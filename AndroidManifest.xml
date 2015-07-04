@@ -86,6 +86,12 @@
             android:name="com.smona.app.propertymanager.wupin.MineWupinActivity"
             android:label="@string/ershouwupin_mine" >
         </activity>
+        
+        <!-- provider -->
+        <provider
+            android:name="com.smona.app.propertymanager.data.db.PropertyProvider"
+            android:authorities="com.smona.app.propertymanager.cache"
+            android:exported="true" />
     </application>
 
 </manifest>

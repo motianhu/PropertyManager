@@ -1,11 +1,13 @@
 package com.smona.app.propertymanager;
 
 import com.smona.app.propertymanager.baoxiu.WuyebaoxiuActivity;
+import com.smona.app.propertymanager.data.table.WuyebaoxiudanTable;
 import com.smona.app.propertymanager.notify.WuyetongzhiActivity;
 import com.smona.app.propertymanager.tousu.TousujianyiActivity;
 import com.smona.app.propertymanager.wupin.ErshouwupinActivity;
 import com.smona.app.propertymanager.zulin.FangwuzulinActivity;
 
+import android.content.ContentResolver;
 import android.os.Bundle;
 import android.view.View;
 
@@ -15,8 +17,15 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         initViews();
+        testProvider();
+    }
+    
+    private void testProvider() {
+        ContentResolver cr = this.getContentResolver();
+        cr.query(WuyebaoxiudanTable.getInstance().mContentUri_NoNotify, null, null, null, null);
     }
 
+    
     protected void initHeader() {
         initText(R.id.title, R.string.wuyefuwu);
         initView(R.id.back);

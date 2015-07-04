@@ -34,8 +34,10 @@ public class ErshouwupinActivity extends BaseActivity {
     @Override
     protected void initBody() {
         View parent = findViewById(R.id.wupintype);
-        initText(parent, R.id.select_type_value, R.string.ershouwupin_wupinfenlei);
-        initText(parent, R.id.select_type, R.string.ershouwupin_xuanzewupinfenlei);
+        initText(parent, R.id.select_type_value,
+                R.string.ershouwupin_wupinfenlei);
+        initText(parent, R.id.select_type,
+                R.string.ershouwupin_xuanzewupinfenlei);
         initView(R.id.wupintype);
 
         parent = findViewById(R.id.pinpai);

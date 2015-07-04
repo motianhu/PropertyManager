@@ -20,6 +20,7 @@ public class WupinDetailAdapter extends BaseDataAdapter {
     public WupinDetailAdapter(Context context, ArrayList<ItemInfo> content) {
         super(context, content);
     }
+
     @SuppressLint("InflateParams")
     public View createContentView(Context context) {
         return LayoutInflater.from(context).inflate(R.layout.fangwuzulin_item,

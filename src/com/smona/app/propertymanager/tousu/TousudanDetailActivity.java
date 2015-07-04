@@ -1,6 +1,5 @@
 package com.smona.app.propertymanager.tousu;
 
-
 import com.smona.app.propertymanager.BaseActivity;
 import com.smona.app.propertymanager.R;
 
