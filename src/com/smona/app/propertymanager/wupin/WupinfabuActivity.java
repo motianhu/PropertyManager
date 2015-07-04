@@ -1,4 +1,4 @@
-package com.smona.app.propertymanager.baoxiu;
+package com.smona.app.propertymanager.wupin;
 
 import com.smona.app.propertymanager.BaseActivity;
 import com.smona.app.propertymanager.R;
@@ -6,28 +6,33 @@ import com.smona.app.propertymanager.R;
 import android.os.Bundle;
 import android.view.View;
 
-public class WuyebaoxiuActivity extends BaseActivity {
+public class WupinfabuActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.wuyebaoxiu);
+        setContentView(R.layout.ershouwupin_fabu);
         initViews();
     }
 
-    protected void initHeader() {
-        initText(R.id.title, R.string.baoxiu);
-        initText(R.id.detail, R.string.baoxiudandetail);
-        initText(R.id.select_type, R.string.xuanzebaoxiuleixing);
-        initText(R.id.problem_desc, R.string.baoxiuwentimiaoshu);
-        initText(R.id.like_action, R.string.likebaoxiu);
-        initView(R.id.back);
-        initView(R.id.detail);
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
+    @Override
+    protected void initHeader() {
+        initText(R.id.title, R.string.ershouwupin_wupinfabu);
+        initText(R.id.detail, R.string.ershouwupin_wupinfabu);
+        initView(R.id.detail);
+        initView(R.id.back);
+    }
+
+    @Override
     protected void initBody() {
 
     }
 
+    @Override
     protected void clickView(View v) {
         int id = v.getId();
         switch (id) {
@@ -35,13 +40,7 @@ public class WuyebaoxiuActivity extends BaseActivity {
             finish();
             break;
         case R.id.detail:
-            gotoSubActivity(BaoxiudanActivity.class);
             break;
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 }

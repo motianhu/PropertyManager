@@ -33,22 +33,22 @@ public class FangwuzulinActivity extends BaseActivity {
 
     @Override
     protected void initBody() {
-        View parent = findViewById(R.id.ywtype);
+        View parent = mRoot.findViewById(R.id.ywtype);
         initText(parent, R.id.select_type_value, R.string.xuanzeyewuleixing);
         initText(parent, R.id.select_type, R.string.yewuleixing);
         initView(R.id.ywtype);
 
-        parent = findViewById(R.id.area);
+        parent = mRoot.findViewById(R.id.area);
         initText(parent, R.id.select_type_value, R.string.area_leixing);
         initText(parent, R.id.select_type, R.string.area_xuanze);
         initView(R.id.area);
 
-        parent = findViewById(R.id.housetype);
+        parent = mRoot.findViewById(R.id.housetype);
         initText(parent, R.id.select_type_value, R.string.house_leixing);
         initText(parent, R.id.select_type, R.string.house_xuanze);
         initView(R.id.housetype);
 
-        ListView list = (ListView) findViewById(R.id.list_content);
+        ListView list = (ListView) mRoot.findViewById(R.id.list_content);
         ArrayList<ItemInfo> data = new ArrayList<ItemInfo>();
         for (int i = 0; i < 10; i++) {
             ItemInfo info = new ItemInfo();

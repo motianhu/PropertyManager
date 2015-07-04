@@ -27,6 +27,10 @@
             android:label="@string/baoxiu" >
         </activity>
         <activity
+            android:name="com.smona.app.propertymanager.baoxiu.BaoxiudanActivity"
+            android:label="@string/baoxiu" >
+        </activity>
+        <activity
             android:name="com.smona.app.propertymanager.baoxiu.BaoxiudanDetailActivity"
             android:label="@string/baoxiu" >
         </activity>
@@ -37,9 +41,14 @@
             android:label="@string/tousu" >
         </activity>
         <activity
-            android:name="com.smona.app.propertymanager.tousu.TousudanActivity"
-            android:label="@string/tousu" >
+            android:name="com.smona.app.propertymanager.tousu.MineTousuActivity"
+            android:label="@string/mine_suggest" >
         </activity>
+        <activity
+            android:name="com.smona.app.propertymanager.tousu.TousudanDetailActivity"
+            android:label="@string/tousudandetail" >
+        </activity>
+
         <!-- Tongzhi -->
         <activity
             android:name="com.smona.app.propertymanager.notify.WuyetongzhiActivity"
@@ -49,6 +58,7 @@
             android:name="com.smona.app.propertymanager.notify.WuyetongzhiDetailActivity"
             android:label="@string/notify" >
         </activity>
+
         <!-- Zulin -->
         <activity
             android:name="com.smona.app.propertymanager.zulin.FangwuzulinActivity"
@@ -62,10 +72,19 @@
             android:name="com.smona.app.propertymanager.zulin.PublishFangYuanActivity"
             android:label="@string/chuzu" >
         </activity>
+
         <!-- ErshouWupin -->
         <activity
             android:name="com.smona.app.propertymanager.wupin.ErshouwupinActivity"
             android:label="@string/wupin" >
+        </activity>
+        <activity
+            android:name="com.smona.app.propertymanager.wupin.WupinfabuActivity"
+            android:label="@string/ershouwupin_wupinfabu" >
+        </activity>
+        <activity
+            android:name="com.smona.app.propertymanager.wupin.MineWupinActivity"
+            android:label="@string/ershouwupin_mine" >
         </activity>
     </application>
 

@@ -24,8 +24,7 @@ public class BaoxiudansAdapter extends BaseDataAdapter {
     }
 
     public void initConvertView(View convertView, final ItemInfo info) {
-        View view = convertView.findViewById(R.id.baoxiudan_item_detail);
-        view.setOnClickListener(new OnClickListener() {
+        convertView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 gotoDetail(info);

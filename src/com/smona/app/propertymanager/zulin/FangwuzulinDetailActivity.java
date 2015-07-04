@@ -27,15 +27,15 @@ public class FangwuzulinDetailActivity extends BaseActivity {
 
     @Override
     protected void initBody() {
-        View parent = findViewById(R.id.ywtype);
+        View parent = mRoot.findViewById(R.id.ywtype);
         initText(parent, R.id.select_type_value, R.string.xuanzeyewuleixing);
         initText(parent, R.id.select_type, R.string.yewuleixing);
         
-        parent = findViewById(R.id.area);
+        parent = mRoot.findViewById(R.id.area);
         initText(parent, R.id.select_type_value, R.string.area_leixing);
         initText(parent, R.id.select_type, R.string.area_xuanze);
         
-        parent = findViewById(R.id.housetype);
+        parent = mRoot.findViewById(R.id.housetype);
         initText(parent, R.id.select_type_value, R.string.house_leixing);
         initText(parent, R.id.select_type, R.string.house_xuanze);
     }

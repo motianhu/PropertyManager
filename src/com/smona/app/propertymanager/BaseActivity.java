@@ -9,14 +9,21 @@ import android.widget.TextView;
 
 public abstract class BaseActivity extends Activity {
 
+    protected View mRoot = null;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     protected void initViews() {
+        initRoot();
         initHeader();
         initBody();
+    }
+
+    private void initRoot() {
+        mRoot = findViewById(R.id.root);
     }
 
     protected abstract void initHeader();
@@ -34,17 +41,17 @@ public abstract class BaseActivity extends Activity {
     protected abstract void clickView(View v);
 
     protected void initText(int resId, int text) {
-        TextView title = (TextView) findViewById(resId);
+        TextView title = (TextView) mRoot.findViewById(resId);
         title.setText(text);
     }
-    
+
     protected void initText(View parent, int resId, int text) {
         TextView title = (TextView) parent.findViewById(resId);
         title.setText(text);
     }
 
     protected void initView(int resId) {
-        View view = findViewById(resId);
+        View view = mRoot.findViewById(resId);
         view.setOnClickListener(mClickListener);
     }
 

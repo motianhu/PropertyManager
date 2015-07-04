@@ -8,7 +8,6 @@ import com.smona.app.propertymanager.zulin.FangwuzulinActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 public class MainActivity extends BaseActivity {
     @Override
@@ -19,8 +18,7 @@ public class MainActivity extends BaseActivity {
     }
 
     protected void initHeader() {
-        TextView title = (TextView) findViewById(R.id.title);
-        title.setText(R.string.wuyefuwu);
+        initText(R.id.title, R.string.wuyefuwu);
         initView(R.id.back);
     }
 

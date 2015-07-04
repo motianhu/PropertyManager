@@ -6,13 +6,12 @@
 
     <include layout="@layout/header" />
 
-    <include
-        android:id="@+id/wupintype"
-        layout="@layout/select_type" />
+    <include layout="@layout/yezhuxinxi" />
 
-    <include
-        android:id="@+id/pinpai"
-        layout="@layout/select_type" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/mine_suggest" />
 
     <include layout="@layout/list_content" />
 
