@@ -1,0 +1,48 @@
+package com.smona.app.propertymanager.baoxiu;
+
+import com.smona.app.propertymanager.BaseActivity;
+import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.tousu.TousudanActivity;
+
+import android.os.Bundle;
+import android.view.View;
+
+public class WuyebaoxiuActivity extends BaseActivity {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.wuyebaoxiu);
+        initViews();
+    }
+
+    protected void initHeader() {
+        initText(R.id.title, R.string.baoxiu);
+        initText(R.id.detail, R.string.baoxiudandetail);
+        initText(R.id.select_type, R.string.xuanzebaoxiuleixing);
+        initText(R.id.problem_desc, R.string.baoxiuwentimiaoshu);
+        initText(R.id.like_action, R.string.likebaoxiu);
+        initView(R.id.back);
+        initView(R.id.detail);
+    }
+
+    protected void initBody() {
+
+    }
+
+    protected void clickView(View v) {
+        int id = v.getId();
+        switch (id) {
+        case R.id.back:
+            finish();
+            break;
+        case R.id.detail:
+            gotoSubActivity(TousudanActivity.class);
+            break;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+}

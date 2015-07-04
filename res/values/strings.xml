@@ -1,0 +1,58 @@
+<resources>
+
+    <string name="app_name">物业管理</string>
+    <string name="back">返回</string>
+    <string name="select_row">></string>
+    <string name="wuyefuwu">物业服务</string>
+    <string name="baoxiu">物业报修</string>
+    <string name="tousu">投诉建议</string>
+    <string name="notify">物业通知</string>
+    <string name="chuzu">房屋租赁</string>
+    <string name="wupin">二手物品</string>
+    <string name="yezhuxingming">业主姓名</string>
+    <string name="yezhudianhu">(13005723564)</string>
+    <string name="yezhudizhi">业主地址</string>
+    <string name="xuanzebaoxiuleixing">选择报修类型</string>
+    <string name="xuanzetousuleixing">选择投诉类型</string>
+    <string name="baoxiuwentimiaoshu">报修问题描述</string>
+    <string name="tousuwentimiaoshu">投诉问题描述</string>
+    <string name="likebaoxiu">立刻报修</string>
+    <string name="liketousu">立刻投诉</string>
+    <string name="wuyedianhua">直接拨打物业电话</string>
+    <string name="paishezhaopian">拍摄照片</string>
+    <string name="wodebaodan">我的报修单</string>
+    <string name="baoxiudan">报修单</string>
+    <string name="baoxiudandetail">报修单详情</string>
+    <string name="tousudandetail">投诉单详情</string>
+    <string name="baoxiudan_item_time">报修时间</string>
+    <string name="baoxiudan_item_status">报修单状态</string>
+    <string name="baoxiudan_item_name">报修单名称</string>
+    <string name="baoxiudan_item_detail">详情></string>
+    <string name="baoxiudan_item_type">报修类型</string>
+    <string name="baoxiudan_item_zhaopian">照片</string>
+    <string name="weixiu_time">派单时间</string>
+    <string name="weixiu_people">维修人</string>
+    <string name="wancheng_time">完成时间</string>
+    <string name="wancheng_jieguo">维修结果</string>
+    <string name="wancheng_fee">维修费用</string>
+    <string name="yonghupingjia">用户评价</string>
+    <string name="wancheng_zhiliang">维修质量</string>
+    <string name="wancheng_taidu">维修态度</string>
+    <string name="wancheng_jishixing">及时性</string>
+    <string name="wancheng_price">维修价格</string>
+    <string name="notify_read_no">未读</string>
+    <string name="notify_read_yes">已读</string>
+    <!-- 房屋租售 -->
+    <string name="xuanzeyewuleixing">选择业务类型</string>
+    <string name="yewuleixing">业务类型</string>
+    <string name="area_leixing">面积</string>
+    <string name="area_xuanze">选择</string>
+    <string name="house_leixing">户型</string>
+    <string name="house_xuanze">选择户型</string>
+    <string name="pulish_time">发布时间</string>
+    <string name="lianxidianhua">联系电话</string>
+    <string name="position">位置</string>
+    <string name="publish_fangyuan">发布房源</string>
+    <string name="mine_fangyuan">我的房源</string>
+
+</resources>
