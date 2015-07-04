@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/header" />
+
+    <include
+        android:id="@+id/ywtype"
+        layout="@layout/select_type" />
+
+    <include
+        android:id="@+id/housetype"
+        layout="@layout/select_type" />
+
+    <include
+        android:id="@+id/area"
+        layout="@layout/select_type" />
+
+    <include layout="@layout/list_content" />
+
+</LinearLayout>
