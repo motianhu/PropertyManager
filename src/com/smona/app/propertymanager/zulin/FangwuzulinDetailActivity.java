@@ -10,7 +10,7 @@ public class FangwuzulinDetailActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fangwuzulin);
+        setContentView(R.layout.fangwuzulin_detail);
         initViews();
     }
 
@@ -21,23 +21,23 @@ public class FangwuzulinDetailActivity extends BaseActivity {
 
     @Override
     protected void initHeader() {
-        initText(R.id.title, R.string.chuzu);
+        initText(R.id.title, R.string.fangyuanxinxi);
         initView(R.id.back);
     }
 
     @Override
     protected void initBody() {
         View parent = mRoot.findViewById(R.id.ywtype);
-        initText(parent, R.id.select_type_value, R.string.xuanzeyewuleixing);
-        initText(parent, R.id.select_type, R.string.yewuleixing);
+        initText(parent, R.id.name, R.string.yewuleixing);
+        initText(parent, R.id.value, R.string.yewuleixing);
 
         parent = mRoot.findViewById(R.id.area);
-        initText(parent, R.id.select_type_value, R.string.area_leixing);
-        initText(parent, R.id.select_type, R.string.area_xuanze);
+        initText(parent, R.id.name, R.string.area_leixing);
+        initText(parent, R.id.value, R.string.area_xuanze);
 
         parent = mRoot.findViewById(R.id.housetype);
-        initText(parent, R.id.select_type_value, R.string.house_leixing);
-        initText(parent, R.id.select_type, R.string.house_xuanze);
+        initText(parent, R.id.name, R.string.house_leixing);
+        initText(parent, R.id.value, R.string.house_xuanze);
     }
 
     @Override

@@ -15,7 +15,7 @@
         layout="@layout/select_type" />
 
     <include
-        android:id="@+id/pinpai"
+        android:id="@+id/xinjiu"
         layout="@layout/select_type" />
     
     

@@ -72,6 +72,10 @@
             android:name="com.smona.app.propertymanager.zulin.PublishFangYuanActivity"
             android:label="@string/chuzu" >
         </activity>
+        <activity
+            android:name="com.smona.app.propertymanager.zulin.MineFangyuanActivity"
+            android:label="@string/mine_fangyuan" >
+        </activity>
 
         <!-- ErshouWupin -->
         <activity
@@ -84,8 +88,10 @@
         </activity>
         <activity
             android:name="com.smona.app.propertymanager.wupin.MineWupinActivity"
-            android:label="@string/ershouwupin_mine" >
-        </activity>
+            android:label="@string/ershouwupin_mine" />
+        <activity
+            android:name="com.smona.app.propertymanager.wupin.WupinDetailActivity"
+            android:label="@string/ershouwupin_detail" />
         
         <!-- provider -->
         <provider

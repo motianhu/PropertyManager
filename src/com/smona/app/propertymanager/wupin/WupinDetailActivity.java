@@ -10,7 +10,7 @@ public class WupinDetailActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fangwuzulin_detail);
+        setContentView(R.layout.ershouwupin_detail);
         initViews();
     }
 
@@ -27,17 +27,17 @@ public class WupinDetailActivity extends BaseActivity {
 
     @Override
     protected void initBody() {
-        View parent = mRoot.findViewById(R.id.ywtype);
-        initText(parent, R.id.name, R.string.yewuleixing);
-        initText(parent, R.id.value, R.string.yewuleixing);
+        View parent = mRoot.findViewById(R.id.wupinfenlei);
+        initText(parent, R.id.name, R.string.ershouwupin_wupinfenlei);
+        initText(parent, R.id.value, R.string.ershouwupin_wupinfenlei);
 
-        parent = mRoot.findViewById(R.id.area);
-        initText(parent, R.id.name, R.string.area_leixing);
-        initText(parent, R.id.value, R.string.area_xuanze);
+        parent = mRoot.findViewById(R.id.pinpai);
+        initText(parent, R.id.name, R.string.ershouwupin_pinpai);
+        initText(parent, R.id.value, R.string.ershouwupin_pinpai);
 
-        parent = mRoot.findViewById(R.id.housetype);
-        initText(parent, R.id.name, R.string.house_leixing);
-        initText(parent, R.id.value, R.string.house_xuanze);
+        parent = mRoot.findViewById(R.id.wupinmingchen);
+        initText(parent, R.id.name, R.string.ershouwupin_wupinmingchen);
+        initText(parent, R.id.value, R.string.ershouwupin_wupinmingchen);
     }
 
     @Override

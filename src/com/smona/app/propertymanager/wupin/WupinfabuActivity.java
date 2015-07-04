@@ -22,14 +22,24 @@ public class WupinfabuActivity extends BaseActivity {
     @Override
     protected void initHeader() {
         initText(R.id.title, R.string.ershouwupin_wupinfabu);
-        initText(R.id.detail, R.string.ershouwupin_wupinfabu);
+        initText(R.id.detail, R.string.ershouwupin_mine);
         initView(R.id.detail);
         initView(R.id.back);
     }
 
     @Override
     protected void initBody() {
+        View parent = mRoot.findViewById(R.id.wupintype);
+        initText(parent, R.id.select_type, R.string.yewuleixing);
+        initText(parent, R.id.select_type_value, R.string.yewuleixing);
 
+        parent = mRoot.findViewById(R.id.pinpai);
+        initText(parent, R.id.select_type, R.string.area_leixing);
+        initText(parent, R.id.select_type_value, R.string.area_xuanze);
+
+        parent = mRoot.findViewById(R.id.xinjiu);
+        initText(parent, R.id.select_type, R.string.house_leixing);
+        initText(parent, R.id.select_type_value, R.string.house_xuanze);
     }
 
     @Override
@@ -40,6 +50,7 @@ public class WupinfabuActivity extends BaseActivity {
             finish();
             break;
         case R.id.detail:
+            gotoSubActivity(MineWupinActivity.class);
             break;
         }
     }

@@ -24,7 +24,17 @@ public class PublishFangYuanActivity extends BaseActivity {
 
     @Override
     protected void initBody() {
+        View parent = mRoot.findViewById(R.id.ywtype);
+        initText(parent, R.id.select_type, R.string.yewuleixing);
+        initText(parent, R.id.select_type_value, R.string.yewuleixing);
 
+        parent = mRoot.findViewById(R.id.area);
+        initText(parent, R.id.select_type, R.string.area_leixing);
+        initText(parent, R.id.select_type_value, R.string.area_xuanze);
+
+        parent = mRoot.findViewById(R.id.housetype);
+        initText(parent, R.id.select_type, R.string.house_leixing);
+        initText(parent, R.id.select_type_value, R.string.house_xuanze);
     }
 
     @Override
@@ -33,6 +43,9 @@ public class PublishFangYuanActivity extends BaseActivity {
         switch (id) {
         case R.id.back:
             finish();
+            break;
+        case R.id.detail:
+            gotoSubActivity(MineFangyuanActivity.class);
             break;
         }
     }

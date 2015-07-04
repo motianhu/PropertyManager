@@ -45,7 +45,7 @@ public class PropertyProvider extends ContentProvider {
     private static final int CODE_BASE_FANGWUZULIN = 10;
     private static final int CODE_FANGWUZULINFANGYUAN = CODE_BASE_FANGWUZULIN + 1;
     private static final int CODE_FANGWUZULINHUXING = CODE_BASE_FANGWUZULIN + 2;
-    private static final int CODE_FANGWUZULINMIANJI = CODE_BASE_FANGWUZULIN + 2;
+    private static final int CODE_FANGWUZULINMIANJI = CODE_BASE_FANGWUZULIN + 3;
 
     // tousujianyi
     private static final int CODE_BASE_TOUSU = 20;
@@ -54,8 +54,8 @@ public class PropertyProvider extends ContentProvider {
 
     // wuyebaoxiu
     private static final int CODE_BASE_WUYEBAOXIU = 30;
-    private static final int CODE_WUYEBAOXIUDAN = CODE_BASE_WUYEBAOXIU + 11;
-    private static final int CODE_WUYEBAOXIUTYPE = CODE_BASE_WUYEBAOXIU + 12;
+    private static final int CODE_WUYEBAOXIUDAN = CODE_BASE_WUYEBAOXIU + 1;
+    private static final int CODE_WUYEBAOXIUTYPE = CODE_BASE_WUYEBAOXIU + 2;
 
     // tongzhi
     private static final int CODE_BASE_TONGZHI = 40;

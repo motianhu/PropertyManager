@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.smona.app.propertymanager.BaseDataAdapter;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.ItemInfo;
-import com.smona.app.propertymanager.zulin.FangwuzulinDetailActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -50,7 +49,7 @@ public class WupinDetailAdapter extends BaseDataAdapter {
 
     public Intent createIntent() {
         Intent intent = new Intent();
-        intent.setClass(mContext, FangwuzulinDetailActivity.class);
+        intent.setClass(mContext, WupinDetailActivity.class);
         return intent;
     }
 
