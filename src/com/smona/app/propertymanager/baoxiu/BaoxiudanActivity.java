@@ -35,7 +35,7 @@ public class BaoxiudanActivity extends BaseActivity {
 
     @Override
     protected void initBody() {
-        mBaoxiudans = (ListView) mRoot.findViewById(R.id.baoxiudans);
+        mBaoxiudans = (ListView) mRoot.findViewById(R.id.list_content);
         ArrayList<ItemInfo> datas = new ArrayList<ItemInfo>();
         for (int i = 0; i < 10; i++) {
             ItemInfo item = new ItemInfo();

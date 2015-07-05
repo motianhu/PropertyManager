@@ -16,6 +16,7 @@ import com.smona.app.propertymanager.data.table.TousujianyiTypeTable;
 import com.smona.app.propertymanager.data.table.WuyebaoxiuTypeTable;
 import com.smona.app.propertymanager.data.table.WuyebaoxiudanTable;
 import com.smona.app.propertymanager.data.table.WuyetongzhiTable;
+import com.smona.app.propertymanager.data.table.YezhuxinxiTable;
 import com.smona.app.propertymanager.util.LogUtil;
 
 import android.annotation.SuppressLint;
@@ -34,31 +35,35 @@ public class PropertyProvider extends ContentProvider {
     private static final String TAG = "PropertyProvider";
     private DatabaseHelper mDataHelper;
 
+    // ywzhuxinxi
+    private static final int CODE_BASE_YEZHUXINXI = 0;
+    private static final int CODE_YEZHUXINXI = CODE_BASE_YEZHUXINXI + 1;
+
     // ershouwupin
-    private static final int CODE_BASE_ERSHOUWUPIN = 0;
+    private static final int CODE_BASE_ERSHOUWUPIN = 10;
     private static final int CODE_ERSHOUWUPINPINPAITYPE = CODE_BASE_ERSHOUWUPIN + 1;
     private static final int CODE_ERSHOUWUPIN = CODE_BASE_ERSHOUWUPIN + 2;
     private static final int CODE_ERSHOUWUPINWUPINTYPE = CODE_BASE_ERSHOUWUPIN + 3;
     private static final int CODE_ERSHOUWUPINXINJIUTYPE = CODE_BASE_ERSHOUWUPIN + 4;
 
     // fangwuzulin
-    private static final int CODE_BASE_FANGWUZULIN = 10;
+    private static final int CODE_BASE_FANGWUZULIN = 20;
     private static final int CODE_FANGWUZULINFANGYUAN = CODE_BASE_FANGWUZULIN + 1;
     private static final int CODE_FANGWUZULINHUXING = CODE_BASE_FANGWUZULIN + 2;
     private static final int CODE_FANGWUZULINMIANJI = CODE_BASE_FANGWUZULIN + 3;
 
     // tousujianyi
-    private static final int CODE_BASE_TOUSU = 20;
+    private static final int CODE_BASE_TOUSU = 30;
     private static final int CODE_TOUSUJIANYI = CODE_BASE_TOUSU + 1;
     private static final int CODE_TOUSUJIANYITYPE = CODE_BASE_TOUSU + 2;
 
     // wuyebaoxiu
-    private static final int CODE_BASE_WUYEBAOXIU = 30;
+    private static final int CODE_BASE_WUYEBAOXIU = 40;
     private static final int CODE_WUYEBAOXIUDAN = CODE_BASE_WUYEBAOXIU + 1;
     private static final int CODE_WUYEBAOXIUTYPE = CODE_BASE_WUYEBAOXIU + 2;
 
     // tongzhi
-    private static final int CODE_BASE_TONGZHI = 40;
+    private static final int CODE_BASE_TONGZHI = 50;
     private static final int CODE_TONGZHI = CODE_BASE_TONGZHI + 1;
 
     private static final UriMatcher URI_MATCH = new UriMatcher(
@@ -68,6 +73,12 @@ public class PropertyProvider extends ContentProvider {
     private static HashMap<Integer, String> TABLE_MATCH = new HashMap<Integer, String>();
 
     static {
+        // yezhuxinxi
+        URI_MATCH.addURI(AbstractTable.AUTHORITY,
+                YezhuxinxiTable.getInstance().mTableName, CODE_YEZHUXINXI);
+        TABLE_MATCH.put(CODE_YEZHUXINXI,
+                YezhuxinxiTable.getInstance().mTableName);
+
         // ershouwupin
         URI_MATCH.addURI(AbstractTable.AUTHORITY,
                 ErshouwupinpinpaiTypeTable.getInstance().mTableName,
@@ -312,28 +323,43 @@ public class PropertyProvider extends ContentProvider {
 
         private ArrayList<String> getCreateTableSqlList() {
             ArrayList<String> sqlList = new ArrayList<String>();
-            //ershouwupin
-            String pinpaiType = ErshouwupinpinpaiTypeTable.getInstance().createTableSql();
-            String ershouwupin = ErshouwupinTable.getInstance().createTableSql();
-            String wupinType = ErshouwupinwupinTypeTable.getInstance().createTableSql();
-            String xinjiuType = ErshouwupinxinjiuTypeTable.getInstance().createTableSql();
+            //yezhuxinxi
+            String yezhuxinxi = YezhuxinxiTable.getInstance()
+                    .createTableSql();
+            
+            // ershouwupin
+            String pinpaiType = ErshouwupinpinpaiTypeTable.getInstance()
+                    .createTableSql();
+            String ershouwupin = ErshouwupinTable.getInstance()
+                    .createTableSql();
+            String wupinType = ErshouwupinwupinTypeTable.getInstance()
+                    .createTableSql();
+            String xinjiuType = ErshouwupinxinjiuTypeTable.getInstance()
+                    .createTableSql();
 
-            //fangwuzulin
-            String fangyuan = FangwuzulinfangyuanTable.getInstance().createTableSql();
-            String huxing = FangwuzulinhuxingTypeTable.getInstance().createTableSql();
-            String mianji = FangwuzulinmianjiTypeTable.getInstance().createTableSql();
-            
-            //tousujianyi
+            // fangwuzulin
+            String fangyuan = FangwuzulinfangyuanTable.getInstance()
+                    .createTableSql();
+            String huxing = FangwuzulinhuxingTypeTable.getInstance()
+                    .createTableSql();
+            String mianji = FangwuzulinmianjiTypeTable.getInstance()
+                    .createTableSql();
+
+            // tousujianyi
             String tousu = TousujianyiTable.getInstance().createTableSql();
-            String tousuType = TousujianyiTypeTable.getInstance().createTableSql();
-            
-            //wuyebaoxiu
-            String baoxiudan = WuyebaoxiudanTable.getInstance().createTableSql();
-            String baoxiudanType = WuyebaoxiuTypeTable.getInstance().createTableSql();
-            
-            //wuyetongzhi
+            String tousuType = TousujianyiTypeTable.getInstance()
+                    .createTableSql();
+
+            // wuyebaoxiu
+            String baoxiudan = WuyebaoxiudanTable.getInstance()
+                    .createTableSql();
+            String baoxiudanType = WuyebaoxiuTypeTable.getInstance()
+                    .createTableSql();
+
+            // wuyetongzhi
             String tongzhi = WuyetongzhiTable.getInstance().createTableSql();
 
+            sqlList.add(yezhuxinxi);
             sqlList.add(pinpaiType);
             sqlList.add(ershouwupin);
             sqlList.add(wupinType);
@@ -343,7 +369,7 @@ public class PropertyProvider extends ContentProvider {
             sqlList.add(mianji);
             sqlList.add(tousu);
             sqlList.add(tousuType);
-            
+
             sqlList.add(baoxiudan);
             sqlList.add(baoxiudanType);
             sqlList.add(tongzhi);
@@ -352,28 +378,41 @@ public class PropertyProvider extends ContentProvider {
 
         private ArrayList<String> getDropTableSqlList() {
             ArrayList<String> sqlList = new ArrayList<String>();
-            //ershouwupin
-            String pinpaiType = ErshouwupinpinpaiTypeTable.getInstance().dropTableSql();
+            //yezhuxinxi
+            String yezhuxinxi = YezhuxinxiTable.getInstance()
+                    .createTableSql();
+            
+            // ershouwupin
+            String pinpaiType = ErshouwupinpinpaiTypeTable.getInstance()
+                    .dropTableSql();
             String ershouwupin = ErshouwupinTable.getInstance().dropTableSql();
-            String wupinType = ErshouwupinwupinTypeTable.getInstance().dropTableSql();
-            String xinjiuType = ErshouwupinxinjiuTypeTable.getInstance().dropTableSql();
+            String wupinType = ErshouwupinwupinTypeTable.getInstance()
+                    .dropTableSql();
+            String xinjiuType = ErshouwupinxinjiuTypeTable.getInstance()
+                    .dropTableSql();
 
-            //fangwuzulin
-            String fangyuan = FangwuzulinfangyuanTable.getInstance().dropTableSql();
-            String huxing = FangwuzulinhuxingTypeTable.getInstance().dropTableSql();
-            String mianji = FangwuzulinmianjiTypeTable.getInstance().dropTableSql();
-            
-            //tousujianyi
+            // fangwuzulin
+            String fangyuan = FangwuzulinfangyuanTable.getInstance()
+                    .dropTableSql();
+            String huxing = FangwuzulinhuxingTypeTable.getInstance()
+                    .dropTableSql();
+            String mianji = FangwuzulinmianjiTypeTable.getInstance()
+                    .dropTableSql();
+
+            // tousujianyi
             String tousu = TousujianyiTable.getInstance().dropTableSql();
-            String tousuType = TousujianyiTypeTable.getInstance().dropTableSql();
-            
-            //wuyebaoxiu
+            String tousuType = TousujianyiTypeTable.getInstance()
+                    .dropTableSql();
+
+            // wuyebaoxiu
             String baoxiudan = WuyebaoxiudanTable.getInstance().dropTableSql();
-            String baoxiudanType = WuyebaoxiuTypeTable.getInstance().dropTableSql();
-            
-            //wuyetongzhi
+            String baoxiudanType = WuyebaoxiuTypeTable.getInstance()
+                    .dropTableSql();
+
+            // wuyetongzhi
             String tongzhi = WuyetongzhiTable.getInstance().dropTableSql();
 
+            sqlList.add(yezhuxinxi);
             sqlList.add(pinpaiType);
             sqlList.add(ershouwupin);
             sqlList.add(wupinType);
@@ -383,7 +422,7 @@ public class PropertyProvider extends ContentProvider {
             sqlList.add(mianji);
             sqlList.add(tousu);
             sqlList.add(tousuType);
-            
+
             sqlList.add(baoxiudan);
             sqlList.add(baoxiudanType);
             sqlList.add(tongzhi);

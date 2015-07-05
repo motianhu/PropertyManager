@@ -30,7 +30,7 @@ public class WuyetongzhiActivity extends BaseActivity {
 
     @Override
     protected void initBody() {
-        ListView list = (ListView) findViewById(R.id.notify_list);
+        ListView list = (ListView) mRoot.findViewById(R.id.list_content);
         ArrayList<ItemInfo> data = new ArrayList<ItemInfo>();
         for (int i = 0; i < 10; i++) {
             ItemInfo info = new ItemInfo();

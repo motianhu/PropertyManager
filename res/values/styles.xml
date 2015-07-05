@@ -4,4 +4,8 @@
 
     <style name="AppTheme" parent="BaseTheme"></style>
 
+    <style name="ProgressBarRotateStyleSmall">
+        <item name="android:indeterminateDrawable">@drawable/progressbar_rotate</item>
+    </style>
+
 </resources>

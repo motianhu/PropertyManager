@@ -8,15 +8,6 @@
 
     <include layout="@layout/yezhuxinxi" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
-
-        <ListView
-            android:id="@+id/notify_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+    <include layout="@layout/list_content" />
 
 </LinearLayout>

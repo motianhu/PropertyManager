@@ -27,9 +27,9 @@ public class WuyetongzhiDetailActivity extends BaseActivity {
 
     @Override
     protected void initBody() {
-        TextView time = (TextView) findViewById(R.id.notify_time);
+        TextView time = (TextView) mRoot.findViewById(R.id.notify_time);
         time.setText("2015-06-27");
-        TextView title = (TextView) findViewById(R.id.notify_title);
+        TextView title = (TextView) mRoot.findViewById(R.id.notify_title);
         title.setText("Hellow world");
     }
 

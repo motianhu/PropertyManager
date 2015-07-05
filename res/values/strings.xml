@@ -83,4 +83,12 @@
     <string name="ershouwupin_mine">我的物品</string>
     <string name="ershouwupin_detail">物品信息</string>
     <string name="ershouwupin_wupinmingchen">物品名称</string>
+    
+    <!-- 下拉刷新 -->
+    <string name="refresh_loading_more">Loading more…</string>
+    <string name="drop_down_refresh">Drop down refresh</string>
+    <string name="release_refresh">Release refresh</string>
+    <string name="refreshing">Refreshing…</string>
+    <string name="last_refresh_time">Last refresh time:</string>
+    <string name="no_more_data">No more data</string>
 </resources>
