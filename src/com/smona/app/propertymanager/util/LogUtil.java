@@ -8,7 +8,7 @@ import android.util.Log;
 public class LogUtil {
     public static final boolean DEBUG = true;
 
-    private static final String MODULE_NAME = "Property";
+    private static final String MODULE_NAME = "Moth";
     private static final LogUtil INSTANCE = new LogUtil();
 
     private LogUtil() {

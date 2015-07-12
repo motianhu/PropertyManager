@@ -1,17 +1,26 @@
 package com.smona.app.propertymanager.baoxiu;
 
 import com.smona.app.propertymanager.BaseActivity;
+import com.smona.app.propertymanager.MessageProcess;
 import com.smona.app.propertymanager.R;
 
 import android.os.Bundle;
 import android.view.View;
 
 public class WuyebaoxiuActivity extends BaseActivity {
+    private MessageProcess mProcess;
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wuyebaoxiu);
         initViews();
+        testData();
+    }
+    
+    private void testData() {
+        mProcess = new MessageProcess();
+        mProcess.requestWuyebaoxiu();
     }
 
     protected void initHeader() {

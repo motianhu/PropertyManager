@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends BaseActivity {
+    private MessageProcess mLogin;
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +25,11 @@ public class MainActivity extends BaseActivity {
     private void testProvider() {
         ContentResolver cr = this.getContentResolver();
         cr.query(WuyebaoxiudanTable.getInstance().mContentUri_NoNotify, null, null, null, null);
+        
+        
+        //login
+        mLogin = new MessageProcess();
+        mLogin.login();
     }
 
     
