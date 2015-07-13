@@ -9,15 +9,14 @@
         android:layout_alignParentTop="true" >
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:orientation="horizontal" >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/property_wuyebaoxi_item_time"
+                android:text="@string/property_wuyebaoxi_baoxiudan_item_time"
                 android:textColor="@color/property_color_common_title" />
 
             <TextView
@@ -32,6 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
             android:textColor="@color/property_color_common_title" />
     </RelativeLayout>
 
@@ -41,15 +41,14 @@
         android:layout_alignParentBottom="true" >
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:orientation="horizontal" >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/property_wuyebaoxi_item_name"
+                android:text="@string/property_wuyebaoxi_baoxiudan_item_name"
                 android:textColor="@color/property_color_common_title" />
 
             <TextView
@@ -63,7 +62,9 @@
             android:id="@+id/baoxiudan_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/baoxiudan_item_status"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:text="@string/property_wuyebaoxi_baoxiudan_item_detail"
             android:textColor="@color/property_color_common_title" />
     </RelativeLayout>
 
