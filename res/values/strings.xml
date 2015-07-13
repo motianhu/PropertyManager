@@ -64,9 +64,6 @@
     <string name="area_xuanze">选择</string>
     <string name="house_leixing">户型</string>
     <string name="house_xuanze">选择户型</string>
-    <string name="pulish_time">发布时间</string>
-    <string name="lianxidianhua">联系电话</string>
-    <string name="position">位置</string>
     <string name="publish_fangyuan">发布房源</string>
     <string name="mine_fangyuan">我的房源</string>
     <string name="peitao_des">配套描述</string>
@@ -74,14 +71,22 @@
 
     <!-- 二手物品 -->
     <string name="property_home_ershouwupin">二手物品</string>
-    <string name="ershouwupin_wupinfabu">物品发布</string>
-    <string name="ershouwupin_wupinfenlei">物品分类</string>
-    <string name="ershouwupin_xuanzewupinfenlei">选择物品分类</string>
-    <string name="ershouwupin_pinpai">品牌</string>
-    <string name="ershouwupin_pinpaifenlei">选择品牌分类</string>
-    <string name="ershouwupin_mine">我的物品</string>
-    <string name="ershouwupin_detail">物品信息</string>
-    <string name="ershouwupin_wupinmingchen">物品名称</string>
+    <string name="property_ershouwupin_wupinfabu">物品发布</string>
+    <string name="property_ershouwupin_xuanzewupinfenlei">选择物品分类</string>
+    <string name="property_ershouwupin_pinpaifenlei">选择品牌分类</string>
+    <string name="property_ershouwupin_xuanzeinjiu">新旧</string>
+    <string name="property_ershouwupin_item_pulish_time">发布时间</string>
+    <string name="property_ershouwupin_item_wupmingcheng">物品名称</string>
+    <string name="property_ershouwupin_item_xinjiu">新&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;旧</string>
+    <string name="property_ershouwupin_mine">我的物品</string>
+    <string name="property_ershouwupin_wupinfabu_wupinmiaoshu">物品描述</string>
+    <string name="property_ershouwupin_wupinfabu_shuru_wupinmiaoshu">请输入物品描述</string>
+    <string name="property_ershouwupin_wupinfabu_lianxiren">联系人</string>
+    <string name="property_ershouwupin_wupinfabu_dianhu">联系电话</string>
+    <string name="property_ershouwupin_wupin_detail">物品信息</string>
+    <string name="property_ershouwupin_detail_wupinfenlei">物品分类</string>
+    <string name="property_ershouwupin_detail_pinpai">品牌</string>
+    <string name="property_ershouwupin_wupinmingchen">物品名称</string>
 
     <!-- 下拉刷新 -->
     <string name="refresh_loading_more">Loading more…</string>

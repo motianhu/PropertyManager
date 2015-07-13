@@ -10,11 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
-public class MineWupinActivity extends BaseActivity {
+public class PropertyMineWupinActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ershouwupin_mine);
+        setContentView(R.layout.property_ershouwupin_mine);
         initViews();
     }
 
@@ -25,23 +25,23 @@ public class MineWupinActivity extends BaseActivity {
 
     @Override
     protected void initHeader() {
-        initText(R.id.title, R.string.ershouwupin_mine);
+        initText(R.id.title, R.string.property_ershouwupin_mine);
         initView(R.id.back);
     }
 
     @Override
     protected void initBody() {
         View parent = mRoot.findViewById(R.id.wupintype);
-        initText(parent, R.id.select_type, R.string.yewuleixing);
-        initText(parent, R.id.select_type_value, R.string.yewuleixing);
+        initText(parent, R.id.select_type,
+                R.string.property_ershouwupin_xuanzewupinfenlei);
 
         parent = mRoot.findViewById(R.id.pinpai);
-        initText(parent, R.id.select_type, R.string.area_leixing);
-        initText(parent, R.id.select_type_value, R.string.area_xuanze);
+        initText(parent, R.id.select_type,
+                R.string.property_ershouwupin_pinpaifenlei);
 
         parent = mRoot.findViewById(R.id.xinjiu);
-        initText(parent, R.id.select_type, R.string.house_leixing);
-        initText(parent, R.id.select_type_value, R.string.house_xuanze);
+        initText(parent, R.id.select_type,
+                R.string.property_ershouwupin_xuanzeinjiu);
 
         ListView list = (ListView) mRoot.findViewById(R.id.list_content);
         ArrayList<ItemInfo> data = new ArrayList<ItemInfo>();
@@ -49,7 +49,8 @@ public class MineWupinActivity extends BaseActivity {
             ItemInfo info = new ItemInfo();
             data.add(info);
         }
-        WupinDetailAdapter adapter = new WupinDetailAdapter(this, data);
+        PropertyWupinDetailAdapter adapter = new PropertyWupinDetailAdapter(
+                this, data);
         list.setAdapter(adapter);
     }
 

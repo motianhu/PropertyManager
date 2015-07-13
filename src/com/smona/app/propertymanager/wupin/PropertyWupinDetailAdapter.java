@@ -14,30 +14,27 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-public class WupinDetailAdapter extends PropertyBaseDataAdapter {
+public class PropertyWupinDetailAdapter extends PropertyBaseDataAdapter {
 
-    public WupinDetailAdapter(Context context, ArrayList<ItemInfo> content) {
+    public PropertyWupinDetailAdapter(Context context, ArrayList<ItemInfo> content) {
         super(context, content);
     }
 
     @SuppressLint("InflateParams")
     public View createContentView(Context context) {
-        return LayoutInflater.from(context).inflate(R.layout.fangwuzulin_item,
+        return LayoutInflater.from(context).inflate(R.layout.property_ershouwupin_item,
                 null);
     }
 
     public void initConvertView(View convertView, final ItemInfo info) {
         View parent = convertView.findViewById(R.id.pulish_time);
-        initText(parent, R.id.name, R.string.pulish_time);
-        initText(parent, R.id.value, R.string.pulish_time);
+        initText(parent, R.id.name, R.string.property_ershouwupin_item_pulish_time);
 
         parent = convertView.findViewById(R.id.position);
-        initText(parent, R.id.name, R.string.position);
-        initText(parent, R.id.value, R.string.position);
+        initText(parent, R.id.name, R.string.property_ershouwupin_item_wupmingcheng);
 
         parent = convertView.findViewById(R.id.tel);
-        initText(parent, R.id.name, R.string.lianxidianhua);
-        initText(parent, R.id.value, R.string.lianxidianhua);
+        initText(parent, R.id.name, R.string.property_ershouwupin_item_xinjiu);
 
         convertView.setOnClickListener(new OnClickListener() {
             @Override
@@ -49,7 +46,7 @@ public class WupinDetailAdapter extends PropertyBaseDataAdapter {
 
     public Intent createIntent() {
         Intent intent = new Intent();
-        intent.setClass(mContext, WupinDetailActivity.class);
+        intent.setClass(mContext, PropertyWupinDetailActivity.class);
         return intent;
     }
 

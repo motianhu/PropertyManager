@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/wentimiaoshu_height"
+    android:background="@color/property_commont_color_select_type_bg"
     android:layout_marginTop="10dp"
     android:orientation="vertical" >
 

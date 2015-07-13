@@ -1,0 +1,84 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/property_color_common_home_bg"
+    android:orientation="vertical" >
+
+    <include layout="@layout/property_common_header" />
+
+    <include
+        android:id="@+id/wupintype"
+        layout="@layout/property_common_select_type" />
+
+    <include
+        android:id="@+id/pinpai"
+        layout="@layout/property_common_select_type" />
+
+    <include
+        android:id="@+id/xinjiu"
+        layout="@layout/property_common_select_type" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:text="@string/property_ershouwupin_wupinfabu_wupinmiaoshu"
+            android:textColor="@color/property_color_common_title" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/property_commont_color_select_type_bg"
+        android:orientation="vertical" >
+
+        <include layout="@layout/property_common_problem_description" />
+    </LinearLayout>
+
+    <include layout="@layout/property_common_startup_camera" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/property_commont_color_select_type_bg"
+        android:orientation="vertical"
+        android:weightSum="2" >
+
+        <include
+            android:id="@+id/lianxiren"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            layout="@layout/name_value" />
+
+        <include
+            android:id="@+id/dianhua"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            layout="@layout/name_value" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/property_commont_color_select_type_bg"
+        android:orientation="vertical" >
+
+        <include
+            android:id="@+id/fabushijian"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            layout="@layout/name_value" />
+    </LinearLayout>
+
+</LinearLayout>

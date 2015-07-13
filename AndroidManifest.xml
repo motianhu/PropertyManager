@@ -94,19 +94,19 @@
 
         <!-- 二手物品 -->
         <activity
-            android:name="com.smona.app.propertymanager.wupin.ErshouwupinActivity"
+            android:name="com.smona.app.propertymanager.wupin.PropertyErshouwupinActivity"
             android:label="@string/property_home_ershouwupin" >
         </activity>
         <activity
-            android:name="com.smona.app.propertymanager.wupin.WupinfabuActivity"
-            android:label="@string/ershouwupin_wupinfabu" >
+            android:name="com.smona.app.propertymanager.wupin.PropertyWupinfabuActivity"
+            android:label="@string/property_ershouwupin_wupinfabu" >
         </activity>
         <activity
-            android:name="com.smona.app.propertymanager.wupin.MineWupinActivity"
-            android:label="@string/ershouwupin_mine" />
+            android:name="com.smona.app.propertymanager.wupin.PropertyMineWupinActivity"
+            android:label="@string/property_ershouwupin_mine" />
         <activity
-            android:name="com.smona.app.propertymanager.wupin.WupinDetailActivity"
-            android:label="@string/ershouwupin_detail" />
+            android:name="com.smona.app.propertymanager.wupin.PropertyWupinDetailActivity"
+            android:label="@string/property_ershouwupin_wupin_detail" />
 
         <!-- provider -->
         <provider

@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/property_common_select_type_height"
     android:background="@color/property_commont_color_select_type_bg"
-    android:layout_marginTop="4dp" >
+    android:layout_marginTop="1dp" >
 
     <TextView
         android:id="@+id/select_type_value"

@@ -2,6 +2,7 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/property_color_common_home_bg"
     android:orientation="vertical" >
 
     <include layout="@layout/property_common_header" />
@@ -17,25 +18,11 @@
     <include
         android:id="@+id/xinjiu"
         layout="@layout/property_common_select_type" />
-    
-    
-    <TextView
-        android:id="@+id/wupinmiaoshu"
+
+    <include
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <include layout="@layout/property_common_startup_camera" />
-
-    <include
-        android:id="@+id/lianxiren"
-        layout="@layout/name_value" />
-
-    <include
-        android:id="@+id/dianhua"
-        layout="@layout/name_value" />
-
-    <include
-        android:id="@+id/fabushijian"
-        layout="@layout/name_value" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="1dp"
+        layout="@layout/property_commont_list_content" />
 
 </LinearLayout>

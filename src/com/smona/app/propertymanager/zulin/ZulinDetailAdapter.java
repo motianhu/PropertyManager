@@ -28,16 +28,13 @@ public class ZulinDetailAdapter extends PropertyBaseDataAdapter {
 
     public void initConvertView(View convertView, final ItemInfo info) {
         View parent = convertView.findViewById(R.id.pulish_time);
-        initText(parent, R.id.name, R.string.pulish_time);
-        initText(parent, R.id.value, R.string.pulish_time);
+        initText(parent, R.id.name, R.string.property_ershouwupin_item_wupmingcheng);
 
         parent = convertView.findViewById(R.id.position);
-        initText(parent, R.id.name, R.string.position);
-        initText(parent, R.id.value, R.string.position);
+        initText(parent, R.id.name, R.string.property_ershouwupin_item_wupmingcheng);
 
         parent = convertView.findViewById(R.id.tel);
-        initText(parent, R.id.name, R.string.lianxidianhua);
-        initText(parent, R.id.value, R.string.lianxidianhua);
+        initText(parent, R.id.name, R.string.property_ershouwupin_item_wupmingcheng);
 
         convertView.setOnClickListener(new OnClickListener() {
             @Override
