@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.smona.app.propertymanager.BaseActivity;
+import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 
-public class PropertyWuyetongzhiDetailActivity extends BaseActivity {
+public class PropertyWuyetongzhiDetailActivity extends PropertyBaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

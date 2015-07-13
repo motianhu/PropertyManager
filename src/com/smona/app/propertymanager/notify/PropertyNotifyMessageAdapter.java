@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.smona.app.propertymanager.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.data.ItemInfo;
+import com.smona.app.propertymanager.data.PropertyItemInfo;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -17,7 +17,8 @@ import android.widget.TextView;
 @SuppressLint("InflateParams")
 public class PropertyNotifyMessageAdapter extends PropertyBaseDataAdapter {
 
-    public PropertyNotifyMessageAdapter(Context context, ArrayList<ItemInfo> content) {
+    public PropertyNotifyMessageAdapter(Context context,
+            ArrayList<PropertyItemInfo> content) {
         super(context, content);
     }
 
@@ -27,19 +28,19 @@ public class PropertyNotifyMessageAdapter extends PropertyBaseDataAdapter {
                 R.layout.property_wuyetongzhi_item, null);
     }
 
-    public void initConvertView(View convertView, final ItemInfo info) {
+    public void initConvertView(View convertView, final PropertyItemInfo info) {
         convertView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 gotoDetail(info);
             }
         });
-        
+
         TextView title = (TextView) convertView.findViewById(R.id.notify_title);
         title.setText("Hellow world");
         TextView time = (TextView) convertView.findViewById(R.id.notify_time);
         time.setText("2015-06-27");
-       
+
     }
 
     public Intent createIntent() {

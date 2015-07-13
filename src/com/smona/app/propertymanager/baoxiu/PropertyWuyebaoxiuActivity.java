@@ -1,14 +1,14 @@
 package com.smona.app.propertymanager.baoxiu;
 
-import com.smona.app.propertymanager.BaseActivity;
-import com.smona.app.propertymanager.MessageProcess;
+import com.smona.app.propertymanager.PropertyBaseActivity;
+import com.smona.app.propertymanager.PropertyMessageProcess;
 import com.smona.app.propertymanager.R;
 
 import android.os.Bundle;
 import android.view.View;
 
-public class PropertyWuyebaoxiuActivity extends BaseActivity {
-    private MessageProcess mProcess;
+public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
+    private PropertyMessageProcess mProcess;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class PropertyWuyebaoxiuActivity extends BaseActivity {
     }
 
     private void testData() {
-        mProcess = new MessageProcess();
+        mProcess = new PropertyMessageProcess();
         mProcess.requestWuyebaoxiu();
     }
 

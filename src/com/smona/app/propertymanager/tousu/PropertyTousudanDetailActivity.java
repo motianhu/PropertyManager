@@ -1,12 +1,12 @@
 package com.smona.app.propertymanager.tousu;
 
-import com.smona.app.propertymanager.BaseActivity;
+import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 
 import android.os.Bundle;
 import android.view.View;
 
-public class PropertyTousudanDetailActivity extends BaseActivity {
+public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

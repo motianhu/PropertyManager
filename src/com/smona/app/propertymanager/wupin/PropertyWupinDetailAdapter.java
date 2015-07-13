@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.smona.app.propertymanager.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.data.ItemInfo;
+import com.smona.app.propertymanager.data.PropertyItemInfo;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -16,22 +16,25 @@ import android.widget.TextView;
 
 public class PropertyWupinDetailAdapter extends PropertyBaseDataAdapter {
 
-    public PropertyWupinDetailAdapter(Context context, ArrayList<ItemInfo> content) {
+    public PropertyWupinDetailAdapter(Context context,
+            ArrayList<PropertyItemInfo> content) {
         super(context, content);
     }
 
     @SuppressLint("InflateParams")
     public View createContentView(Context context) {
-        return LayoutInflater.from(context).inflate(R.layout.property_ershouwupin_item,
-                null);
+        return LayoutInflater.from(context).inflate(
+                R.layout.property_ershouwupin_item, null);
     }
 
-    public void initConvertView(View convertView, final ItemInfo info) {
+    public void initConvertView(View convertView, final PropertyItemInfo info) {
         View parent = convertView.findViewById(R.id.pulish_time);
-        initText(parent, R.id.name, R.string.property_ershouwupin_item_pulish_time);
+        initText(parent, R.id.name,
+                R.string.property_ershouwupin_item_pulish_time);
 
         parent = convertView.findViewById(R.id.position);
-        initText(parent, R.id.name, R.string.property_ershouwupin_item_wupmingcheng);
+        initText(parent, R.id.name,
+                R.string.property_ershouwupin_item_wupmingcheng);
 
         parent = convertView.findViewById(R.id.tel);
         initText(parent, R.id.name, R.string.property_ershouwupin_item_xinjiu);

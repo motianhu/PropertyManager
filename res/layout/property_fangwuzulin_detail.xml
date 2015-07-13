@@ -62,14 +62,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            layout="@layout/name_value" />
+            layout="@layout/property_name_value" />
 
         <include
             android:id="@+id/dianhua"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            layout="@layout/name_value" />
+            layout="@layout/property_name_value" />
     </LinearLayout>
 
     <LinearLayout
@@ -83,7 +83,7 @@
             android:id="@+id/fabushijian"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            layout="@layout/name_value" />
+            layout="@layout/property_name_value" />
     </LinearLayout>
 
     <LinearLayout

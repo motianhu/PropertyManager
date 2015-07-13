@@ -3,7 +3,7 @@ package com.smona.app.propertymanager.baoxiu;
 import java.util.ArrayList;
 import com.smona.app.propertymanager.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.data.ItemInfo;
+import com.smona.app.propertymanager.data.PropertyItemInfo;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,7 @@ import android.view.View.OnClickListener;
 public class PropertyBaoxiudansAdapter extends PropertyBaseDataAdapter {
 
     public PropertyBaoxiudansAdapter(Context context,
-            ArrayList<ItemInfo> content) {
+            ArrayList<PropertyItemInfo> content) {
         super(context, content);
     }
 
@@ -24,7 +24,7 @@ public class PropertyBaoxiudansAdapter extends PropertyBaseDataAdapter {
                 R.layout.property_wuyebaoxiu_baoxiudan_item, null);
     }
 
-    public void initConvertView(View convertView, final ItemInfo info) {
+    public void initConvertView(View convertView, final PropertyItemInfo info) {
         convertView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

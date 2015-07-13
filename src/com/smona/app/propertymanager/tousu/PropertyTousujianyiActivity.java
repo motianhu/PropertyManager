@@ -1,13 +1,13 @@
 package com.smona.app.propertymanager.tousu;
 
-import com.smona.app.propertymanager.BaseActivity;
+import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-public class PropertyTousujianyiActivity extends BaseActivity {
+public class PropertyTousujianyiActivity extends PropertyBaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +34,7 @@ public class PropertyTousujianyiActivity extends BaseActivity {
                 R.string.property_tousujianyi_xuanzetousuleixing);
         initText(R.id.action_now, R.string.property_tousujianyi_action_tousu);
 
-        EditText text = (EditText)mRoot.findViewById(R.id.problem_content);
+        EditText text = (EditText) mRoot.findViewById(R.id.problem_content);
         text.setHint(R.string.property_tousujianyi_tousuwentimiaoshu);
     }
 

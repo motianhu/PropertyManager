@@ -3,10 +3,10 @@ package com.smona.app.propertymanager.wupin;
 import android.os.Bundle;
 import android.view.View;
 
-import com.smona.app.propertymanager.BaseActivity;
+import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 
-public class PropertyWupinDetailActivity extends BaseActivity {
+public class PropertyWupinDetailActivity extends PropertyBaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,28 +28,33 @@ public class PropertyWupinDetailActivity extends BaseActivity {
     @Override
     protected void initBody() {
         View parent = mRoot.findViewById(R.id.wupinfenlei);
-        initText(parent, R.id.name, R.string.property_ershouwupin_detail_wupinfenlei);
+        initText(parent, R.id.name,
+                R.string.property_ershouwupin_detail_wupinfenlei);
 
         parent = mRoot.findViewById(R.id.pinpai);
         initText(parent, R.id.name, R.string.property_ershouwupin_detail_pinpai);
 
         parent = mRoot.findViewById(R.id.wupinmingchen);
         initText(parent, R.id.name, R.string.property_ershouwupin_wupinmingchen);
-        
+
         parent = mRoot.findViewById(R.id.wupinmiaoshu);
-        initText(parent, R.id.name, R.string.property_ershouwupin_wupinfabu_wupinmiaoshu);
-        
+        initText(parent, R.id.name,
+                R.string.property_ershouwupin_wupinfabu_wupinmiaoshu);
+
         parent = mRoot.findViewById(R.id.xinjiu);
         initText(parent, R.id.name, R.string.property_ershouwupin_xuanzexinjiu);
-        
+
         parent = mRoot.findViewById(R.id.lianxiren);
-        initText(parent, R.id.name, R.string.property_ershouwupin_wupinfabu_lianxiren);
-        
+        initText(parent, R.id.name,
+                R.string.property_ershouwupin_wupinfabu_lianxiren);
+
         parent = mRoot.findViewById(R.id.dianhua);
-        initText(parent, R.id.name, R.string.property_ershouwupin_wupinfabu_dianhu);
-        
-        parent= mRoot.findViewById(R.id.fabushijian);
-        initText(parent, R.id.name, R.string.property_ershouwupin_item_pulish_time);
+        initText(parent, R.id.name,
+                R.string.property_ershouwupin_wupinfabu_dianhu);
+
+        parent = mRoot.findViewById(R.id.fabushijian);
+        initText(parent, R.id.name,
+                R.string.property_ershouwupin_item_pulish_time);
     }
 
     @Override

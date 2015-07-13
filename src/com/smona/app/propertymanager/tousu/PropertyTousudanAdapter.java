@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.smona.app.propertymanager.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.data.ItemInfo;
+import com.smona.app.propertymanager.data.PropertyItemInfo;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -16,7 +16,8 @@ import android.widget.TextView;
 
 public class PropertyTousudanAdapter extends PropertyBaseDataAdapter {
 
-    public PropertyTousudanAdapter(Context context, ArrayList<ItemInfo> content) {
+    public PropertyTousudanAdapter(Context context,
+            ArrayList<PropertyItemInfo> content) {
         super(context, content);
     }
 
@@ -26,18 +27,18 @@ public class PropertyTousudanAdapter extends PropertyBaseDataAdapter {
                 R.layout.property_tousujianyi_tousudan_item, null);
     }
 
-    public void initConvertView(View convertView, final ItemInfo info) {
-//        View parent = convertView.findViewById(R.id.pulish_time);
-//        initText(parent, R.id.name, R.string.pulish_time);
-//        initText(parent, R.id.value, R.string.pulish_time);
-//
-//        parent = convertView.findViewById(R.id.position);
-//        initText(parent, R.id.name, R.string.position);
-//        initText(parent, R.id.value, R.string.position);
-//
-//        parent = convertView.findViewById(R.id.tel);
-//        initText(parent, R.id.name, R.string.lianxidianhua);
-//        initText(parent, R.id.value, R.string.lianxidianhua);
+    public void initConvertView(View convertView, final PropertyItemInfo info) {
+        // View parent = convertView.findViewById(R.id.pulish_time);
+        // initText(parent, R.id.name, R.string.pulish_time);
+        // initText(parent, R.id.value, R.string.pulish_time);
+        //
+        // parent = convertView.findViewById(R.id.position);
+        // initText(parent, R.id.name, R.string.position);
+        // initText(parent, R.id.value, R.string.position);
+        //
+        // parent = convertView.findViewById(R.id.tel);
+        // initText(parent, R.id.name, R.string.lianxidianhua);
+        // initText(parent, R.id.value, R.string.lianxidianhua);
 
         convertView.setOnClickListener(new OnClickListener() {
             @Override

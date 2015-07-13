@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.smona.app.propertymanager.BaseActivity;
+import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 
-public class PropertyPublishFangYuanActivity extends BaseActivity {
+public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,25 +26,31 @@ public class PropertyPublishFangYuanActivity extends BaseActivity {
     @Override
     protected void initBody() {
         View parent = mRoot.findViewById(R.id.ywtype);
-        initText(parent, R.id.select_type, R.string.property_fangwuzulin_xuanzeyewuleixing);
+        initText(parent, R.id.select_type,
+                R.string.property_fangwuzulin_xuanzeyewuleixing);
 
         parent = mRoot.findViewById(R.id.area);
-        initText(parent, R.id.select_type, R.string.property_fangwuzulin_arealeixing);
+        initText(parent, R.id.select_type,
+                R.string.property_fangwuzulin_arealeixing);
 
         parent = mRoot.findViewById(R.id.housetype);
-        initText(parent, R.id.select_type, R.string.property_fangwuzulin_xuanzehuxing);
-        
-        EditText text = (EditText)mRoot.findViewById(R.id.problem_content);
+        initText(parent, R.id.select_type,
+                R.string.property_fangwuzulin_xuanzehuxing);
+
+        EditText text = (EditText) mRoot.findViewById(R.id.problem_content);
         text.setHint(R.string.property_fangwuzulin_fangyuanfabu_shurupeitaomiaoshu);
-        
+
         parent = mRoot.findViewById(R.id.lianxiren);
-        initText(parent, R.id.name, R.string.property_ershouwupin_wupinfabu_lianxiren);
-        
+        initText(parent, R.id.name,
+                R.string.property_ershouwupin_wupinfabu_lianxiren);
+
         parent = mRoot.findViewById(R.id.dianhua);
-        initText(parent, R.id.name, R.string.property_ershouwupin_wupinfabu_dianhu);
-        
-        parent= mRoot.findViewById(R.id.fabushijian);
-        initText(parent, R.id.name, R.string.property_ershouwupin_item_pulish_time);
+        initText(parent, R.id.name,
+                R.string.property_ershouwupin_wupinfabu_dianhu);
+
+        parent = mRoot.findViewById(R.id.fabushijian);
+        initText(parent, R.id.name,
+                R.string.property_ershouwupin_item_pulish_time);
     }
 
     @Override

@@ -1,12 +1,12 @@
 package com.smona.app.propertymanager.baoxiu;
 
-import com.smona.app.propertymanager.BaseActivity;
+import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 
 import android.os.Bundle;
 import android.view.View;
 
-public class PropertyBaoxiudanDetailActivity extends BaseActivity {
+public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

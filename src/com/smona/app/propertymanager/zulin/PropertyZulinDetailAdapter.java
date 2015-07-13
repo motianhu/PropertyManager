@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.smona.app.propertymanager.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.data.ItemInfo;
+import com.smona.app.propertymanager.data.PropertyItemInfo;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -17,7 +17,7 @@ import android.widget.TextView;
 public class PropertyZulinDetailAdapter extends PropertyBaseDataAdapter {
 
     public PropertyZulinDetailAdapter(Context context,
-            ArrayList<ItemInfo> content) {
+            ArrayList<PropertyItemInfo> content) {
         super(context, content);
     }
 
@@ -27,7 +27,7 @@ public class PropertyZulinDetailAdapter extends PropertyBaseDataAdapter {
                 R.layout.property_fangwuzulin_item, null);
     }
 
-    public void initConvertView(View convertView, final ItemInfo info) {
+    public void initConvertView(View convertView, final PropertyItemInfo info) {
         View parent = convertView.findViewById(R.id.pulish_time);
         initText(parent, R.id.name,
                 R.string.property_fangwuzulin_item_pulish_time);

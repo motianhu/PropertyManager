@@ -1,7 +1,7 @@
 package com.smona.app.propertymanager;
 
 import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuActivity;
-import com.smona.app.propertymanager.data.table.WuyebaoxiudanTable;
+import com.smona.app.propertymanager.data.table.PropertyWuyebaoxiudanTable;
 import com.smona.app.propertymanager.notify.PropertyWuyetongzhiActivity;
 import com.smona.app.propertymanager.tousu.PropertyTousujianyiActivity;
 import com.smona.app.propertymanager.wupin.PropertyErshouwupinActivity;
@@ -13,8 +13,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class PropertyHomeActivity extends BaseActivity {
-    private MessageProcess mLogin;
+public class PropertyHomeActivity extends PropertyBaseActivity {
+    private PropertyMessageProcess mLogin;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,11 +26,11 @@ public class PropertyHomeActivity extends BaseActivity {
 
     private void testProvider() {
         ContentResolver cr = this.getContentResolver();
-        cr.query(WuyebaoxiudanTable.getInstance().mContentUri_NoNotify, null,
-                null, null, null);
+        cr.query(PropertyWuyebaoxiudanTable.getInstance().mContentUri_NoNotify,
+                null, null, null, null);
 
         // login
-        mLogin = new MessageProcess();
+        mLogin = new PropertyMessageProcess();
         mLogin.login();
     }
 

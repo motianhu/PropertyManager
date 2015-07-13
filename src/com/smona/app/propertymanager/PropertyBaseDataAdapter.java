@@ -2,7 +2,7 @@ package com.smona.app.propertymanager;
 
 import java.util.ArrayList;
 
-import com.smona.app.propertymanager.data.ItemInfo;
+import com.smona.app.propertymanager.data.PropertyItemInfo;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,9 +12,10 @@ import android.widget.BaseAdapter;
 
 public abstract class PropertyBaseDataAdapter extends BaseAdapter {
     protected Context mContext;
-    protected ArrayList<ItemInfo> mContent;
+    protected ArrayList<PropertyItemInfo> mContent;
 
-    public PropertyBaseDataAdapter(Context context, ArrayList<ItemInfo> content) {
+    public PropertyBaseDataAdapter(Context context,
+            ArrayList<PropertyItemInfo> content) {
         mContext = context;
         mContent = content;
     }
@@ -36,7 +37,7 @@ public abstract class PropertyBaseDataAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ItemInfo info = mContent.get(position);
+        PropertyItemInfo info = mContent.get(position);
         if (convertView == null) {
             convertView = createContentView(mContext);
             convertView.setTag(info);
@@ -47,9 +48,9 @@ public abstract class PropertyBaseDataAdapter extends BaseAdapter {
 
     public abstract View createContentView(Context context);
 
-    public abstract void initConvertView(View view, ItemInfo info);
+    public abstract void initConvertView(View view, PropertyItemInfo info);
 
-    protected void gotoDetail(ItemInfo info) {
+    protected void gotoDetail(PropertyItemInfo info) {
         Intent intent = createIntent();
         mContext.startActivity(intent);
     }

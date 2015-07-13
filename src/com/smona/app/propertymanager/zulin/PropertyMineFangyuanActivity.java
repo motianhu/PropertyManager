@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
-import com.smona.app.propertymanager.BaseActivity;
+import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.data.ItemInfo;
+import com.smona.app.propertymanager.data.PropertyItemInfo;
 
-public class PropertyMineFangyuanActivity extends BaseActivity {
+public class PropertyMineFangyuanActivity extends PropertyBaseActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +39,9 @@ public class PropertyMineFangyuanActivity extends BaseActivity {
                 R.string.property_fangwuzulin_xuanzehuxing);
 
         ListView list = (ListView) mRoot.findViewById(R.id.list_content);
-        ArrayList<ItemInfo> data = new ArrayList<ItemInfo>();
+        ArrayList<PropertyItemInfo> data = new ArrayList<PropertyItemInfo>();
         for (int i = 0; i < 10; i++) {
-            ItemInfo info = new ItemInfo();
+            PropertyItemInfo info = new PropertyItemInfo();
             data.add(info);
         }
         PropertyZulinDetailAdapter adapter = new PropertyZulinDetailAdapter(

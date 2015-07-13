@@ -2,15 +2,15 @@ package com.smona.app.propertymanager.baoxiu;
 
 import java.util.ArrayList;
 
-import com.smona.app.propertymanager.BaseActivity;
+import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.data.ItemInfo;
+import com.smona.app.propertymanager.data.PropertyItemInfo;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
-public class PropertyBaoxiudanActivity extends BaseActivity {
+public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
 
     private ListView mBaoxiudans;
     private PropertyBaoxiudansAdapter mBaoxiudansAdapter;
@@ -43,9 +43,9 @@ public class PropertyBaoxiudanActivity extends BaseActivity {
         initText(R.id.yezhuxinxi_dizhi, address);
 
         mBaoxiudans = (ListView) mRoot.findViewById(R.id.list_content);
-        ArrayList<ItemInfo> datas = new ArrayList<ItemInfo>();
+        ArrayList<PropertyItemInfo> datas = new ArrayList<PropertyItemInfo>();
         for (int i = 0; i < 10; i++) {
-            ItemInfo item = new ItemInfo();
+            PropertyItemInfo item = new PropertyItemInfo();
             datas.add(item);
         }
         mBaoxiudansAdapter = new PropertyBaoxiudansAdapter(this, datas);

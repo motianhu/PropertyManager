@@ -110,7 +110,7 @@
 
         <!-- provider -->
         <provider
-            android:name="com.smona.app.propertymanager.data.db.PropertyProvider"
+            android:name="com.smona.app.propertymanager.data.db.PropertyPropertyProvider"
             android:authorities="com.smona.app.propertymanager.cache"
             android:exported="true" />
     </application>
