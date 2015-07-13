@@ -1,10 +1,6 @@
 <resources>
 
-    <string name="app_name">物业管理</string>
-    <string name="baoxiuwentimiaoshu">报修问题描述</string>
-    <string name="tousuwentimiaoshu">投诉问题描述</string>
-    <string name="notify_read_no">未读</string>
-    <string name="notify_read_yes">已读</string>
+    <string name="app_name">@string/property_wuyefuwu</string>
 
     <!-- 公共 -->
     <string name="property_common_back">返回</string>
@@ -13,6 +9,8 @@
     <string name="property_common_xuanzebaoxiuleixing">选择报修类型</string>
     <string name="property_common_paishezhaopian_title">拍摄照片</string>
     <string name="property_common_wuyedianhua">直接拨打物业电话</string>
+    <string name="property_common_publish_information">发布信息</string>
+    <string name="property_common_call_contact_phone">直接拨打联系人电话</string>
 
     <!-- 物业报修 -->
     <string name="property_home_wuyebaoxiu">物业报修</string>
@@ -51,30 +49,34 @@
     <string name="property_tousujianyi_tousudan_item_fankuishijian">反馈时间</string>
     <string name="property_tousujianyi_tousudan_item_tousu_taidu">服务态度</string>
     <string name="property_tousujianyi_tousudan_item_tousu_jishixing">反馈及时性</string>
-    <string name="tousudandetail">投诉单详情</string>
+    <string name="property_tousudan_detail">投诉单详情</string>
 
     <!-- 物业通知 -->
     <string name="property_home_wuyetongzhi">物业通知</string>
 
     <!-- 房屋租售 -->
     <string name="property_home_fangwuzulin">房屋租赁</string>
-    <string name="xuanzeyewuleixing">选择业务类型</string>
-    <string name="yewuleixing">业务类型</string>
-    <string name="area_leixing">面积</string>
-    <string name="area_xuanze">选择</string>
-    <string name="house_leixing">户型</string>
-    <string name="house_xuanze">选择户型</string>
-    <string name="publish_fangyuan">发布房源</string>
-    <string name="mine_fangyuan">我的房源</string>
-    <string name="peitao_des">配套描述</string>
-    <string name="fangyuanxinxi">房源信息</string>
+    <string name="property_fangwuzulin_publish_fangyuan">发布房源</string>
+    <string name="property_fangwuzulin_xuanzeyewuleixing">选择业务类型</string>
+    <string name="property_fangwuzulin_arealeixing">选择面积</string>
+    <string name="property_fangwuzulin_item_pulish_time">发布时间</string>
+    <string name="property_fangwuzulin_item_position">位置</string>
+    <string name="property_fangwuzulin_item_tel">联系电话</string>
+    <string name="property_fangwuzulin_item_yewuleixing">业务类型</string>
+    <string name="property_fangwuzulin_item_area">面积</string>
+    <string name="property_fangwuzulin_item_huxing">户型</string>
+    <string name="property_fangwuzulin_xuanzehuxing">选择户型</string>
+    <string name="property_fangwuzulin_mine">我的房源</string>
+    <string name="property_fangwuzulin_fangyuanfabu_peitaomiaoshu">配套描述</string>
+    <string name="property_fangwuzulin_fangyuanfabu_shurupeitaomiaoshu">输入配套描述</string>
+    <string name="property_fangwuzulin_fangyuanxinxi">房源信息</string>
 
     <!-- 二手物品 -->
     <string name="property_home_ershouwupin">二手物品</string>
     <string name="property_ershouwupin_wupinfabu">物品发布</string>
     <string name="property_ershouwupin_xuanzewupinfenlei">选择物品分类</string>
     <string name="property_ershouwupin_pinpaifenlei">选择品牌分类</string>
-    <string name="property_ershouwupin_xuanzeinjiu">新旧</string>
+    <string name="property_ershouwupin_xuanzexinjiu">新旧</string>
     <string name="property_ershouwupin_item_pulish_time">发布时间</string>
     <string name="property_ershouwupin_item_wupmingcheng">物品名称</string>
     <string name="property_ershouwupin_item_xinjiu">新&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;旧</string>

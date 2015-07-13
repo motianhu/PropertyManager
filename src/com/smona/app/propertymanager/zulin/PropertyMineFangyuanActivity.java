@@ -10,33 +10,33 @@ import com.smona.app.propertymanager.BaseActivity;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.ItemInfo;
 
-public class MineFangyuanActivity extends BaseActivity {
+public class PropertyMineFangyuanActivity extends BaseActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fangwuzulin_mine);
+        setContentView(R.layout.property_fangwuzulin_mine);
         initViews();
     }
 
     @Override
     protected void initHeader() {
-        initText(R.id.title, R.string.mine_fangyuan);
+        initText(R.id.title, R.string.property_fangwuzulin_mine);
         initView(R.id.back);
     }
 
     @Override
     protected void initBody() {
         View parent = mRoot.findViewById(R.id.ywtype);
-        initText(parent, R.id.select_type, R.string.yewuleixing);
-        initText(parent, R.id.select_type_value, R.string.yewuleixing);
+        initText(parent, R.id.select_type,
+                R.string.property_fangwuzulin_xuanzeyewuleixing);
 
         parent = mRoot.findViewById(R.id.area);
-        initText(parent, R.id.select_type, R.string.area_xuanze);
-        initText(parent, R.id.select_type_value, R.string.area_leixing);
+        initText(parent, R.id.select_type,
+                R.string.property_fangwuzulin_arealeixing);
 
         parent = mRoot.findViewById(R.id.housetype);
-        initText(parent, R.id.select_type, R.string.house_xuanze);
-        initText(parent, R.id.select_type_value, R.string.house_leixing);
+        initText(parent, R.id.select_type,
+                R.string.property_fangwuzulin_xuanzehuxing);
 
         ListView list = (ListView) mRoot.findViewById(R.id.list_content);
         ArrayList<ItemInfo> data = new ArrayList<ItemInfo>();
@@ -44,7 +44,8 @@ public class MineFangyuanActivity extends BaseActivity {
             ItemInfo info = new ItemInfo();
             data.add(info);
         }
-        ZulinDetailAdapter adapter = new ZulinDetailAdapter(this, data);
+        PropertyZulinDetailAdapter adapter = new PropertyZulinDetailAdapter(
+                this, data);
         list.setAdapter(adapter);
     }
 

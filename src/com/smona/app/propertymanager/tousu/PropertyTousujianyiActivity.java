@@ -17,7 +17,7 @@ public class PropertyTousujianyiActivity extends BaseActivity {
 
     protected void initHeader() {
         initText(R.id.title, R.string.property_home_tousujianyi);
-        initText(R.id.detail, R.string.tousudandetail);
+        initText(R.id.detail, R.string.property_tousudan_detail);
         initView(R.id.back);
         initView(R.id.detail);
     }

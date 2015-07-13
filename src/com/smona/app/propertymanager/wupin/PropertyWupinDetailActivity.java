@@ -40,7 +40,7 @@ public class PropertyWupinDetailActivity extends BaseActivity {
         initText(parent, R.id.name, R.string.property_ershouwupin_wupinfabu_wupinmiaoshu);
         
         parent = mRoot.findViewById(R.id.xinjiu);
-        initText(parent, R.id.name, R.string.property_ershouwupin_xuanzeinjiu);
+        initText(parent, R.id.name, R.string.property_ershouwupin_xuanzexinjiu);
         
         parent = mRoot.findViewById(R.id.lianxiren);
         initText(parent, R.id.name, R.string.property_ershouwupin_wupinfabu_lianxiren);

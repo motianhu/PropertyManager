@@ -43,13 +43,13 @@
         layout="@layout/property_common_text_value" />
 
     <include
-        android:id="@+id/baoxiu_problem"
+        android:id="@+id/wupin_picture"
         android:layout_width="match_parent"
         android:layout_height="@dimen/property_common_paishezhaoping_container_height"
         android:layout_marginTop="1dp"
         layout="@layout/property_common_display_picture" />
 
-     <LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginTop="5dp"
@@ -84,6 +84,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             layout="@layout/name_value" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/property_commont_color_select_type_bg"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/property_common_call_contact_phone" />
     </LinearLayout>
 
 </LinearLayout>

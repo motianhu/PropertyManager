@@ -5,7 +5,7 @@ import com.smona.app.propertymanager.data.table.WuyebaoxiudanTable;
 import com.smona.app.propertymanager.notify.PropertyWuyetongzhiActivity;
 import com.smona.app.propertymanager.tousu.PropertyTousujianyiActivity;
 import com.smona.app.propertymanager.wupin.PropertyErshouwupinActivity;
-import com.smona.app.propertymanager.zulin.FangwuzulinActivity;
+import com.smona.app.propertymanager.zulin.PropertyFangwuzulinActivity;
 
 import android.content.ContentResolver;
 import android.os.Bundle;
@@ -90,7 +90,7 @@ public class PropertyHomeActivity extends BaseActivity {
             gotoSubActivity(PropertyWuyetongzhiActivity.class);
             break;
         case R.id.fangwuzulin:
-            gotoSubActivity(FangwuzulinActivity.class);
+            gotoSubActivity(PropertyFangwuzulinActivity.class);
             break;
         case R.id.ershouwupin:
             gotoSubActivity(PropertyErshouwupinActivity.class);

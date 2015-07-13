@@ -61,7 +61,7 @@
         </activity>
         <activity
             android:name="com.smona.app.propertymanager.tousu.PropertyTousudanDetailActivity"
-            android:label="@string/tousudandetail" >
+            android:label="@string/property_tousudan_detail" >
         </activity>
 
         <!-- 物业通知 -->
@@ -76,20 +76,20 @@
 
         <!-- 房屋租赁 -->
         <activity
-            android:name="com.smona.app.propertymanager.zulin.FangwuzulinActivity"
+            android:name="com.smona.app.propertymanager.zulin.PropertyFangwuzulinActivity"
             android:label="@string/property_home_fangwuzulin" >
         </activity>
         <activity
-            android:name="com.smona.app.propertymanager.zulin.FangwuzulinDetailActivity"
+            android:name="com.smona.app.propertymanager.zulin.PropertyFangwuzulinDetailActivity"
             android:label="@string/property_home_fangwuzulin" >
         </activity>
         <activity
-            android:name="com.smona.app.propertymanager.zulin.PublishFangYuanActivity"
+            android:name="com.smona.app.propertymanager.zulin.PropertyPublishFangYuanActivity"
             android:label="@string/property_home_fangwuzulin" >
         </activity>
         <activity
-            android:name="com.smona.app.propertymanager.zulin.MineFangyuanActivity"
-            android:label="@string/mine_fangyuan" >
+            android:name="com.smona.app.propertymanager.zulin.PropertyMineFangyuanActivity"
+            android:label="@string/property_fangwuzulin_mine" >
         </activity>
 
         <!-- 二手物品 -->

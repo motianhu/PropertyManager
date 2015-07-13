@@ -14,27 +14,29 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-public class ZulinDetailAdapter extends PropertyBaseDataAdapter {
+public class PropertyZulinDetailAdapter extends PropertyBaseDataAdapter {
 
-    public ZulinDetailAdapter(Context context, ArrayList<ItemInfo> content) {
+    public PropertyZulinDetailAdapter(Context context,
+            ArrayList<ItemInfo> content) {
         super(context, content);
     }
 
     @SuppressLint("InflateParams")
     public View createContentView(Context context) {
-        return LayoutInflater.from(context).inflate(R.layout.fangwuzulin_item,
-                null);
+        return LayoutInflater.from(context).inflate(
+                R.layout.property_fangwuzulin_item, null);
     }
 
     public void initConvertView(View convertView, final ItemInfo info) {
         View parent = convertView.findViewById(R.id.pulish_time);
-        initText(parent, R.id.name, R.string.property_ershouwupin_item_wupmingcheng);
+        initText(parent, R.id.name,
+                R.string.property_fangwuzulin_item_pulish_time);
 
         parent = convertView.findViewById(R.id.position);
-        initText(parent, R.id.name, R.string.property_ershouwupin_item_wupmingcheng);
+        initText(parent, R.id.name, R.string.property_fangwuzulin_item_position);
 
         parent = convertView.findViewById(R.id.tel);
-        initText(parent, R.id.name, R.string.property_ershouwupin_item_wupmingcheng);
+        initText(parent, R.id.name, R.string.property_fangwuzulin_item_tel);
 
         convertView.setOnClickListener(new OnClickListener() {
             @Override
@@ -46,7 +48,7 @@ public class ZulinDetailAdapter extends PropertyBaseDataAdapter {
 
     public Intent createIntent() {
         Intent intent = new Intent();
-        intent.setClass(mContext, FangwuzulinDetailActivity.class);
+        intent.setClass(mContext, PropertyFangwuzulinDetailActivity.class);
         return intent;
     }
 

@@ -41,7 +41,7 @@ public class PropertyMineWupinActivity extends BaseActivity {
 
         parent = mRoot.findViewById(R.id.xinjiu);
         initText(parent, R.id.select_type,
-                R.string.property_ershouwupin_xuanzeinjiu);
+                R.string.property_ershouwupin_xuanzexinjiu);
 
         ListView list = (ListView) mRoot.findViewById(R.id.list_content);
         ArrayList<ItemInfo> data = new ArrayList<ItemInfo>();

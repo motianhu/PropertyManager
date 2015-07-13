@@ -5,16 +5,16 @@ import java.io.FileOutputStream;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-public class LogUtil {
+public class PropertyLogUtil {
     public static final boolean DEBUG = true;
 
     private static final String MODULE_NAME = "Moth";
-    private static final LogUtil INSTANCE = new LogUtil();
+    private static final PropertyLogUtil INSTANCE = new PropertyLogUtil();
 
-    private LogUtil() {
+    private PropertyLogUtil() {
     }
 
-    public static LogUtil getInstance() {
+    public static PropertyLogUtil getInstance() {
         return INSTANCE;
     }
 

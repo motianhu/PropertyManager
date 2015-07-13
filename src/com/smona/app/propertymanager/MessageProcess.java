@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.jasonwang.informationhuimin.https.DoHttp;
 import com.jasonwang.informationhuimin.json.resp.JSONAuthenticationMessage;
 import com.jasonwang.informationhuimin.utils.ConfigsInfo;
-import com.smona.app.propertymanager.util.LogUtil;
+import com.smona.app.propertymanager.util.PropertyLogUtil;
 
 public class MessageProcess {
     private static final String TAG = "Login";
@@ -16,7 +16,7 @@ public class MessageProcess {
         new Thread() {
             public void run() {
                 boolean flag = new DoHttp().authentication();
-                LogUtil.d(TAG, "login flag: " + flag);
+                PropertyLogUtil.d(TAG, "login flag: " + flag);
                 // if (flag) {
                 // String username = "020148888";
                 // String password = "888888";
@@ -28,7 +28,7 @@ public class MessageProcess {
                 String username = "18937113913";
                 String password = "123456";
                 String result = new DoHttp().doLogin(username, password);
-                LogUtil.d(TAG, "login result: " + result);
+                PropertyLogUtil.d(TAG, "login result: " + result);
                 authentication();
             }
         }.start();
@@ -44,7 +44,7 @@ public class MessageProcess {
         message.setCurrappver(ConfigsInfo.VERSION);
         String msg = new Gson().toJson(message);
         String result = new DoHttp().sendMsg("0000", msg);
-        LogUtil.d(TAG, "authentication result " + result);
+        PropertyLogUtil.d(TAG, "authentication result " + result);
         if (result.equals("0") || result.equals("1") || result.equals("2")
                 || result.equals("3") || result.equals("4")
                 || result.equals("5") || result.equals("6")
@@ -57,7 +57,7 @@ public class MessageProcess {
                 return false;
             }
             String answercode = json.getAnswercode().toString();
-            LogUtil.d(TAG, "authentication answercode " + answercode);
+            PropertyLogUtil.d(TAG, "authentication answercode " + answercode);
             if (answercode.equals("00")) {
                 String key = json.getWorkkey();
                 ConfigsInfo.updateKey(key);
@@ -78,7 +78,7 @@ public class MessageProcess {
                 message.setLoginname(ConfigsInfo.username);
                 String msg = new Gson().toJson(message);
                 String result = new DoHttp().sendMsg("3200", msg);
-                LogUtil.d(TAG, "requestWuyebaoxiu result " + result);
+                PropertyLogUtil.d(TAG, "requestWuyebaoxiu result " + result);
                 if (result.equals("0") || result.equals("1")
                         || result.equals("2") || result.equals("3")
                         || result.equals("4") || result.equals("5")
@@ -90,7 +90,7 @@ public class MessageProcess {
                         return;
                     }
                     String answercode = json.getAnswercode().toString();
-                    LogUtil.d(TAG, "answercode " + answercode);
+                    PropertyLogUtil.d(TAG, "answercode " + answercode);
                 }
             }
         }.start();

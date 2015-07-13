@@ -8,15 +8,15 @@
     <include layout="@layout/property_common_header" />
 
     <include
-        android:id="@+id/wupintype"
+        android:id="@+id/ywtype"
         layout="@layout/property_common_select_type" />
 
     <include
-        android:id="@+id/pinpai"
+        android:id="@+id/area"
         layout="@layout/property_common_select_type" />
 
     <include
-        android:id="@+id/xinjiu"
+        android:id="@+id/housetype"
         layout="@layout/property_common_select_type" />
 
     <LinearLayout
@@ -81,18 +81,17 @@
             layout="@layout/name_value" />
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:background="@color/property_commont_color_select_type_bg"
-        android:gravity="center"
-        android:orientation="vertical" >
+        android:background="@color/property_commont_color_select_type_bg" >
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="@string/property_common_publish_information" />
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

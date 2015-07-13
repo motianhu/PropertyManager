@@ -17,7 +17,7 @@ import com.smona.app.propertymanager.data.table.WuyebaoxiuTypeTable;
 import com.smona.app.propertymanager.data.table.WuyebaoxiudanTable;
 import com.smona.app.propertymanager.data.table.WuyetongzhiTable;
 import com.smona.app.propertymanager.data.table.YezhuxinxiTable;
-import com.smona.app.propertymanager.util.LogUtil;
+import com.smona.app.propertymanager.util.PropertyLogUtil;
 
 import android.annotation.SuppressLint;
 import android.content.ContentProvider;
@@ -155,7 +155,7 @@ public class PropertyProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        LogUtil.d(TAG, "onCreate");
+        PropertyLogUtil.d(TAG, "onCreate");
         mDataHelper = new DatabaseHelper(getContext());
         return true;
     }
@@ -178,7 +178,7 @@ public class PropertyProvider extends ContentProvider {
     public String getType(Uri uri) {
         int match = URI_MATCH.match(uri);
         String tableName = TABLE_MATCH.get(match);
-        LogUtil.d(TAG, "getType uri: " + uri + ";tableName: " + tableName);
+        PropertyLogUtil.d(TAG, "getType uri: " + uri + ";tableName: " + tableName);
         if (tableName != null) {
             return "vnd.android.cursor.dir/wallpaper";
         } else {
@@ -282,7 +282,7 @@ public class PropertyProvider extends ContentProvider {
             String[] selectionArgs) {
         int count = -1;
         count = update(uri, values, selection, selectionArgs);
-        LogUtil.d(TAG, "count = " + count);
+        PropertyLogUtil.d(TAG, "count = " + count);
         if (count <= 0) {
             insert(uri, values);
         }
@@ -298,7 +298,7 @@ public class PropertyProvider extends ContentProvider {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            LogUtil.d(TAG, "DatabaseHelper onCreate");
+            PropertyLogUtil.d(TAG, "DatabaseHelper onCreate");
             ArrayList<String> sqlList = getCreateTableSqlList();
             for (String sql : sqlList) {
                 db.execSQL(sql);
@@ -310,7 +310,7 @@ public class PropertyProvider extends ContentProvider {
             if (oldVersion >= newVersion) {
                 return;
             }
-            LogUtil.d(TAG, "DatabaseHelper onUpgrade oldVersion: " + oldVersion
+            PropertyLogUtil.d(TAG, "DatabaseHelper onUpgrade oldVersion: " + oldVersion
                     + ", newVersion: " + newVersion);
 
             ArrayList<String> dropList = getDropTableSqlList();

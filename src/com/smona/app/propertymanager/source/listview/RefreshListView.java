@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.util.LogUtil;
+import com.smona.app.propertymanager.util.PropertyLogUtil;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -84,7 +84,7 @@ public class RefreshListView extends ListView implements OnScrollListener {
         mTvLastUpdateTime.setText(getFinallyUpdateTime());
         measureView(mHeaderView);
         mHeaderViewHeight = mHeaderView.getMeasuredHeight();
-        LogUtil.i(TAG, "头布局的高度: " + mHeaderViewHeight);
+        PropertyLogUtil.i(TAG, "头布局的高度: " + mHeaderViewHeight);
         mHeaderView.setPadding(0, -mHeaderViewHeight, 0, 0);
         this.addHeaderView(mHeaderView);
     }
@@ -160,7 +160,7 @@ public class RefreshListView extends ListView implements OnScrollListener {
                     refreshHeaderViewState();
                 } else if (paddingTop < 0
                         && mCurrentState == DisplayMode.Release_Refresh) {
-                    LogUtil.d(TAG, "下拉刷新");
+                    PropertyLogUtil.d(TAG, "下拉刷新");
                     mCurrentState = DisplayMode.Pull_Down;
                     refreshHeaderViewState();
                 }
@@ -218,7 +218,7 @@ public class RefreshListView extends ListView implements OnScrollListener {
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-        LogUtil.i(TAG, "onScrollStateChanged: " + scrollState);
+        PropertyLogUtil.i(TAG, "onScrollStateChanged: " + scrollState);
         if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
                 || scrollState == OnScrollListener.SCROLL_STATE_FLING) {
             if (mIsScroll2Bottom && !mIsLoadMoving) {
@@ -240,7 +240,7 @@ public class RefreshListView extends ListView implements OnScrollListener {
         }
 
         mFirstVisibleItemPos = firstVisibleItem;
-        LogUtil.i(TAG, "onScroll: " + firstVisibleItem + ", "
+        PropertyLogUtil.i(TAG, "onScroll: " + firstVisibleItem + ", "
                 + visibleItemCount + ", " + totalItemCount);
         if ((firstVisibleItem + visibleItemCount) >= totalItemCount
                 && totalItemCount > 0) {

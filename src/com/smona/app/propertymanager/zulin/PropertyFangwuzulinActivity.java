@@ -10,11 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
-public class FangwuzulinActivity extends BaseActivity {
+public class PropertyFangwuzulinActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fangwuzulin);
+        setContentView(R.layout.property_fangwuzulin);
         initViews();
     }
 
@@ -26,7 +26,7 @@ public class FangwuzulinActivity extends BaseActivity {
     @Override
     protected void initHeader() {
         initText(R.id.title, R.string.property_home_fangwuzulin);
-        initText(R.id.detail, R.string.publish_fangyuan);
+        initText(R.id.detail, R.string.property_fangwuzulin_publish_fangyuan);
         initView(R.id.detail);
         initView(R.id.back);
     }
@@ -34,18 +34,15 @@ public class FangwuzulinActivity extends BaseActivity {
     @Override
     protected void initBody() {
         View parent = mRoot.findViewById(R.id.ywtype);
-        initText(parent, R.id.select_type_value, R.string.xuanzeyewuleixing);
-        initText(parent, R.id.select_type, R.string.yewuleixing);
+        initText(parent, R.id.select_type, R.string.property_fangwuzulin_xuanzeyewuleixing);
         initView(R.id.ywtype);
 
         parent = mRoot.findViewById(R.id.area);
-        initText(parent, R.id.select_type_value, R.string.area_leixing);
-        initText(parent, R.id.select_type, R.string.area_xuanze);
+        initText(parent, R.id.select_type, R.string.property_fangwuzulin_arealeixing);
         initView(R.id.area);
 
         parent = mRoot.findViewById(R.id.housetype);
-        initText(parent, R.id.select_type_value, R.string.house_leixing);
-        initText(parent, R.id.select_type, R.string.house_xuanze);
+        initText(parent, R.id.select_type, R.string.property_fangwuzulin_xuanzehuxing);
         initView(R.id.housetype);
 
         ListView list = (ListView) mRoot.findViewById(R.id.list_content);
@@ -54,7 +51,7 @@ public class FangwuzulinActivity extends BaseActivity {
             ItemInfo info = new ItemInfo();
             data.add(info);
         }
-        ZulinDetailAdapter adapter = new ZulinDetailAdapter(this, data);
+        PropertyZulinDetailAdapter adapter = new PropertyZulinDetailAdapter(this, data);
         list.setAdapter(adapter);
     }
 
@@ -66,7 +63,7 @@ public class FangwuzulinActivity extends BaseActivity {
             finish();
             break;
         case R.id.detail:
-            gotoSubActivity(PublishFangYuanActivity.class);
+            gotoSubActivity(PropertyPublishFangYuanActivity.class);
             break;
         case R.id.ywtype:
             break;

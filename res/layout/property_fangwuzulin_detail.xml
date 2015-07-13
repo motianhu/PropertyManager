@@ -8,45 +8,50 @@
     <include layout="@layout/property_common_header" />
 
     <include
-        android:id="@+id/wupintype"
-        layout="@layout/property_common_select_type" />
+        android:id="@+id/ywtype"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="1dp"
+        layout="@layout/property_common_text_value" />
 
     <include
-        android:id="@+id/pinpai"
-        layout="@layout/property_common_select_type" />
+        android:id="@+id/housetype"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="1dp"
+        layout="@layout/property_common_text_value" />
 
     <include
-        android:id="@+id/xinjiu"
-        layout="@layout/property_common_select_type" />
+        android:id="@+id/area"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="1dp"
+        layout="@layout/property_common_text_value" />
+
+    <include
+        android:id="@+id/peitaomiaoshu"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="1dp"
+        layout="@layout/property_common_text_value" />
+
+    <include
+        android:id="@+id/position"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="1dp"
+        layout="@layout/property_common_text_value" />
+
+    <include
+        android:id="@+id/fangyuan_picture"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/property_common_paishezhaoping_container_height"
+        android:layout_marginTop="1dp"
+        layout="@layout/property_common_display_picture" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:layout_marginLeft="5dp"
-            android:gravity="center"
-            android:text="@string/property_ershouwupin_wupinfabu_wupinmiaoshu"
-            android:textColor="@color/property_color_common_title" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/property_commont_color_select_type_bg"
-        android:orientation="vertical" >
-
-        <include layout="@layout/property_common_problem_description" />
-    </LinearLayout>
-
-    <include layout="@layout/property_common_startup_camera" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:layout_marginTop="5dp"
         android:background="@color/property_commont_color_select_type_bg"
         android:orientation="vertical"
@@ -69,7 +74,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_marginTop="5dp"
         android:background="@color/property_commont_color_select_type_bg"
         android:orientation="vertical" >
@@ -92,7 +97,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/property_common_publish_information" />
+            android:text="@string/property_common_call_contact_phone" />
     </LinearLayout>
 
 </LinearLayout>
