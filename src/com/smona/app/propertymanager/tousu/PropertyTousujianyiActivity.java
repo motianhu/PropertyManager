@@ -5,27 +5,37 @@ import com.smona.app.propertymanager.R;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
-public class TousujianyiActivity extends BaseActivity {
+public class PropertyTousujianyiActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tousujianyi);
+        setContentView(R.layout.property_tousujianyi);
         initViews();
     }
 
     protected void initHeader() {
         initText(R.id.title, R.string.property_home_tousujianyi);
         initText(R.id.detail, R.string.tousudandetail);
-        initText(R.id.select_type, R.string.xuanzetousuleixing);
-        
-        initText(R.id.action_now, R.string.liketousu);
         initView(R.id.back);
         initView(R.id.detail);
     }
 
     protected void initBody() {
+        String name = "张三";
+        String tel = "(13582426255)";
+        String address = "深圳市南山区南山村花好月圆小区五栋502";
+        initText(R.id.yezhuxinxi_xingming, name);
+        initText(R.id.yezhuxinxi_dianhua, tel);
+        initText(R.id.yezhuxinxi_dizhi, address);
 
+        initText(R.id.select_type,
+                R.string.property_tousujianyi_xuanzetousuleixing);
+        initText(R.id.action_now, R.string.property_tousujianyi_action_tousu);
+
+        EditText text = (EditText)mRoot.findViewById(R.id.problem_content);
+        text.setHint(R.string.property_tousujianyi_tousuwentimiaoshu);
     }
 
     @Override
@@ -36,7 +46,7 @@ public class TousujianyiActivity extends BaseActivity {
             finish();
             break;
         case R.id.detail:
-            gotoSubActivity(MineTousuActivity.class);
+            gotoSubActivity(PropertyMineTousuActivity.class);
             break;
         }
     }

@@ -10,7 +10,7 @@ public class PropertyBaoxiudanDetailActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.property_wuyebaoxiu_baoxiudandetail);
+        setContentView(R.layout.property_wuyebaoxiu_baoxiudan_detail);
         initViews();
     }
 

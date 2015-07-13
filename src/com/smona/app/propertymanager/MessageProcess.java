@@ -11,19 +11,20 @@ public class MessageProcess {
 
     public void login() {
         ConfigsInfo.FWURL = "http://123.149.86.64:3715/AppCommDataHandler.ashx";
-//        ConfigsInfo.FWURL = "http://zhyj189.eicp.net:8080/CommDataSyncService/AppCommDataHandler.ashx";
+        // ConfigsInfo.FWURL =
+        // "http://zhyj189.eicp.net:8080/CommDataSyncService/AppCommDataHandler.ashx";
         new Thread() {
             public void run() {
                 boolean flag = new DoHttp().authentication();
                 LogUtil.d(TAG, "login flag: " + flag);
-//                if (flag) {
-//                    String username = "020148888";
-//                    String password = "888888";
-//                    String result = new DoHttp().doLogin(username, password);
-//                    LogUtil.d(TAG, "login result: " + result);
-//                    authentication();
-//                }
-                
+                // if (flag) {
+                // String username = "020148888";
+                // String password = "888888";
+                // String result = new DoHttp().doLogin(username, password);
+                // LogUtil.d(TAG, "login result: " + result);
+                // authentication();
+                // }
+
                 String username = "18937113913";
                 String password = "123456";
                 String result = new DoHttp().doLogin(username, password);

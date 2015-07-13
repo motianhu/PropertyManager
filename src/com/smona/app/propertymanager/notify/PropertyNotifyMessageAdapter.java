@@ -15,16 +15,16 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 @SuppressLint("InflateParams")
-public class NotifyMessageAdapter extends PropertyBaseDataAdapter {
+public class PropertyNotifyMessageAdapter extends PropertyBaseDataAdapter {
 
-    public NotifyMessageAdapter(Context context, ArrayList<ItemInfo> content) {
+    public PropertyNotifyMessageAdapter(Context context, ArrayList<ItemInfo> content) {
         super(context, content);
     }
 
     @Override
     public View createContentView(Context context) {
         return LayoutInflater.from(context).inflate(
-                R.layout.wuyetongzhi_detail_item, null);
+                R.layout.property_wuyetongzhi_item, null);
     }
 
     public void initConvertView(View convertView, final ItemInfo info) {
@@ -34,15 +34,17 @@ public class NotifyMessageAdapter extends PropertyBaseDataAdapter {
                 gotoDetail(info);
             }
         });
-        TextView time = (TextView) convertView.findViewById(R.id.notify_time);
-        time.setText("2015-06-27");
+        
         TextView title = (TextView) convertView.findViewById(R.id.notify_title);
         title.setText("Hellow world");
+        TextView time = (TextView) convertView.findViewById(R.id.notify_time);
+        time.setText("2015-06-27");
+       
     }
 
     public Intent createIntent() {
         Intent intent = new Intent();
-        intent.setClass(mContext, WuyetongzhiDetailActivity.class);
+        intent.setClass(mContext, PropertyWuyetongzhiDetailActivity.class);
         return intent;
     }
 }

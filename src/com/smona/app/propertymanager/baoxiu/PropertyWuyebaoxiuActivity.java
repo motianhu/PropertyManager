@@ -9,7 +9,7 @@ import android.view.View;
 
 public class PropertyWuyebaoxiuActivity extends BaseActivity {
     private MessageProcess mProcess;
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,7 +17,7 @@ public class PropertyWuyebaoxiuActivity extends BaseActivity {
         initViews();
         testData();
     }
-    
+
     private void testData() {
         mProcess = new MessageProcess();
         mProcess.requestWuyebaoxiu();
@@ -31,17 +31,17 @@ public class PropertyWuyebaoxiuActivity extends BaseActivity {
     }
 
     protected void initBody() {
-    	String name="张三";
-    	String tel="(13582426255)";
-    	String address="深圳市南山区南山村花好月圆小区五栋502";
-    	initText(R.id.yezhuxinxi_xingming, name);
-    	initText(R.id.yezhuxinxi_dianhua, tel);
-    	initText(R.id.yezhuxinxi_dizhi, address);
-    	
-    	
-    	initText(R.id.select_type, R.string.property_common_xuanzebaoxiuleixing);
-    	
-        initText(R.id.action_now, R.string.property_wuyebaoxiu_now_action_baoxiu);
+        String name = "张三";
+        String tel = "(13582426255)";
+        String address = "深圳市南山区南山村花好月圆小区五栋502";
+        initText(R.id.yezhuxinxi_xingming, name);
+        initText(R.id.yezhuxinxi_dianhua, tel);
+        initText(R.id.yezhuxinxi_dizhi, address);
+
+        initText(R.id.select_type, R.string.property_common_xuanzebaoxiuleixing);
+
+        initText(R.id.action_now,
+                R.string.property_wuyebaoxiu_now_action_baoxiu);
     }
 
     protected void clickView(View v) {

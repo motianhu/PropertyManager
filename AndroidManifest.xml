@@ -52,25 +52,25 @@
 
         <!-- 投诉建议 -->
         <activity
-            android:name="com.smona.app.propertymanager.tousu.TousujianyiActivity"
+            android:name="com.smona.app.propertymanager.tousu.PropertyTousujianyiActivity"
             android:label="@string/property_home_tousujianyi" >
         </activity>
         <activity
-            android:name="com.smona.app.propertymanager.tousu.MineTousuActivity"
-            android:label="@string/mine_suggest" >
+            android:name="com.smona.app.propertymanager.tousu.PropertyMineTousuActivity"
+            android:label="@string/property_tousujianyi_mine_suggest" >
         </activity>
         <activity
-            android:name="com.smona.app.propertymanager.tousu.TousudanDetailActivity"
+            android:name="com.smona.app.propertymanager.tousu.PropertyTousudanDetailActivity"
             android:label="@string/tousudandetail" >
         </activity>
 
         <!-- 物业通知 -->
         <activity
-            android:name="com.smona.app.propertymanager.notify.WuyetongzhiActivity"
+            android:name="com.smona.app.propertymanager.notify.PropertyWuyetongzhiActivity"
             android:label="@string/property_home_wuyetongzhi" >
         </activity>
         <activity
-            android:name="com.smona.app.propertymanager.notify.WuyetongzhiDetailActivity"
+            android:name="com.smona.app.propertymanager.notify.PropertyWuyetongzhiDetailActivity"
             android:label="@string/property_home_wuyetongzhi" >
         </activity>
 

@@ -7,11 +7,11 @@ import android.widget.TextView;
 import com.smona.app.propertymanager.BaseActivity;
 import com.smona.app.propertymanager.R;
 
-public class WuyetongzhiDetailActivity extends BaseActivity {
+public class PropertyWuyetongzhiDetailActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.wuyetongzhi_detail);
+        setContentView(R.layout.property_wuyetongzhi_detail);
         initViews();
     }
 
@@ -31,6 +31,8 @@ public class WuyetongzhiDetailActivity extends BaseActivity {
         time.setText("2015-06-27");
         TextView title = (TextView) mRoot.findViewById(R.id.notify_title);
         title.setText("Hellow world");
+        TextView content = (TextView) mRoot.findViewById(R.id.notify_content);
+        content.setText("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     }
 
     @Override

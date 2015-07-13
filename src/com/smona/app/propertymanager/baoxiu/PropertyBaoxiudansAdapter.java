@@ -13,14 +13,15 @@ import android.view.View.OnClickListener;
 
 public class PropertyBaoxiudansAdapter extends PropertyBaseDataAdapter {
 
-    public PropertyBaoxiudansAdapter(Context context, ArrayList<ItemInfo> content) {
+    public PropertyBaoxiudansAdapter(Context context,
+            ArrayList<ItemInfo> content) {
         super(context, content);
     }
 
     @SuppressLint("InflateParams")
     public View createContentView(Context context) {
-        return LayoutInflater.from(context).inflate(R.layout.property_wuyebaoxiu_baoxiudan_item,
-                null);
+        return LayoutInflater.from(context).inflate(
+                R.layout.property_wuyebaoxiu_baoxiudan_item, null);
     }
 
     public void initConvertView(View convertView, final ItemInfo info) {

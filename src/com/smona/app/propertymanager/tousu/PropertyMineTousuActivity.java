@@ -10,12 +10,12 @@ import com.smona.app.propertymanager.BaseActivity;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.ItemInfo;
 
-public class MineTousuActivity extends BaseActivity {
+public class PropertyMineTousuActivity extends BaseActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tousujianyi_mine);
+        setContentView(R.layout.property_tousujianyi_mine);
         initViews();
     }
 
@@ -25,13 +25,22 @@ public class MineTousuActivity extends BaseActivity {
     }
 
     protected void initBody() {
+        String name = "张三";
+        String tel = "(13582426255)";
+        String address = "深圳市南山区南山村花好月圆小区五栋502";
+        initText(R.id.yezhuxinxi_xingming, name);
+        initText(R.id.yezhuxinxi_dianhua, tel);
+        initText(R.id.yezhuxinxi_dizhi, address);
+        
+        
         ListView list = (ListView) mRoot.findViewById(R.id.list_content);
         ArrayList<ItemInfo> data = new ArrayList<ItemInfo>();
         for (int i = 0; i < 10; i++) {
             ItemInfo info = new ItemInfo();
             data.add(info);
         }
-        TousudanAdapter adapter = new TousudanAdapter(this, data);
+        PropertyTousudanAdapter adapter = new PropertyTousudanAdapter(this,
+                data);
         list.setAdapter(adapter);
     }
 

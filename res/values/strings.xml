@@ -1,10 +1,8 @@
 <resources>
 
     <string name="app_name">物业管理</string>
-    <string name="xuanzetousuleixing">选择投诉类型</string>
     <string name="baoxiuwentimiaoshu">报修问题描述</string>
     <string name="tousuwentimiaoshu">投诉问题描述</string>
-    <string name="liketousu">立刻投诉</string>
     <string name="notify_read_no">未读</string>
     <string name="notify_read_yes">已读</string>
 
@@ -41,8 +39,18 @@
 
     <!-- 投诉建议 -->
     <string name="property_home_tousujianyi">投诉建议</string>
-    <string name="tousu_detail">投诉建议详情</string>
-    <string name="mine_suggest">我的投诉建议</string>
+    <string name="property_tousujianyi_xuanzetousuleixing">选择投诉类型</string>
+    <string name="property_tousujianyi_action_tousu">立刻投诉</string>
+    <string name="property_tousujianyi_tousu_detail">投诉建议详情</string>
+    <string name="property_tousujianyi_tousuwentimiaoshu">投诉问题描述</string>
+    <string name="property_tousujianyi_mine_suggest">我的投诉建议</string>
+    <string name="property_tousujianyi_tousudan_item_time">投诉时间</string>
+    <string name="property_tousujianyi_tousudan_item_name">投诉名称</string>
+    <string name="property_tousujianyi_tousudan_item_type">投诉类型</string>
+    <string name="property_tousujianyi_tousudan_item_wuyefankui">物业反馈</string>
+    <string name="property_tousujianyi_tousudan_item_fankuishijian">反馈时间</string>
+    <string name="property_tousujianyi_tousudan_item_tousu_taidu">服务态度</string>
+    <string name="property_tousujianyi_tousudan_item_tousu_jishixing">反馈及时性</string>
     <string name="tousudandetail">投诉单详情</string>
 
     <!-- 物业通知 -->

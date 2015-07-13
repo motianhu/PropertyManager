@@ -323,10 +323,9 @@ public class PropertyProvider extends ContentProvider {
 
         private ArrayList<String> getCreateTableSqlList() {
             ArrayList<String> sqlList = new ArrayList<String>();
-            //yezhuxinxi
-            String yezhuxinxi = YezhuxinxiTable.getInstance()
-                    .createTableSql();
-            
+            // yezhuxinxi
+            String yezhuxinxi = YezhuxinxiTable.getInstance().createTableSql();
+
             // ershouwupin
             String pinpaiType = ErshouwupinpinpaiTypeTable.getInstance()
                     .createTableSql();
@@ -378,10 +377,9 @@ public class PropertyProvider extends ContentProvider {
 
         private ArrayList<String> getDropTableSqlList() {
             ArrayList<String> sqlList = new ArrayList<String>();
-            //yezhuxinxi
-            String yezhuxinxi = YezhuxinxiTable.getInstance()
-                    .createTableSql();
-            
+            // yezhuxinxi
+            String yezhuxinxi = YezhuxinxiTable.getInstance().createTableSql();
+
             // ershouwupin
             String pinpaiType = ErshouwupinpinpaiTypeTable.getInstance()
                     .dropTableSql();
