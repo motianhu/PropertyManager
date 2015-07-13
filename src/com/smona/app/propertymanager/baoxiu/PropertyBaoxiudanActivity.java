@@ -10,15 +10,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
-public class BaoxiudanActivity extends BaseActivity {
+public class PropertyBaoxiudanActivity extends BaseActivity {
 
     private ListView mBaoxiudans;
-    private BaoxiudansAdapter mBaoxiudansAdapter;
+    private PropertyBaoxiudansAdapter mBaoxiudansAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.baoxiudan);
+        setContentView(R.layout.property_wuyebaoxiu_baoxiudan);
         initViews();
     }
 
@@ -29,19 +29,27 @@ public class BaoxiudanActivity extends BaseActivity {
 
     @Override
     protected void initHeader() {
-        initText(R.id.title, R.string.baoxiudan);
+        initText(R.id.title, R.string.property_wuyebaoxiu_baoxiudan);
         initView(R.id.back);
     }
 
     @Override
     protected void initBody() {
+    	String name="张三";
+    	String tel="(13582426255)";
+    	String address="深圳市南山区南山村花好月圆小区五栋502";
+    	initText(R.id.yezhuxinxi_xingming, name);
+    	initText(R.id.yezhuxinxi_dianhua, tel);
+    	initText(R.id.yezhuxinxi_dizhi, address);
+    	
+    	
         mBaoxiudans = (ListView) mRoot.findViewById(R.id.list_content);
         ArrayList<ItemInfo> datas = new ArrayList<ItemInfo>();
         for (int i = 0; i < 10; i++) {
             ItemInfo item = new ItemInfo();
             datas.add(item);
         }
-        mBaoxiudansAdapter = new BaoxiudansAdapter(this, datas);
+        mBaoxiudansAdapter = new PropertyBaoxiudansAdapter(this, datas);
         mBaoxiudans.setAdapter(mBaoxiudansAdapter);
     }
 

@@ -2,7 +2,7 @@ package com.smona.app.propertymanager.notify;
 
 import java.util.ArrayList;
 
-import com.smona.app.propertymanager.BaseDataAdapter;
+import com.smona.app.propertymanager.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.ItemInfo;
 
@@ -15,7 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 @SuppressLint("InflateParams")
-public class NotifyMessageAdapter extends BaseDataAdapter {
+public class NotifyMessageAdapter extends PropertyBaseDataAdapter {
 
     public NotifyMessageAdapter(Context context, ArrayList<ItemInfo> content) {
         super(context, content);

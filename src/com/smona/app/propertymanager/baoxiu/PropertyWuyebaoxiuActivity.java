@@ -7,13 +7,13 @@ import com.smona.app.propertymanager.R;
 import android.os.Bundle;
 import android.view.View;
 
-public class WuyebaoxiuActivity extends BaseActivity {
+public class PropertyWuyebaoxiuActivity extends BaseActivity {
     private MessageProcess mProcess;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.wuyebaoxiu);
+        setContentView(R.layout.property_wuyebaoxiu);
         initViews();
         testData();
     }
@@ -24,17 +24,24 @@ public class WuyebaoxiuActivity extends BaseActivity {
     }
 
     protected void initHeader() {
-        initText(R.id.title, R.string.baoxiu);
-        initText(R.id.detail, R.string.baoxiudandetail);
-        initText(R.id.select_type, R.string.xuanzebaoxiuleixing);
-        initText(R.id.problem_desc, R.string.baoxiuwentimiaoshu);
-        initText(R.id.like_action, R.string.likebaoxiu);
+        initText(R.id.title, R.string.property_home_wuyebaoxiu);
+        initText(R.id.detail, R.string.property_wuyebaoxiu_baoxiudandetail);
         initView(R.id.back);
         initView(R.id.detail);
     }
 
     protected void initBody() {
-
+    	String name="张三";
+    	String tel="(13582426255)";
+    	String address="深圳市南山区南山村花好月圆小区五栋502";
+    	initText(R.id.yezhuxinxi_xingming, name);
+    	initText(R.id.yezhuxinxi_dianhua, tel);
+    	initText(R.id.yezhuxinxi_dizhi, address);
+    	
+    	
+    	initText(R.id.select_type, R.string.property_common_xuanzebaoxiuleixing);
+    	
+        initText(R.id.action_now, R.string.property_wuyebaoxiu_now_action_baoxiu);
     }
 
     protected void clickView(View v) {
@@ -44,7 +51,7 @@ public class WuyebaoxiuActivity extends BaseActivity {
             finish();
             break;
         case R.id.detail:
-            gotoSubActivity(BaoxiudanActivity.class);
+            gotoSubActivity(PropertyBaoxiudanActivity.class);
             break;
         }
     }

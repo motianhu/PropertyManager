@@ -4,16 +4,10 @@
     android:layout_marginTop="10dp"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/problem_desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/baoxiuwentimiaoshu" />
-
     <EditText
         android:id="@+id/problem_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/baoxiuwentimiaoshu" />
+        android:hint="@string/property_wuyebaoxiu_baoxiuwentimiaoshu" />
 
 </LinearLayout>

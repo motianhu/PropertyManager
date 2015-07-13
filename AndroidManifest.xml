@@ -7,7 +7,7 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
 
-        <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -21,14 +21,14 @@
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".PropertyHomeActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,24 +36,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- Baoxiu -->
+        <!-- 物业报修 -->
         <activity
-            android:name="com.smona.app.propertymanager.baoxiu.WuyebaoxiuActivity"
-            android:label="@string/baoxiu" >
+            android:name="com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuActivity"
+            android:label="@string/property_home_wuyebaoxiu" >
         </activity>
         <activity
-            android:name="com.smona.app.propertymanager.baoxiu.BaoxiudanActivity"
-            android:label="@string/baoxiu" >
+            android:name="com.smona.app.propertymanager.baoxiu.PropertyBaoxiudanActivity"
+            android:label="@string/property_home_wuyebaoxiu" >
         </activity>
         <activity
-            android:name="com.smona.app.propertymanager.baoxiu.BaoxiudanDetailActivity"
-            android:label="@string/baoxiu" >
+            android:name="com.smona.app.propertymanager.baoxiu.PropertyBaoxiudanDetailActivity"
+            android:label="@string/property_wuyebaoxiu_baoxiudandetail" >
         </activity>
 
-        <!-- Tousu -->
+        <!-- 投诉建议 -->
         <activity
             android:name="com.smona.app.propertymanager.tousu.TousujianyiActivity"
-            android:label="@string/tousu" >
+            android:label="@string/property_home_tousujianyi" >
         </activity>
         <activity
             android:name="com.smona.app.propertymanager.tousu.MineTousuActivity"
@@ -64,38 +64,38 @@
             android:label="@string/tousudandetail" >
         </activity>
 
-        <!-- Tongzhi -->
+        <!-- 物业通知 -->
         <activity
             android:name="com.smona.app.propertymanager.notify.WuyetongzhiActivity"
-            android:label="@string/notify" >
+            android:label="@string/property_home_wuyetongzhi" >
         </activity>
         <activity
             android:name="com.smona.app.propertymanager.notify.WuyetongzhiDetailActivity"
-            android:label="@string/notify" >
+            android:label="@string/property_home_wuyetongzhi" >
         </activity>
 
-        <!-- Zulin -->
+        <!-- 房屋租赁 -->
         <activity
             android:name="com.smona.app.propertymanager.zulin.FangwuzulinActivity"
-            android:label="@string/chuzu" >
+            android:label="@string/property_home_fangwuzulin" >
         </activity>
         <activity
             android:name="com.smona.app.propertymanager.zulin.FangwuzulinDetailActivity"
-            android:label="@string/chuzu" >
+            android:label="@string/property_home_fangwuzulin" >
         </activity>
         <activity
             android:name="com.smona.app.propertymanager.zulin.PublishFangYuanActivity"
-            android:label="@string/chuzu" >
+            android:label="@string/property_home_fangwuzulin" >
         </activity>
         <activity
             android:name="com.smona.app.propertymanager.zulin.MineFangyuanActivity"
             android:label="@string/mine_fangyuan" >
         </activity>
 
-        <!-- ErshouWupin -->
+        <!-- 二手物品 -->
         <activity
             android:name="com.smona.app.propertymanager.wupin.ErshouwupinActivity"
-            android:label="@string/wupin" >
+            android:label="@string/property_home_ershouwupin" >
         </activity>
         <activity
             android:name="com.smona.app.propertymanager.wupin.WupinfabuActivity"
@@ -107,7 +107,7 @@
         <activity
             android:name="com.smona.app.propertymanager.wupin.WupinDetailActivity"
             android:label="@string/ershouwupin_detail" />
-        
+
         <!-- provider -->
         <provider
             android:name="com.smona.app.propertymanager.data.db.PropertyProvider"

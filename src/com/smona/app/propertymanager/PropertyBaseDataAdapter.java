@@ -10,11 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-public abstract class BaseDataAdapter extends BaseAdapter {
+public abstract class PropertyBaseDataAdapter extends BaseAdapter {
     protected Context mContext;
     protected ArrayList<ItemInfo> mContent;
 
-    public BaseDataAdapter(Context context, ArrayList<ItemInfo> content) {
+    public PropertyBaseDataAdapter(Context context, ArrayList<ItemInfo> content) {
         mContext = context;
         mContent = content;
     }

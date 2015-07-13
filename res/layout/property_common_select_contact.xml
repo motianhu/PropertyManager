@@ -7,14 +7,16 @@
     android:paddingRight="20dp" >
 
     <Button
-        android:id="@+id/like_action"
+        android:id="@+id/action_now"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="@color/property_color_common_title" />
 
     <Button
         android:id="@+id/call_wuye"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/wuyedianhua" />
+        android:text="@string/property_common_wuyedianhua"
+        android:textColor="@color/property_color_common_title" />
 
 </LinearLayout>

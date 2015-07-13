@@ -20,7 +20,7 @@ public class MineTousuActivity extends BaseActivity {
     }
 
     protected void initHeader() {
-        initText(R.id.title, R.string.tousu);
+        initText(R.id.title, R.string.property_home_tousujianyi);
         initView(R.id.back);
     }
 

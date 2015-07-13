@@ -44,6 +44,11 @@ public abstract class BaseActivity extends Activity {
         TextView title = (TextView) mRoot.findViewById(resId);
         title.setText(text);
     }
+    
+    protected void initText(int resId, String text) {
+        TextView title = (TextView) mRoot.findViewById(resId);
+        title.setText(text);
+    }
 
     protected void initText(View parent, int resId, int text) {
         TextView title = (TextView) parent.findViewById(resId);

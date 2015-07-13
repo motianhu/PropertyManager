@@ -4,19 +4,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include layout="@layout/header" />
+    <include layout="@layout/property_common_header" />
 
     <include
         android:id="@+id/wupintype"
-        layout="@layout/select_type" />
+        layout="@layout/property_common_select_type" />
 
     <include
         android:id="@+id/pinpai"
-        layout="@layout/select_type" />
+        layout="@layout/property_common_select_type" />
 
     <include
         android:id="@+id/xinjiu"
-        layout="@layout/select_type" />
+        layout="@layout/property_common_select_type" />
     
     
     <TextView
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <include layout="@layout/select_camera" />
+    <include layout="@layout/property_common_startup_camera" />
 
     <include
         android:id="@+id/lianxiren"
