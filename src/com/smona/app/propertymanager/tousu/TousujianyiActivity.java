@@ -15,11 +15,11 @@ public class TousujianyiActivity extends BaseActivity {
     }
 
     protected void initHeader() {
-        initText(R.id.title, R.string.tousu);
+        initText(R.id.title, R.string.property_home_tousujianyi);
         initText(R.id.detail, R.string.tousudandetail);
         initText(R.id.select_type, R.string.xuanzetousuleixing);
-        initText(R.id.problem_desc, R.string.tousuwentimiaoshu);
-        initText(R.id.like_action, R.string.liketousu);
+        
+        initText(R.id.action_now, R.string.liketousu);
         initView(R.id.back);
         initView(R.id.detail);
     }

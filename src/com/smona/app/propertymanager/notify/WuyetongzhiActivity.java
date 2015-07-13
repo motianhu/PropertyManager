@@ -24,7 +24,7 @@ public class WuyetongzhiActivity extends BaseActivity {
     }
 
     protected void initHeader() {
-        initText(R.id.title, R.string.notify);
+        initText(R.id.title, R.string.property_home_wuyetongzhi);
         initView(R.id.back);
     }
 

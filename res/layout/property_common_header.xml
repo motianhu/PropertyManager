@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="#225252"
-    android:layout_height="40dp" >
+    android:layout_height="40dp"
+    android:background="@drawable/property_common_header_bg" >
 
     <LinearLayout
         android:id="@+id/back"
@@ -12,29 +12,32 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/back" />
+            android:src="@drawable/property_common_back" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/back" />
+            android:text="@string/property_common_back"
+            android:textColor="@color/property_color_common_header_back" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:textSize="22sp"
         android:layout_centerInParent="true"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="@color/property_color_common_header_title"
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/detail"
         android:layout_width="wrap_content"
-        android:layout_marginRight="10dp"
         android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
         android:gravity="center"
-        android:layout_alignParentRight="true" />
+        android:textColor="@color/property_color_common_header_detail" />
 
 </RelativeLayout>

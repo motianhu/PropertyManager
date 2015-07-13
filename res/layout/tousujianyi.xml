@@ -4,16 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include layout="@layout/header" />
+    <include layout="@layout/property_common_header" />
 
-    <include layout="@layout/yezhuxinxi" />
+    <include layout="@layout/property_common_yezhuxinxi" />
 
-    <include layout="@layout/select_type" />
+    <include layout="@layout/property_common_select_type" />
 
-    <include layout="@layout/problem_description" />
+    <include layout="@layout/property_common_problem_description" />
 
-    <include layout="@layout/select_camera" />
+    <include layout="@layout/property_common_startup_camera" />
 
-    <include layout="@layout/select_contact" />
+    <include layout="@layout/property_common_select_contact" />
 
 </LinearLayout>

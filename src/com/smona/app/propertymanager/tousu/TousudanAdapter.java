@@ -2,7 +2,7 @@ package com.smona.app.propertymanager.tousu;
 
 import java.util.ArrayList;
 
-import com.smona.app.propertymanager.BaseDataAdapter;
+import com.smona.app.propertymanager.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.ItemInfo;
 
@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-public class TousudanAdapter extends BaseDataAdapter {
+public class TousudanAdapter extends PropertyBaseDataAdapter {
 
     public TousudanAdapter(Context context, ArrayList<ItemInfo> content) {
         super(context, content);

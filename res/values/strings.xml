@@ -2,15 +2,12 @@
 
     <string name="app_name">物业管理</string>
     
-    <string name="xuanzebaoxiuleixing">选择报修类型</string>
+    
     <string name="xuanzetousuleixing">选择投诉类型</string>
     <string name="baoxiuwentimiaoshu">报修问题描述</string>
     <string name="tousuwentimiaoshu">投诉问题描述</string>
-    <string name="likebaoxiu">立刻报修</string>
     <string name="liketousu">立刻投诉</string>
-    <string name="wuyedianhua">直接拨打物业电话</string>
-    <string name="paishezhaopian">拍摄照片</string>
-    <string name="wodebaodan">我的报修单</string>
+    
     
     <string name="baoxiudan_item_detail">详情></string>
     <string name="baoxiudan_item_type">报修类型</string>
@@ -29,37 +26,43 @@
     <string name="notify_read_yes">已读</string>
     
     <!-- 公共 -->
-    <string name="back">返回</string>
-    <string name="select_row">></string>
-    <string name="wuyefuwu">物业服务</string>
+    <string name="property_common_back">返回</string>
+    <string name="property_common_select_type_arrow">></string>
+    <string name="property_wuyefuwu">物业服务</string>
+    <string name="property_common_xuanzebaoxiuleixing">选择报修类型</string>
+    <string name="property_common_paishezhaopian_title">拍摄照片</string>
+    <string name="property_common_wuyedianhua">直接拨打物业电话</string>
     
-    
-    
-    <string name="chuzu">房屋租赁</string>
-    <string name="wupin">二手物品</string>
-    
-    <string name="yezhuxingming">业主姓名</string>
-    <string name="yezhudianhu">(13005723564)</string>
-    <string name="yezhudizhi">业主地址</string>
     
     <!-- 物业报修 -->
-    <string name="baoxiu">物业报修</string>
-    <string name="baoxiudan">报修单</string>
-    <string name="baoxiudandetail">报修单详情</string>
-    <string name="baoxiudan_item_time">报修时间</string>
+    <string name="property_home_wuyebaoxiu">物业报修</string>
+    <string name="property_wuyebaoxiu_baoxiudandetail">报修单详情</string>
+    <string name="property_wuyebaoxiu_baoxiuwentimiaoshu">报修问题描述</string>
+    <string name="property_wuyebaoxiu_now_action_baoxiu">立刻报修</string>
+    <string name="property_wuyebaoxiu_baoxiudan_wodebaodan">我的报修单</string>
+    <string name="property_wuyebaoxiu_baoxiudan">报修单</string>
+    
+    <string name="property_wuyebaoxi_item_time">报修时间</string>
     <string name="baoxiudan_item_status">报修单状态</string>
-    <string name="baoxiudan_item_name">报修单名称</string>
+    <string name="property_wuyebaoxi_item_name">报修单名称</string>
 
+    
+    
     <!-- 投诉建议 -->
-    <string name="tousu">投诉建议</string>
+    <string name="property_home_tousujianyi">投诉建议</string>
     <string name="tousu_detail">投诉建议详情</string>
     <string name="mine_suggest">我的投诉建议</string>
     <string name="tousudandetail">投诉单详情</string>
     
+    
+    
     <!-- 物业通知 -->
-    <string name="notify">物业通知</string>
+    <string name="property_home_wuyetongzhi">物业通知</string>
 
+    
+    
     <!-- 房屋租售 -->
+    <string name="property_home_fangwuzulin">房屋租赁</string>
     <string name="xuanzeyewuleixing">选择业务类型</string>
     <string name="yewuleixing">业务类型</string>
     <string name="area_leixing">面积</string>
@@ -74,7 +77,10 @@
     <string name="peitao_des">配套描述</string>
     <string name="fangyuanxinxi">房源信息</string>
 
+    
+    
     <!-- 二手物品 -->
+    <string name="property_home_ershouwupin">二手物品</string>
     <string name="ershouwupin_wupinfabu">物品发布</string>
     <string name="ershouwupin_wupinfenlei">物品分类</string>
     <string name="ershouwupin_xuanzewupinfenlei">选择物品分类</string>
@@ -83,6 +89,8 @@
     <string name="ershouwupin_mine">我的物品</string>
     <string name="ershouwupin_detail">物品信息</string>
     <string name="ershouwupin_wupinmingchen">物品名称</string>
+    
+    
     
     <!-- 下拉刷新 -->
     <string name="refresh_loading_more">Loading more…</string>

@@ -4,10 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include layout="@layout/header" />
+    <include layout="@layout/property_common_header" />
 
-    <include layout="@layout/yezhuxinxi" />
+    <include layout="@layout/property_common_yezhuxinxi" />
 
-    <include layout="@layout/list_content" />
+    <include layout="@layout/property_commont_list_content" />
 
 </LinearLayout>

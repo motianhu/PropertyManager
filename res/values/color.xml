@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- 公共 -->
+    <color name="property_color_common_header_back">#f4f4f4</color>
+    <color name="property_color_common_header_detail">#f4f4f4</color>
+    <color name="property_color_common_header_title">#f4f4f4</color>
+    <color name="property_color_common_home_bg">#f4f4f4</color>
+    <color name="property_color_common_title">#000000</color>
+    <color name="property_commont_color_select_type_bg">#ffffff</color>
+    <color name="property_common_color_action_now_bg">#FF8C00</color>
+
+    <!-- 首页 -->
+
     <color name="listview_refresh_color">#ffffff</color>
+
 </resources>

@@ -1,7 +1,7 @@
 package com.smona.app.propertymanager.baoxiu;
 
 import java.util.ArrayList;
-import com.smona.app.propertymanager.BaseDataAdapter;
+import com.smona.app.propertymanager.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.ItemInfo;
 import android.annotation.SuppressLint;
@@ -11,15 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-public class BaoxiudansAdapter extends BaseDataAdapter {
+public class PropertyBaoxiudansAdapter extends PropertyBaseDataAdapter {
 
-    public BaoxiudansAdapter(Context context, ArrayList<ItemInfo> content) {
+    public PropertyBaoxiudansAdapter(Context context, ArrayList<ItemInfo> content) {
         super(context, content);
     }
 
     @SuppressLint("InflateParams")
     public View createContentView(Context context) {
-        return LayoutInflater.from(context).inflate(R.layout.baoxiudan_item,
+        return LayoutInflater.from(context).inflate(R.layout.property_wuyebaoxiu_baoxiudan_item,
                 null);
     }
 
@@ -34,7 +34,7 @@ public class BaoxiudansAdapter extends BaseDataAdapter {
 
     public Intent createIntent() {
         Intent intent = new Intent();
-        intent.setClass(mContext, BaoxiudanDetailActivity.class);
+        intent.setClass(mContext, PropertyBaoxiudanDetailActivity.class);
         return intent;
     }
 

@@ -25,7 +25,7 @@ public class FangwuzulinActivity extends BaseActivity {
 
     @Override
     protected void initHeader() {
-        initText(R.id.title, R.string.chuzu);
+        initText(R.id.title, R.string.property_home_fangwuzulin);
         initText(R.id.detail, R.string.publish_fangyuan);
         initView(R.id.detail);
         initView(R.id.back);

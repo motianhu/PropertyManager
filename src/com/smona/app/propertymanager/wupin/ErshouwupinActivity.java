@@ -25,7 +25,7 @@ public class ErshouwupinActivity extends BaseActivity {
 
     @Override
     protected void initHeader() {
-        initText(R.id.title, R.string.wupin);
+        initText(R.id.title, R.string.property_home_ershouwupin);
         initText(R.id.detail, R.string.ershouwupin_wupinfabu);
         initView(R.id.detail);
         initView(R.id.back);
