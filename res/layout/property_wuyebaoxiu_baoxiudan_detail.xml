@@ -29,7 +29,7 @@
         layout="@layout/property_common_text_value" />
 
     <include
-        android:id="@+id/baoxiu_problem"
+        android:id="@+id/baoxiu_picture"
         android:layout_width="match_parent"
         android:layout_height="@dimen/property_common_paishezhaoping_container_height"
         android:layout_marginTop="1dp"
