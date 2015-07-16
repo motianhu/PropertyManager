@@ -2,7 +2,7 @@ package com.smona.app.propertymanager;
 
 import java.util.ArrayList;
 
-import com.smona.app.propertymanager.data.PropertyItemInfo;
+import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 
 import android.content.Context;
 import android.content.Intent;

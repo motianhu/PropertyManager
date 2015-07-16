@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.util.PropertyLogUtil;
+import com.smona.app.propertymanager.util.LogUtil;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -21,12 +21,12 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class PropertyRefreshListView extends ListView implements
+public class RefreshListView extends ListView implements
         OnScrollListener {
-    private static final String TAG = PropertyRefreshListView.class
+    private static final String TAG = RefreshListView.class
             .getSimpleName();
-    private PropertyWorkMode mWorkMode = PropertyWorkMode.getDefault();
-    private PropertyIRefreshListener mListener;
+    private WorkMode mWorkMode = WorkMode.getDefault();
+    private IRefreshListener mListener;
 
     private static final int ANIMATION_DURATION = 300;
     private int mDownY;
@@ -50,7 +50,7 @@ public class PropertyRefreshListView extends ListView implements
         Pull_Down, Release_Refresh, Refreshing
     }
 
-    public PropertyRefreshListView(Context context, AttributeSet attrs) {
+    public RefreshListView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initAnimation();
         initHeader();
@@ -86,7 +86,7 @@ public class PropertyRefreshListView extends ListView implements
         mTvLastUpdateTime.setText(getFinallyUpdateTime());
         measureView(mHeaderView);
         mHeaderViewHeight = mHeaderView.getMeasuredHeight();
-        PropertyLogUtil.i(TAG, "头布局的高度: " + mHeaderViewHeight);
+        LogUtil.i(TAG, "头布局的高度: " + mHeaderViewHeight);
         mHeaderView.setPadding(0, -mHeaderViewHeight, 0, 0);
         this.addHeaderView(mHeaderView);
     }
@@ -162,7 +162,7 @@ public class PropertyRefreshListView extends ListView implements
                     refreshHeaderViewState();
                 } else if (paddingTop < 0
                         && mCurrentState == DisplayMode.Release_Refresh) {
-                    PropertyLogUtil.d(TAG, "下拉刷新");
+                    LogUtil.d(TAG, "下拉刷新");
                     mCurrentState = DisplayMode.Pull_Down;
                     refreshHeaderViewState();
                 }
@@ -220,7 +220,7 @@ public class PropertyRefreshListView extends ListView implements
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-        PropertyLogUtil.i(TAG, "onScrollStateChanged: " + scrollState);
+        LogUtil.i(TAG, "onScrollStateChanged: " + scrollState);
         if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
                 || scrollState == OnScrollListener.SCROLL_STATE_FLING) {
             if (mIsScroll2Bottom && !mIsLoadMoving) {
@@ -242,7 +242,7 @@ public class PropertyRefreshListView extends ListView implements
         }
 
         mFirstVisibleItemPos = firstVisibleItem;
-        PropertyLogUtil.i(TAG, "onScroll: " + firstVisibleItem + ", "
+        LogUtil.i(TAG, "onScroll: " + firstVisibleItem + ", "
                 + visibleItemCount + ", " + totalItemCount);
         if ((firstVisibleItem + visibleItemCount) >= totalItemCount
                 && totalItemCount > 0) {
@@ -252,7 +252,7 @@ public class PropertyRefreshListView extends ListView implements
         }
     }
 
-    public void setRefreshListener(PropertyIRefreshListener mListener) {
+    public void setRefreshListener(IRefreshListener mListener) {
         this.mListener = mListener;
     }
 }

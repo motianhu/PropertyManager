@@ -17,7 +17,7 @@ import com.smona.app.propertymanager.data.table.PropertyWuyebaoxiuTypeTable;
 import com.smona.app.propertymanager.data.table.PropertyWuyebaoxiudanTable;
 import com.smona.app.propertymanager.data.table.PropertyWuyetongzhiTable;
 import com.smona.app.propertymanager.data.table.PropertyYezhuxinxiTable;
-import com.smona.app.propertymanager.util.PropertyLogUtil;
+import com.smona.app.propertymanager.util.LogUtil;
 
 import android.annotation.SuppressLint;
 import android.content.ContentProvider;
@@ -159,7 +159,7 @@ public class PropertyPropertyProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        PropertyLogUtil.d(TAG, "onCreate");
+        LogUtil.d(TAG, "onCreate");
         mDataHelper = new DatabaseHelper(getContext());
         return true;
     }
@@ -182,7 +182,7 @@ public class PropertyPropertyProvider extends ContentProvider {
     public String getType(Uri uri) {
         int match = URI_MATCH.match(uri);
         String tableName = TABLE_MATCH.get(match);
-        PropertyLogUtil.d(TAG, "getType uri: " + uri + ";tableName: "
+        LogUtil.d(TAG, "getType uri: " + uri + ";tableName: "
                 + tableName);
         if (tableName != null) {
             return "vnd.android.cursor.dir/wallpaper";
@@ -287,7 +287,7 @@ public class PropertyPropertyProvider extends ContentProvider {
             String[] selectionArgs) {
         int count = -1;
         count = update(uri, values, selection, selectionArgs);
-        PropertyLogUtil.d(TAG, "count = " + count);
+        LogUtil.d(TAG, "count = " + count);
         if (count <= 0) {
             insert(uri, values);
         }
@@ -303,7 +303,7 @@ public class PropertyPropertyProvider extends ContentProvider {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            PropertyLogUtil.d(TAG, "DatabaseHelper onCreate");
+            LogUtil.d(TAG, "DatabaseHelper onCreate");
             ArrayList<String> sqlList = getCreateTableSqlList();
             for (String sql : sqlList) {
                 db.execSQL(sql);
@@ -315,7 +315,7 @@ public class PropertyPropertyProvider extends ContentProvider {
             if (oldVersion >= newVersion) {
                 return;
             }
-            PropertyLogUtil.d(TAG, "DatabaseHelper onUpgrade oldVersion: "
+            LogUtil.d(TAG, "DatabaseHelper onUpgrade oldVersion: "
                     + oldVersion + ", newVersion: " + newVersion);
 
             ArrayList<String> dropList = getDropTableSqlList();

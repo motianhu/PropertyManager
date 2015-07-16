@@ -1,9 +1,11 @@
 package com.smona.app.propertymanager.baoxiu;
 
 import java.util.ArrayList;
+
 import com.smona.app.propertymanager.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.data.PropertyItemInfo;
+import com.smona.app.propertymanager.data.model.PropertyItemInfo;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;

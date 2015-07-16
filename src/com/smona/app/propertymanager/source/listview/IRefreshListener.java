@@ -2,7 +2,7 @@ package com.smona.app.propertymanager.source.listview;
 
 import android.view.View;
 
-public interface PropertyIRefreshListener {
+public interface IRefreshListener {
     /**
      * 下拉刷新执行的刷新任务回调：当刷新完毕之后, 需要手动的调用onRefreshFinish(), 去隐藏头布局
      */

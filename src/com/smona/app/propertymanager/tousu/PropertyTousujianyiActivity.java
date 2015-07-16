@@ -1,13 +1,19 @@
 package com.smona.app.propertymanager.tousu;
 
+import java.util.ArrayList;
+
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.data.model.PropertyItemInfo;
+import com.smona.app.propertymanager.data.model.PropertyTypeItem;
+import com.smona.app.propertymanager.util.LogUtil;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
 public class PropertyTousujianyiActivity extends PropertyBaseActivity {
+    private static final String TAG = "PropertyTousujianyiActivity";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +42,8 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
 
         EditText text = (EditText) mRoot.findViewById(R.id.problem_content);
         text.setHint(R.string.property_tousujianyi_tousuwentimiaoshu);
+        
+        initView(R.id.select_type_container);
     }
 
     @Override
@@ -48,11 +56,35 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
         case R.id.detail:
             gotoSubActivity(PropertyMineTousuActivity.class);
             break;
+        case R.id.select_type_container:
+            clickSelectType();
+            break;
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+    
+    private void clickSelectType() {
+        final ArrayList<PropertyItemInfo> datas = new ArrayList<PropertyItemInfo>();
+        for (int i = 0; i < 100; i++) {
+            PropertyTypeItem item = new PropertyTypeItem();
+            item.type_id = i + "";
+            item.type_name = "item " + i;
+            datas.add(item);
+        }
+
+        showSingleChoiceType(datas, new IChoiceCallback() {
+            @Override
+            public void onChoice(int which) {
+                PropertyItemInfo info = datas.get(which);
+                LogUtil.d(TAG, "clickSelectType: info: "
+                        + ((PropertyTypeItem) info).type_name);
+                initText(R.id.select_type_value,
+                        ((PropertyTypeItem) info).type_name);
+            }
+        });
     }
 }

@@ -1,6 +1,6 @@
 package com.smona.app.propertymanager.data.model;
 
 public class PropertyTypeItem extends PropertyItemInfo {
-    String type_id;
-    String type_name;
+    public String type_id;
+    public String type_name;
 }

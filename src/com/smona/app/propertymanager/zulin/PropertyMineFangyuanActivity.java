@@ -8,7 +8,7 @@ import android.widget.ListView;
 
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.data.PropertyItemInfo;
+import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 
 public class PropertyMineFangyuanActivity extends PropertyBaseActivity {
 

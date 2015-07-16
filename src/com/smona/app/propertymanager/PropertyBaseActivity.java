@@ -1,6 +1,13 @@
 package com.smona.app.propertymanager;
 
+import java.util.ArrayList;
+
+import com.smona.app.propertymanager.baoxiu.PropertySelectedDialog;
+import com.smona.app.propertymanager.baoxiu.TypeAdapter;
+import com.smona.app.propertymanager.data.model.PropertyItemInfo;
+
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -54,6 +61,11 @@ public abstract class PropertyBaseActivity extends Activity {
         TextView title = (TextView) parent.findViewById(resId);
         title.setText(text);
     }
+    
+    protected void initText(View parent, int resId, String text) {
+        TextView title = (TextView) parent.findViewById(resId);
+        title.setText(text);
+    }
 
     protected void initView(int resId) {
         View view = mRoot.findViewById(resId);
@@ -64,6 +76,26 @@ public abstract class PropertyBaseActivity extends Activity {
         Intent intent = new Intent();
         intent.setClass(this, clazz);
         startActivity(intent);
+    }
+
+    protected void showSingleChoiceType(ArrayList<PropertyItemInfo> datas,
+            final IChoiceCallback callback) {
+        TypeAdapter dapter = new TypeAdapter(this, datas);
+
+        PropertySelectedDialog.Builder builder = new PropertySelectedDialog.Builder(
+                this);
+        builder.setSingleChoiceItems(dapter, 0,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        callback.onChoice(which);
+                        dialog.dismiss();
+                    }
+                });
+        builder.show();
+    }
+
+    public interface IChoiceCallback {
+        void onChoice(int which);
     }
 
     @Override

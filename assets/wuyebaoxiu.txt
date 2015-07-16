@@ -3,27 +3,25 @@
         "customerid": 0,
         "communtiycode": null,
         "propertyphone": "0371-12345678",
-        "pictureurl": "http://171.8.187.205:8080/CommDataSyncService/img/123.jpg",
+        "pictureurl": [
+            "http://171.8.187.205:8080/CommDataSyncService/img/123.jpg"
+        ],
         "username": "周处",
         "userphone": "18937113913",
         "useraddress": "河南省郑州市西开发区"
     },
     "icobject": [
         {
-            "repaircode": "1",
-            "repairname": "换灯泡"
+            "repaircode": "9",
+            "repairname": "空调不工作"
         },
         {
-            "repaircode": "2",
-            "repairname": "换水管"
+            "repaircode": "10",
+            "repairname": "水管漏水"
         },
         {
-            "repaircode": "3",
-            "repairname": "修灯泡"
-        },
-        {
-            "repaircode": "4",
-            "repairname": "修水管"
+            "repaircode": "7",
+            "repairname": "更换灯泡"
         }
     ],
     "iccode": "3210",

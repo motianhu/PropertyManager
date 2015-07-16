@@ -1,13 +1,19 @@
 package com.smona.app.propertymanager.zulin;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.data.model.PropertyItemInfo;
+import com.smona.app.propertymanager.data.model.PropertyTypeItem;
+import com.smona.app.propertymanager.util.LogUtil;
 
 public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
+    private static final String TAG = "PropertyPublishFangYuanActivity";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,14 +34,17 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
         View parent = mRoot.findViewById(R.id.ywtype);
         initText(parent, R.id.select_type,
                 R.string.property_fangwuzulin_xuanzeyewuleixing);
+        initView(R.id.ywtype);
 
         parent = mRoot.findViewById(R.id.area);
         initText(parent, R.id.select_type,
                 R.string.property_fangwuzulin_arealeixing);
+        initView(R.id.area);
 
         parent = mRoot.findViewById(R.id.housetype);
         initText(parent, R.id.select_type,
                 R.string.property_fangwuzulin_xuanzehuxing);
+        initView(R.id.housetype);
 
         EditText text = (EditText) mRoot.findViewById(R.id.problem_content);
         text.setHint(R.string.property_fangwuzulin_fangyuanfabu_shurupeitaomiaoshu);
@@ -63,7 +72,81 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
         case R.id.detail:
             gotoSubActivity(PropertyMineFangyuanActivity.class);
             break;
+        case R.id.ywtype:
+            clickSelectType();
+            break;
+        case R.id.area:
+            clickSelectArea();
+            break;
+        case R.id.housetype:
+            clickSelectHuxing();
+            break;
         }
     }
 
+    private void clickSelectType() {
+        final ArrayList<PropertyItemInfo> datas = new ArrayList<PropertyItemInfo>();
+        for (int i = 0; i < 100; i++) {
+            PropertyTypeItem item = new PropertyTypeItem();
+            item.type_id = i + "";
+            item.type_name = "item " + i;
+            datas.add(item);
+        }
+
+        showSingleChoiceType(datas, new IChoiceCallback() {
+            @Override
+            public void onChoice(int which) {
+                PropertyItemInfo info = datas.get(which);
+                LogUtil.d(TAG, "clickSelectType: info: "
+                        + ((PropertyTypeItem) info).type_name);
+                View parent = mRoot.findViewById(R.id.ywtype);
+                initText(parent, R.id.select_type_value,
+                        ((PropertyTypeItem) info).type_name);
+            }
+        });
+    }
+
+    private void clickSelectHuxing() {
+        final ArrayList<PropertyItemInfo> datas = new ArrayList<PropertyItemInfo>();
+        for (int i = 0; i < 100; i++) {
+            PropertyTypeItem item = new PropertyTypeItem();
+            item.type_id = i + "";
+            item.type_name = "item " + i;
+            datas.add(item);
+        }
+
+        showSingleChoiceType(datas, new IChoiceCallback() {
+            @Override
+            public void onChoice(int which) {
+                PropertyItemInfo info = datas.get(which);
+                LogUtil.d(TAG, "clickSelectType: info: "
+                        + ((PropertyTypeItem) info).type_name);
+                View parent = mRoot.findViewById(R.id.housetype);
+                initText(parent, R.id.select_type_value,
+                        ((PropertyTypeItem) info).type_name);
+            }
+        });
+    }
+
+    private void clickSelectArea() {
+        final ArrayList<PropertyItemInfo> datas = new ArrayList<PropertyItemInfo>();
+        for (int i = 0; i < 100; i++) {
+            PropertyTypeItem item = new PropertyTypeItem();
+            item.type_id = i + "";
+            item.type_name = "item " + i;
+            datas.add(item);
+        }
+
+        showSingleChoiceType(datas, new IChoiceCallback() {
+            @Override
+            public void onChoice(int which) {
+                PropertyItemInfo info = datas.get(which);
+                LogUtil.d(TAG, "clickSelectType: info: "
+                        + ((PropertyTypeItem) info).type_name);
+                View parent = mRoot.findViewById(R.id.area);
+                initText(parent, R.id.select_type_value,
+                        ((PropertyTypeItem) info).type_name);
+            }
+        });
+    }
 }

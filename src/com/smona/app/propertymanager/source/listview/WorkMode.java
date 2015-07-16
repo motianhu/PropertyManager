@@ -1,6 +1,6 @@
 package com.smona.app.propertymanager.source.listview;
 
-public enum PropertyWorkMode {
+public enum WorkMode {
     // 没有刷新
     MODE_NULL(0x00),
     // 可以上拉可以下拉
@@ -12,11 +12,11 @@ public enum PropertyWorkMode {
 
     int mValue;
 
-    PropertyWorkMode(int value) {
+    WorkMode(int value) {
         this.mValue = value;
     }
 
-    static public PropertyWorkMode getDefault() {
+    static public WorkMode getDefault() {
         return FOOTER;
     }
 
