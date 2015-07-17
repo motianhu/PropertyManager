@@ -1,0 +1,30 @@
+{
+    "customer": {
+        "customerid": 0,
+        "communtiycode": null,
+        "propertyphone": "0371-12345678",
+        "pictureurl": [
+            "http://171.8.187.205:8080/CommDataSyncService/img/123.jpg"
+        ],
+        "username": "周处",
+        "userphone": "18937113913",
+        "useraddress": "河南省郑州市西开发区"
+    },
+    "pageno": "1",
+    "pagesize": "12",
+    "totalrecord": "000001",
+    "icobjct": [
+        {
+            "repairid": "3",
+            "repairname": "空调不工作",
+            "repairpicture": null,
+            "repairdesc": "换led灯泡",
+            "requesttime": "2015-07-14",
+            "repairstatus": ""
+        }
+    ],
+    "iccode": "3410",
+    "loginname": null,
+    "sessionid": null,
+    "answercode": "00"
+}

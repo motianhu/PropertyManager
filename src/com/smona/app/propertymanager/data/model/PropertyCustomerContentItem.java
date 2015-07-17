@@ -7,6 +7,8 @@ import com.smona.app.propertymanager.data.table.PropertyCustomerTable;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 public class PropertyCustomerContentItem extends PropertyContentItem {
     public String customerid;
@@ -58,6 +60,45 @@ public class PropertyCustomerContentItem extends PropertyContentItem {
             propertyphone = property;
         }
     }
+
+    public PropertyCustomerContentItem() {
+
+    }
+
+    public PropertyCustomerContentItem(Parcel in) {
+        username = in.readString();
+        userphone = in.readString();
+        useraddress = in.readString();
+        propertyphone = in.readString();
+        pictureurl = new ArrayList<String>();
+        in.readList(pictureurl, ClassLoader.getSystemClassLoader());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(username);
+        dest.writeString(userphone);
+        dest.writeString(useraddress);
+        dest.writeString(propertyphone);
+        dest.writeList(pictureurl);
+    }
+
+    public static final Parcelable.Creator<PropertyCustomerContentItem> CREATOR = new Creator<PropertyCustomerContentItem>() {
+        @Override
+        public PropertyCustomerContentItem[] newArray(int size) {
+            return new PropertyCustomerContentItem[size];
+        }
+
+        @Override
+        public PropertyCustomerContentItem createFromParcel(Parcel in) {
+            return new PropertyCustomerContentItem(in);
+        }
+    };
 
     public String toString() {
         return "PropertyCustomerContentItem[username: " + username

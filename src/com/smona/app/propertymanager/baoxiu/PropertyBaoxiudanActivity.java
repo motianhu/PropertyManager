@@ -4,22 +4,35 @@ import java.util.ArrayList;
 
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.data.model.PropertyCustomerContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
+import com.smona.app.propertymanager.imageload.ImageLoaderManager;
+import com.smona.app.propertymanager.util.LogUtil;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
 
+    private static final String TAG = "PropertyBaoxiudanActivity";
+
     private ListView mBaoxiudans;
     private PropertyBaoxiudansAdapter mBaoxiudansAdapter;
+    private PropertyCustomerContentItem customer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.property_wuyebaoxiu_baoxiudan);
+        acquireData();
         initViews();
+        LogUtil.d(TAG, "customer: " + customer);
+    }
+
+    private void acquireData() {
+        customer = getIntent().getParcelableExtra("customer");
     }
 
     @Override
@@ -35,12 +48,7 @@ public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
 
     @Override
     protected void initBody() {
-        String name = "张三";
-        String tel = "(13582426255)";
-        String address = "深圳市南山区南山村花好月圆小区五栋502";
-        initText(R.id.yezhuxinxi_xingming, name);
-        initText(R.id.yezhuxinxi_dianhua, tel);
-        initText(R.id.yezhuxinxi_dizhi, address);
+        initYezhuxinxi();
 
         mBaoxiudans = (ListView) mRoot.findViewById(R.id.list_content);
         ArrayList<PropertyItemInfo> datas = new ArrayList<PropertyItemInfo>();
@@ -50,6 +58,17 @@ public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
         }
         mBaoxiudansAdapter = new PropertyBaoxiudansAdapter(this, datas);
         mBaoxiudans.setAdapter(mBaoxiudansAdapter);
+    }
+
+    private void initYezhuxinxi() {
+        initText(R.id.yezhuxinxi_xingming, customer.username);
+        initText(R.id.yezhuxinxi_dianhua, "(" + customer.userphone + ")");
+        initText(R.id.yezhuxinxi_dizhi, customer.useraddress);
+
+        ImageView image = (ImageView) mRoot
+                .findViewById(R.id.yezhuxinxi_touxiang);
+        ImageLoaderManager.getInstance().loadImage(customer.pictureurl.get(0),
+                image);
     }
 
     @Override

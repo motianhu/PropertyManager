@@ -14,6 +14,8 @@ import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -57,6 +59,14 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
     }
 
     protected void refreshUI() {
+        initYezhuxinxi();
+
+        initText(R.id.call_wuye,
+                getResources().getString(R.string.property_common_wuyedianhua)
+                        + "(" + mContent.customer.propertyphone + ")");
+    }
+
+    private void initYezhuxinxi() {
         initText(R.id.yezhuxinxi_xingming, mContent.customer.username);
         initText(R.id.yezhuxinxi_dianhua, "(" + mContent.customer.userphone
                 + ")");
@@ -66,10 +76,6 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
                 .findViewById(R.id.yezhuxinxi_touxiang);
         ImageLoaderManager.getInstance().loadImage(
                 mContent.customer.pictureurl.get(0), image);
-
-        initText(R.id.call_wuye,
-                getResources().getString(R.string.property_common_wuyedianhua)
-                        + "(" + mContent.customer.propertyphone + ")");
     }
 
     protected void initHeader() {
@@ -86,6 +92,8 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
                 R.string.property_wuyebaoxiu_now_action_baoxiu);
 
         initView(R.id.select_type_container);
+        initView(R.id.action_now);
+        initView(R.id.call_wuye);
     }
 
     protected void clickView(View v) {
@@ -95,12 +103,36 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
             finish();
             break;
         case R.id.detail:
-            gotoSubActivity(PropertyBaoxiudanActivity.class);
+            gotoSubActivity();
             break;
         case R.id.select_type_container:
             clickSelectType();
             break;
+        case R.id.action_now:
+            clickActionNow();
+            break;
+        case R.id.call_wuye:
+            clickCallWuye();
+            break;
         }
+    }
+
+    private void gotoSubActivity() {
+        Intent intent = new Intent();
+        intent.putExtra("customer", mContent.customer);
+        intent.setClass(this, PropertyBaoxiudanActivity.class);
+        startActivity(intent);
+    }
+
+    private void clickActionNow() {
+
+    }
+
+    private void clickCallWuye() {
+        String phone = "tel:" + mContent.customer.propertyphone;
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(phone));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     @Override
