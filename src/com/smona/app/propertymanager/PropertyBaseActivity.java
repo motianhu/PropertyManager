@@ -1,22 +1,41 @@
 package com.smona.app.propertymanager;
 
 import java.util.ArrayList;
-
 import com.smona.app.propertymanager.baoxiu.PropertySelectedDialog;
 import com.smona.app.propertymanager.baoxiu.TypeAdapter;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 public abstract class PropertyBaseActivity extends Activity {
 
+    private static final int MSG_LOAD_DATA = 0;
+    private static final int MSG_NOTIFY_REFRESH_UI = 1;
+
     protected View mRoot = null;
+
+    @SuppressLint("HandlerLeak")
+    private Handler mLoadDataHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            int what = msg.what;
+            switch (what) {
+            case MSG_LOAD_DATA:
+                loadData();
+                break;
+            case MSG_NOTIFY_REFRESH_UI:
+                refreshUI();
+                break;
+            }
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +55,26 @@ public abstract class PropertyBaseActivity extends Activity {
     protected abstract void initHeader();
 
     protected abstract void initBody();
+
+    protected void requestLoadData() {
+        sendMessage(MSG_LOAD_DATA);
+    }
+
+    protected void requestRefreshUI() {
+        sendMessage(MSG_NOTIFY_REFRESH_UI);
+    }
+
+    private void sendMessage(int msg) {
+        mLoadDataHandler.sendEmptyMessage(msg);
+    }
+
+    protected void loadData() {
+
+    }
+
+    protected void refreshUI() {
+
+    }
 
     private OnClickListener mClickListener = new OnClickListener() {
 
@@ -61,7 +100,7 @@ public abstract class PropertyBaseActivity extends Activity {
         TextView title = (TextView) parent.findViewById(resId);
         title.setText(text);
     }
-    
+
     protected void initText(View parent, int resId, String text) {
         TextView title = (TextView) parent.findViewById(resId);
         title.setText(text);

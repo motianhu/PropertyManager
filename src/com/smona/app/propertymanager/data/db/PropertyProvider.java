@@ -3,6 +3,7 @@ package com.smona.app.propertymanager.data.db;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.smona.app.propertymanager.PropertyApplication;
 import com.smona.app.propertymanager.data.table.PropertyAbstractTable;
 import com.smona.app.propertymanager.data.table.PropertyErshouwupinTable;
 import com.smona.app.propertymanager.data.table.PropertyErshouwupinpinpaiTypeTable;
@@ -13,6 +14,7 @@ import com.smona.app.propertymanager.data.table.PropertyFangwuzulinhuxingTypeTab
 import com.smona.app.propertymanager.data.table.PropertyFangwuzulinmianjiTypeTable;
 import com.smona.app.propertymanager.data.table.PropertyTousujianyiTable;
 import com.smona.app.propertymanager.data.table.PropertyTousujianyiTypeTable;
+import com.smona.app.propertymanager.data.table.PropertyCustomerTable;
 import com.smona.app.propertymanager.data.table.PropertyWuyebaoxiuTypeTable;
 import com.smona.app.propertymanager.data.table.PropertyWuyebaoxiudanTable;
 import com.smona.app.propertymanager.data.table.PropertyWuyetongzhiTable;
@@ -31,39 +33,43 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
-public class PropertyPropertyProvider extends ContentProvider {
+public class PropertyProvider extends ContentProvider {
     private static final String TAG = "PropertyProvider";
     private DatabaseHelper mDataHelper;
 
+    // customer
+    private static final int CODE_BASE_CUSTOMER = 0;
+    private static final int CODE_CUSOMTER = CODE_BASE_CUSTOMER + 1;
+    
     // ywzhuxinxi
-    private static final int CODE_BASE_YEZHUXINXI = 0;
+    private static final int CODE_BASE_YEZHUXINXI = 10;
     private static final int CODE_YEZHUXINXI = CODE_BASE_YEZHUXINXI + 1;
 
     // ershouwupin
-    private static final int CODE_BASE_ERSHOUWUPIN = 10;
+    private static final int CODE_BASE_ERSHOUWUPIN = 20;
     private static final int CODE_ERSHOUWUPINPINPAITYPE = CODE_BASE_ERSHOUWUPIN + 1;
     private static final int CODE_ERSHOUWUPIN = CODE_BASE_ERSHOUWUPIN + 2;
     private static final int CODE_ERSHOUWUPINWUPINTYPE = CODE_BASE_ERSHOUWUPIN + 3;
     private static final int CODE_ERSHOUWUPINXINJIUTYPE = CODE_BASE_ERSHOUWUPIN + 4;
 
     // fangwuzulin
-    private static final int CODE_BASE_FANGWUZULIN = 20;
+    private static final int CODE_BASE_FANGWUZULIN = 30;
     private static final int CODE_FANGWUZULINFANGYUAN = CODE_BASE_FANGWUZULIN + 1;
     private static final int CODE_FANGWUZULINHUXING = CODE_BASE_FANGWUZULIN + 2;
     private static final int CODE_FANGWUZULINMIANJI = CODE_BASE_FANGWUZULIN + 3;
 
     // tousujianyi
-    private static final int CODE_BASE_TOUSU = 30;
+    private static final int CODE_BASE_TOUSU = 40;
     private static final int CODE_TOUSUJIANYI = CODE_BASE_TOUSU + 1;
     private static final int CODE_TOUSUJIANYITYPE = CODE_BASE_TOUSU + 2;
 
     // wuyebaoxiu
-    private static final int CODE_BASE_WUYEBAOXIU = 40;
+    private static final int CODE_BASE_WUYEBAOXIU = 50;
     private static final int CODE_WUYEBAOXIUDAN = CODE_BASE_WUYEBAOXIU + 1;
     private static final int CODE_WUYEBAOXIUTYPE = CODE_BASE_WUYEBAOXIU + 2;
 
     // tongzhi
-    private static final int CODE_BASE_TONGZHI = 50;
+    private static final int CODE_BASE_TONGZHI = 60;
     private static final int CODE_TONGZHI = CODE_BASE_TONGZHI + 1;
 
     private static final UriMatcher URI_MATCH = new UriMatcher(
@@ -73,6 +79,13 @@ public class PropertyPropertyProvider extends ContentProvider {
     private static HashMap<Integer, String> TABLE_MATCH = new HashMap<Integer, String>();
 
     static {
+        //cusotmer
+        URI_MATCH.addURI(PropertyAbstractTable.AUTHORITY,
+                PropertyCustomerTable.getInstance().mTableName,
+                CODE_CUSOMTER);
+        TABLE_MATCH.put(CODE_CUSOMTER,
+                PropertyCustomerTable.getInstance().mTableName);
+        
         // yezhuxinxi
         URI_MATCH.addURI(PropertyAbstractTable.AUTHORITY,
                 PropertyYezhuxinxiTable.getInstance().mTableName,
@@ -161,6 +174,8 @@ public class PropertyPropertyProvider extends ContentProvider {
     public boolean onCreate() {
         LogUtil.d(TAG, "onCreate");
         mDataHelper = new DatabaseHelper(getContext());
+        ((PropertyApplication) (getContext().getApplicationContext()))
+                .setPropertyProvider(this);
         return true;
     }
 
@@ -182,8 +197,7 @@ public class PropertyPropertyProvider extends ContentProvider {
     public String getType(Uri uri) {
         int match = URI_MATCH.match(uri);
         String tableName = TABLE_MATCH.get(match);
-        LogUtil.d(TAG, "getType uri: " + uri + ";tableName: "
-                + tableName);
+        LogUtil.d(TAG, "getType uri: " + uri + ";tableName: " + tableName);
         if (tableName != null) {
             return "vnd.android.cursor.dir/wallpaper";
         } else {
@@ -315,8 +329,8 @@ public class PropertyPropertyProvider extends ContentProvider {
             if (oldVersion >= newVersion) {
                 return;
             }
-            LogUtil.d(TAG, "DatabaseHelper onUpgrade oldVersion: "
-                    + oldVersion + ", newVersion: " + newVersion);
+            LogUtil.d(TAG, "DatabaseHelper onUpgrade oldVersion: " + oldVersion
+                    + ", newVersion: " + newVersion);
 
             ArrayList<String> dropList = getDropTableSqlList();
             for (String sql : dropList) {
@@ -328,6 +342,9 @@ public class PropertyPropertyProvider extends ContentProvider {
 
         private ArrayList<String> getCreateTableSqlList() {
             ArrayList<String> sqlList = new ArrayList<String>();
+            String customerTable = PropertyCustomerTable.getInstance()
+                    .createTableSql();
+            
             // yezhuxinxi
             String yezhuxinxi = PropertyYezhuxinxiTable.getInstance()
                     .createTableSql();
@@ -366,6 +383,7 @@ public class PropertyPropertyProvider extends ContentProvider {
             String tongzhi = PropertyWuyetongzhiTable.getInstance()
                     .createTableSql();
 
+            sqlList.add(customerTable);
             sqlList.add(yezhuxinxi);
             sqlList.add(pinpaiType);
             sqlList.add(ershouwupin);
@@ -385,9 +403,12 @@ public class PropertyPropertyProvider extends ContentProvider {
 
         private ArrayList<String> getDropTableSqlList() {
             ArrayList<String> sqlList = new ArrayList<String>();
+            String customerTable = PropertyCustomerTable.getInstance()
+                    .dropTableSql();
+            
             // yezhuxinxi
             String yezhuxinxi = PropertyYezhuxinxiTable.getInstance()
-                    .createTableSql();
+                    .dropTableSql();
 
             // ershouwupin
             String pinpaiType = PropertyErshouwupinpinpaiTypeTable
@@ -423,6 +444,7 @@ public class PropertyPropertyProvider extends ContentProvider {
             String tongzhi = PropertyWuyetongzhiTable.getInstance()
                     .dropTableSql();
 
+            sqlList.add(customerTable);
             sqlList.add(yezhuxinxi);
             sqlList.add(pinpaiType);
             sqlList.add(ershouwupin);

@@ -6,17 +6,22 @@ import java.util.ArrayList;
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.data.bean.PropertyWuyebaoxiuBean;
+import com.smona.app.propertymanager.data.bean.PropertyBeanWuyebaoxiu;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
+import com.smona.app.propertymanager.data.model.PropertyWuyebaoxiuContentItem;
+import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyWuyebaoxiuActivity";
+
+    private PropertyWuyebaoxiuContentItem mContent;
     private PropertyWuyebaoxiuMessageProcess mProcess;
 
     @Override
@@ -24,18 +29,47 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.property_wuyebaoxiu);
         initViews();
-        testData();
+        requestLoadData();
     }
 
-    private void testData() {
+    protected void loadData() {
+        requestData();
+        loadDBData();
+    }
+
+    private void requestData() {
         mProcess = new PropertyWuyebaoxiuMessageProcess();
         String content = mProcess.getWuyebaoxiuContent(this);
         LogUtil.d(TAG, "content: " + content);
-        PropertyWuyebaoxiuBean bean = new PropertyWuyebaoxiuBean();
-        Type type = new TypeToken<PropertyWuyebaoxiuBean>() {
+        PropertyBeanWuyebaoxiu bean = new PropertyBeanWuyebaoxiu();
+        Type type = new TypeToken<PropertyBeanWuyebaoxiu>() {
         }.getType();
         bean = JsonUtils.parseJson(content, type);
-        LogUtil.d(TAG, "bean: " + bean);
+        bean.saveDataToDB(this);
+    }
+
+    private void loadDBData() {
+        mContent = new PropertyWuyebaoxiuContentItem();
+        mContent.loadDBData(this);
+        LogUtil.d(TAG, "loadDBData mContent: " + mContent);
+
+        requestRefreshUI();
+    }
+
+    protected void refreshUI() {
+        initText(R.id.yezhuxinxi_xingming, mContent.customer.username);
+        initText(R.id.yezhuxinxi_dianhua, "(" + mContent.customer.userphone
+                + ")");
+        initText(R.id.yezhuxinxi_dizhi, mContent.customer.useraddress);
+
+        ImageView image = (ImageView) mRoot
+                .findViewById(R.id.yezhuxinxi_touxiang);
+        ImageLoaderManager.getInstance().loadImage(
+                mContent.customer.pictureurl.get(0), image);
+
+        initText(R.id.call_wuye,
+                getResources().getString(R.string.property_common_wuyedianhua)
+                        + "(" + mContent.customer.propertyphone + ")");
     }
 
     protected void initHeader() {
@@ -46,13 +80,6 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
     }
 
     protected void initBody() {
-        String name = "张三";
-        String tel = "(13582426255)";
-        String address = "深圳市南山区南山村花好月圆小区五栋502";
-        initText(R.id.yezhuxinxi_xingming, name);
-        initText(R.id.yezhuxinxi_dianhua, tel);
-        initText(R.id.yezhuxinxi_dizhi, address);
-
         initText(R.id.select_type, R.string.property_common_xuanzebaoxiuleixing);
 
         initText(R.id.action_now,
@@ -82,13 +109,7 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
     }
 
     private void clickSelectType() {
-        final ArrayList<PropertyItemInfo> datas = new ArrayList<PropertyItemInfo>();
-        for (int i = 0; i < 100; i++) {
-            PropertyTypeItem item = new PropertyTypeItem();
-            item.type_id = i + "";
-            item.type_name = "item " + i;
-            datas.add(item);
-        }
+        final ArrayList<PropertyItemInfo> datas = mContent.types;
 
         showSingleChoiceType(datas, new IChoiceCallback() {
             @Override

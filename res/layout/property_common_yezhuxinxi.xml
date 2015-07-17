@@ -8,14 +8,13 @@
         android:layout_width="@dimen/property_common_yezhuxinxi_touxiang_width"
         android:layout_height="@dimen/property_common_yezhuxinxi_touxiang_height"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="@dimen/property_common_yezhuxinxi_touxiang_margin_left"
-        android:background="#0055ff" />
+        android:layout_marginLeft="@dimen/property_common_yezhuxinxi_touxiang_margin_left" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/property_common_yezhuxinxi_mingcheng_margin_top"
         android:layout_marginLeft="@dimen/property_common_yezhuxinxi_mingcheng_margin_left"
+        android:layout_marginTop="@dimen/property_common_yezhuxinxi_mingcheng_margin_top"
         android:layout_toRightOf="@+id/yezhuxinxi_touxiang"
         android:orientation="vertical" >
 

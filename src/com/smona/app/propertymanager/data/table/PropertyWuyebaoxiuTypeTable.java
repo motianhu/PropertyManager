@@ -1,9 +1,10 @@
 package com.smona.app.propertymanager.data.table;
 
 public class PropertyWuyebaoxiuTypeTable extends PropertyAbstractTable {
-    private static final String TABLE_NAME = "wuyebaoxiutype";
-    public static final String TYPE_ID = "type_id";
-    public static final String TYPE_NAME = "type_name";
+
+    private static final String TABLE_NAME = "wuyebaoxiu_type";
+    public static final String TYPE_ID = "repair_id";
+    public static final String TYPE_NAME = "repair_name";
 
     private static volatile PropertyWuyebaoxiuTypeTable mInanstance = null;
 
@@ -29,4 +30,5 @@ public class PropertyWuyebaoxiuTypeTable extends PropertyAbstractTable {
     public String updateTableSql() {
         return null;
     }
+
 }
