@@ -20,14 +20,15 @@
                 android:textColor="@color/property_color_common_title" />
 
             <TextView
-                android:id="@+id/baoxiudan_time"
+                android:id="@+id/tousudan_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:textColor="@color/property_color_common_title" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/baoxiudan_status"
+            android:id="@+id/tousudan_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -52,9 +53,10 @@
                 android:textColor="@color/property_color_common_title" />
 
             <TextView
-                android:id="@+id/baoxiudan_title"
+                android:id="@+id/tousudan_mingcheng"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:textColor="@color/property_color_common_title" />
         </LinearLayout>
 

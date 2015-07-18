@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.smona.app.propertymanager.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
+import com.smona.app.propertymanager.data.model.PropertyTousujianyidanContentItem;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -28,24 +29,28 @@ public class PropertyTousudanAdapter extends PropertyBaseDataAdapter {
     }
 
     public void initConvertView(View convertView, final PropertyItemInfo info) {
-        // View parent = convertView.findViewById(R.id.pulish_time);
-        // initText(parent, R.id.name, R.string.pulish_time);
-        // initText(parent, R.id.value, R.string.pulish_time);
-        //
-        // parent = convertView.findViewById(R.id.position);
-        // initText(parent, R.id.name, R.string.position);
-        // initText(parent, R.id.value, R.string.position);
-        //
-        // parent = convertView.findViewById(R.id.tel);
-        // initText(parent, R.id.name, R.string.lianxidianhua);
-        // initText(parent, R.id.value, R.string.lianxidianhua);
-
         convertView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 gotoDetail(info);
             }
         });
+
+        PropertyTousujianyidanContentItem item;
+        if (info instanceof PropertyTousujianyidanContentItem) {
+            item = (PropertyTousujianyidanContentItem) info;
+        } else {
+            return;
+        }
+
+        TextView text = (TextView)convertView.findViewById(R.id.tousudan_time);
+        text.setText(item.requesttime);
+
+        text =  (TextView)convertView.findViewById(R.id.tousudan_mingcheng);
+        text.setText(item.complaintname);
+
+        text =  (TextView)convertView.findViewById(R.id.tousudan_status);
+        text.setText(item.complaint);
     }
 
     public Intent createIntent() {

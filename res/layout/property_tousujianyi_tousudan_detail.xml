@@ -70,47 +70,23 @@
             android:text="@string/property_wuyebaoxi_baoxiudan_item_yonghupingjia"
             android:textColor="@color/property_color_common_title" />
 
-        <RelativeLayout
+        <include
+            android:id="@+id/pingjia_fuwutaidu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="2dp"
-            android:gravity="center_vertical" >
+            layout="@layout/property_common_pingjia" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="@string/property_tousujianyi_tousudan_item_tousu_taidu"
-                android:textColor="@color/property_color_common_title" />
-
-            <TextView
-                android:id="@+id/wancheng_zhiliang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true" />
-        </RelativeLayout>
-
-        <RelativeLayout
+        <include
+            android:id="@+id/pingjia_jishixing"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="2dp"
-            android:gravity="center_vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="@string/property_tousujianyi_tousudan_item_tousu_jishixing"
-                android:textColor="@color/property_color_common_title" />
-
-            <TextView
-                android:id="@+id/wancheng_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true" />
-        </RelativeLayout>
+            layout="@layout/property_common_pingjia" />
     </LinearLayout>
 
 </LinearLayout>

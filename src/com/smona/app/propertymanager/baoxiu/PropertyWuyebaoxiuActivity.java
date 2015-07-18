@@ -42,10 +42,9 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
         mProcess = new PropertyWuyebaoxiuMessageProcess();
         String content = mProcess.getWuyebaoxiuContent(this);
         LogUtil.d(TAG, "content: " + content);
-        PropertyBeanWuyebaoxiu bean = new PropertyBeanWuyebaoxiu();
         Type type = new TypeToken<PropertyBeanWuyebaoxiu>() {
         }.getType();
-        bean = JsonUtils.parseJson(content, type);
+        PropertyBeanWuyebaoxiu bean = JsonUtils.parseJson(content, type);
         bean.saveDataToDB(this);
     }
 

@@ -16,14 +16,13 @@ import com.smona.app.propertymanager.util.LogUtil;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
 
     private static final String TAG = "PropertyBaoxiudanActivity";
 
-    private ListView mBaoxiudans;
-    private PropertyBaoxiudansAdapter mBaoxiudansAdapter;
     ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
 
     private PropertyCustomerContentItem customer;
@@ -77,9 +76,9 @@ public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
     protected void initBody() {
         initYezhuxinxi();
 
-        mBaoxiudans = (ListView) mRoot.findViewById(R.id.list_content);
-        mBaoxiudansAdapter = new PropertyBaoxiudansAdapter(this, mDatas);
-        mBaoxiudans.setAdapter(mBaoxiudansAdapter);
+        ListView list = (ListView) mRoot.findViewById(R.id.list_content);
+        ListAdapter adapter = new PropertyBaoxiudansAdapter(this, mDatas);
+        list.setAdapter(adapter);
     }
 
     private void initYezhuxinxi() {

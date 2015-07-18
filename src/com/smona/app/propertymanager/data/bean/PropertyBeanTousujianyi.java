@@ -6,15 +6,15 @@ import java.util.List;
 import com.smona.app.propertymanager.PropertyApplication;
 import com.smona.app.propertymanager.data.bean.BeanInterfaceSet.IPersistence;
 import com.smona.app.propertymanager.data.db.PropertyProvider;
-import com.smona.app.propertymanager.data.table.PropertyWuyebaoxiuTypeTable;
+import com.smona.app.propertymanager.data.table.PropertyTousujianyiTypeTable;
 
 import android.content.ContentValues;
 import android.content.Context;
 
-public class PropertyBeanWuyebaoxiu implements IPersistence {
+public class PropertyBeanTousujianyi implements IPersistence {
     public Customer customer;
     public String msg;
-    public List<IcObjectWuyebaoxiu> icobject;
+    public List<IcObjectTousujianyi> icobject;
 
     public String iccode;
     public String loginname;
@@ -22,7 +22,7 @@ public class PropertyBeanWuyebaoxiu implements IPersistence {
     public String answercode;
 
     public String toString() {
-        return "PropertyWuyebaoxiuBean[customer:" + customer + ", msg: " + msg
+        return "PropertyBeanTousujianyi[customer:" + customer + ", msg: " + msg
                 + ", icobject: " + icobject + ", iccode: " + iccode
                 + ", loginname: " + loginname + ", sessionid: " + sessionid
                 + ", answercode: " + answercode + "]";
@@ -48,7 +48,7 @@ public class PropertyBeanWuyebaoxiu implements IPersistence {
             list.add(value);
         }
         provider.batchUpdateLocals(
-                PropertyWuyebaoxiuTypeTable.getInstance().mContentUri_NoNotify,
-                list, PropertyWuyebaoxiuTypeTable.TYPE_ID);
+                PropertyTousujianyiTypeTable.getInstance().mContentUri_NoNotify,
+                list, PropertyTousujianyiTypeTable.TYPE_ID);
     }
 }
