@@ -98,6 +98,7 @@
             android:id="@+id/call_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/property_common_button"
             android:text="@string/property_common_call_contact_phone" />
     </LinearLayout>
 

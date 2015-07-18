@@ -10,12 +10,15 @@
         android:id="@+id/action_now"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/property_common_button"
         android:textColor="@color/property_color_common_title" />
 
     <Button
         android:id="@+id/call_wuye"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/property_common_button"
         android:text="@string/property_common_wuyedianhua"
         android:textColor="@color/property_color_common_title" />
 

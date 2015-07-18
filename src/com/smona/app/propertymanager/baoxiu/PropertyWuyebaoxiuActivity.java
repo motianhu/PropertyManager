@@ -17,6 +17,7 @@ import com.smona.app.propertymanager.util.LogUtil;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -90,8 +91,10 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
                 R.string.property_wuyebaoxiu_now_action_baoxiu);
 
         initView(R.id.select_type_container);
+        initView(R.id.start_camera);
         initView(R.id.action_now);
         initView(R.id.call_wuye);
+        
     }
 
     protected void clickView(View v) {
@@ -112,14 +115,23 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
         case R.id.call_wuye:
             clickCallWuye();
             break;
+        case R.id.start_camera:
+            actionCamera();
+            break;
         }
     }
-
+    
     private void gotoSubActivity() {
         Intent intent = new Intent();
         intent.putExtra("customer", mContent.customer);
         intent.setClass(this, PropertyBaoxiudanActivity.class);
         startActivity(intent);
+    }
+    
+    private void actionCamera() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
+        startActivityForResult(intent, 1);
     }
 
     private void clickActionNow() {

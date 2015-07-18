@@ -18,6 +18,7 @@ import com.smona.app.propertymanager.util.LogUtil;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -95,6 +96,7 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
         text.setHint(R.string.property_tousujianyi_tousuwentimiaoshu);
 
         initView(R.id.select_type_container);
+        initView(R.id.start_camera);
         initView(R.id.action_now);
         initView(R.id.call_wuye);
     }
@@ -118,6 +120,9 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
         case R.id.call_wuye:
             clickCallWuye();
             break;
+        case R.id.start_camera:
+            actionCamera();
+            break;
         }
     }
 
@@ -126,6 +131,12 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
         intent.putExtra("customer", mContent.customer);
         intent.setClass(this, PropertyMineTousuActivity.class);
         startActivity(intent);
+    }
+    
+    private void actionCamera() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
+        startActivityForResult(intent, 1);
     }
 
     private void clickActionNow() {

@@ -97,6 +97,7 @@
         <Button
             android:id="@+id/call_phone"
             android:layout_width="match_parent"
+            android:background="@drawable/property_common_button"
             android:layout_height="wrap_content"
             android:text="@string/property_common_call_contact_phone" />
     </LinearLayout>

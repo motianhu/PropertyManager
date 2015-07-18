@@ -2,7 +2,9 @@ package com.smona.app.propertymanager.zulin;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 
@@ -77,6 +79,8 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
         parent = mRoot.findViewById(R.id.fabushijian);
         initText(parent, R.id.name,
                 R.string.property_ershouwupin_item_pulish_time);
+        
+        initView(R.id.start_camera);
     }
 
     @Override
@@ -98,7 +102,16 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
         case R.id.housetype:
             clickSelectHuxing();
             break;
+        case R.id.start_camera:
+            actionCamera();
+            break;
         }
+    }
+    
+    private void actionCamera() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
+        startActivityForResult(intent, 1);
     }
 
     private void clickSelectType() {
