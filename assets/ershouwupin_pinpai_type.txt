@@ -1,0 +1,29 @@
+{
+    "classid": "1",
+    "icobject": [
+        {
+            "brandcode": "2",
+            "brandname": "华为"
+        },
+        {
+            "brandcode": "5",
+            "brandname": "苹果"
+        },
+        {
+            "brandcode": "6",
+            "brandname": "小米"
+        },
+        {
+            "brandcode": "7",
+            "brandname": "sony"
+        },
+        {
+            "brandcode": "1",
+            "brandname": "三星"
+        }
+    ],
+    "iccode": "4910",
+    "loginname": null,
+    "sessionid": null,
+    "answercode": "00"
+}

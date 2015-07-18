@@ -1,0 +1,30 @@
+{
+    "icobject": [
+        {
+            "classcode": "1",
+            "classname": "手机"
+        },
+        {
+            "classcode": "2",
+            "classname": "电视"
+        },
+        {
+            "classcode": "4",
+            "classname": "电动车"
+        }
+    ],
+    "inobject": [
+        {
+            "newcode": "1",
+            "newname": "9成新"
+        },
+        {
+            "newcode": "2",
+            "newname": "8成新"
+        }
+    ],
+    "iccode": "4810",
+    "loginname": null,
+    "sessionid": null,
+    "answercode": "00"
+}

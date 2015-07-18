@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.smona.app.propertymanager.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.data.model.PropertyErshouwupinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 
 import android.annotation.SuppressLint;
@@ -28,23 +29,40 @@ public class PropertyWupinDetailAdapter extends PropertyBaseDataAdapter {
     }
 
     public void initConvertView(View convertView, final PropertyItemInfo info) {
-        View parent = convertView.findViewById(R.id.pulish_time);
-        initText(parent, R.id.name,
-                R.string.property_ershouwupin_item_pulish_time);
-
-        parent = convertView.findViewById(R.id.position);
-        initText(parent, R.id.name,
-                R.string.property_ershouwupin_item_wupmingcheng);
-
-        parent = convertView.findViewById(R.id.tel);
-        initText(parent, R.id.name, R.string.property_ershouwupin_item_xinjiu);
-
         convertView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 gotoDetail(info);
             }
         });
+
+        View parent = convertView.findViewById(R.id.pulish_time);
+        initText(parent, R.id.name,
+                R.string.property_ershouwupin_item_pulish_time);
+
+        parent = convertView.findViewById(R.id.wupin_name);
+        initText(parent, R.id.name,
+                R.string.property_ershouwupin_item_wupmingcheng);
+
+        parent = convertView.findViewById(R.id.goodstatus);
+        initText(parent, R.id.name, R.string.property_ershouwupin_item_xinjiu);
+
+        PropertyErshouwupinContentItem item;
+        if (info instanceof PropertyErshouwupinContentItem) {
+            item = (PropertyErshouwupinContentItem) info;
+        } else {
+            return;
+        }
+
+        parent = convertView.findViewById(R.id.pulish_time);
+        initText(parent, R.id.value, item.publishtime);
+
+        parent = convertView.findViewById(R.id.wupin_name);
+        initText(parent, R.id.value, item.goodsname);
+
+        parent = convertView.findViewById(R.id.goodstatus);
+        initText(parent, R.id.value, item.goosstatus);
+
     }
 
     public Intent createIntent() {
@@ -58,4 +76,8 @@ public class PropertyWupinDetailAdapter extends PropertyBaseDataAdapter {
         title.setText(text);
     }
 
+    private void initText(View parent, int resId, String text) {
+        TextView title = (TextView) parent.findViewById(resId);
+        title.setText(text);
+    }
 }

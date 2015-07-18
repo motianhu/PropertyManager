@@ -11,6 +11,8 @@ import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -129,6 +131,8 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
         parent = mRoot.findViewById(R.id.fabushijian);
         initText(parent, R.id.name,
                 R.string.property_ershouwupin_item_pulish_time);
+
+        initView(R.id.call_phone);
     }
 
     @Override
@@ -138,6 +142,16 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
         case R.id.back:
             finish();
             break;
+        case R.id.call_phone:
+            clickCall();
+            break;
         }
+    }
+
+    private void clickCall() {
+        String phone = "tel:" + mItem.userphone;
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(phone));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

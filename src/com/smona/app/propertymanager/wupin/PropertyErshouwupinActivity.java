@@ -1,11 +1,16 @@
 package com.smona.app.propertymanager.wupin;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuMessageProcess;
+import com.smona.app.propertymanager.data.model.PropertyErshouwupinHomeContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
+import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 
 import android.os.Bundle;
@@ -15,11 +20,48 @@ import android.widget.ListView;
 public class PropertyErshouwupinActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyErshouwupinActivity";
 
+    // content
+    private ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
+    private PropertyErshouwupinHomeContentItem mContent;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.property_ershouwupin);
         initViews();
+        requestLoadData();
+    }
+
+    protected void loadData() {
+        requestData();
+        loadDBData();
+    }
+
+    private void requestData() {
+        mProcess = new PropertyWuyebaoxiuMessageProcess();
+        String content = mProcess.getErshouwupinContent(this);
+        LogUtil.d(TAG, "content: " + content);
+        Type type = new TypeToken<PropertyErshouwupinHomeContentItem>() {
+        }.getType();
+        mContent = JsonUtils.parseJson(content, type);
+
+        // content = mProcess.getFangwuzulin_typeContent(this);
+        // LogUtil.d(TAG, "1content: " + content);
+        // type = new TypeToken<PropertyBeanFangwuzulinType>() {
+        // }.getType();
+        // PropertyBeanFangwuzulinType bean = JsonUtils.parseJson(content,
+        // type);
+        // bean.saveDataToDB(this);
+    }
+
+    private void loadDBData() {
+        mDatas.addAll(mContent.icobject);
+
+        requestRefreshUI();
+    }
+
+    protected void refreshUI() {
+
     }
 
     @Override
@@ -48,11 +90,7 @@ public class PropertyErshouwupinActivity extends PropertyBaseActivity {
         initView(R.id.pinpai);
 
         ListView list = (ListView) findViewById(R.id.list_content);
-        ArrayList<PropertyItemInfo> data = new ArrayList<PropertyItemInfo>();
-        for (int i = 0; i < 10; i++) {
-            PropertyItemInfo info = new PropertyItemInfo();
-            data.add(info);
-        }
+        ArrayList<PropertyItemInfo> data = mDatas;
         PropertyWupinDetailAdapter adapter = new PropertyWupinDetailAdapter(
                 this, data);
         list.setAdapter(adapter);

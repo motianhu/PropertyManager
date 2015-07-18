@@ -1,0 +1,68 @@
+{
+    "pageno": "1",
+    "pagesize": "12",
+    "totalrecord": "000003",
+    "icobject": [
+        {
+            "publishid": "4",
+            "brand": "三星",
+            "classname": "手机",
+            "goodsname": "手机",
+            "goodsdesc": "小号水枪",
+            "goosstatus": "9成新",
+            "picurl": [
+                "http://171.8.187.205:8080/CommDataSyncService/img/123.jpg"
+            ],
+            "username": "郭璞",
+            "userphone": "13323312345",
+            "publishtime": "2015-07-14 12:16:05",
+            "publishstatus": "0",
+            "iccode": null,
+            "loginname": null,
+            "sessionid": null,
+            "answercode": null
+        },
+        {
+            "publishid": "3",
+            "brand": "三星",
+            "classname": "手机",
+            "goodsname": "手机",
+            "goodsdesc": "小号水枪",
+            "goosstatus": "9成新",
+            "picurl": [
+                "http://171.8.187.205:8080/CommDataSyncService/img/123.jpg"
+            ],
+            "username": "郭璞",
+            "userphone": "13323312345",
+            "publishtime": "2015-07-14 12:16:03",
+            "publishstatus": "0",
+            "iccode": null,
+            "loginname": null,
+            "sessionid": null,
+            "answercode": null
+        },
+        {
+            "publishid": "2",
+            "brand": "三星",
+            "classname": "手机",
+            "goodsname": "手机",
+            "goodsdesc": "小号水枪",
+            "goosstatus": "9成新",
+            "picurl": [
+                "http://171.8.187.205:8080/CommDataSyncService/img/123.jpg"
+            ],
+            "username": "郭璞",
+            "userphone": "13323312345",
+            "publishtime": "2015-07-14 12:16:01",
+            "publishstatus": "0",
+            "iccode": null,
+            "loginname": null,
+            "sessionid": null,
+            "answercode": null
+        }
+    ],
+    "iccode": "5210",
+    "loginname": null,
+    "sessionid": null,
+    "answercode": "00"
+}

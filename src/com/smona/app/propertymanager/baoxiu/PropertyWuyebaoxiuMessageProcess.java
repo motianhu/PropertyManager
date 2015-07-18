@@ -34,27 +34,44 @@ public class PropertyWuyebaoxiuMessageProcess {
     public String getTousujianyidan_detailContent(Context context) {
         return geFileFromAssets(context, "tousujianyidan_detail.txt");
     }
-    
+
     // wuyetongzhi
     public String getWuyetongzhiContent(Context context) {
         return geFileFromAssets(context, "wuyetongzhi.txt");
     }
-    
+
     public String getWuyetongzhi_detailContent(Context context) {
         return geFileFromAssets(context, "wuyetongzhi_detail.txt");
     }
-    
+
     // fangwuzulin
     public String getFangwuzulinContent(Context context) {
         return geFileFromAssets(context, "fangwuzulin.txt");
     }
-    
+
     public String getFangwuzulin_detailContent(Context context) {
         return geFileFromAssets(context, "fangwuzulin_detail.txt");
     }
-    
+
     public String getFangwuzulin_typeContent(Context context) {
         return geFileFromAssets(context, "fangwuzulin_type.txt");
+    }
+
+    // ershouwupin
+    public String getErshouwupinContent(Context context) {
+        return geFileFromAssets(context, "ershouwupin.txt");
+    }
+
+    public String getErshouwupin_detailContent(Context context) {
+        return geFileFromAssets(context, "ershouwupin_detail.txt");
+    }
+
+    public String getErshouwupin_wupin_typeContent(Context context) {
+        return geFileFromAssets(context, "ershouwupin_wupin_type.txt");
+    }
+    
+    public String getErshouwupin_pinpai_typeContent(Context context) {
+        return geFileFromAssets(context, "ershouwupin_pinpai_type.txt");
     }
 
     public static String geFileFromAssets(Context context, String fileName) {

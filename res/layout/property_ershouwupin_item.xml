@@ -28,7 +28,7 @@
             layout="@layout/property_name_value" />
 
         <include
-            android:id="@+id/position"
+            android:id="@+id/wupin_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
@@ -36,7 +36,7 @@
             layout="@layout/property_name_value" />
 
         <include
-            android:id="@+id/tel"
+            android:id="@+id/goodstatus"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"

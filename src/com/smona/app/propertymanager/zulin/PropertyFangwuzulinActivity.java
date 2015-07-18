@@ -9,7 +9,7 @@ import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuMessageProcess;
 import com.smona.app.propertymanager.data.bean.PropertyBeanFangwuzulinType;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinTypeItem;
-import com.smona.app.propertymanager.data.model.PropertyFangwuzulinfangyuanHomeContentItem;
+import com.smona.app.propertymanager.data.model.PropertyFangwuzulinHomeContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
 import com.smona.app.propertymanager.util.JsonUtils;
@@ -24,7 +24,7 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
 
     // content
     private ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
-    private PropertyFangwuzulinfangyuanHomeContentItem mContent;
+    private PropertyFangwuzulinHomeContentItem mContent;
 
     // type
     private PropertyFangwuzulinTypeItem mTypes;
@@ -49,7 +49,7 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
         mProcess = new PropertyWuyebaoxiuMessageProcess();
         String content = mProcess.getFangwuzulinContent(this);
         LogUtil.d(TAG, "content: " + content);
-        Type type = new TypeToken<PropertyFangwuzulinfangyuanHomeContentItem>() {
+        Type type = new TypeToken<PropertyFangwuzulinHomeContentItem>() {
         }.getType();
         mContent = JsonUtils.parseJson(content, type);
 
