@@ -6,13 +6,23 @@ import android.widget.TextView;
 
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.data.model.PropertyWuyetongzhiContentItem;
 
 public class PropertyWuyetongzhiDetailActivity extends PropertyBaseActivity {
+
+    private PropertyWuyetongzhiContentItem mItem;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.property_wuyetongzhi_detail);
+        acquireData();
         initViews();
+    }
+
+    private void acquireData() {
+        mItem = (PropertyWuyetongzhiContentItem) getIntent()
+                .getParcelableExtra("iteminfo");
     }
 
     @Override
@@ -27,12 +37,14 @@ public class PropertyWuyetongzhiDetailActivity extends PropertyBaseActivity {
 
     @Override
     protected void initBody() {
-        TextView time = (TextView) mRoot.findViewById(R.id.notify_time);
-        time.setText("2015-06-27");
-        TextView title = (TextView) mRoot.findViewById(R.id.notify_title);
-        title.setText("Hellow world");
-        TextView content = (TextView) mRoot.findViewById(R.id.notify_content);
-        content.setText("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        TextView text = (TextView) mRoot.findViewById(R.id.notify_time);
+        text.setText(mItem.publishtime);
+
+        text = (TextView) mRoot.findViewById(R.id.notify_title);
+        text.setText(mItem.title);
+
+        text = (TextView) mRoot.findViewById(R.id.notify_content);
+        text.setText(mItem.notice);
     }
 
     @Override

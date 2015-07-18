@@ -1,21 +1,73 @@
 package com.smona.app.propertymanager.notify;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuMessageProcess;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
+import com.smona.app.propertymanager.data.model.PropertyWuyetongzhiHomeContentItem;
+import com.smona.app.propertymanager.imageload.ImageLoaderManager;
+import com.smona.app.propertymanager.util.JsonUtils;
+import com.smona.app.propertymanager.util.LogUtil;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 public class PropertyWuyetongzhiActivity extends PropertyBaseActivity {
+    private static final String TAG = "PropertyWuyetongzhiActivity";
+
+    ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
+    private PropertyWuyetongzhiHomeContentItem mContent;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.property_wuyetongzhi);
         initViews();
+        requestLoadData();
+    }
+
+    protected void loadData() {
+        requestData();
+        loadDBData();
+    }
+
+    private void requestData() {
+        mProcess = new PropertyWuyebaoxiuMessageProcess();
+        String content = mProcess.getWuyetongzhiContent(this);
+        LogUtil.d(TAG, "content: " + content);
+        Type type = new TypeToken<PropertyWuyetongzhiHomeContentItem>() {
+        }.getType();
+        mContent = JsonUtils.parseJson(content, type);
+
+    }
+
+    private void loadDBData() {
+        mContent.loadDBData(this);
+        LogUtil.d(TAG, "loadDBData mContent: " + mContent);
+        mDatas.addAll(mContent.icobject);
+        requestRefreshUI();
+    }
+
+    protected void refreshUI() {
+        initYezhuxinxi();
+    }
+
+    private void initYezhuxinxi() {
+        initText(R.id.yezhuxinxi_xingming, mContent.customer.username);
+        initText(R.id.yezhuxinxi_dianhua, "(" + mContent.customer.userphone
+                + ")");
+        initText(R.id.yezhuxinxi_dizhi, mContent.customer.useraddress);
+
+        ImageView image = (ImageView) mRoot
+                .findViewById(R.id.yezhuxinxi_touxiang);
+        ImageLoaderManager.getInstance().loadImage(
+                mContent.customer.pictureurl.get(0), image);
     }
 
     @Override
@@ -30,21 +82,9 @@ public class PropertyWuyetongzhiActivity extends PropertyBaseActivity {
 
     @Override
     protected void initBody() {
-        String name = "张三";
-        String tel = "(13582426255)";
-        String address = "深圳市南山区南山村花好月圆小区五栋502";
-        initText(R.id.yezhuxinxi_xingming, name);
-        initText(R.id.yezhuxinxi_dianhua, tel);
-        initText(R.id.yezhuxinxi_dizhi, address);
-
         ListView list = (ListView) mRoot.findViewById(R.id.list_content);
-        ArrayList<PropertyItemInfo> data = new ArrayList<PropertyItemInfo>();
-        for (int i = 0; i < 10; i++) {
-            PropertyItemInfo info = new PropertyItemInfo();
-            data.add(info);
-        }
         PropertyNotifyMessageAdapter adapter = new PropertyNotifyMessageAdapter(
-                this, data);
+                this, mDatas);
         list.setAdapter(adapter);
     }
 

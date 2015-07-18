@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.smona.app.propertymanager.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
+import com.smona.app.propertymanager.data.model.PropertyWuyetongzhiContentItem;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,6 +13,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 @SuppressLint("InflateParams")
@@ -36,11 +38,22 @@ public class PropertyNotifyMessageAdapter extends PropertyBaseDataAdapter {
             }
         });
 
-        TextView title = (TextView) convertView.findViewById(R.id.notify_title);
-        title.setText("Hellow world");
-        TextView time = (TextView) convertView.findViewById(R.id.notify_time);
-        time.setText("2015-06-27");
+        PropertyWuyetongzhiContentItem item;
+        if (info instanceof PropertyWuyetongzhiContentItem) {
+            item = (PropertyWuyetongzhiContentItem) info;
+        } else {
+            return;
+        }
 
+        TextView title = (TextView) convertView.findViewById(R.id.notify_title);
+        title.setText(item.title);
+        TextView time = (TextView) convertView.findViewById(R.id.notify_time);
+        time.setText(item.publishtime);
+
+        ImageView image = (ImageView) convertView.findViewById(R.id.image_read);
+        int resId = "1".equals(item.noticestatus) ? R.drawable.property_wuyetongzhi_message_unread
+                : R.drawable.property_wuyetongzhi_message_read;
+        image.setImageResource(resId);
     }
 
     public Intent createIntent() {

@@ -1,0 +1,36 @@
+{
+    "customer": {
+        "customerid": 0,
+        "communtiycode": null,
+        "propertyphone": "0371-12345678",
+        "pictureurl": [
+            "http://171.8.187.205:8080/CommDataSyncService/img/123.jpg"
+        ],
+        "username": "周处",
+        "userphone": "18937113913",
+        "useraddress": "河南省郑州市西开发区"
+    },
+    "pageno": "1",
+    "pagesize": "12",
+    "totalrecord": "000002",
+    "icobject": [
+        {
+            "publishid": "4",
+            "title": "放假通知",
+            "notice": "testabcde",
+            "publishtime": "2015-07-01 00:00:00",
+            "noticestatus": "1"
+        },
+        {
+            "publishid": "5",
+            "title": "停水通知",
+            "notice": "testabcdefefef",
+            "publishtime": "2015-07-01 00:00:00",
+            "noticestatus": ""
+        }
+    ],
+    "iccode": "5310",
+    "loginname": null,
+    "sessionid": null,
+    "answercode": "00"
+}
