@@ -7,7 +7,10 @@ import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuMessageProcess;
+import com.smona.app.propertymanager.data.bean.PropertyBeanErshouwupinpinpais;
+import com.smona.app.propertymanager.data.bean.PropertyBeanErshouwupinwupins;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinHomeContentItem;
+import com.smona.app.propertymanager.data.model.PropertyErshouwupinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
 import com.smona.app.propertymanager.util.JsonUtils;
@@ -24,6 +27,11 @@ public class PropertyErshouwupinActivity extends PropertyBaseActivity {
     private ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
     private PropertyErshouwupinHomeContentItem mContent;
 
+    // type
+    private PropertyErshouwupinTypeItem mTypes;
+    private ArrayList<PropertyItemInfo> mPinpaiDatas = new ArrayList<PropertyItemInfo>();
+    private ArrayList<PropertyItemInfo> mWupinDatas = new ArrayList<PropertyItemInfo>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,23 +46,51 @@ public class PropertyErshouwupinActivity extends PropertyBaseActivity {
     }
 
     private void requestData() {
+        initConent();
+
+        initPinpaiTypes();
+
+        initWupinTypes();
+    }
+
+    private void initConent() {
         mProcess = new PropertyWuyebaoxiuMessageProcess();
         String content = mProcess.getErshouwupinContent(this);
         LogUtil.d(TAG, "content: " + content);
         Type type = new TypeToken<PropertyErshouwupinHomeContentItem>() {
         }.getType();
         mContent = JsonUtils.parseJson(content, type);
+    }
 
-        // content = mProcess.getFangwuzulin_typeContent(this);
-        // LogUtil.d(TAG, "1content: " + content);
-        // type = new TypeToken<PropertyBeanFangwuzulinType>() {
-        // }.getType();
-        // PropertyBeanFangwuzulinType bean = JsonUtils.parseJson(content,
-        // type);
-        // bean.saveDataToDB(this);
+    private void initPinpaiTypes() {
+        String content;
+        Type type;
+        content = mProcess.getErshouwupin_pinpai_typeContent(this);
+        LogUtil.d(TAG, "1content: " + content);
+        type = new TypeToken<PropertyBeanErshouwupinpinpais>() {
+        }.getType();
+        PropertyBeanErshouwupinpinpais bean = JsonUtils
+                .parseJson(content, type);
+        bean.saveDataToDB(this);
+    }
+
+    private void initWupinTypes() {
+        String content;
+        Type type;
+        content = mProcess.getErshouwupin_wupin_typeContent(this);
+        LogUtil.d(TAG, "2content: " + content);
+        type = new TypeToken<PropertyBeanErshouwupinwupins>() {
+        }.getType();
+        PropertyBeanErshouwupinwupins bean = JsonUtils.parseJson(content, type);
+        bean.saveDataToDB(this);
     }
 
     private void loadDBData() {
+        mTypes = new PropertyErshouwupinTypeItem();
+        mTypes.loadDBData(this);
+        mPinpaiDatas.addAll(mTypes.pinpais);
+        mWupinDatas.addAll(mTypes.wupins);
+
         mDatas.addAll(mContent.icobject);
 
         requestRefreshUI();
@@ -117,13 +153,7 @@ public class PropertyErshouwupinActivity extends PropertyBaseActivity {
     }
 
     private void clickChoidWupinType() {
-        final ArrayList<PropertyItemInfo> datas = new ArrayList<PropertyItemInfo>();
-        for (int i = 0; i < 100; i++) {
-            PropertyTypeItem item = new PropertyTypeItem();
-            item.type_id = i + "";
-            item.type_name = "item " + i;
-            datas.add(item);
-        }
+        final ArrayList<PropertyItemInfo> datas = mWupinDatas;
 
         showSingleChoiceType(datas, new IChoiceCallback() {
             @Override
@@ -139,13 +169,7 @@ public class PropertyErshouwupinActivity extends PropertyBaseActivity {
     }
 
     private void clickChoicePinpai() {
-        final ArrayList<PropertyItemInfo> datas = new ArrayList<PropertyItemInfo>();
-        for (int i = 0; i < 100; i++) {
-            PropertyTypeItem item = new PropertyTypeItem();
-            item.type_id = i + "";
-            item.type_name = "item " + i;
-            datas.add(item);
-        }
+        final ArrayList<PropertyItemInfo> datas = mPinpaiDatas;
 
         showSingleChoiceType(datas, new IChoiceCallback() {
             @Override

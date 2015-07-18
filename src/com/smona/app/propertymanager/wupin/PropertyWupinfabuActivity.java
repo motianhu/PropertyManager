@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.data.model.PropertyErshouwupinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
 import com.smona.app.propertymanager.util.LogUtil;
@@ -15,11 +16,40 @@ import android.widget.EditText;
 public class PropertyWupinfabuActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyWupinfabuActivity";
 
+    // type
+    private PropertyErshouwupinTypeItem mTypes;
+    private ArrayList<PropertyItemInfo> mPinpaiDatas = new ArrayList<PropertyItemInfo>();
+    private ArrayList<PropertyItemInfo> mWupinDatas = new ArrayList<PropertyItemInfo>();
+    private ArrayList<PropertyItemInfo> mXinjiuDatas = new ArrayList<PropertyItemInfo>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.property_ershouwupin_fabu);
         initViews();
+        requestLoadData();
+    }
+
+    protected void loadData() {
+        requestData();
+        loadDBData();
+    }
+
+    private void requestData() {
+    }
+
+    private void loadDBData() {
+        mTypes = new PropertyErshouwupinTypeItem();
+        mTypes.loadDBData(this);
+        mPinpaiDatas.addAll(mTypes.pinpais);
+        mWupinDatas.addAll(mTypes.wupins);
+        mXinjiuDatas.addAll(mTypes.xinjius);
+
+        requestRefreshUI();
+    }
+
+    protected void refreshUI() {
+
     }
 
     @Override
@@ -93,13 +123,7 @@ public class PropertyWupinfabuActivity extends PropertyBaseActivity {
     }
 
     private void clickChoidWupinType() {
-        final ArrayList<PropertyItemInfo> datas = new ArrayList<PropertyItemInfo>();
-        for (int i = 0; i < 100; i++) {
-            PropertyTypeItem item = new PropertyTypeItem();
-            item.type_id = i + "";
-            item.type_name = "item " + i;
-            datas.add(item);
-        }
+        final ArrayList<PropertyItemInfo> datas = mWupinDatas;
 
         showSingleChoiceType(datas, new IChoiceCallback() {
             @Override
@@ -115,13 +139,7 @@ public class PropertyWupinfabuActivity extends PropertyBaseActivity {
     }
 
     private void clickChoiceXinjiu() {
-        final ArrayList<PropertyItemInfo> datas = new ArrayList<PropertyItemInfo>();
-        for (int i = 0; i < 100; i++) {
-            PropertyTypeItem item = new PropertyTypeItem();
-            item.type_id = i + "";
-            item.type_name = "item " + i;
-            datas.add(item);
-        }
+        final ArrayList<PropertyItemInfo> datas = mXinjiuDatas;
 
         showSingleChoiceType(datas, new IChoiceCallback() {
             @Override
@@ -137,13 +155,7 @@ public class PropertyWupinfabuActivity extends PropertyBaseActivity {
     }
 
     private void clickChoicePinpai() {
-        final ArrayList<PropertyItemInfo> datas = new ArrayList<PropertyItemInfo>();
-        for (int i = 0; i < 100; i++) {
-            PropertyTypeItem item = new PropertyTypeItem();
-            item.type_id = i + "";
-            item.type_name = "item " + i;
-            datas.add(item);
-        }
+        final ArrayList<PropertyItemInfo> datas = mPinpaiDatas;
 
         showSingleChoiceType(datas, new IChoiceCallback() {
             @Override
