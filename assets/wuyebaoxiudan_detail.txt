@@ -12,9 +12,9 @@
     "repairname": "空调不工作",
     "repairpicture": null,
     "repairdesc": "换led灯泡",
-    "workbegintime": null,
-    "worker": "",
-    "workendtime": null,
+    "workbegintime": "2015-07-12",
+    "worker": "11",
+    "workendtime": "2015-07-13",
     "evalute": [{
             "repairid": "3",
             "evalcode": "1",

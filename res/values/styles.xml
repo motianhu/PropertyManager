@@ -8,4 +8,8 @@
         <item name="android:indeterminateDrawable">@drawable/progressbar_rotate</item>
     </style>
 
+    <style name="Property_Style_Pingjia" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/property_pingjia</item>
+    </style>
+
 </resources>

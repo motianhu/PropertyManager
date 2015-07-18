@@ -12,6 +12,14 @@ public class PropertyWuyebaoxiuMessageProcess {
     public String getWuyebaoxiuContent(Context context) {
         return geFileFromAssets(context, "wuyebaoxiu.txt");
     }
+    
+    public String getWuyebaoxiudanContent(Context context) {
+        return geFileFromAssets(context, "wuyebaoxiudan.txt");
+    }
+    
+    public String getWuyebaoxiudan_detailContent(Context context) {
+        return geFileFromAssets(context, "wuyebaoxiudan_detail.txt");
+    }
 
     public static String geFileFromAssets(Context context, String fileName) {
         if (context == null || TextUtils.isEmpty(fileName)) {

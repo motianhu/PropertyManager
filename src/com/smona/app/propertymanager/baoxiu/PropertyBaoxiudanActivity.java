@@ -1,12 +1,16 @@
 package com.smona.app.propertymanager.baoxiu;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.model.PropertyCustomerContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
+import com.smona.app.propertymanager.data.model.PropertyWuyebaoxiudanHomeContentItem;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
+import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 
 import android.os.Bundle;
@@ -20,7 +24,10 @@ public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
 
     private ListView mBaoxiudans;
     private PropertyBaoxiudansAdapter mBaoxiudansAdapter;
+    ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
+
     private PropertyCustomerContentItem customer;
+    private PropertyWuyebaoxiudanHomeContentItem mBean;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,10 +36,30 @@ public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
         acquireData();
         initViews();
         LogUtil.d(TAG, "customer: " + customer);
+        requestLoadData();
     }
 
     private void acquireData() {
         customer = getIntent().getParcelableExtra("customer");
+    }
+
+    protected void loadData() {
+        requestData();
+        loadDBData();
+    }
+
+    private void requestData() {
+        mProcess = new PropertyWuyebaoxiuMessageProcess();
+        String content = mProcess.getWuyebaoxiudanContent(this);
+        LogUtil.d(TAG, "content: " + content);
+        Type type = new TypeToken<PropertyWuyebaoxiudanHomeContentItem>() {
+        }.getType();
+        mBean = JsonUtils.parseJson(content, type);
+        LogUtil.d(TAG, "mBean: " + mBean);
+    }
+
+    private void loadDBData() {
+        mDatas.addAll(mBean.icobjct);
     }
 
     @Override
@@ -51,12 +78,7 @@ public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
         initYezhuxinxi();
 
         mBaoxiudans = (ListView) mRoot.findViewById(R.id.list_content);
-        ArrayList<PropertyItemInfo> datas = new ArrayList<PropertyItemInfo>();
-        for (int i = 0; i < 10; i++) {
-            PropertyItemInfo item = new PropertyItemInfo();
-            datas.add(item);
-        }
-        mBaoxiudansAdapter = new PropertyBaoxiudansAdapter(this, datas);
+        mBaoxiudansAdapter = new PropertyBaoxiudansAdapter(this, mDatas);
         mBaoxiudans.setAdapter(mBaoxiudansAdapter);
     }
 

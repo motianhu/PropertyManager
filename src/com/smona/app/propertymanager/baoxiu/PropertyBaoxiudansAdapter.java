@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.smona.app.propertymanager.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
+import com.smona.app.propertymanager.data.model.PropertyWuyebaoxiudanContentItem;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,6 +13,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 public class PropertyBaoxiudansAdapter extends PropertyBaseDataAdapter {
 
@@ -33,6 +35,25 @@ public class PropertyBaoxiudansAdapter extends PropertyBaseDataAdapter {
                 gotoDetail(info);
             }
         });
+
+        PropertyWuyebaoxiudanContentItem item;
+        if (info instanceof PropertyWuyebaoxiudanContentItem) {
+            item = (PropertyWuyebaoxiudanContentItem) info;
+        } else {
+            return;
+        }
+
+        TextView text = (TextView) convertView
+                .findViewById(R.id.baoxiudan_time);
+        text.setText(item.requesttime);
+        
+        text = (TextView) convertView
+                .findViewById(R.id.baoxiudan_status);
+        text.setText(item.repairstatus);
+        
+        text = (TextView) convertView
+                .findViewById(R.id.baoxiudan_title);
+        text.setText(item.repairname);
     }
 
     public Intent createIntent() {

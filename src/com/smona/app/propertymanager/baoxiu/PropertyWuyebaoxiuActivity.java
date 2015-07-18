@@ -24,7 +24,6 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyWuyebaoxiuActivity";
 
     private PropertyWuyebaoxiuContentItem mContent;
-    private PropertyWuyebaoxiuMessageProcess mProcess;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

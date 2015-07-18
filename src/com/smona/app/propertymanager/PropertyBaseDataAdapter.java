@@ -52,6 +52,7 @@ public abstract class PropertyBaseDataAdapter extends BaseAdapter {
 
     protected void gotoDetail(PropertyItemInfo info) {
         Intent intent = createIntent();
+        intent.putExtra("iteminfo", info);
         mContext.startActivity(intent);
     }
 

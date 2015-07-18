@@ -1,9 +1,12 @@
 package com.smona.app.propertymanager;
 
 import java.util.ArrayList;
+
 import com.smona.app.propertymanager.baoxiu.PropertySelectedDialog;
+import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuMessageProcess;
 import com.smona.app.propertymanager.baoxiu.TypeAdapter;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -21,6 +24,8 @@ public abstract class PropertyBaseActivity extends Activity {
     private static final int MSG_NOTIFY_REFRESH_UI = 1;
 
     protected View mRoot = null;
+    
+    protected PropertyWuyebaoxiuMessageProcess mProcess;
 
     @SuppressLint("HandlerLeak")
     private Handler mLoadDataHandler = new Handler() {

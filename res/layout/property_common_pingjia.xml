@@ -1,0 +1,21 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/pingjia_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/property_wuyebaoxi_baoxiudan_item_wancheng_price"
+        android:textColor="@color/property_color_common_title" />
+
+    <RatingBar
+        android:id="@+id/pingjia_result"
+        style="@style/Property_Style_Pingjia"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_centerInParent="true"
+        android:rating="0"
+        android:stepSize="1.0" />
+
+</RelativeLayout>

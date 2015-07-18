@@ -20,7 +20,15 @@
             "repairpicture": null,
             "repairdesc": "换led灯泡",
             "requesttime": "2015-07-14",
-            "repairstatus": ""
+            "repairstatus": "未处理"
+        },
+        {
+            "repairid": "4",
+            "repairname": "水管漏水",
+            "repairpicture": null,
+            "repairdesc": "换led灯泡",
+            "requesttime": "2015-07-14",
+            "repairstatus": "已处理"
         }
     ],
     "iccode": "3410",
