@@ -3,6 +3,7 @@ package com.smona.app.propertymanager.baoxiu;
 import java.util.ArrayList;
 
 import com.smona.app.propertymanager.PropertyBaseDataAdapter;
+import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
 
@@ -22,7 +23,7 @@ public class TypeAdapter extends PropertyBaseDataAdapter {
     @SuppressLint("InflateParams")
     public View createContentView(Context context) {
         return LayoutInflater.from(context).inflate(
-                android.R.layout.simple_list_item_single_choice, null);
+                R.layout.property_common_tankuang, null);
     }
 
     public void initConvertView(View convertView, final PropertyItemInfo info) {

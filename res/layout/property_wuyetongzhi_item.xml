@@ -2,25 +2,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="80dp" >
+        android:layout_height="80dp"
+        android:layout_marginLeft="5dp"
+        android:orientation="vertical"
+        android:weightSum="2" >
 
         <TextView
             android:id="@+id/notify_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/property_color_common_title" />
 
         <TextView
             android:id="@+id/notify_time"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/property_color_common_wenzi_qianse" />
-    </RelativeLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -34,15 +38,15 @@
             android:id="@+id/image_read"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/property_wuyetongzhi_message_unread"
-            android:layout_marginRight="5dp" />
+            android:layout_marginRight="5dp"
+            android:src="@drawable/property_wuyetongzhi_message_unread" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:text="@string/property_wuyebaoxi_baoxiudan_item_detail"
-            android:textColor="@color/property_color_common_title" />
+            android:textColor="@color/property_color_common_wenzi_qianse" />
     </LinearLayout>
 
 </RelativeLayout>

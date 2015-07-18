@@ -10,6 +10,7 @@ import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,6 +29,7 @@ public class PropertyZulinDetailAdapter extends PropertyBaseDataAdapter {
                 R.layout.property_fangwuzulin_item, null);
     }
 
+    @SuppressLint("ResourceAsColor")
     public void initConvertView(View convertView, final PropertyItemInfo info) {
         convertView.setOnClickListener(new OnClickListener() {
             @Override
@@ -59,6 +61,8 @@ public class PropertyZulinDetailAdapter extends PropertyBaseDataAdapter {
         initText(parent, R.id.value, item.houseaddress);
         parent = convertView.findViewById(R.id.tel);
         initText(parent, R.id.value, item.userphone);
+        TextView text = (TextView)parent.findViewById(R.id.value);
+        text.setTextColor(Color.rgb(0x37, 0x86, 0xbe));
 
     }
 

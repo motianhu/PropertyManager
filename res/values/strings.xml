@@ -27,7 +27,7 @@
     <string name="property_wuyebaoxi_baoxiudan_item_type">报修类型</string>
     <string name="property_wuyebaoxi_baoxiudan_item_zhaopian">照片</string>
     <string name="property_wuyebaoxi_baoxiudan_item_paidan_time">派单时间</string>
-    <string name="property_wuyebaoxi_baoxiudan_item_weixiuren">维修人</string>
+    <string name="property_wuyebaoxi_baoxiudan_item_weixiuren">维&#160;&#160;修&#160;&#160;人</string>
     <string name="property_wuyebaoxi_baoxiudan_item_wancheng_time">完成时间</string>
     <string name="property_wuyebaoxi_baoxiudan_item_wancheng_result">维修结果</string>
     <string name="property_wuyebaoxi_baoxiudan_item_wancheng_fee">维修费用</string>
@@ -62,11 +62,11 @@
     <string name="property_fangwuzulin_xuanzeyewuleixing">选择业务类型</string>
     <string name="property_fangwuzulin_arealeixing">选择面积</string>
     <string name="property_fangwuzulin_item_pulish_time">发布时间</string>
-    <string name="property_fangwuzulin_item_position">位置</string>
+    <string name="property_fangwuzulin_item_position">位&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;置</string>
     <string name="property_fangwuzulin_item_tel">联系电话</string>
     <string name="property_fangwuzulin_item_yewuleixing">业务类型</string>
-    <string name="property_fangwuzulin_item_area">面积</string>
-    <string name="property_fangwuzulin_item_huxing">户型</string>
+    <string name="property_fangwuzulin_item_area">面&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;积</string>
+    <string name="property_fangwuzulin_item_huxing">户&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;型</string>
     <string name="property_fangwuzulin_xuanzehuxing">选择户型</string>
     <string name="property_fangwuzulin_mine">我的房源</string>
     <string name="property_fangwuzulin_fangyuanfabu_peitaomiaoshu">配套描述</string>
@@ -78,18 +78,18 @@
     <string name="property_ershouwupin_wupinfabu">物品发布</string>
     <string name="property_ershouwupin_xuanzewupinfenlei">选择物品分类</string>
     <string name="property_ershouwupin_pinpaifenlei">选择品牌分类</string>
-    <string name="property_ershouwupin_xuanzexinjiu">新旧</string>
+    <string name="property_ershouwupin_xuanzexinjiu">新&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;旧</string>
     <string name="property_ershouwupin_item_pulish_time">发布时间</string>
     <string name="property_ershouwupin_item_wupmingcheng">物品名称</string>
     <string name="property_ershouwupin_item_xinjiu">新&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;旧</string>
     <string name="property_ershouwupin_mine">我的物品</string>
     <string name="property_ershouwupin_wupinfabu_wupinmiaoshu">物品描述</string>
     <string name="property_ershouwupin_wupinfabu_shuru_wupinmiaoshu">请输入物品描述</string>
-    <string name="property_ershouwupin_wupinfabu_lianxiren">联系人</string>
+    <string name="property_ershouwupin_wupinfabu_lianxiren">联&#160;&#160;系&#160;&#160;人</string>
     <string name="property_ershouwupin_wupinfabu_dianhu">联系电话</string>
     <string name="property_ershouwupin_wupin_detail">物品信息</string>
     <string name="property_ershouwupin_detail_wupinfenlei">物品分类</string>
-    <string name="property_ershouwupin_detail_pinpai">品牌</string>
+    <string name="property_ershouwupin_detail_pinpai">品&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;牌</string>
     <string name="property_ershouwupin_wupinmingchen">物品名称</string>
 
     <!-- 下拉刷新 -->

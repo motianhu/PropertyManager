@@ -64,11 +64,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="20dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="@string/property_wuyebaoxi_baoxiudan_item_yonghupingjia"
-            android:textColor="@color/property_color_common_title" />
+            android:textColor="@color/property_color_common_title"
+            android:textStyle="bold" />
 
         <include
             android:id="@+id/pingjia_fuwutaidu"
