@@ -43,6 +43,19 @@ public class PropertyWuyebaoxiuMessageProcess {
     public String getWuyetongzhi_detailContent(Context context) {
         return geFileFromAssets(context, "wuyetongzhi_detail.txt");
     }
+    
+    // fangwuzulin
+    public String getFangwuzulinContent(Context context) {
+        return geFileFromAssets(context, "fangwuzulin.txt");
+    }
+    
+    public String getFangwuzulin_detailContent(Context context) {
+        return geFileFromAssets(context, "fangwuzulin_detail.txt");
+    }
+    
+    public String getFangwuzulin_typeContent(Context context) {
+        return geFileFromAssets(context, "fangwuzulin_type.txt");
+    }
 
     public static String geFileFromAssets(Context context, String fileName) {
         if (context == null || TextUtils.isEmpty(fileName)) {

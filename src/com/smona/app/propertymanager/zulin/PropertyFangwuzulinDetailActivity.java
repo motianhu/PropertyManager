@@ -1,17 +1,91 @@
 package com.smona.app.propertymanager.zulin;
 
+import java.lang.reflect.Type;
+
+import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuMessageProcess;
+import com.smona.app.propertymanager.data.model.PropertyFangwuzulinContentItem;
+import com.smona.app.propertymanager.imageload.ImageLoaderManager;
+import com.smona.app.propertymanager.util.JsonUtils;
+import com.smona.app.propertymanager.util.LogUtil;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
+    private static final String TAG = "PropertyFangwuzulinDetailActivity";
+
+    private PropertyFangwuzulinContentItem mItem;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.property_fangwuzulin_detail);
+        acquireData();
         initViews();
+        requestLoadData();
+    }
+
+    private void acquireData() {
+        mItem = (PropertyFangwuzulinContentItem) getIntent()
+                .getParcelableExtra("iteminfo");
+    }
+
+    protected void loadData() {
+        requestData();
+        loadDBData();
+    }
+
+    private void requestData() {
+        mProcess = new PropertyWuyebaoxiuMessageProcess();
+        String content = mProcess.getFangwuzulin_detailContent(this);
+        LogUtil.d(TAG, "content: " + content);
+        Type type = new TypeToken<PropertyFangwuzulinContentItem>() {
+        }.getType();
+        mItem = JsonUtils.parseJson(content, type);
+    }
+
+    private void loadDBData() {
+        requestRefreshUI();
+    }
+
+    protected void refreshUI() {
+        View parent = mRoot.findViewById(R.id.ywtype);
+        initText(parent, R.id.value, mItem.choosetype);
+
+        parent = mRoot.findViewById(R.id.area);
+        initText(parent, R.id.value, mItem.housearea);
+
+        parent = mRoot.findViewById(R.id.housetype);
+        initText(parent, R.id.value, mItem.housetype);
+
+        parent = mRoot.findViewById(R.id.peitaomiaoshu);
+        initText(parent, R.id.value, mItem.housedesc);
+
+        parent = mRoot.findViewById(R.id.position);
+        initText(parent, R.id.value, mItem.houseaddress);
+
+        parent = mRoot.findViewById(R.id.lianxiren);
+        initText(parent, R.id.value, mItem.username);
+
+        parent = mRoot.findViewById(R.id.dianhua);
+        initText(parent, R.id.value, mItem.userphone);
+
+        parent = mRoot.findViewById(R.id.fabushijian);
+        initText(parent, R.id.value, mItem.publishtime);
+
+        parent = mRoot.findViewById(R.id.fangyuan_picture);
+        ImageView image = (ImageView) parent.findViewById(R.id.image);
+        ImageLoaderManager.getInstance().loadImage(mItem.picurl.get(0), image);
+
+        TextView text = (TextView) mRoot.findViewById(R.id.call_phone);
+        text.setText(getResources().getString(
+                R.string.property_common_call_contact_phone)
+                + "(" + mItem.userphone + ")");
     }
 
     @Override

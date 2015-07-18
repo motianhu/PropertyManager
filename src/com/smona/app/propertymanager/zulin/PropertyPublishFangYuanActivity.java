@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.data.model.PropertyFangwuzulinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
 import com.smona.app.propertymanager.util.LogUtil;
@@ -15,10 +16,26 @@ import com.smona.app.propertymanager.util.LogUtil;
 public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyPublishFangYuanActivity";
 
+    // type
+    private PropertyFangwuzulinTypeItem mTypes;
+    private ArrayList<PropertyItemInfo> mYewuDatas = new ArrayList<PropertyItemInfo>();
+    private ArrayList<PropertyItemInfo> mHuxingDatas = new ArrayList<PropertyItemInfo>();
+    private ArrayList<PropertyItemInfo> mAreaDatas = new ArrayList<PropertyItemInfo>();
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.property_fangwuzulin_fabufangyuan);
+        aquireData();
         initViews();
+    }
+
+    private void aquireData() {
+        mTypes = new PropertyFangwuzulinTypeItem();
+        mTypes.loadDBData(this);
+
+        mYewuDatas.addAll(mTypes.yewus);
+        mHuxingDatas.addAll(mTypes.hourse);
+        mAreaDatas.addAll(mTypes.areas);
     }
 
     @Override
@@ -85,13 +102,7 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
     }
 
     private void clickSelectType() {
-        final ArrayList<PropertyItemInfo> datas = new ArrayList<PropertyItemInfo>();
-        for (int i = 0; i < 100; i++) {
-            PropertyTypeItem item = new PropertyTypeItem();
-            item.type_id = i + "";
-            item.type_name = "item " + i;
-            datas.add(item);
-        }
+        final ArrayList<PropertyItemInfo> datas = mYewuDatas;
 
         showSingleChoiceType(datas, new IChoiceCallback() {
             @Override
@@ -107,13 +118,7 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
     }
 
     private void clickSelectHuxing() {
-        final ArrayList<PropertyItemInfo> datas = new ArrayList<PropertyItemInfo>();
-        for (int i = 0; i < 100; i++) {
-            PropertyTypeItem item = new PropertyTypeItem();
-            item.type_id = i + "";
-            item.type_name = "item " + i;
-            datas.add(item);
-        }
+        final ArrayList<PropertyItemInfo> datas = mHuxingDatas;
 
         showSingleChoiceType(datas, new IChoiceCallback() {
             @Override
@@ -129,13 +134,7 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
     }
 
     private void clickSelectArea() {
-        final ArrayList<PropertyItemInfo> datas = new ArrayList<PropertyItemInfo>();
-        for (int i = 0; i < 100; i++) {
-            PropertyTypeItem item = new PropertyTypeItem();
-            item.type_id = i + "";
-            item.type_name = "item " + i;
-            datas.add(item);
-        }
+        final ArrayList<PropertyItemInfo> datas = mAreaDatas;
 
         showSingleChoiceType(datas, new IChoiceCallback() {
             @Override

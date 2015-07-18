@@ -2,8 +2,8 @@ package com.smona.app.propertymanager.data.table;
 
 public class PropertyFangwuzulinhuxingTypeTable extends PropertyAbstractTable {
     private static final String TABLE_NAME = "fangwuzulinhuxingtype";
-    public static final String TYPE_ID = "type_id";
-    public static final String TYPE_NAME = "type_name";
+    public static final String TYPE_ID = "house_code";
+    public static final String TYPE_NAME = "house_name";
 
     private static volatile PropertyFangwuzulinhuxingTypeTable mInanstance = null;
 

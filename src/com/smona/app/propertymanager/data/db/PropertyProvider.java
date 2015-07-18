@@ -11,7 +11,8 @@ import com.smona.app.propertymanager.data.table.PropertyErshouwupinwupinTypeTabl
 import com.smona.app.propertymanager.data.table.PropertyErshouwupinxinjiuTypeTable;
 import com.smona.app.propertymanager.data.table.PropertyFangwuzulinfangyuanTable;
 import com.smona.app.propertymanager.data.table.PropertyFangwuzulinhuxingTypeTable;
-import com.smona.app.propertymanager.data.table.PropertyFangwuzulinmianjiTypeTable;
+import com.smona.app.propertymanager.data.table.PropertyFangwuzulinareaTypeTable;
+import com.smona.app.propertymanager.data.table.PropertyFangwuzulinyewuTypeTable;
 import com.smona.app.propertymanager.data.table.PropertyTousujianyiTable;
 import com.smona.app.propertymanager.data.table.PropertyTousujianyiTypeTable;
 import com.smona.app.propertymanager.data.table.PropertyCustomerTable;
@@ -40,7 +41,7 @@ public class PropertyProvider extends ContentProvider {
     // customer
     private static final int CODE_BASE_CUSTOMER = 0;
     private static final int CODE_CUSOMTER = CODE_BASE_CUSTOMER + 1;
-    
+
     // ywzhuxinxi
     private static final int CODE_BASE_YEZHUXINXI = 10;
     private static final int CODE_YEZHUXINXI = CODE_BASE_YEZHUXINXI + 1;
@@ -57,6 +58,7 @@ public class PropertyProvider extends ContentProvider {
     private static final int CODE_FANGWUZULINFANGYUAN = CODE_BASE_FANGWUZULIN + 1;
     private static final int CODE_FANGWUZULINHUXING = CODE_BASE_FANGWUZULIN + 2;
     private static final int CODE_FANGWUZULINMIANJI = CODE_BASE_FANGWUZULIN + 3;
+    private static final int CODE_FANGWUZULINYEWU = CODE_BASE_FANGWUZULIN + 4;
 
     // tousujianyi
     private static final int CODE_BASE_TOUSU = 40;
@@ -79,13 +81,12 @@ public class PropertyProvider extends ContentProvider {
     private static HashMap<Integer, String> TABLE_MATCH = new HashMap<Integer, String>();
 
     static {
-        //cusotmer
+        // cusotmer
         URI_MATCH.addURI(PropertyAbstractTable.AUTHORITY,
-                PropertyCustomerTable.getInstance().mTableName,
-                CODE_CUSOMTER);
+                PropertyCustomerTable.getInstance().mTableName, CODE_CUSOMTER);
         TABLE_MATCH.put(CODE_CUSOMTER,
                 PropertyCustomerTable.getInstance().mTableName);
-        
+
         // yezhuxinxi
         URI_MATCH.addURI(PropertyAbstractTable.AUTHORITY,
                 PropertyYezhuxinxiTable.getInstance().mTableName,
@@ -124,15 +125,20 @@ public class PropertyProvider extends ContentProvider {
                 PropertyFangwuzulinhuxingTypeTable.getInstance().mTableName,
                 CODE_FANGWUZULINHUXING);
         URI_MATCH.addURI(PropertyAbstractTable.AUTHORITY,
-                PropertyFangwuzulinmianjiTypeTable.getInstance().mTableName,
+                PropertyFangwuzulinareaTypeTable.getInstance().mTableName,
                 CODE_FANGWUZULINMIANJI);
+        URI_MATCH.addURI(PropertyAbstractTable.AUTHORITY,
+                PropertyFangwuzulinyewuTypeTable.getInstance().mTableName,
+                CODE_FANGWUZULINYEWU);
 
         TABLE_MATCH.put(CODE_FANGWUZULINFANGYUAN,
                 PropertyFangwuzulinfangyuanTable.getInstance().mTableName);
         TABLE_MATCH.put(CODE_FANGWUZULINHUXING,
                 PropertyFangwuzulinhuxingTypeTable.getInstance().mTableName);
         TABLE_MATCH.put(CODE_FANGWUZULINMIANJI,
-                PropertyFangwuzulinmianjiTypeTable.getInstance().mTableName);
+                PropertyFangwuzulinareaTypeTable.getInstance().mTableName);
+        TABLE_MATCH.put(CODE_FANGWUZULINYEWU,
+                PropertyFangwuzulinyewuTypeTable.getInstance().mTableName);
 
         // tousujianyi
         URI_MATCH.addURI(PropertyAbstractTable.AUTHORITY,
@@ -344,7 +350,7 @@ public class PropertyProvider extends ContentProvider {
             ArrayList<String> sqlList = new ArrayList<String>();
             String customerTable = PropertyCustomerTable.getInstance()
                     .createTableSql();
-            
+
             // yezhuxinxi
             String yezhuxinxi = PropertyYezhuxinxiTable.getInstance()
                     .createTableSql();
@@ -364,7 +370,9 @@ public class PropertyProvider extends ContentProvider {
                     .createTableSql();
             String huxing = PropertyFangwuzulinhuxingTypeTable.getInstance()
                     .createTableSql();
-            String mianji = PropertyFangwuzulinmianjiTypeTable.getInstance()
+            String mianji = PropertyFangwuzulinareaTypeTable.getInstance()
+                    .createTableSql();
+            String yewuType = PropertyFangwuzulinyewuTypeTable.getInstance()
                     .createTableSql();
 
             // tousujianyi
@@ -392,6 +400,7 @@ public class PropertyProvider extends ContentProvider {
             sqlList.add(fangyuan);
             sqlList.add(huxing);
             sqlList.add(mianji);
+            sqlList.add(yewuType);
             sqlList.add(tousu);
             sqlList.add(tousuType);
 
@@ -405,7 +414,7 @@ public class PropertyProvider extends ContentProvider {
             ArrayList<String> sqlList = new ArrayList<String>();
             String customerTable = PropertyCustomerTable.getInstance()
                     .dropTableSql();
-            
+
             // yezhuxinxi
             String yezhuxinxi = PropertyYezhuxinxiTable.getInstance()
                     .dropTableSql();
@@ -425,7 +434,9 @@ public class PropertyProvider extends ContentProvider {
                     .dropTableSql();
             String huxing = PropertyFangwuzulinhuxingTypeTable.getInstance()
                     .dropTableSql();
-            String mianji = PropertyFangwuzulinmianjiTypeTable.getInstance()
+            String mianji = PropertyFangwuzulinareaTypeTable.getInstance()
+                    .dropTableSql();
+            String yewuType = PropertyFangwuzulinyewuTypeTable.getInstance()
                     .dropTableSql();
 
             // tousujianyi
@@ -453,6 +464,7 @@ public class PropertyProvider extends ContentProvider {
             sqlList.add(fangyuan);
             sqlList.add(huxing);
             sqlList.add(mianji);
+            sqlList.add(yewuType);
             sqlList.add(tousu);
             sqlList.add(tousuType);
 

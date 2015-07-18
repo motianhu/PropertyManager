@@ -1,11 +1,18 @@
 package com.smona.app.propertymanager.zulin;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuMessageProcess;
+import com.smona.app.propertymanager.data.bean.PropertyBeanFangwuzulinType;
+import com.smona.app.propertymanager.data.model.PropertyFangwuzulinTypeItem;
+import com.smona.app.propertymanager.data.model.PropertyFangwuzulinfangyuanHomeContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
+import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 
 import android.os.Bundle;
@@ -15,11 +22,61 @@ import android.widget.ListView;
 public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyFangwuzulinActivity";
 
+    // content
+    private ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
+    private PropertyFangwuzulinfangyuanHomeContentItem mContent;
+
+    // type
+    private PropertyFangwuzulinTypeItem mTypes;
+    private ArrayList<PropertyItemInfo> mYewuDatas = new ArrayList<PropertyItemInfo>();
+    private ArrayList<PropertyItemInfo> mHuxingDatas = new ArrayList<PropertyItemInfo>();
+    private ArrayList<PropertyItemInfo> mAreaDatas = new ArrayList<PropertyItemInfo>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.property_fangwuzulin);
         initViews();
+        requestLoadData();
+    }
+
+    protected void loadData() {
+        requestData();
+        loadDBData();
+    }
+
+    private void requestData() {
+        mProcess = new PropertyWuyebaoxiuMessageProcess();
+        String content = mProcess.getFangwuzulinContent(this);
+        LogUtil.d(TAG, "content: " + content);
+        Type type = new TypeToken<PropertyFangwuzulinfangyuanHomeContentItem>() {
+        }.getType();
+        mContent = JsonUtils.parseJson(content, type);
+
+        content = mProcess.getFangwuzulin_typeContent(this);
+        LogUtil.d(TAG, "1content: " + content);
+        type = new TypeToken<PropertyBeanFangwuzulinType>() {
+        }.getType();
+        PropertyBeanFangwuzulinType bean = JsonUtils.parseJson(content, type);
+        bean.saveDataToDB(this);
+    }
+
+    private void loadDBData() {
+        mTypes = new PropertyFangwuzulinTypeItem();
+        mTypes.loadDBData(this);
+        LogUtil.d(TAG, "loadDBData mContent: " + mTypes);
+
+        mYewuDatas.addAll(mTypes.yewus);
+        mHuxingDatas.addAll(mTypes.hourse);
+        mAreaDatas.addAll(mTypes.areas);
+
+        mDatas.addAll(mContent.icobject);
+
+        requestRefreshUI();
+    }
+
+    protected void refreshUI() {
+
     }
 
     @Override
@@ -53,13 +110,8 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
         initView(R.id.housetype);
 
         ListView list = (ListView) mRoot.findViewById(R.id.list_content);
-        ArrayList<PropertyItemInfo> data = new ArrayList<PropertyItemInfo>();
-        for (int i = 0; i < 10; i++) {
-            PropertyItemInfo info = new PropertyItemInfo();
-            data.add(info);
-        }
         PropertyZulinDetailAdapter adapter = new PropertyZulinDetailAdapter(
-                this, data);
+                this, mDatas);
         list.setAdapter(adapter);
     }
 
@@ -86,18 +138,10 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
     }
 
     private void clickSelectType() {
-        final ArrayList<PropertyItemInfo> datas = new ArrayList<PropertyItemInfo>();
-        for (int i = 0; i < 100; i++) {
-            PropertyTypeItem item = new PropertyTypeItem();
-            item.type_id = i + "";
-            item.type_name = "item " + i;
-            datas.add(item);
-        }
-
-        showSingleChoiceType(datas, new IChoiceCallback() {
+        showSingleChoiceType(mYewuDatas, new IChoiceCallback() {
             @Override
             public void onChoice(int which) {
-                PropertyItemInfo info = datas.get(which);
+                PropertyItemInfo info = mYewuDatas.get(which);
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 View parent = mRoot.findViewById(R.id.ywtype);
@@ -108,18 +152,10 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
     }
 
     private void clickSelectHuxing() {
-        final ArrayList<PropertyItemInfo> datas = new ArrayList<PropertyItemInfo>();
-        for (int i = 0; i < 100; i++) {
-            PropertyTypeItem item = new PropertyTypeItem();
-            item.type_id = i + "";
-            item.type_name = "item " + i;
-            datas.add(item);
-        }
-
-        showSingleChoiceType(datas, new IChoiceCallback() {
+        showSingleChoiceType(mHuxingDatas, new IChoiceCallback() {
             @Override
             public void onChoice(int which) {
-                PropertyItemInfo info = datas.get(which);
+                PropertyItemInfo info = mHuxingDatas.get(which);
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 View parent = mRoot.findViewById(R.id.housetype);
@@ -130,18 +166,10 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
     }
 
     private void clickSelectArea() {
-        final ArrayList<PropertyItemInfo> datas = new ArrayList<PropertyItemInfo>();
-        for (int i = 0; i < 100; i++) {
-            PropertyTypeItem item = new PropertyTypeItem();
-            item.type_id = i + "";
-            item.type_name = "item " + i;
-            datas.add(item);
-        }
-
-        showSingleChoiceType(datas, new IChoiceCallback() {
+        showSingleChoiceType(mAreaDatas, new IChoiceCallback() {
             @Override
             public void onChoice(int which) {
-                PropertyItemInfo info = datas.get(which);
+                PropertyItemInfo info = mAreaDatas.get(which);
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 View parent = mRoot.findViewById(R.id.area);

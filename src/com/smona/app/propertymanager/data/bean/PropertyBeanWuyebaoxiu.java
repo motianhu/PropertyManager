@@ -14,7 +14,7 @@ import android.content.Context;
 public class PropertyBeanWuyebaoxiu implements IPersistence {
     public Customer customer;
     public String msg;
-    public List<IcObjectWuyebaoxiu> icobject;
+    public List<PropertyBeanWuyebaoxiuType> icobject;
 
     public String iccode;
     public String loginname;

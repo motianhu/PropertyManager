@@ -1,0 +1,18 @@
+{
+    "publishid": "2",
+    "choosetype": "0",
+    "housetype": "三室两厅",
+    "housearea": "全部",
+    "picurl": [
+        "http: //171.8.187.205: 8080/CommDataSyncService/img/123.jpg"
+    ],
+    "housedesc": "经装修",
+    "houseaddress": "郑州市高新区瑞达路1号",
+    "username": "温峤",
+    "userphone": "12345678901",
+    "publishtime": "2015-07-1411: 49: 05",
+    "iccode": "4210",
+    "loginname": null,
+    "sessionid": null,
+    "answercode": "00"
+}

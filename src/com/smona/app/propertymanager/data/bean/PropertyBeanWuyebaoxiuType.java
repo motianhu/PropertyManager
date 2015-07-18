@@ -5,7 +5,7 @@ import android.content.ContentValues;
 import com.smona.app.propertymanager.data.bean.BeanInterfaceSet.ICreateDBValues;
 import com.smona.app.propertymanager.data.table.PropertyWuyebaoxiuTypeTable;
 
-public class IcObjectWuyebaoxiu implements ICreateDBValues {
+public class PropertyBeanWuyebaoxiuType implements ICreateDBValues {
     public String repaircode;
     public String repairname;
 

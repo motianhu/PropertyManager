@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.smona.app.propertymanager.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.data.model.PropertyFangwuzulinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 
 import android.annotation.SuppressLint;
@@ -28,22 +29,37 @@ public class PropertyZulinDetailAdapter extends PropertyBaseDataAdapter {
     }
 
     public void initConvertView(View convertView, final PropertyItemInfo info) {
-        View parent = convertView.findViewById(R.id.pulish_time);
-        initText(parent, R.id.name,
-                R.string.property_fangwuzulin_item_pulish_time);
-
-        parent = convertView.findViewById(R.id.position);
-        initText(parent, R.id.name, R.string.property_fangwuzulin_item_position);
-
-        parent = convertView.findViewById(R.id.tel);
-        initText(parent, R.id.name, R.string.property_fangwuzulin_item_tel);
-
         convertView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 gotoDetail(info);
             }
         });
+
+        // static args
+        View parent = convertView.findViewById(R.id.pulish_time);
+        initText(parent, R.id.name,
+                R.string.property_fangwuzulin_item_pulish_time);
+        parent = convertView.findViewById(R.id.position);
+        initText(parent, R.id.name, R.string.property_fangwuzulin_item_position);
+        parent = convertView.findViewById(R.id.tel);
+        initText(parent, R.id.name, R.string.property_fangwuzulin_item_tel);
+
+        PropertyFangwuzulinContentItem item;
+        if (info instanceof PropertyFangwuzulinContentItem) {
+            item = (PropertyFangwuzulinContentItem) info;
+        } else {
+            return;
+        }
+
+        // dynamic args
+        parent = convertView.findViewById(R.id.pulish_time);
+        initText(parent, R.id.value, item.publishtime);
+        parent = convertView.findViewById(R.id.position);
+        initText(parent, R.id.value, item.houseaddress);
+        parent = convertView.findViewById(R.id.tel);
+        initText(parent, R.id.value, item.userphone);
+
     }
 
     public Intent createIntent() {
@@ -53,6 +69,11 @@ public class PropertyZulinDetailAdapter extends PropertyBaseDataAdapter {
     }
 
     private void initText(View parent, int resId, int text) {
+        TextView title = (TextView) parent.findViewById(resId);
+        title.setText(text);
+    }
+
+    private void initText(View parent, int resId, String text) {
         TextView title = (TextView) parent.findViewById(resId);
         title.setText(text);
     }

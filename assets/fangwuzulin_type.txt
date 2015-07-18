@@ -1,0 +1,42 @@
+{
+    "icobject": [
+        {
+            "housecode": "1",
+            "housename": "三室一厅"
+        },
+        {
+            "housecode": "2",
+            "housename": "三室两厅"
+        },
+        {
+            "housecode": "3",
+            "housename": "别墅(带院子)"
+        }
+    ],
+    "iaobject": [
+        {
+            "areacode": "1",
+            "areaname": "全部"
+        },
+        {
+            "areacode": "2",
+            "areaname": "0-60平方米"
+        },
+        {
+            "areacode": "3",
+            "areaname": "60-80平方米"
+        },
+        {
+            "areacode": "4",
+            "areaname": "80-120平方米"
+        },
+        {
+            "areacode": "5",
+            "areaname": "120以上"
+        }
+    ],
+    "iccode": "4310",
+    "loginname": null,
+    "sessionid": null,
+    "answercode": "00"
+}

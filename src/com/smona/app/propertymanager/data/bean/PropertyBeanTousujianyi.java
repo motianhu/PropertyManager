@@ -14,7 +14,7 @@ import android.content.Context;
 public class PropertyBeanTousujianyi implements IPersistence {
     public Customer customer;
     public String msg;
-    public List<IcObjectTousujianyi> icobject;
+    public List<PropertyBeanTousujianyiType> icobject;
 
     public String iccode;
     public String loginname;
