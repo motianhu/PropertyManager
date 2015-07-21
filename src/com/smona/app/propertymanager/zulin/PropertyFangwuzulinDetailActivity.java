@@ -118,7 +118,7 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
                 R.string.property_fangwuzulin_fangyuanfabu_peitaomiaoshu);
 
         parent = mRoot.findViewById(R.id.position);
-        initText(parent, R.id.name, R.string.property_fangwuzulin_item_position);
+        initText(parent, R.id.name, R.string.property_fangwuzulin_position);
 
         parent = mRoot.findViewById(R.id.lianxiren);
         initText(parent, R.id.name,

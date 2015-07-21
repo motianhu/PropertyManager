@@ -21,25 +21,25 @@
         android:weightSum="3" >
 
         <include
-            android:id="@+id/pulish_time"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            layout="@layout/property_name_value" />
-
-        <include
             android:id="@+id/position"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_weight="1"
-            layout="@layout/property_name_value" />
+            layout="@layout/property_name_value_locate" />
 
         <include
             android:id="@+id/tel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            layout="@layout/property_name_value_phone" />
+
+        <include
+            android:id="@+id/pulish_time"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             layout="@layout/property_name_value" />
     </LinearLayout>

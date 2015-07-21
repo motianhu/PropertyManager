@@ -61,9 +61,10 @@
     <string name="property_fangwuzulin_publish_fangyuan">发布房源</string>
     <string name="property_fangwuzulin_xuanzeyewuleixing">选择业务类型</string>
     <string name="property_fangwuzulin_arealeixing">选择面积</string>
+    <string name="property_fangwuzulin_position">位&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;置</string>
     <string name="property_fangwuzulin_item_pulish_time">发布时间</string>
-    <string name="property_fangwuzulin_item_position">位&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;置</string>
-    <string name="property_fangwuzulin_item_tel">联系电话</string>
+    <string name="property_fangwuzulin_item_position">位&#160;&#160;&#160;&#160;置</string>
+    <string name="property_fangwuzulin_item_tel">电&#160;&#160;&#160;&#160;话</string>
     <string name="property_fangwuzulin_item_yewuleixing">业务类型</string>
     <string name="property_fangwuzulin_item_area">面&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;积</string>
     <string name="property_fangwuzulin_item_huxing">户&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;型</string>
@@ -77,8 +78,8 @@
     <string name="property_home_ershouwupin">二手物品</string>
     <string name="property_ershouwupin_wupinfabu">物品发布</string>
     <string name="property_ershouwupin_xuanzewupinfenlei">选择物品分类</string>
-    <string name="property_ershouwupin_pinpaifenlei">选择品牌分类</string>
-    <string name="property_ershouwupin_xuanzexinjiu">新&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;旧</string>
+    <string name="property_ershouwupin_pinpaifenlei">选择品牌</string>
+    <string name="property_ershouwupin_xuanzexinjiu">选择新旧</string>
     <string name="property_ershouwupin_item_pulish_time">发布时间</string>
     <string name="property_ershouwupin_item_wupmingcheng">物品名称</string>
     <string name="property_ershouwupin_item_xinjiu">新&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;旧</string>

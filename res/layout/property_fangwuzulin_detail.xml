@@ -7,99 +7,112 @@
 
     <include layout="@layout/property_common_header" />
 
-    <include
-        android:id="@+id/ywtype"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="1dp"
-        layout="@layout/property_common_text_value" />
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
 
-    <include
-        android:id="@+id/housetype"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="1dp"
-        layout="@layout/property_common_text_value" />
-
-    <include
-        android:id="@+id/area"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="1dp"
-        layout="@layout/property_common_text_value" />
-
-    <include
-        android:id="@+id/peitaomiaoshu"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="1dp"
-        layout="@layout/property_common_text_value" />
-
-    <include
-        android:id="@+id/position"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="1dp"
-        layout="@layout/property_common_text_value" />
-
-    <include
-        android:id="@+id/fangyuan_picture"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/property_common_paishezhaoping_container_height"
-        android:layout_marginTop="1dp"
-        layout="@layout/property_common_display_picture" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="5dp"
-        android:background="@color/property_commont_color_select_type_bg"
-        android:orientation="vertical"
-        android:weightSum="2" >
-
-        <include
-            android:id="@+id/lianxiren"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            layout="@layout/property_common_text_value" />
-
-        <include
-            android:id="@+id/dianhua"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            layout="@layout/property_common_text_value" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="5dp"
-        android:background="@color/property_commont_color_select_type_bg"
-        android:orientation="vertical" >
-
-        <include
-            android:id="@+id/fabushijian"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            layout="@layout/property_common_text_value" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp" >
-
-        <Button
-            android:id="@+id/call_phone"
-            android:layout_width="match_parent"
-            android:background="@drawable/property_common_button"
             android:layout_height="wrap_content"
-            android:text="@string/property_common_call_contact_phone" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:paddingBottom="20dp" >
+
+            <include
+                android:id="@+id/ywtype"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="1dp"
+                layout="@layout/property_common_text_value" />
+
+            <include
+                android:id="@+id/housetype"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="1dp"
+                layout="@layout/property_common_text_value" />
+
+            <include
+                android:id="@+id/area"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="1dp"
+                layout="@layout/property_common_text_value" />
+
+            <include
+                android:id="@+id/peitaomiaoshu"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="1dp"
+                layout="@layout/property_common_text_value" />
+
+            <include
+                android:id="@+id/position"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="1dp"
+                layout="@layout/property_common_text_value" />
+
+            <include
+                android:id="@+id/fangyuan_picture"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/property_common_paishezhaoping_container_height"
+                android:layout_marginTop="1dp"
+                layout="@layout/property_common_display_picture" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/property_commont_color_select_type_bg"
+                android:orientation="vertical"
+                android:weightSum="2" >
+
+                <include
+                    android:id="@+id/lianxiren"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    layout="@layout/property_common_text_value" />
+
+                <include
+                    android:id="@+id/dianhua"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    layout="@layout/property_common_text_value" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/property_commont_color_select_type_bg"
+                android:orientation="vertical" >
+
+                <include
+                    android:id="@+id/fabushijian"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    layout="@layout/property_common_text_value" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp" >
+
+                <Button
+                    android:id="@+id/call_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape"
+                    android:text="@string/property_common_call_contact_phone" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

@@ -7,93 +7,106 @@
 
     <include layout="@layout/property_common_header" />
 
-    <include
-        android:id="@+id/ywtype"
-        layout="@layout/property_common_select_type" />
-
-    <include
-        android:id="@+id/area"
-        layout="@layout/property_common_select_type" />
-
-    <include
-        android:id="@+id/housetype"
-        layout="@layout/property_common_select_type" />
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:layout_marginLeft="5dp"
-            android:gravity="center"
-            android:text="@string/property_ershouwupin_wupinfabu_wupinmiaoshu"
-            android:textColor="@color/property_color_common_title" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/property_commont_color_select_type_bg"
-        android:orientation="vertical" >
-
-        <include layout="@layout/property_common_problem_description" />
-    </LinearLayout>
-
-    <include layout="@layout/property_common_startup_camera" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="5dp"
-        android:background="@color/property_commont_color_select_type_bg"
-        android:orientation="vertical"
-        android:weightSum="2" >
-
-        <include
-            android:id="@+id/lianxiren"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            layout="@layout/property_common_text_value" />
-
-        <include
-            android:id="@+id/dianhua"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            layout="@layout/property_common_text_value" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="5dp"
-        android:background="@color/property_commont_color_select_type_bg"
-        android:orientation="vertical" >
-
-        <include
-            android:id="@+id/fabushijian"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            layout="@layout/property_common_text_value" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp" >
-
-        <Button
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/property_common_button"
-            android:text="@string/property_common_publish_information" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:paddingBottom="20dp" >
+
+            <include
+                android:id="@+id/ywtype"
+                layout="@layout/property_common_select_type" />
+
+            <include
+                android:id="@+id/area"
+                layout="@layout/property_common_select_type" />
+
+            <include
+                android:id="@+id/housetype"
+                layout="@layout/property_common_select_type" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:text="@string/property_ershouwupin_wupinfabu_wupinmiaoshu"
+                    android:textColor="@color/property_color_common_title" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/property_commont_color_select_type_bg"
+                android:orientation="vertical" >
+
+                <include layout="@layout/property_common_problem_description" />
+            </LinearLayout>
+
+            <include layout="@layout/property_common_startup_camera" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/property_commont_color_select_type_bg"
+                android:orientation="vertical"
+                android:weightSum="2" >
+
+                <include
+                    android:id="@+id/lianxiren"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    layout="@layout/property_common_text_value" />
+
+                <include
+                    android:id="@+id/dianhua"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    layout="@layout/property_common_text_value" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/property_commont_color_select_type_bg"
+                android:orientation="vertical" >
+
+                <include
+                    android:id="@+id/fabushijian"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    layout="@layout/property_common_text_value" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp" >
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape"
+                    android:text="@string/property_common_publish_information" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

@@ -17,7 +17,7 @@
         {
             "complaintid": "4",
             "complaintcode": "11",
-            "complaintname": "",
+            "complaintname": "测试投诉1",
             "complaintpicture": null,
             "complaintdesc": "投诉建议测试",
             "requesttime": "2015-07-14 11:35:49",
@@ -27,7 +27,7 @@
         {
             "complaintid": "5",
             "complaintcode": "11",
-            "complaintname": "",
+            "complaintname": "测试投诉2",
             "complaintpicture": null,
             "complaintdesc": "投诉建议测试",
             "requesttime": "2015-07-14 11:35:53",
@@ -37,7 +37,7 @@
         {
             "complaintid": "6",
             "complaintcode": "11",
-            "complaintname": "",
+            "complaintname": "测试投诉3",
             "complaintpicture": null,
             "complaintdesc": "投诉建议测试",
             "requesttime": "2015-07-14 11:35:54",

@@ -11,13 +11,26 @@
         android:id="@+id/wupintype"
         layout="@layout/property_common_select_type" />
 
-    <include
-        android:id="@+id/pinpai"
-        layout="@layout/property_common_select_type" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/property_common_select_type_height"
+        android:orientation="horizontal"
+        android:weightSum="2" >
 
-    <include
-        android:id="@+id/xinjiu"
-        layout="@layout/property_common_select_type" />
+        <include
+            android:id="@+id/pinpai"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            layout="@layout/property_common_select_type" />
+
+        <include
+            android:id="@+id/xinjiu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            layout="@layout/property_common_select_type" />
+    </LinearLayout>
 
     <include
         android:layout_width="match_parent"
