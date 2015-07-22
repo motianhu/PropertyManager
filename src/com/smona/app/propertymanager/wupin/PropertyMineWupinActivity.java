@@ -83,18 +83,24 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity {
     @Override
     protected void initBody() {
         View parent = mRoot.findViewById(R.id.wupintype);
-        initText(parent, R.id.select_type,
+        initTextHint(parent, R.id.select_type,
                 R.string.property_ershouwupin_xuanzewupinfenlei);
+        initText(parent, R.id.select_type_value,
+                R.string.property_ershouwupin_detail_wupinfenlei);
         initView(R.id.wupintype);
 
         parent = mRoot.findViewById(R.id.pinpai);
-        initText(parent, R.id.select_type,
+        initTextHint(parent, R.id.select_type,
                 R.string.property_ershouwupin_pinpaifenlei);
+        initText(parent, R.id.select_type_value,
+                R.string.property_ershouwupin_detail_pinpai);
         initView(R.id.pinpai);
 
         parent = mRoot.findViewById(R.id.xinjiu);
-        initText(parent, R.id.select_type,
+        initTextHint(parent, R.id.select_type,
                 R.string.property_ershouwupin_xuanzexinjiu);
+        initText(parent, R.id.select_type_value,
+                R.string.property_ershouwupin_item_xinjiu);
         initView(R.id.xinjiu);
 
         ListView list = (ListView) mRoot.findViewById(R.id.list_content);
@@ -133,7 +139,7 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity {
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 View parent = mRoot.findViewById(R.id.wupintype);
-                initText(parent, R.id.select_type_value,
+                initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
         });
@@ -149,7 +155,7 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity {
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 View parent = mRoot.findViewById(R.id.xinjiu);
-                initText(parent, R.id.select_type_value,
+                initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
         });
@@ -165,7 +171,7 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity {
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 View parent = mRoot.findViewById(R.id.pinpai);
-                initText(parent, R.id.select_type_value,
+                initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
         });

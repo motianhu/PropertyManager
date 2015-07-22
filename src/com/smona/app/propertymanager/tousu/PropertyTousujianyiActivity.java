@@ -88,8 +88,11 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
     }
 
     protected void initBody() {
-        initText(R.id.select_type,
+        initTextHint(R.id.select_type,
                 R.string.property_tousujianyi_xuanzetousuleixing);
+        initText(R.id.select_type_value,
+                R.string.property_tousujianyi_tousudan_item_type);
+
         initText(R.id.action_now, R.string.property_tousujianyi_action_tousu);
 
         EditText text = (EditText) mRoot.findViewById(R.id.problem_content);
@@ -132,7 +135,7 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
         intent.setClass(this, PropertyMineTousuActivity.class);
         startActivity(intent);
     }
-    
+
     private void actionCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
@@ -164,7 +167,7 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
                 PropertyItemInfo info = datas.get(which);
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
-                initText(R.id.select_type_value,
+                initText(R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
         });

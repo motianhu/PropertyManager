@@ -68,14 +68,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    layout="@layout/property_common_text_value" />
+                    layout="@layout/property_common_text_value_editor" />
 
                 <include
                     android:id="@+id/dianhua"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    layout="@layout/property_common_text_value" />
+                    layout="@layout/property_common_text_value_editor" />
             </LinearLayout>
 
             <LinearLayout

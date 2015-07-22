@@ -51,18 +51,24 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
     @Override
     protected void initBody() {
         View parent = mRoot.findViewById(R.id.ywtype);
-        initText(parent, R.id.select_type,
+        initTextHint(parent, R.id.select_type,
                 R.string.property_fangwuzulin_xuanzeyewuleixing);
+        initText(parent, R.id.select_type_value,
+                R.string.property_fangwuzulin_item_yewuleixing);
         initView(R.id.ywtype);
 
         parent = mRoot.findViewById(R.id.area);
-        initText(parent, R.id.select_type,
+        initTextHint(parent, R.id.select_type,
                 R.string.property_fangwuzulin_arealeixing);
+        initText(parent, R.id.select_type_value,
+                R.string.property_fangwuzulin_item_area);
         initView(R.id.area);
 
         parent = mRoot.findViewById(R.id.housetype);
-        initText(parent, R.id.select_type,
+        initTextHint(parent, R.id.select_type,
                 R.string.property_fangwuzulin_xuanzehuxing);
+        initText(parent, R.id.select_type_value,
+                R.string.property_fangwuzulin_item_huxing);
         initView(R.id.housetype);
 
         EditText text = (EditText) mRoot.findViewById(R.id.problem_content);
@@ -124,7 +130,7 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 View parent = mRoot.findViewById(R.id.ywtype);
-                initText(parent, R.id.select_type_value,
+                initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
         });
@@ -140,7 +146,7 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 View parent = mRoot.findViewById(R.id.housetype);
-                initText(parent, R.id.select_type_value,
+                initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
         });
@@ -156,7 +162,7 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 View parent = mRoot.findViewById(R.id.area);
-                initText(parent, R.id.select_type_value,
+                initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
         });

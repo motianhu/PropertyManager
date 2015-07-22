@@ -24,7 +24,7 @@ public abstract class PropertyBaseActivity extends Activity {
     private static final int MSG_NOTIFY_REFRESH_UI = 1;
 
     protected View mRoot = null;
-    
+
     protected PropertyWuyebaoxiuMessageProcess mProcess;
 
     @SuppressLint("HandlerLeak")
@@ -91,6 +91,7 @@ public abstract class PropertyBaseActivity extends Activity {
 
     protected abstract void clickView(View v);
 
+    // text
     protected void initText(int resId, int text) {
         TextView title = (TextView) mRoot.findViewById(resId);
         title.setText(text);
@@ -101,6 +102,7 @@ public abstract class PropertyBaseActivity extends Activity {
         title.setText(text);
     }
 
+    // parent text
     protected void initText(View parent, int resId, int text) {
         TextView title = (TextView) parent.findViewById(resId);
         title.setText(text);
@@ -109,6 +111,28 @@ public abstract class PropertyBaseActivity extends Activity {
     protected void initText(View parent, int resId, String text) {
         TextView title = (TextView) parent.findViewById(resId);
         title.setText(text);
+    }
+
+    // hint
+    protected void initTextHint(int resId, int text) {
+        TextView title = (TextView) mRoot.findViewById(resId);
+        title.setHint(text);
+    }
+
+    protected void initTextHint(int resId, String text) {
+        TextView title = (TextView) mRoot.findViewById(resId);
+        title.setHint(text);
+    }
+
+    // parent hint
+    protected void initTextHint(View parent, int resId, int text) {
+        TextView title = (TextView) parent.findViewById(resId);
+        title.setHint(text);
+    }
+
+    protected void initTextHint(View parent, int resId, String text) {
+        TextView title = (TextView) parent.findViewById(resId);
+        title.setHint(text);
     }
 
     protected void initView(int resId) {
