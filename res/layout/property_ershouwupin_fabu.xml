@@ -80,20 +80,6 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="5dp"
-                android:background="@color/property_commont_color_select_type_bg"
-                android:orientation="vertical" >
-
-                <include
-                    android:id="@+id/fabushijian"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    layout="@layout/property_common_text_value" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:orientation="vertical"

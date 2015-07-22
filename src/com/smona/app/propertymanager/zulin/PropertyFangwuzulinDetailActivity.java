@@ -132,7 +132,17 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
         initText(parent, R.id.name,
                 R.string.property_ershouwupin_item_pulish_time);
 
-        initView(R.id.call_phone);
+        
+        boolean isMine = true;
+        if(isMine) {
+            findViewById(R.id.other_operate).setVisibility(View.GONE);
+            initView(R.id.modify_info);
+            initView(R.id.cancel_publish);
+        } else {
+            findViewById(R.id.my_operate).setVisibility(View.GONE);
+            initView(R.id.call_phone);    
+        }
+        
     }
 
     @Override

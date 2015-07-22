@@ -97,7 +97,9 @@
                     layout="@layout/property_common_text_value" />
             </LinearLayout>
 
+            
             <LinearLayout
+                android:id="@+id/other_operate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -111,6 +113,31 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape"
                     android:text="@string/property_common_call_contact_phone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/my_operate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp" >
+
+                <Button
+                    android:id="@+id/modify_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape"
+                    android:text="@string/property_common_modify_info" />
+
+                <Button
+                    android:id="@+id/cancel_publish"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/shape"
+                    android:text="@string/property_common_cancel_publish" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -81,10 +81,6 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
         parent = mRoot.findViewById(R.id.dianhua);
         initText(parent, R.id.name,
                 R.string.property_ershouwupin_wupinfabu_dianhu);
-
-        parent = mRoot.findViewById(R.id.fabushijian);
-        initText(parent, R.id.name,
-                R.string.property_ershouwupin_item_pulish_time);
         
         initView(R.id.start_camera);
     }
