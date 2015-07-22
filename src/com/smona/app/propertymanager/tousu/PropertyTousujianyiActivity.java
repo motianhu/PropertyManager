@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
+import com.smona.app.propertymanager.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuMessageProcess;
 import com.smona.app.propertymanager.data.bean.PropertyBeanTousujianyi;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTousujianyiContentItem;
@@ -43,13 +43,23 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
     }
 
     private void requestData() {
-        mProcess = new PropertyWuyebaoxiuMessageProcess();
-        String content = mProcess.getTousujianyi(this);
+        mProcess = new PropertyMessageProcessProxy();
+        mProcess.requestTousujianyi(this, this);
+    }
+    
+
+    protected void saveData(String content) {
         LogUtil.d(TAG, "content: " + content);
         Type type = new TypeToken<PropertyBeanTousujianyi>() {
         }.getType();
         PropertyBeanTousujianyi bean = JsonUtils.parseJson(content, type);
         bean.saveDataToDB(this);
+        
+        loadDBData();
+    }
+
+    protected void failedRequest() {
+
     }
 
     private void loadDBData() {

@@ -4,8 +4,8 @@ import java.lang.reflect.Type;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
+import com.smona.app.propertymanager.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuMessageProcess;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinContentItem;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.util.JsonUtils;
@@ -43,12 +43,21 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
     }
 
     private void requestData() {
-        mProcess = new PropertyWuyebaoxiuMessageProcess();
-        String content = mProcess.getFangwuzulin_detailContent(this);
+        mProcess = new PropertyMessageProcessProxy();
+        mProcess.requestFangwuzulinDetail(this, this);
+    }
+
+    protected void saveData(String content) {
         LogUtil.d(TAG, "content: " + content);
         Type type = new TypeToken<PropertyFangwuzulinContentItem>() {
         }.getType();
         mItem = JsonUtils.parseJson(content, type);
+
+        loadDBData();
+    }
+
+    protected void failedRequest() {
+
     }
 
     private void loadDBData() {
@@ -132,17 +141,16 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
         initText(parent, R.id.name,
                 R.string.property_ershouwupin_item_pulish_time);
 
-        
         boolean isMine = true;
-        if(isMine) {
+        if (isMine) {
             findViewById(R.id.other_operate).setVisibility(View.GONE);
             initView(R.id.modify_info);
             initView(R.id.cancel_publish);
         } else {
             findViewById(R.id.my_operate).setVisibility(View.GONE);
-            initView(R.id.call_phone);    
+            initView(R.id.call_phone);
         }
-        
+
     }
 
     @Override

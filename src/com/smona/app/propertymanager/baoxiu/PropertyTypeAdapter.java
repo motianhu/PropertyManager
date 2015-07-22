@@ -14,9 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-public class TypeAdapter extends PropertyBaseDataAdapter {
+public class PropertyTypeAdapter extends PropertyBaseDataAdapter {
 
-    public TypeAdapter(Context context, ArrayList<PropertyItemInfo> content) {
+    public PropertyTypeAdapter(Context context, ArrayList<PropertyItemInfo> content) {
         super(context, content);
     }
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
+import com.smona.app.propertymanager.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.bean.PropertyBeanWuyebaoxiu;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
@@ -39,21 +40,28 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
         loadDBData();
     }
 
-    private void requestData() {
-        mProcess = new PropertyWuyebaoxiuMessageProcess();
-        String content = mProcess.getWuyebaoxiuContent(this);
+    protected void requestData() {
+        mContent = new PropertyWuyebaoxiuContentItem();
+        mProcess = new PropertyMessageProcessProxy();
+        mProcess.requestWuyebaoxiu(this, this);
+    }
+    
+    protected void saveData(String content) {
         LogUtil.d(TAG, "content: " + content);
         Type type = new TypeToken<PropertyBeanWuyebaoxiu>() {
         }.getType();
         PropertyBeanWuyebaoxiu bean = JsonUtils.parseJson(content, type);
         bean.saveDataToDB(this);
+        loadDBData();
     }
+    
+    protected void failedRequest() {
+
+    }   
 
     private void loadDBData() {
-        mContent = new PropertyWuyebaoxiuContentItem();
         mContent.loadDBData(this);
         LogUtil.d(TAG, "loadDBData mContent: " + mContent);
-
         requestRefreshUI();
     }
 

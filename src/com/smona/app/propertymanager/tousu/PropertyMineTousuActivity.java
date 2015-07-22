@@ -11,8 +11,8 @@ import android.widget.ListView;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
+import com.smona.app.propertymanager.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuMessageProcess;
 import com.smona.app.propertymanager.data.model.PropertyCustomerContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTousujianyidanHomeContentItem;
@@ -44,17 +44,24 @@ public class PropertyMineTousuActivity extends PropertyBaseActivity {
 
     protected void loadData() {
         requestData();
-        loadDBData();
+    }
+    
+    private void requestData() {
+        mProcess = new PropertyMessageProcessProxy();
+        mProcess.requestTousujianyidan(this, this);
     }
 
-    private void requestData() {
-        mProcess = new PropertyWuyebaoxiuMessageProcess();
-        String content = mProcess.getTousujianyidanContent(this);
+    protected void saveData(String content) {
         LogUtil.d(TAG, "content: " + content);
         Type type = new TypeToken<PropertyTousujianyidanHomeContentItem>() {
         }.getType();
         mBean = JsonUtils.parseJson(content, type);
-        LogUtil.d(TAG, "mBean: " + mBean);
+
+        loadDBData();
+    }
+
+    protected void failedRequest() {
+
     }
 
     private void loadDBData() {

@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
+import com.smona.app.propertymanager.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuMessageProcess;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinContentItem;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.util.JsonUtils;
@@ -44,12 +44,21 @@ public class PropertyWupinDetailActivity extends PropertyBaseActivity {
     }
 
     private void requestData() {
-        mProcess = new PropertyWuyebaoxiuMessageProcess();
-        String content = mProcess.getErshouwupin_detailContent(this);
+        mProcess = new PropertyMessageProcessProxy();
+        mProcess.requestErshouwupinDetail(this, this);
+    }
+
+    protected void saveData(String content) {
         LogUtil.d(TAG, "content: " + content);
         Type type = new TypeToken<PropertyErshouwupinContentItem>() {
         }.getType();
         mItem = JsonUtils.parseJson(content, type);
+
+        loadDBData();
+    }
+
+    protected void failedRequest() {
+
     }
 
     private void loadDBData() {

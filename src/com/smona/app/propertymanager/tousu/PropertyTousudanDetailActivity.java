@@ -4,8 +4,8 @@ import java.lang.reflect.Type;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
+import com.smona.app.propertymanager.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuMessageProcess;
 import com.smona.app.propertymanager.data.model.PropertyTousujianyidanContentItem;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.util.JsonUtils;
@@ -40,12 +40,21 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
     }
 
     private void requestData() {
-        mProcess = new PropertyWuyebaoxiuMessageProcess();
-        String content = mProcess.getTousujianyidan_detailContent(this);
+        mProcess = new PropertyMessageProcessProxy();
+        mProcess.requestTousujianyidanDetail(this, this);
+    }
+
+    protected void saveData(String content) {
         LogUtil.d(TAG, "content: " + content);
         Type type = new TypeToken<PropertyTousujianyidanContentItem>() {
         }.getType();
         mItem = JsonUtils.parseJson(content, type);
+
+        loadDBData();
+    }
+
+    protected void failedRequest() {
+
     }
 
     private void loadDBData() {
@@ -59,8 +68,9 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
         initText(view, R.id.value, mItem.complaintdesc);
 
         view = findViewById(R.id.tousudan_picture);
-        ImageView imageView = (ImageView)view.findViewById(R.id.image);
-        ImageLoaderManager.getInstance().loadImage(mItem.complaintpicture, imageView);
+        ImageView imageView = (ImageView) view.findViewById(R.id.image);
+        ImageLoaderManager.getInstance().loadImage(mItem.complaintpicture,
+                imageView);
 
         view = findViewById(R.id.tousu_wuyefankui);
         initText(view, R.id.value, mItem.feedback);

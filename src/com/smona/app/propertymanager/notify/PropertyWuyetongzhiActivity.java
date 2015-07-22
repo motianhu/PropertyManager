@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
+import com.smona.app.propertymanager.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuMessageProcess;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyWuyetongzhiHomeContentItem;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
@@ -34,16 +34,23 @@ public class PropertyWuyetongzhiActivity extends PropertyBaseActivity {
 
     protected void loadData() {
         requestData();
-        loadDBData();
     }
 
     private void requestData() {
-        mProcess = new PropertyWuyebaoxiuMessageProcess();
-        String content = mProcess.getWuyetongzhiContent(this);
+        mProcess = new PropertyMessageProcessProxy();
+        mProcess.requestWuyetongzhi(this, this);
+    }
+
+    protected void saveData(String content) {
         LogUtil.d(TAG, "content: " + content);
         Type type = new TypeToken<PropertyWuyetongzhiHomeContentItem>() {
         }.getType();
         mContent = JsonUtils.parseJson(content, type);
+
+        loadDBData();
+    }
+
+    protected void failedRequest() {
 
     }
 

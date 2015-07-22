@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class PropertyItemInfo implements Parcelable {
+    public String iccode;
 
     public PropertyItemInfo() {
     }

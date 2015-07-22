@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
+import com.smona.app.propertymanager.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuMessageProcess;
 import com.smona.app.propertymanager.data.bean.PropertyBeanFangwuzulinType;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinHomeContentItem;
@@ -42,36 +42,53 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
 
     protected void loadData() {
         requestData();
-        loadDBData();
+        loadTypeData();
     }
 
     private void requestData() {
-        mProcess = new PropertyWuyebaoxiuMessageProcess();
-        String content = mProcess.getFangwuzulinContent(this);
-        LogUtil.d(TAG, "content: " + content);
-        Type type = new TypeToken<PropertyFangwuzulinHomeContentItem>() {
-        }.getType();
-        mContent = JsonUtils.parseJson(content, type);
-
-        content = mProcess.getFangwuzulin_typeContent(this);
-        LogUtil.d(TAG, "1content: " + content);
-        type = new TypeToken<PropertyBeanFangwuzulinType>() {
-        }.getType();
-        PropertyBeanFangwuzulinType bean = JsonUtils.parseJson(content, type);
-        bean.saveDataToDB(this);
+        mProcess = new PropertyMessageProcessProxy();
+        mProcess.requestFangwuzulin(this, this);
+        mProcess.requestFangwuzulinType(this, this);
     }
 
-    private void loadDBData() {
+    protected void saveData(String content) {
+        Type type = new TypeToken<PropertyItemInfo>() {
+        }.getType();
+        PropertyItemInfo info = JsonUtils.parseJson(content, type);
+        if ("4210".equals(info.iccode)) {
+            type = new TypeToken<PropertyFangwuzulinHomeContentItem>() {
+            }.getType();
+            mContent = JsonUtils.parseJson(content, type);
+            loadListData();
+        } else if ("4310".equals(info.iccode)) {
+            LogUtil.d(TAG, "1content: " + content);
+            type = new TypeToken<PropertyBeanFangwuzulinType>() {
+            }.getType();
+            PropertyBeanFangwuzulinType bean = JsonUtils.parseJson(content,
+                    type);
+            bean.saveDataToDB(this);
+            loadTypeData();
+        }
+
+    }
+
+    protected void failedRequest() {
+
+    }
+    
+    private void loadTypeData() {
         mTypes = new PropertyFangwuzulinTypeItem();
         mTypes.loadDBData(this);
         LogUtil.d(TAG, "loadDBData mContent: " + mTypes);
-
+        
         mYewuDatas.addAll(mTypes.yewus);
         mHuxingDatas.addAll(mTypes.hourse);
         mAreaDatas.addAll(mTypes.areas);
+    }
 
+    private void loadListData() {
+        //has problem
         mDatas.addAll(mContent.icobject);
-
         requestRefreshUI();
     }
 

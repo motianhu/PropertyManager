@@ -2,9 +2,9 @@ package com.smona.app.propertymanager;
 
 import java.util.ArrayList;
 
+import com.smona.app.propertymanager.PropertyMessageProcess.IQuestCallback;
 import com.smona.app.propertymanager.baoxiu.PropertySelectedDialog;
-import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuMessageProcess;
-import com.smona.app.propertymanager.baoxiu.TypeAdapter;
+import com.smona.app.propertymanager.baoxiu.PropertyTypeAdapter;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 
 import android.annotation.SuppressLint;
@@ -18,14 +18,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-public abstract class PropertyBaseActivity extends Activity {
+public abstract class PropertyBaseActivity extends Activity implements IQuestCallback {
 
-    private static final int MSG_LOAD_DATA = 0;
-    private static final int MSG_NOTIFY_REFRESH_UI = 1;
+    private static final int MSG_LOAD_DATA = 1;
+    private static final int MSG_NOTIFY_REFRESH_UI = 2;
 
     protected View mRoot = null;
 
-    protected PropertyWuyebaoxiuMessageProcess mProcess;
+    protected PropertyMessageProcess mProcess;
 
     @SuppressLint("HandlerLeak")
     private Handler mLoadDataHandler = new Handler() {
@@ -72,13 +72,30 @@ public abstract class PropertyBaseActivity extends Activity {
     private void sendMessage(int msg) {
         mLoadDataHandler.sendEmptyMessage(msg);
     }
-
+    
     protected void loadData() {
 
     }
 
     protected void refreshUI() {
 
+    }
+    
+    protected void saveData(String content) {
+
+    }
+    
+    protected void failedRequest() {
+
+    }    
+    
+    
+    public  void onResult(boolean success, String content) {
+        if(success) {
+            saveData(content);
+        } else {
+            failedRequest();
+        }
     }
 
     private OnClickListener mClickListener = new OnClickListener() {
@@ -148,7 +165,7 @@ public abstract class PropertyBaseActivity extends Activity {
 
     protected void showSingleChoiceType(ArrayList<PropertyItemInfo> datas,
             final IChoiceCallback callback) {
-        TypeAdapter dapter = new TypeAdapter(this, datas);
+        PropertyTypeAdapter dapter = new PropertyTypeAdapter(this, datas);
 
         PropertySelectedDialog.Builder builder = new PropertySelectedDialog.Builder(
                 this);

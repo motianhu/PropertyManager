@@ -14,8 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class PropertyHomeActivity extends PropertyBaseActivity {
-    private PropertyMessageProcess mLogin;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +28,8 @@ public class PropertyHomeActivity extends PropertyBaseActivity {
                 null, null, null, null);
 
         // login
-        mLogin = new PropertyMessageProcess();
-        mLogin.login();
+        mProcess = new PropertyMessageProcessProxy();
+        mProcess.login();
     }
 
     protected void initHeader() {

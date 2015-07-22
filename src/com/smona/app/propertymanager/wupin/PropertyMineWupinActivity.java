@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
+import com.smona.app.propertymanager.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuMessageProcess;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinHomeContentItem;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
@@ -41,27 +41,38 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity {
 
     protected void loadData() {
         requestData();
-        loadDBData();
+        loadTypeData();
     }
 
     private void requestData() {
-        mProcess = new PropertyWuyebaoxiuMessageProcess();
-        String content = mProcess.getErshouwupinContent(this);
+        mProcess = new PropertyMessageProcessProxy();
+        mProcess.requestErshouwupinMine(this, this);
+
+    }
+
+    protected void saveData(String content) {
         LogUtil.d(TAG, "content: " + content);
         Type type = new TypeToken<PropertyErshouwupinHomeContentItem>() {
         }.getType();
         mContent = JsonUtils.parseJson(content, type);
+
+        loadDBData();
     }
 
-    private void loadDBData() {
+    protected void failedRequest() {
+
+    }
+
+    private void loadTypeData() {
         mTypes = new PropertyErshouwupinTypeItem();
         mTypes.loadDBData(this);
         mPinpaiDatas.addAll(mTypes.pinpais);
         mWupinDatas.addAll(mTypes.wupins);
         mXinjiuDatas.addAll(mTypes.xinjius);
+    }
 
+    private void loadDBData() {
         mDatas.addAll(mContent.icobject);
-
         requestRefreshUI();
     }
 

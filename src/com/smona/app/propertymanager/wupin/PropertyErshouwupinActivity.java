@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
+import com.smona.app.propertymanager.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuMessageProcess;
 import com.smona.app.propertymanager.data.bean.PropertyBeanErshouwupinpinpais;
 import com.smona.app.propertymanager.data.bean.PropertyBeanErshouwupinwupins;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinHomeContentItem;
@@ -42,7 +42,7 @@ public class PropertyErshouwupinActivity extends PropertyBaseActivity {
 
     protected void loadData() {
         requestData();
-        loadDBData();
+        loadTypeData();
     }
 
     private void requestData() {
@@ -54,45 +54,63 @@ public class PropertyErshouwupinActivity extends PropertyBaseActivity {
     }
 
     private void initConent() {
-        mProcess = new PropertyWuyebaoxiuMessageProcess();
-        String content = mProcess.getErshouwupinContent(this);
-        LogUtil.d(TAG, "content: " + content);
-        Type type = new TypeToken<PropertyErshouwupinHomeContentItem>() {
-        }.getType();
-        mContent = JsonUtils.parseJson(content, type);
+        mProcess = new PropertyMessageProcessProxy();
+        mProcess.requestErshouwupin(this, this);
     }
 
     private void initPinpaiTypes() {
-        String content;
-        Type type;
-        content = mProcess.getErshouwupin_pinpai_typeContent(this);
-        LogUtil.d(TAG, "1content: " + content);
-        type = new TypeToken<PropertyBeanErshouwupinpinpais>() {
-        }.getType();
-        PropertyBeanErshouwupinpinpais bean = JsonUtils
-                .parseJson(content, type);
-        bean.saveDataToDB(this);
+        mProcess.requestErshouwupinPinpaiType(this, this);
     }
 
     private void initWupinTypes() {
-        String content;
-        Type type;
-        content = mProcess.getErshouwupin_wupin_typeContent(this);
-        LogUtil.d(TAG, "2content: " + content);
-        type = new TypeToken<PropertyBeanErshouwupinwupins>() {
-        }.getType();
-        PropertyBeanErshouwupinwupins bean = JsonUtils.parseJson(content, type);
-        bean.saveDataToDB(this);
+        mProcess.requestErshouwupinWupinType(this, this);
     }
 
-    private void loadDBData() {
+    protected void saveData(String content) {
+        Type type = new TypeToken<PropertyItemInfo>() {
+        }.getType();
+        PropertyItemInfo info = JsonUtils.parseJson(content, type);
+        LogUtil.d(TAG, "content: " + content);
+
+        if ("4710".equals(info.iccode)) {
+            type = new TypeToken<PropertyErshouwupinHomeContentItem>() {
+            }.getType();
+            mContent = JsonUtils.parseJson(content, type);
+            loadListData();
+        } else if ("4910".equals(info.iccode)) {
+            type = new TypeToken<PropertyBeanErshouwupinpinpais>() {
+            }.getType();
+            PropertyBeanErshouwupinpinpais bean = JsonUtils.parseJson(content,
+                    type);
+            bean.saveDataToDB(this);
+
+        } else if ("4810".equals(info.iccode)) {
+            LogUtil.d(TAG, "1content: " + content);
+            type = new TypeToken<PropertyBeanErshouwupinwupins>() {
+            }.getType();
+            PropertyBeanErshouwupinwupins wupin = JsonUtils.parseJson(content,
+                    type);
+            wupin.saveDataToDB(this);
+            loadTypeData();
+        }
+    }
+
+    protected void failedRequest() {
+
+    }
+
+    private void loadTypeData() {
         mTypes = new PropertyErshouwupinTypeItem();
         mTypes.loadDBData(this);
+        mPinpaiDatas.clear();
+        mWupinDatas.clear();
+        
         mPinpaiDatas.addAll(mTypes.pinpais);
         mWupinDatas.addAll(mTypes.wupins);
+    }
 
+    private void loadListData() {
         mDatas.addAll(mContent.icobject);
-
         requestRefreshUI();
     }
 

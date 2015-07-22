@@ -9,8 +9,8 @@ import android.widget.ListView;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
+import com.smona.app.propertymanager.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuMessageProcess;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinHomeContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
@@ -22,6 +22,7 @@ public class PropertyMineFangyuanActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyMineFangyuanActivity";
 
     // content
+    private PropertyZulinDetailAdapter mAdapter;
     private PropertyFangwuzulinHomeContentItem mContent;
     private ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
 
@@ -50,22 +51,34 @@ public class PropertyMineFangyuanActivity extends PropertyBaseActivity {
 
     protected void loadData() {
         requestData();
-        loadDBData();
     }
 
     private void requestData() {
-        mProcess = new PropertyWuyebaoxiuMessageProcess();
-        String content = mProcess.getFangwuzulinContent(this);
+        mProcess = new PropertyMessageProcessProxy();
+        mProcess.requestFangwuzulinMine(this, this);
+    }
+
+    protected void saveData(String content) {
         LogUtil.d(TAG, "content: " + content);
         Type type = new TypeToken<PropertyFangwuzulinHomeContentItem>() {
         }.getType();
         mContent = JsonUtils.parseJson(content, type);
+
+        loadDBData();
+    }
+
+    protected void failedRequest() {
+
     }
 
     private void loadDBData() {
         mDatas.addAll(mContent.icobject);
 
         requestRefreshUI();
+    }
+
+    protected void refreshUI() {
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -99,9 +112,8 @@ public class PropertyMineFangyuanActivity extends PropertyBaseActivity {
 
         ListView list = (ListView) mRoot.findViewById(R.id.list_content);
         ArrayList<PropertyItemInfo> data = mDatas;
-        PropertyZulinDetailAdapter adapter = new PropertyZulinDetailAdapter(
-                this, data);
-        list.setAdapter(adapter);
+        mAdapter = new PropertyZulinDetailAdapter(this, data);
+        list.setAdapter(mAdapter);
     }
 
     @Override
