@@ -1,4 +1,4 @@
-package com.smona.app.propertymanager.baoxiu;
+package com.smona.app.propertymanager.common;
 
 import java.util.ArrayList;
 

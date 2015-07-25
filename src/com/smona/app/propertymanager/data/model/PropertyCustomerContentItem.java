@@ -103,6 +103,6 @@ public class PropertyCustomerContentItem extends PropertyContentItem {
     public String toString() {
         return "PropertyCustomerContentItem[username: " + username
                 + ", userphone: " + userphone + ", useraddress: " + useraddress
-                + "]";
+                + ", pictureurl: " + pictureurl + "]";
     }
 }

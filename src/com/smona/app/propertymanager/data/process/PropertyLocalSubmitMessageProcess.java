@@ -1,4 +1,4 @@
-package com.smona.app.propertymanager;
+package com.smona.app.propertymanager.data.process;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import android.content.Context;
 import android.text.TextUtils;
 
-public class PropertyLocalMessageProcess extends PropertyMessageProcess {
+public class PropertyLocalSubmitMessageProcess extends PropertyMessageProcess {
 
     // wuyebaoxiu
     public void requestWuyebaoxiu(Context context, IQuestCallback callback) {

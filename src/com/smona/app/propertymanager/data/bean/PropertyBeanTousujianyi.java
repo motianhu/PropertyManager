@@ -12,7 +12,7 @@ import android.content.ContentValues;
 import android.content.Context;
 
 public class PropertyBeanTousujianyi implements IPersistence {
-    public Customer customer;
+    public PropertyBeanCustomer customer;
     public String msg;
     public List<PropertyBeanTousujianyiType> icobject;
 

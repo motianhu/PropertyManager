@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
-import com.smona.app.propertymanager.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.baoxiu.process.PropertyWuyebaoxiuMessageProcessProxy;
 import com.smona.app.propertymanager.data.bean.PropertyBeanWuyebaoxiu;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
@@ -25,6 +25,8 @@ import android.widget.ImageView;
 public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyWuyebaoxiuActivity";
 
+    private boolean mIsGetSuccess = false;
+
     private PropertyWuyebaoxiuContentItem mContent;
 
     @Override
@@ -37,15 +39,16 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
 
     protected void loadData() {
         requestData();
-        loadDBData();
     }
 
     protected void requestData() {
         mContent = new PropertyWuyebaoxiuContentItem();
-        mProcess = new PropertyMessageProcessProxy();
+
+        mProcess = new PropertyWuyebaoxiuMessageProcessProxy();
         mProcess.requestWuyebaoxiu(this, this);
+        showDialog(0);
     }
-    
+
     protected void saveData(String content) {
         LogUtil.d(TAG, "content: " + content);
         Type type = new TypeToken<PropertyBeanWuyebaoxiu>() {
@@ -54,15 +57,20 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
         bean.saveDataToDB(this);
         loadDBData();
     }
-    
-    protected void failedRequest() {
 
-    }   
+    protected void failedRequest() {
+         hideCustomProgressDialog();
+    }
 
     private void loadDBData() {
         mContent.loadDBData(this);
         LogUtil.d(TAG, "loadDBData mContent: " + mContent);
         requestRefreshUI();
+
+        if (mContent.types != null && mContent.types.size() > 0) {
+            mIsGetSuccess = true;
+            hideCustomProgressDialog();
+        }
     }
 
     protected void refreshUI() {
@@ -93,8 +101,10 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
     }
 
     protected void initBody() {
-        initTextHint(R.id.select_type, R.string.property_common_xuanzebaoxiuleixing);
-        initText(R.id.select_type_value, R.string.property_wuyebaoxi_baoxiudan_item_type);
+        initTextHint(R.id.select_type,
+                R.string.property_common_xuanzebaoxiuleixing);
+        initText(R.id.select_type_value,
+                R.string.property_wuyebaoxi_baoxiudan_item_type);
 
         initText(R.id.action_now,
                 R.string.property_wuyebaoxiu_now_action_baoxiu);
@@ -103,23 +113,31 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
         initView(R.id.start_camera);
         initView(R.id.action_now);
         initView(R.id.call_wuye);
-        
+
     }
 
     protected void clickView(View v) {
+
         int id = v.getId();
-        switch (id) {
-        case R.id.back:
+        if (id == R.id.back) {
             finish();
-            break;
+            return;
+        }
+
+        if (mIsGetSuccess) {
+            switch (id) {
+            case R.id.select_type_container:
+                clickSelectType();
+                break;
+            case R.id.action_now:
+                clickActionNow();
+                break;
+            }
+        }
+
+        switch (id) {
         case R.id.detail:
             gotoSubActivity();
-            break;
-        case R.id.select_type_container:
-            clickSelectType();
-            break;
-        case R.id.action_now:
-            clickActionNow();
             break;
         case R.id.call_wuye:
             clickCallWuye();
@@ -129,14 +147,14 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
             break;
         }
     }
-    
+
     private void gotoSubActivity() {
         Intent intent = new Intent();
         intent.putExtra("customer", mContent.customer);
         intent.setClass(this, PropertyBaoxiudanActivity.class);
         startActivity(intent);
     }
-    
+
     private void actionCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
@@ -168,8 +186,7 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
                 PropertyItemInfo info = datas.get(which);
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
-                initText(R.id.select_type,
-                        ((PropertyTypeItem) info).type_name);
+                initText(R.id.select_type, ((PropertyTypeItem) info).type_name);
             }
         });
     }

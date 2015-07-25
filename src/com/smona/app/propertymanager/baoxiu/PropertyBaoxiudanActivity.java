@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
-import com.smona.app.propertymanager.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.model.PropertyCustomerContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyWuyebaoxiudanHomeContentItem;
+import com.smona.app.propertymanager.data.process.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
@@ -35,17 +35,16 @@ public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
         setContentView(R.layout.property_wuyebaoxiu_baoxiudan);
         acquireData();
         initViews();
-        LogUtil.d(TAG, "customer: " + customer);
         requestLoadData();
     }
 
     private void acquireData() {
         customer = getIntent().getParcelableExtra("customer");
+        LogUtil.d(TAG, "customer: " + customer);
     }
 
     protected void loadData() {
         requestData();
-        loadDBData();
     }
 
     private void requestData() {
@@ -58,6 +57,8 @@ public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
         Type type = new TypeToken<PropertyWuyebaoxiudanHomeContentItem>() {
         }.getType();
         mBean = JsonUtils.parseJson(content, type);
+
+        loadDBData();
     }
 
     protected void failedRequest() {
@@ -93,10 +94,12 @@ public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
         initText(R.id.yezhuxinxi_dianhua, "(" + customer.userphone + ")");
         initText(R.id.yezhuxinxi_dizhi, customer.useraddress);
 
-        ImageView image = (ImageView) mRoot
-                .findViewById(R.id.yezhuxinxi_touxiang);
-        ImageLoaderManager.getInstance().loadImage(customer.pictureurl.get(0),
-                image);
+        if (customer.pictureurl != null && customer.pictureurl.size() > 0) {
+            ImageView image = (ImageView) mRoot
+                    .findViewById(R.id.yezhuxinxi_touxiang);
+            ImageLoaderManager.getInstance().loadImage(
+                    customer.pictureurl.get(0), image);
+        }
     }
 
     @Override

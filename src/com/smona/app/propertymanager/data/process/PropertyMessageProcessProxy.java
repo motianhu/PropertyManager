@@ -1,4 +1,4 @@
-package com.smona.app.propertymanager;
+package com.smona.app.propertymanager.data.process;
 
 import android.content.Context;
 
@@ -6,7 +6,7 @@ public class PropertyMessageProcessProxy extends PropertyMessageProcess {
     private PropertyMessageProcess mLocalJson;
     private PropertyMessageProcess mNetJson;
 
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     public PropertyMessageProcessProxy() {
         mLocalJson = new PropertyLocalMessageProcess();

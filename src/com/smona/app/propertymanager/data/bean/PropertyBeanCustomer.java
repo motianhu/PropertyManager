@@ -10,7 +10,7 @@ import com.smona.app.propertymanager.data.db.PropertyProvider;
 import com.smona.app.propertymanager.data.bean.BeanInterfaceSet.IPersistence;
 import com.smona.app.propertymanager.data.table.PropertyCustomerTable;
 
-public class Customer implements IPersistence {
+public class PropertyBeanCustomer implements IPersistence {
     public String customerid;
     public String communtiycode;
     public String propertyphone;

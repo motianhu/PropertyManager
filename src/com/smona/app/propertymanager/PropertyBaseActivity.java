@@ -2,13 +2,13 @@ package com.smona.app.propertymanager;
 
 import java.util.ArrayList;
 
-import com.smona.app.propertymanager.PropertyMessageProcess.IQuestCallback;
 import com.smona.app.propertymanager.baoxiu.PropertySelectedDialog;
-import com.smona.app.propertymanager.baoxiu.PropertyTypeAdapter;
+import com.smona.app.propertymanager.common.PropertyTypeAdapter;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
+import com.smona.app.propertymanager.data.process.PropertyMessageProcess;
+import com.smona.app.propertymanager.data.process.PropertyMessageProcess.IQuestCallback;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +18,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-public abstract class PropertyBaseActivity extends Activity implements IQuestCallback {
+public abstract class PropertyBaseActivity extends PropertyDialogActivity implements IQuestCallback {
 
     private static final int MSG_LOAD_DATA = 1;
     private static final int MSG_NOTIFY_REFRESH_UI = 2;

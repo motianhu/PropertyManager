@@ -12,8 +12,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PropertyHomeActivity extends PropertyBaseActivity {
+
+    private static final  boolean DEBUG = true;
+    private boolean mIsLogin = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +33,19 @@ public class PropertyHomeActivity extends PropertyBaseActivity {
                 null, null, null, null);
 
         // login
-        mProcess = new PropertyMessageProcessProxy();
-        mProcess.login();
+        mProcess = new PropertyNetLoginMessageProcess();
+        ((PropertyNetLoginMessageProcess) mProcess).login(this);
+        showDialog(0);
+    }
+
+    protected void saveData(String content) {
+        mIsLogin = true;
+        hideCustomProgressDialog();
+    }
+
+    protected void failedRequest() {
+        mIsLogin = false;
+        hideCustomProgressDialog();
     }
 
     protected void initHeader() {
@@ -74,10 +90,17 @@ public class PropertyHomeActivity extends PropertyBaseActivity {
 
     protected void clickView(View v) {
         int id = v.getId();
-        switch (id) {
-        case R.id.back:
+        if (R.id.back == id) {
             finish();
-            break;
+            return;
+        }
+        
+        if (!mIsLogin && !DEBUG) {
+            Toast.makeText(this, "未登录", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
+        switch (id) {
         case R.id.wuyebaoxiu:
             gotoSubActivity(PropertyWuyebaoxiuActivity.class);
             break;
