@@ -12,9 +12,9 @@ import com.smona.app.propertymanager.data.model.PropertyErshouwupinHomeContentIt
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
-import com.smona.app.propertymanager.data.process.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
+import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinMessageProcessProxy;
 
 import android.os.Bundle;
 import android.view.View;
@@ -54,7 +54,7 @@ public class PropertyErshouwupinActivity extends PropertyBaseActivity {
     }
 
     private void initConent() {
-        mProcess = new PropertyMessageProcessProxy();
+        mProcess = new PropertyErshouwupinMessageProcessProxy();
         mProcess.requestErshouwupin(this, this);
     }
 

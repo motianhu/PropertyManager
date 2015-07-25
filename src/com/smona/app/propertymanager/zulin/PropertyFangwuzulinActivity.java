@@ -11,9 +11,9 @@ import com.smona.app.propertymanager.data.model.PropertyFangwuzulinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinHomeContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
-import com.smona.app.propertymanager.data.process.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
+import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinMessageProcessProxy;
 
 import android.os.Bundle;
 import android.view.View;
@@ -46,7 +46,7 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
     }
 
     private void requestData() {
-        mProcess = new PropertyMessageProcessProxy();
+        mProcess = new PropertyFangwuzulinMessageProcessProxy();
         mProcess.requestFangwuzulin(this, this);
         mProcess.requestFangwuzulinType(this, this);
     }

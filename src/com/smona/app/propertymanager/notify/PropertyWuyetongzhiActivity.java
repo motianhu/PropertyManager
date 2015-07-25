@@ -10,6 +10,7 @@ import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyWuyetongzhiHomeContentItem;
 import com.smona.app.propertymanager.data.process.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
+import com.smona.app.propertymanager.notify.process.PropertyWuyetongzhiMessageProcessProxy;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 
@@ -37,7 +38,7 @@ public class PropertyWuyetongzhiActivity extends PropertyBaseActivity {
     }
 
     private void requestData() {
-        mProcess = new PropertyMessageProcessProxy();
+        mProcess = new PropertyWuyetongzhiMessageProcessProxy();
         mProcess.requestWuyetongzhi(this, this);
     }
 
