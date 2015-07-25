@@ -10,8 +10,8 @@ import com.smona.app.propertymanager.data.bean.PropertyBeanTousujianyi;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTousujianyiContentItem;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
-import com.smona.app.propertymanager.data.process.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
+import com.smona.app.propertymanager.tousu.process.PropertyTousujianyiMessageProcessProxy;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 
@@ -42,11 +42,12 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
         loadDBData();
     }
 
+    @SuppressWarnings("deprecation")
     private void requestData() {
-        mProcess = new PropertyMessageProcessProxy();
+        mProcess = new PropertyTousujianyiMessageProcessProxy();
         mProcess.requestTousujianyi(this, this);
+        showDialog(0);
     }
-    
 
     protected void saveData(String content) {
         LogUtil.d(TAG, "content: " + content);
@@ -54,12 +55,12 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
         }.getType();
         PropertyBeanTousujianyi bean = JsonUtils.parseJson(content, type);
         bean.saveDataToDB(this);
-        
+
         loadDBData();
     }
 
     protected void failedRequest() {
-
+        hideCustomProgressDialog();
     }
 
     private void loadDBData() {
@@ -68,6 +69,8 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
         LogUtil.d(TAG, "loadDBData mContent: " + mContent);
 
         requestRefreshUI();
+
+        hideCustomProgressDialog();
     }
 
     protected void refreshUI() {
@@ -84,10 +87,13 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
                 + ")");
         initText(R.id.yezhuxinxi_dizhi, mContent.customer.useraddress);
 
-        ImageView image = (ImageView) mRoot
-                .findViewById(R.id.yezhuxinxi_touxiang);
-        ImageLoaderManager.getInstance().loadImage(
-                mContent.customer.pictureurl.get(0), image);
+        if (mContent.customer.pictureurl != null
+                && mContent.customer.pictureurl.size() > 0) {
+            ImageView image = (ImageView) mRoot
+                    .findViewById(R.id.yezhuxinxi_touxiang);
+            ImageLoaderManager.getInstance().loadImage(
+                    mContent.customer.pictureurl.get(0), image);
+        }
     }
 
     protected void initHeader() {
@@ -177,8 +183,7 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
                 PropertyItemInfo info = datas.get(which);
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
-                initText(R.id.select_type,
-                        ((PropertyTypeItem) info).type_name);
+                initText(R.id.select_type, ((PropertyTypeItem) info).type_name);
             }
         });
     }

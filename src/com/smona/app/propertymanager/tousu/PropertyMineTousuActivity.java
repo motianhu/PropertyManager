@@ -86,10 +86,12 @@ public class PropertyMineTousuActivity extends PropertyBaseActivity {
         initText(R.id.yezhuxinxi_dianhua, "(" + customer.userphone + ")");
         initText(R.id.yezhuxinxi_dizhi, customer.useraddress);
 
-        ImageView image = (ImageView) mRoot
-                .findViewById(R.id.yezhuxinxi_touxiang);
-        ImageLoaderManager.getInstance().loadImage(customer.pictureurl.get(0),
-                image);
+        if (customer.pictureurl != null && customer.pictureurl.size() > 0) {
+            ImageView image = (ImageView) mRoot
+                    .findViewById(R.id.yezhuxinxi_touxiang);
+            ImageLoaderManager.getInstance().loadImage(
+                    customer.pictureurl.get(0), image);
+        }
     }
 
     @Override

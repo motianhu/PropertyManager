@@ -59,7 +59,7 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
     }
 
     protected void failedRequest() {
-         hideCustomProgressDialog();
+        hideCustomProgressDialog();
     }
 
     private void loadDBData() {
@@ -124,18 +124,13 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
             return;
         }
 
-        if (mIsGetSuccess) {
-            switch (id) {
-            case R.id.select_type_container:
-                clickSelectType();
-                break;
-            case R.id.action_now:
-                clickActionNow();
-                break;
-            }
-        }
-
         switch (id) {
+        case R.id.action_now:
+            clickActionNow();
+            break;
+        case R.id.select_type_container:
+            clickSelectType();
+            break;
         case R.id.detail:
             gotoSubActivity();
             break;
