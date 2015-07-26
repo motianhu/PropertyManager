@@ -56,6 +56,11 @@ public class PropertyFangwuzulinContentItem extends PropertyContentItem {
         dest.writeList(picurl);
     }
 
+    public String toString() {
+        return "PropertyFangwuzulinContentItem[" + "publishid: " + publishid
+                + ", userphone: " + userphone + ", username: " + username + "]";
+    }
+
     public static final Parcelable.Creator<PropertyFangwuzulinContentItem> CREATOR = new Creator<PropertyFangwuzulinContentItem>() {
         @Override
         public PropertyFangwuzulinContentItem[] newArray(int size) {

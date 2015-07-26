@@ -14,6 +14,7 @@ import com.smona.app.propertymanager.data.model.PropertyTypeItem;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinMessageProcessProxy;
+import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinRequestInfo;
 
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,7 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyFangwuzulinActivity";
 
     // content
+    private PropertyZulinDetailAdapter mAdapter;
     private ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
     private PropertyFangwuzulinHomeContentItem mContent;
 
@@ -47,8 +49,15 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
 
     private void requestData() {
         mProcess = new PropertyFangwuzulinMessageProcessProxy();
-        ((PropertyFangwuzulinMessageProcessProxy)mProcess).requestFangwuzulin(this, this);
-        ((PropertyFangwuzulinMessageProcessProxy)mProcess).requestFangwuzulinType(this, this);
+
+        mRequestInfo = new PropertyFangwuzulinRequestInfo();
+        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageno = "1";
+        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageSize = "12";
+
+        ((PropertyFangwuzulinMessageProcessProxy) mProcess).requestFangwuzulin(
+                this, mRequestInfo, this);
+        ((PropertyFangwuzulinMessageProcessProxy) mProcess)
+                .requestFangwuzulinType(this, this);
     }
 
     protected void saveData(String content) {
@@ -69,31 +78,30 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
             bean.saveDataToDB(this);
             loadTypeData();
         }
-
     }
 
     protected void failedRequest() {
 
     }
-    
+
     private void loadTypeData() {
         mTypes = new PropertyFangwuzulinTypeItem();
         mTypes.loadDBData(this);
         LogUtil.d(TAG, "loadDBData mContent: " + mTypes);
-        
+
         mYewuDatas.addAll(mTypes.yewus);
         mHuxingDatas.addAll(mTypes.hourse);
         mAreaDatas.addAll(mTypes.areas);
     }
 
     private void loadListData() {
-        //has problem
+        // has problem
         mDatas.addAll(mContent.icobject);
         requestRefreshUI();
     }
 
     protected void refreshUI() {
-
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -133,9 +141,9 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
         initView(R.id.housetype);
 
         ListView list = (ListView) mRoot.findViewById(R.id.list_content);
-        PropertyZulinDetailAdapter adapter = new PropertyZulinDetailAdapter(
+        mAdapter = new PropertyZulinDetailAdapter(
                 this, mDatas);
-        list.setAdapter(adapter);
+        list.setAdapter(mAdapter);
     }
 
     @Override

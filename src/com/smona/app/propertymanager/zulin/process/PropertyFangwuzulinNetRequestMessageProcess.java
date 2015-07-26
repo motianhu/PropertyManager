@@ -5,24 +5,40 @@ import com.jasonwang.informationhuimin.https.DoHttp;
 import com.jasonwang.informationhuimin.json.resp.JSONAuthenticationMessage;
 import com.jasonwang.informationhuimin.utils.ConfigsInfo;
 import com.smona.app.propertymanager.data.process.PropertyNetRequestMessageProcess;
+import com.smona.app.propertymanager.data.process.PropertyRequestInfo;
 import com.smona.app.propertymanager.util.LogUtil;
 
 import android.content.Context;
 
-public class PropertyFangwuzulinNetRequestMessageProcess extends PropertyNetRequestMessageProcess {
+public class PropertyFangwuzulinNetRequestMessageProcess extends
+        PropertyNetRequestMessageProcess {
     private static final String TAG = "PropertyNetMessageProcess";
 
     // wuyebaoxiu
-    private static final String MSG_WUYEBAOXIU_SHENGQING = "3200";
-    private static final String MSG_WUYEBAOXIU_DAN = "3400";
-    private static final String MSG_WUYEBAOXIU_DAN_DETAIL = "3500";
+    private static final String MSG_FANGWUZULIN = "4200";
+    private static final String MSG_FANGWUZULIN_TYPE = "4300";
+    private static final String MSG_FANGWUZULIN_MINE = "4500";
 
-    public void requestWuyebaoxiuDan(final IQuestCallback callback) {
-        requestCommon(MSG_WUYEBAOXIU_DAN, callback);
-    }
-
-    public void requestFangwuzulin(final IQuestCallback callback) {
-        requestCommon(MSG_WUYEBAOXIU_DAN_DETAIL, callback);
+    private void requestCommon(final String MSG_CODE,
+            final PropertyRequestInfo request, final IQuestCallback callback) {
+        new Thread() {
+            public void run() {
+                request.iccode = MSG_CODE;
+                request.sessionid = ConfigsInfo.sesssionId;
+                request.loginname = ConfigsInfo.username;
+                String msg = new Gson().toJson(request);
+                String result = new DoHttp().sendMsg(MSG_CODE, msg);
+                LogUtil.d(TAG, "requestFangwuzulin result " + result);
+                if (result.equals("0") || result.equals("1")
+                        || result.equals("2") || result.equals("3")
+                        || result.equals("4") || result.equals("5")
+                        || result.equals("6") || result.equals("7")) {
+                    callback.onResult(false, null);
+                } else {
+                    callback.onResult(true, result);
+                }
+            }
+        }.start();
     }
 
     private void requestCommon(final String MSG_CODE,
@@ -35,7 +51,7 @@ public class PropertyFangwuzulinNetRequestMessageProcess extends PropertyNetRequ
                 message.setLoginname(ConfigsInfo.username);
                 String msg = new Gson().toJson(message);
                 String result = new DoHttp().sendMsg(MSG_CODE, msg);
-                LogUtil.d(TAG, "requestWuyebaoxiu result " + result);
+                LogUtil.d(TAG, "requestFangwuzulin result " + result);
                 if (result.equals("0") || result.equals("1")
                         || result.equals("2") || result.equals("3")
                         || result.equals("4") || result.equals("5")
@@ -47,20 +63,18 @@ public class PropertyFangwuzulinNetRequestMessageProcess extends PropertyNetRequ
             }
         }.start();
     }
-    
-    @Override
-    public void requestFangwuzulinDetail(Context context, IQuestCallback callback) {
-        requestCommon(MSG_WUYEBAOXIU_SHENGQING, callback);
+
+    public void requestFangwuzulin(Context context,
+            PropertyRequestInfo request, final IQuestCallback callback) {
+        requestCommon(MSG_FANGWUZULIN, request, callback);
     }
 
-    @Override
-    public void requestFangwuzulinType(Context context, IQuestCallback callback) {
-        requestCommon(MSG_WUYEBAOXIU_DAN, callback);
-    }
-
-    @Override
     public void requestFangwuzulinMine(Context context,
-            IQuestCallback callback) {
+            PropertyRequestInfo request, IQuestCallback callback) {
+        requestCommon(MSG_FANGWUZULIN_MINE, request, callback);
+    }
 
+    public void requestFangwuzulinType(Context context, IQuestCallback callback) {
+        requestCommon(MSG_FANGWUZULIN_TYPE, callback);
     }
 }

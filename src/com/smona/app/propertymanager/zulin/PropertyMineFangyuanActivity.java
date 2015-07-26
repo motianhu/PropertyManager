@@ -14,10 +14,10 @@ import com.smona.app.propertymanager.data.model.PropertyFangwuzulinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinHomeContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
-import com.smona.app.propertymanager.data.process.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinMessageProcessProxy;
+import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinRequestInfo;
 
 public class PropertyMineFangyuanActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyMineFangyuanActivity";
@@ -55,16 +55,22 @@ public class PropertyMineFangyuanActivity extends PropertyBaseActivity {
     }
 
     private void requestData() {
-        mProcess = new PropertyMessageProcessProxy();
-        ((PropertyFangwuzulinMessageProcessProxy)mProcess).requestFangwuzulinMine(this, this);
+        mProcess = new PropertyFangwuzulinMessageProcessProxy();
+
+        mRequestInfo = new PropertyFangwuzulinRequestInfo();
+        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageno = "1";
+        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageSize = "12";
+
+        ((PropertyFangwuzulinMessageProcessProxy) mProcess)
+                .requestFangwuzulinMine(this, mRequestInfo, this);
     }
 
     protected void saveData(String content) {
-        LogUtil.d(TAG, "content: " + content);
         Type type = new TypeToken<PropertyFangwuzulinHomeContentItem>() {
         }.getType();
         mContent = JsonUtils.parseJson(content, type);
 
+        LogUtil.d(TAG, "mContent.icobject: " + mContent.icobject.size());
         loadDBData();
     }
 

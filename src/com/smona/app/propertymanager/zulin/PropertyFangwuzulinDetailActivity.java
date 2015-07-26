@@ -1,16 +1,10 @@
 package com.smona.app.propertymanager.zulin;
 
-import java.lang.reflect.Type;
-
-import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinContentItem;
-import com.smona.app.propertymanager.data.process.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
-import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
-import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinMessageProcessProxy;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -23,6 +17,7 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyFangwuzulinDetailActivity";
 
     private PropertyFangwuzulinContentItem mItem;
+    private boolean mIsMySelf = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,39 +25,14 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
         setContentView(R.layout.property_fangwuzulin_detail);
         acquireData();
         initViews();
-        requestLoadData();
+        requestRefreshUI();
     }
 
     private void acquireData() {
         mItem = (PropertyFangwuzulinContentItem) getIntent()
                 .getParcelableExtra("iteminfo");
-    }
-
-    protected void loadData() {
-        requestData();
-        loadDBData();
-    }
-
-    private void requestData() {
-        mProcess = new PropertyFangwuzulinMessageProcessProxy();
-        ((PropertyFangwuzulinMessageProcessProxy)mProcess).requestFangwuzulinDetail(this, this);
-    }
-
-    protected void saveData(String content) {
-        LogUtil.d(TAG, "content: " + content);
-        Type type = new TypeToken<PropertyFangwuzulinContentItem>() {
-        }.getType();
-        mItem = JsonUtils.parseJson(content, type);
-
-        loadDBData();
-    }
-
-    protected void failedRequest() {
-
-    }
-
-    private void loadDBData() {
-        requestRefreshUI();
+        mIsMySelf = true;
+        LogUtil.d(TAG, "acquireData mItem: " + mItem);
     }
 
     protected void refreshUI() {
@@ -142,8 +112,7 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
         initText(parent, R.id.name,
                 R.string.property_ershouwupin_item_pulish_time);
 
-        boolean isMine = true;
-        if (isMine) {
+        if (mIsMySelf) {
             findViewById(R.id.other_operate).setVisibility(View.GONE);
             initView(R.id.modify_info);
             initView(R.id.cancel_publish);
