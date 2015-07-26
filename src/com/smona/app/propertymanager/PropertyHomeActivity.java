@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 public class PropertyHomeActivity extends PropertyBaseActivity {
 
-    private static final  boolean DEBUG = false;
+    private static final boolean DEBUG = false;
     private boolean mIsLogin = false;
 
     @Override
@@ -95,12 +95,12 @@ public class PropertyHomeActivity extends PropertyBaseActivity {
             finish();
             return;
         }
-        
+
         if (!mIsLogin && !DEBUG) {
             Toast.makeText(this, "未登录", Toast.LENGTH_SHORT).show();
             return;
         }
-        
+
         switch (id) {
         case R.id.wuyebaoxiu:
             gotoSubActivity(PropertyWuyebaoxiuActivity.class);

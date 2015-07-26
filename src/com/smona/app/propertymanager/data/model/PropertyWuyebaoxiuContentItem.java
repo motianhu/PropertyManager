@@ -58,7 +58,7 @@ public class PropertyWuyebaoxiuContentItem extends PropertyContentItem {
     }
 
     public String toString() {
-        return "PropertyWuyebaoxiuContentItem==[ customer: " + customer.toString()
-                + ", types: " + types.size() + "]";
+        return "PropertyWuyebaoxiuContentItem==[ customer: "
+                + customer.toString() + ", types: " + types.size() + "]";
     }
 }

@@ -10,7 +10,7 @@ import com.smona.app.propertymanager.data.table.PropertyTousujianyiTypeTable;
 public class PropertyTousujianyiContentItem extends PropertyContentItem {
     public PropertyCustomerContentItem customer;
     public ArrayList<PropertyItemInfo> types;
-    
+
     public PropertyTousujianyiContentItem() {
         types = new ArrayList<PropertyItemInfo>();
         customer = new PropertyCustomerContentItem();
@@ -58,7 +58,7 @@ public class PropertyTousujianyiContentItem extends PropertyContentItem {
     }
 
     public String toString() {
-        return "PropertyTaosujianyiContentItem==[ customer: " + customer.toString()
-                + ", types: " + types.size() + "]";
+        return "PropertyTaosujianyiContentItem==[ customer: "
+                + customer.toString() + ", types: " + types.size() + "]";
     }
 }

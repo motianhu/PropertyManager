@@ -7,6 +7,7 @@ import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.model.PropertyTousujianyidanContentItem;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
+import com.smona.app.propertymanager.tousu.process.PropertyTousujianyiDetailRequestInfo;
 import com.smona.app.propertymanager.tousu.process.PropertyTousujianyiMessageProcessProxy;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
@@ -58,7 +59,7 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
     protected void failedRequest() {
 
     }
-    
+
     protected void refreshUI() {
         View view = findViewById(R.id.tousu_time);
         initText(view, R.id.value, mItem.requesttime);

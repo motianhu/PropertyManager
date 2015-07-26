@@ -16,6 +16,7 @@ import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTousujianyidanHomeContentItem;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.tousu.process.PropertyTousujianyiMessageProcessProxy;
+import com.smona.app.propertymanager.tousu.process.PropertyTousujianyiRequestInfo;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 

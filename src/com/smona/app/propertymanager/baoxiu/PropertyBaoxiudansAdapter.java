@@ -46,13 +46,11 @@ public class PropertyBaoxiudansAdapter extends PropertyBaseDataAdapter {
         TextView text = (TextView) convertView
                 .findViewById(R.id.baoxiudan_time);
         text.setText(item.requesttime);
-        
-        text = (TextView) convertView
-                .findViewById(R.id.baoxiudan_status);
+
+        text = (TextView) convertView.findViewById(R.id.baoxiudan_status);
         text.setText(item.repairstatus);
-        
-        text = (TextView) convertView
-                .findViewById(R.id.baoxiudan_title);
+
+        text = (TextView) convertView.findViewById(R.id.baoxiudan_title);
         text.setText(item.repairname);
     }
 

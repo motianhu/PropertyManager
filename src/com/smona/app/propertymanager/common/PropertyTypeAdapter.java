@@ -16,7 +16,8 @@ import android.widget.TextView;
 
 public class PropertyTypeAdapter extends PropertyBaseDataAdapter {
 
-    public PropertyTypeAdapter(Context context, ArrayList<PropertyItemInfo> content) {
+    public PropertyTypeAdapter(Context context,
+            ArrayList<PropertyItemInfo> content) {
         super(context, content);
     }
 

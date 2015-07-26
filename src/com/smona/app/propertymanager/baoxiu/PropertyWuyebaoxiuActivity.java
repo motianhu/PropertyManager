@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -160,12 +161,19 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
 
         Object obj = getTag(R.id.select_type);
         if (!(obj instanceof PropertyTypeItem)) {
+            showMessage("Type is null!");
+            return;
+        }
+
+        String desc = getTextContent(R.id.problem_content);
+        if (TextUtils.isEmpty(desc)) {
+            showMessage("Problem desc is null!");
             return;
         }
 
         PropertyWuyebaoxiuSubmitRequestInfo submit = new PropertyWuyebaoxiuSubmitRequestInfo();
         submit.repaircode = ((PropertyTypeItem) obj).type_id;
-        submit.repairdesc = "test";
+        submit.repairdesc = desc;
         ((PropertyWuyebaoxiuMessageProcessProxy) mProcess).submitWuyebaoxiudan(
                 this, submit, null);
     }

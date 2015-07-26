@@ -12,6 +12,7 @@ import com.smona.app.propertymanager.data.model.PropertyTousujianyiContentItem;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.tousu.process.PropertyTousujianyiMessageProcessProxy;
+import com.smona.app.propertymanager.tousu.process.PropertyTousujianyiSubmitRequestInfo;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 
@@ -19,6 +20,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -45,8 +47,9 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
     @SuppressWarnings("deprecation")
     private void requestData() {
         mProcess = new PropertyTousujianyiMessageProcessProxy();
-        
-        ((PropertyTousujianyiMessageProcessProxy)mProcess).requestTousujianyi(this, this);
+
+        ((PropertyTousujianyiMessageProcessProxy) mProcess).requestTousujianyi(
+                this, this);
         showDialog(0);
     }
 
@@ -160,7 +163,23 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
     }
 
     private void clickActionNow() {
+        Object obj = getTag(R.id.select_type);
+        if (!(obj instanceof PropertyTypeItem)) {
+            showMessage("Type is null!");
+            return;
+        }
 
+        String desc = getTextContent(R.id.problem_content);
+        if (TextUtils.isEmpty(desc)) {
+            showMessage("Problem desc is null!");
+            return;
+        }
+
+        PropertyTousujianyiSubmitRequestInfo submit = new PropertyTousujianyiSubmitRequestInfo();
+        submit.complaintcode = ((PropertyTypeItem) obj).type_id;
+        submit.complaintdesc = desc;
+        ((PropertyTousujianyiMessageProcessProxy) mProcess)
+                .submitTousujianyidan(this, submit, null);
     }
 
     private void clickCallWuye() {
@@ -185,6 +204,7 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 initText(R.id.select_type, ((PropertyTypeItem) info).type_name);
+                setTag(R.id.select_type, info);
             }
         });
     }

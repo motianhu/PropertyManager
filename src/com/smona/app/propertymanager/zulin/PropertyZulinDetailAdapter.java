@@ -61,7 +61,7 @@ public class PropertyZulinDetailAdapter extends PropertyBaseDataAdapter {
         initText(parent, R.id.value, item.houseaddress);
         parent = convertView.findViewById(R.id.tel);
         initText(parent, R.id.value, item.userphone);
-        TextView text = (TextView)parent.findViewById(R.id.value);
+        TextView text = (TextView) parent.findViewById(R.id.value);
         text.setTextColor(Color.rgb(0x37, 0x86, 0xbe));
 
     }

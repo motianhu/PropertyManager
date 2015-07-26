@@ -64,7 +64,6 @@ public class PropertyWupinDetailActivity extends PropertyBaseActivity {
         parent = mRoot.findViewById(R.id.wupin_picture);
         ImageView image = (ImageView) parent.findViewById(R.id.image);
         ImageLoaderManager.getInstance().loadImage(mItem.picurl.get(0), image);
-        
 
         if (mIsMySelf) {
             findViewById(R.id.other_operate).setVisibility(View.GONE);

@@ -75,7 +75,7 @@ public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
         mDatas.addAll(mBean.icobjct);
         requestRefreshUI();
     }
-    
+
     protected void refreshUI() {
         mAdapter.notifyDataSetChanged();
     }

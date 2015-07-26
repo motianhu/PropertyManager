@@ -18,8 +18,10 @@ import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public abstract class PropertyBaseActivity extends PropertyDialogActivity implements IQuestCallback {
+public abstract class PropertyBaseActivity extends PropertyDialogActivity
+        implements IQuestCallback {
 
     private static final int MSG_LOAD_DATA = 1;
     private static final int MSG_NOTIFY_REFRESH_UI = 2;
@@ -27,7 +29,7 @@ public abstract class PropertyBaseActivity extends PropertyDialogActivity implem
     protected View mRoot = null;
 
     protected PropertyMessageProcess mProcess;
-    
+
     protected PropertyRequestInfo mRequestInfo;
 
     @SuppressLint("HandlerLeak")
@@ -75,7 +77,7 @@ public abstract class PropertyBaseActivity extends PropertyDialogActivity implem
     private void sendMessage(int msg) {
         mLoadDataHandler.sendEmptyMessage(msg);
     }
-    
+
     protected void loadData() {
 
     }
@@ -83,18 +85,17 @@ public abstract class PropertyBaseActivity extends PropertyDialogActivity implem
     protected void refreshUI() {
 
     }
-    
+
     protected void saveData(String content) {
 
     }
-    
+
     protected void failedRequest() {
 
-    }    
-    
-    
-    public  void onResult(boolean success, String content) {
-        if(success) {
+    }
+
+    public void onResult(boolean success, String content) {
+        if (success) {
             saveData(content);
         } else {
             failedRequest();
@@ -155,27 +156,38 @@ public abstract class PropertyBaseActivity extends PropertyDialogActivity implem
         title.setHint(text);
     }
 
-    //set tag
+    // text
+    protected String getTextContent(View parent, int resId) {
+        TextView view = (TextView) parent.findViewById(resId);
+        return view.getText().toString();
+    }
+
+    protected String getTextContent(int resId) {
+        TextView view = (TextView) mRoot.findViewById(resId);
+        return view.getText().toString();
+    }
+
+    // set tag
     protected void setTag(int resId, Object obj) {
         View view = mRoot.findViewById(resId);
         view.setTag(obj);
     }
-    
+
     protected void setTag(View parent, int resId, Object obj) {
         View view = parent.findViewById(resId);
         view.setTag(obj);
     }
-    
+
     protected Object getTag(int resId) {
         View view = mRoot.findViewById(resId);
         return view.getTag();
     }
-    
+
     protected Object getTag(View parent, int resId) {
         View view = parent.findViewById(resId);
         return view.getTag();
     }
-    
+
     protected void initView(int resId) {
         View view = mRoot.findViewById(resId);
         view.setOnClickListener(mClickListener);
@@ -210,6 +222,14 @@ public abstract class PropertyBaseActivity extends PropertyDialogActivity implem
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    protected void showMessage(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
+
+    protected void showMessage(int text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
 }

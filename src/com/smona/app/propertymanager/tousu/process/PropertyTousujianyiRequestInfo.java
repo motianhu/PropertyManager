@@ -1,4 +1,4 @@
-package com.smona.app.propertymanager.tousu;
+package com.smona.app.propertymanager.tousu.process;
 
 import com.smona.app.propertymanager.data.process.PropertyRequestInfo;
 

@@ -43,13 +43,13 @@ public class PropertyTousudanAdapter extends PropertyBaseDataAdapter {
             return;
         }
 
-        TextView text = (TextView)convertView.findViewById(R.id.tousudan_time);
+        TextView text = (TextView) convertView.findViewById(R.id.tousudan_time);
         text.setText(item.requesttime);
 
-        text =  (TextView)convertView.findViewById(R.id.tousudan_mingcheng);
+        text = (TextView) convertView.findViewById(R.id.tousudan_mingcheng);
         text.setText(item.complaintname);
 
-        text =  (TextView)convertView.findViewById(R.id.tousudan_status);
+        text = (TextView) convertView.findViewById(R.id.tousudan_status);
         text.setText(item.complaint);
     }
 

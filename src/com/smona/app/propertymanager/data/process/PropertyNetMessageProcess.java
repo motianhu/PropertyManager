@@ -51,7 +51,7 @@ public class PropertyNetMessageProcess extends PropertyMessageProcess {
             }
         }.start();
     }
-    
+
     private void requestCommonPage(final String MSG_CODE,
             final IQuestCallback callback) {
         new Thread() {

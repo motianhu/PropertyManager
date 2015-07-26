@@ -38,7 +38,7 @@ public class PropertyBeanErshouwupinwupins implements IPersistence {
                 PropertyErshouwupinwupinTypeTable.getInstance().mContentUri_NoNotify,
                 list, PropertyErshouwupinwupinTypeTable.TYPE_ID);
     }
-    
+
     private void insertXinjius(Context context) {
         if (inobject == null || inobject.size() == 0) {
             return;

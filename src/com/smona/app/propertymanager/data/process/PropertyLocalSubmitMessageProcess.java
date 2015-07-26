@@ -98,7 +98,6 @@ public class PropertyLocalSubmitMessageProcess extends PropertyMessageProcess {
         callback.onResult(true,
                 geFileFromAssets(context, "fangwuzulin_type.txt"));
     }
-    
 
     public void requestFangwuzulinMine(Context context, IQuestCallback callback) {
         if (callback == null) {
@@ -142,12 +141,13 @@ public class PropertyLocalSubmitMessageProcess extends PropertyMessageProcess {
         callback.onResult(true,
                 geFileFromAssets(context, "ershouwupin_pinpai_type.txt"));
     }
-    
+
     public void requestErshouwupinMine(Context context, IQuestCallback callback) {
         if (callback == null) {
             return;
         }
-        callback.onResult(true, geFileFromAssets(context, "ershouwupin_mine.txt"));
+        callback.onResult(true,
+                geFileFromAssets(context, "ershouwupin_mine.txt"));
     }
 
     public static String geFileFromAssets(Context context, String fileName) {

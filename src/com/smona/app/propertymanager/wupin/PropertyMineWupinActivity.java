@@ -121,8 +121,7 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity {
 
         ListView list = (ListView) mRoot.findViewById(R.id.list_content);
         ArrayList<PropertyItemInfo> data = mDatas;
-        mAdapter = new PropertyWupinDetailAdapter(
-                this, data);
+        mAdapter = new PropertyWupinDetailAdapter(this, data);
         list.setAdapter(mAdapter);
     }
 

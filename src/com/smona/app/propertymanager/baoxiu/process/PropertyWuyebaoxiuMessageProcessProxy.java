@@ -46,7 +46,8 @@ public class PropertyWuyebaoxiuMessageProcessProxy extends
         }
     }
 
-    public void submitWuyebaoxiudan(Context context, PropertyRequestInfo request, IQuestCallback callback) {
-        mNetSubmitJson.submitWuyebaoxiudan(context,request, callback);
+    public void submitWuyebaoxiudan(Context context,
+            PropertyRequestInfo request, IQuestCallback callback) {
+        mNetSubmitJson.submitWuyebaoxiudan(context, request, callback);
     }
 }

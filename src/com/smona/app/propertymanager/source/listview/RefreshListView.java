@@ -21,10 +21,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class RefreshListView extends ListView implements
-        OnScrollListener {
-    private static final String TAG = RefreshListView.class
-            .getSimpleName();
+public class RefreshListView extends ListView implements OnScrollListener {
+    private static final String TAG = RefreshListView.class.getSimpleName();
     private WorkMode mWorkMode = WorkMode.getDefault();
     private IRefreshListener mListener;
 

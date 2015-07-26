@@ -159,8 +159,7 @@ public class PropertyErshouwupinActivity extends PropertyBaseActivity {
 
         ListView list = (ListView) findViewById(R.id.list_content);
         ArrayList<PropertyItemInfo> data = mDatas;
-        mAdapter = new PropertyWupinDetailAdapter(
-                this, data);
+        mAdapter = new PropertyWupinDetailAdapter(this, data);
         list.setAdapter(mAdapter);
     }
 

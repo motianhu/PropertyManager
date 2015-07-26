@@ -82,8 +82,8 @@ public class PropertyWuyebaoxiuNetRequestMessageProcess extends
         requestCommon(MSG_WUYEBAOXIU_DAN, request, callback);
     }
 
-    public void requestWuyebaoxiudanDetail(Context context,PropertyRequestInfo request,
-            IQuestCallback callback) {
+    public void requestWuyebaoxiudanDetail(Context context,
+            PropertyRequestInfo request, IQuestCallback callback) {
         requestCommon(MSG_WUYEBAOXIU_DAN_DETAIL, request, callback);
     }
 }

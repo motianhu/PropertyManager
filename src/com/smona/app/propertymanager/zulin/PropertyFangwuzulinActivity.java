@@ -141,8 +141,7 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
         initView(R.id.housetype);
 
         ListView list = (ListView) mRoot.findViewById(R.id.list_content);
-        mAdapter = new PropertyZulinDetailAdapter(
-                this, mDatas);
+        mAdapter = new PropertyZulinDetailAdapter(this, mDatas);
         list.setAdapter(mAdapter);
     }
 

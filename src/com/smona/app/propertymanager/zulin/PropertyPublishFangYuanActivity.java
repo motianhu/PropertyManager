@@ -81,7 +81,7 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
         parent = mRoot.findViewById(R.id.dianhua);
         initText(parent, R.id.name,
                 R.string.property_ershouwupin_wupinfabu_dianhu);
-        
+
         initView(R.id.start_camera);
     }
 
@@ -109,7 +109,7 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
             break;
         }
     }
-    
+
     private void actionCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
