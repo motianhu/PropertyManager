@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.baoxiu.process.PropertyWuyebaoxiuMessageProcessProxy;
+import com.smona.app.propertymanager.baoxiu.process.PropertyWuyebaoxiuSubmitRequestInfo;
 import com.smona.app.propertymanager.data.bean.PropertyBeanWuyebaoxiu;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
@@ -44,7 +45,8 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
         mContent = new PropertyWuyebaoxiuContentItem();
 
         mProcess = new PropertyWuyebaoxiuMessageProcessProxy();
-        ((PropertyWuyebaoxiuMessageProcessProxy)mProcess).requestWuyebaoxiu(this, this);
+        ((PropertyWuyebaoxiuMessageProcessProxy) mProcess).requestWuyebaoxiu(
+                this, this);
         showDialog(0);
     }
 
@@ -156,6 +158,16 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
 
     private void clickActionNow() {
 
+        Object obj = getTag(R.id.select_type);
+        if (!(obj instanceof PropertyTypeItem)) {
+            return;
+        }
+
+        PropertyWuyebaoxiuSubmitRequestInfo submit = new PropertyWuyebaoxiuSubmitRequestInfo();
+        submit.repaircode = ((PropertyTypeItem) obj).type_id;
+        submit.repairdesc = "test";
+        ((PropertyWuyebaoxiuMessageProcessProxy) mProcess).submitWuyebaoxiudan(
+                this, submit, null);
     }
 
     private void clickCallWuye() {
@@ -180,6 +192,7 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 initText(R.id.select_type, ((PropertyTypeItem) info).type_name);
+                setTag(R.id.select_type, info);
             }
         });
     }

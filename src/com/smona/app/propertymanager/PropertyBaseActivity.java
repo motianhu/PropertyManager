@@ -155,6 +155,27 @@ public abstract class PropertyBaseActivity extends PropertyDialogActivity implem
         title.setHint(text);
     }
 
+    //set tag
+    protected void setTag(int resId, Object obj) {
+        View view = mRoot.findViewById(resId);
+        view.setTag(obj);
+    }
+    
+    protected void setTag(View parent, int resId, Object obj) {
+        View view = parent.findViewById(resId);
+        view.setTag(obj);
+    }
+    
+    protected Object getTag(int resId) {
+        View view = mRoot.findViewById(resId);
+        return view.getTag();
+    }
+    
+    protected Object getTag(View parent, int resId) {
+        View view = parent.findViewById(resId);
+        return view.getTag();
+    }
+    
     protected void initView(int resId) {
         View view = mRoot.findViewById(resId);
         view.setOnClickListener(mClickListener);
