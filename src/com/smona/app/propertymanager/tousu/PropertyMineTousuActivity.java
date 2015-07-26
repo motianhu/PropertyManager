@@ -15,8 +15,8 @@ import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.model.PropertyCustomerContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTousujianyidanHomeContentItem;
-import com.smona.app.propertymanager.data.process.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
+import com.smona.app.propertymanager.tousu.process.PropertyTousujianyiMessageProcessProxy;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 
@@ -47,8 +47,8 @@ public class PropertyMineTousuActivity extends PropertyBaseActivity {
     }
     
     private void requestData() {
-        mProcess = new PropertyMessageProcessProxy();
-        mProcess.requestTousujianyidan(this, this);
+        mProcess = new PropertyTousujianyiMessageProcessProxy();
+        ((PropertyTousujianyiMessageProcessProxy)mProcess).requestTousujianyidan(this, this);
     }
 
     protected void saveData(String content) {

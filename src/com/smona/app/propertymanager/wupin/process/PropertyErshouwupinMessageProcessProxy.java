@@ -18,7 +18,6 @@ public class PropertyErshouwupinMessageProcessProxy extends
         mNetSubmitJson = new PropertyErshouwupinNetSubmitMessageProcess();
     }
 
-    @Override
     public void requestErshouwupin(Context context, IQuestCallback callback) {
         if (DEBUG) {
             mLocalJson.requestErshouwupin(context, callback);
@@ -27,7 +26,6 @@ public class PropertyErshouwupinMessageProcessProxy extends
         }
     }
 
-    @Override
     public void requestErshouwupinDetail(Context context, IQuestCallback callback) {
         if (DEBUG) {
             mLocalJson.requestErshouwupinDetail(context, callback);
@@ -36,7 +34,6 @@ public class PropertyErshouwupinMessageProcessProxy extends
         }
     }
 
-    @Override
     public void requestErshouwupinWupinType(Context context,
             IQuestCallback callback) {
         if (DEBUG) {
@@ -47,7 +44,6 @@ public class PropertyErshouwupinMessageProcessProxy extends
     }
     
 
-    @Override
     public void requestErshouwupinPinpaiType(Context context,
             IQuestCallback callback) {
         if (DEBUG) {
@@ -57,7 +53,6 @@ public class PropertyErshouwupinMessageProcessProxy extends
         }
     }
     
-    @Override
     public void requestErshouwupinMine(Context context,
             IQuestCallback callback) {
         if (DEBUG) {

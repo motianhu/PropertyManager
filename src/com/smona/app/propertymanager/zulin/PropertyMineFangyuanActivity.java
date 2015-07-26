@@ -17,6 +17,7 @@ import com.smona.app.propertymanager.data.model.PropertyTypeItem;
 import com.smona.app.propertymanager.data.process.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
+import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinMessageProcessProxy;
 
 public class PropertyMineFangyuanActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyMineFangyuanActivity";
@@ -55,7 +56,7 @@ public class PropertyMineFangyuanActivity extends PropertyBaseActivity {
 
     private void requestData() {
         mProcess = new PropertyMessageProcessProxy();
-        mProcess.requestFangwuzulinMine(this, this);
+        ((PropertyFangwuzulinMessageProcessProxy)mProcess).requestFangwuzulinMine(this, this);
     }
 
     protected void saveData(String content) {

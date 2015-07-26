@@ -10,6 +10,7 @@ import com.smona.app.propertymanager.data.process.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
+import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinMessageProcessProxy;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -43,8 +44,8 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
     }
 
     private void requestData() {
-        mProcess = new PropertyMessageProcessProxy();
-        mProcess.requestFangwuzulinDetail(this, this);
+        mProcess = new PropertyFangwuzulinMessageProcessProxy();
+        ((PropertyFangwuzulinMessageProcessProxy)mProcess).requestFangwuzulinDetail(this, this);
     }
 
     protected void saveData(String content) {

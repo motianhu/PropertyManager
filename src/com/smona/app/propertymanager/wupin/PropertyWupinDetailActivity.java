@@ -13,10 +13,10 @@ import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinContentItem;
-import com.smona.app.propertymanager.data.process.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
+import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinMessageProcessProxy;
 
 public class PropertyWupinDetailActivity extends PropertyBaseActivity {
 
@@ -44,8 +44,8 @@ public class PropertyWupinDetailActivity extends PropertyBaseActivity {
     }
 
     private void requestData() {
-        mProcess = new PropertyMessageProcessProxy();
-        mProcess.requestErshouwupinDetail(this, this);
+        mProcess = new PropertyErshouwupinMessageProcessProxy();
+        ((PropertyErshouwupinMessageProcessProxy) mProcess).requestErshouwupinDetail(this, this);
     }
 
     protected void saveData(String content) {

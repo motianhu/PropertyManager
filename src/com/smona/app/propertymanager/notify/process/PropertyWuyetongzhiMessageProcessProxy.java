@@ -18,7 +18,6 @@ public class PropertyWuyetongzhiMessageProcessProxy extends
         mNetSubmitJson = new PropertyWuyetongzhiSubmitMessageProcess();
     }
 
-    @Override
     public void requestWuyetongzhi(Context context, IQuestCallback callback) {
         if (DEBUG) {
             mLocalJson.requestWuyetongzhi(context, callback);
@@ -27,7 +26,6 @@ public class PropertyWuyetongzhiMessageProcessProxy extends
         }
     }
 
-    @Override
     public void requestWuyetongzhiDetail(Context context, IQuestCallback callback) {
         if (DEBUG) {
             mLocalJson.requestWuyetongzhiDetail(context, callback);

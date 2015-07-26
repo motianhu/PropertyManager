@@ -18,7 +18,6 @@ public class PropertyFangwuzulinMessageProcessProxy extends
         mNetSubmitJson = new PropertyFangwuzulinNetSubmitMessageProcess();
     }
 
-    @Override
     public void requestFangwuzulin(Context context, IQuestCallback callback) {
         if (DEBUG) {
             mLocalJson.requestFangwuzulin(context, callback);
@@ -27,7 +26,6 @@ public class PropertyFangwuzulinMessageProcessProxy extends
         }
     }
 
-    @Override
     public void requestFangwuzulinDetail(Context context, IQuestCallback callback) {
         if (DEBUG) {
             mLocalJson.requestFangwuzulinDetail(context, callback);
@@ -36,7 +34,6 @@ public class PropertyFangwuzulinMessageProcessProxy extends
         }
     }
 
-    @Override
     public void requestFangwuzulinType(Context context,
             IQuestCallback callback) {
         if (DEBUG) {
@@ -47,7 +44,6 @@ public class PropertyFangwuzulinMessageProcessProxy extends
     }
     
 
-    @Override
     public void requestFangwuzulinMine(Context context,
             IQuestCallback callback) {
         if (DEBUG) {

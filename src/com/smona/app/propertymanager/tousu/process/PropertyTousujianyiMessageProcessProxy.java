@@ -18,7 +18,6 @@ public class PropertyTousujianyiMessageProcessProxy extends
         mNetSubmitJson = new PropertyTousujianyiNetSubmitMessageProcess();
     }
 
-    @Override
     public void requestTousujianyi(Context context, IQuestCallback callback) {
         if (DEBUG) {
             mLocalJson.requestTousujianyi(context, callback);
@@ -27,7 +26,6 @@ public class PropertyTousujianyiMessageProcessProxy extends
         }
     }
 
-    @Override
     public void requestTousujianyidan(Context context, IQuestCallback callback) {
         if (DEBUG) {
             mLocalJson.requestTousujianyidan(context, callback);
@@ -36,7 +34,6 @@ public class PropertyTousujianyiMessageProcessProxy extends
         }
     }
 
-    @Override
     public void requestTousujianyidanDetail(Context context,
             IQuestCallback callback) {
         if (DEBUG) {

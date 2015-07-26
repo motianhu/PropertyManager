@@ -55,15 +55,15 @@ public class PropertyErshouwupinActivity extends PropertyBaseActivity {
 
     private void initConent() {
         mProcess = new PropertyErshouwupinMessageProcessProxy();
-        mProcess.requestErshouwupin(this, this);
+        ((PropertyErshouwupinMessageProcessProxy)mProcess).requestErshouwupin(this, this);
     }
 
     private void initPinpaiTypes() {
-        mProcess.requestErshouwupinPinpaiType(this, this);
+        ((PropertyErshouwupinMessageProcessProxy)mProcess).requestErshouwupinPinpaiType(this, this);
     }
 
     private void initWupinTypes() {
-        mProcess.requestErshouwupinWupinType(this, this);
+        ((PropertyErshouwupinMessageProcessProxy)mProcess).requestErshouwupinWupinType(this, this);
     }
 
     protected void saveData(String content) {

@@ -47,8 +47,8 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
 
     private void requestData() {
         mProcess = new PropertyFangwuzulinMessageProcessProxy();
-        mProcess.requestFangwuzulin(this, this);
-        mProcess.requestFangwuzulinType(this, this);
+        ((PropertyFangwuzulinMessageProcessProxy)mProcess).requestFangwuzulin(this, this);
+        ((PropertyFangwuzulinMessageProcessProxy)mProcess).requestFangwuzulinType(this, this);
     }
 
     protected void saveData(String content) {

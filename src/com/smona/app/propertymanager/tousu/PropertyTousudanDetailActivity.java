@@ -6,8 +6,8 @@ import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.model.PropertyTousujianyidanContentItem;
-import com.smona.app.propertymanager.data.process.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
+import com.smona.app.propertymanager.tousu.process.PropertyTousujianyiMessageProcessProxy;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 
@@ -40,8 +40,8 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
     }
 
     private void requestData() {
-        mProcess = new PropertyMessageProcessProxy();
-        mProcess.requestTousujianyidanDetail(this, this);
+        mProcess = new PropertyTousujianyiMessageProcessProxy();
+        ((PropertyTousujianyiMessageProcessProxy)mProcess).requestTousujianyidanDetail(this, this);
     }
 
     protected void saveData(String content) {

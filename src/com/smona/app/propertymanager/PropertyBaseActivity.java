@@ -7,6 +7,7 @@ import com.smona.app.propertymanager.common.PropertyTypeAdapter;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.process.PropertyMessageProcess;
 import com.smona.app.propertymanager.data.process.PropertyMessageProcess.IQuestCallback;
+import com.smona.app.propertymanager.data.process.PropertyRequestInfo;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
@@ -26,6 +27,8 @@ public abstract class PropertyBaseActivity extends PropertyDialogActivity implem
     protected View mRoot = null;
 
     protected PropertyMessageProcess mProcess;
+    
+    protected PropertyRequestInfo mRequestInfo;
 
     @SuppressLint("HandlerLeak")
     private Handler mLoadDataHandler = new Handler() {

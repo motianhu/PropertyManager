@@ -100,7 +100,6 @@ public class PropertyLocalSubmitMessageProcess extends PropertyMessageProcess {
     }
     
 
-    @Override
     public void requestFangwuzulinMine(Context context, IQuestCallback callback) {
         if (callback == null) {
             return;

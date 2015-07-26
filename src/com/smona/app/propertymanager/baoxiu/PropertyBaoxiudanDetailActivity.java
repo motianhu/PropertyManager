@@ -5,8 +5,9 @@ import java.lang.reflect.Type;
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.baoxiu.process.PropertyWuyebaoxiuDetailRequestInfo;
+import com.smona.app.propertymanager.baoxiu.process.PropertyWuyebaoxiuMessageProcessProxy;
 import com.smona.app.propertymanager.data.model.PropertyWuyebaoxiudanContentItem;
-import com.smona.app.propertymanager.data.process.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 
@@ -34,12 +35,14 @@ public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
 
     protected void loadData() {
         requestData();
-        loadDBData();
     }
 
     private void requestData() {
-        mProcess = new PropertyMessageProcessProxy();
-        mProcess.requestWuyebaoxiudanDetail(this, this);
+        mProcess = new PropertyWuyebaoxiuMessageProcessProxy();
+        mRequestInfo = new PropertyWuyebaoxiuDetailRequestInfo();
+        ((PropertyWuyebaoxiuDetailRequestInfo) mRequestInfo).repairid = mItem.repairid;
+        ((PropertyWuyebaoxiuMessageProcessProxy) mProcess)
+                .requestWuyebaoxiudanDetail(this, mRequestInfo, this);
     }
 
     protected void saveData(String content) {
@@ -47,14 +50,14 @@ public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
         Type type = new TypeToken<PropertyWuyebaoxiudanContentItem>() {
         }.getType();
         mItem = JsonUtils.parseJson(content, type);
-        loadDBData();
+        requestRefreshUI();
     }
 
     protected void failedRequest() {
 
     }
 
-    private void loadDBData() {
+    protected void refreshUI() {
         View view = findViewById(R.id.baoxiu_time);
         initText(view, R.id.value, mItem.requesttime);
 
@@ -78,8 +81,6 @@ public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
 
         view = findViewById(R.id.baoxiu_wancheng_fee);
         initText(view, R.id.value, mItem.repairstatus);
-
-        requestRefreshUI();
     }
 
     @Override

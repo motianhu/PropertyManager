@@ -25,8 +25,6 @@ import android.widget.ImageView;
 public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyWuyebaoxiuActivity";
 
-    private boolean mIsGetSuccess = false;
-
     private PropertyWuyebaoxiuContentItem mContent;
 
     @Override
@@ -41,11 +39,12 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
         requestData();
     }
 
+    @SuppressWarnings("deprecation")
     protected void requestData() {
         mContent = new PropertyWuyebaoxiuContentItem();
 
         mProcess = new PropertyWuyebaoxiuMessageProcessProxy();
-        mProcess.requestWuyebaoxiu(this, this);
+        ((PropertyWuyebaoxiuMessageProcessProxy)mProcess).requestWuyebaoxiu(this, this);
         showDialog(0);
     }
 
@@ -68,7 +67,6 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
         requestRefreshUI();
 
         if (mContent.types != null && mContent.types.size() > 0) {
-            mIsGetSuccess = true;
             hideCustomProgressDialog();
         }
     }

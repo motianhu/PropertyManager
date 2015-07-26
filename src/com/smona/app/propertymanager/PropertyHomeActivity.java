@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 public class PropertyHomeActivity extends PropertyBaseActivity {
 
-    private static final  boolean DEBUG = true;
+    private static final  boolean DEBUG = false;
     private boolean mIsLogin = false;
 
     @Override
@@ -27,6 +27,7 @@ public class PropertyHomeActivity extends PropertyBaseActivity {
         testProvider();
     }
 
+    @SuppressWarnings("deprecation")
     private void testProvider() {
         ContentResolver cr = this.getContentResolver();
         cr.query(PropertyWuyebaoxiudanTable.getInstance().mContentUri_NoNotify,

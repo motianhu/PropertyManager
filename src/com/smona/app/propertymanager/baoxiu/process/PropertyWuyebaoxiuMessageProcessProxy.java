@@ -1,6 +1,7 @@
 package com.smona.app.propertymanager.baoxiu.process;
 
 import com.smona.app.propertymanager.data.process.PropertyMessageProcessProxy;
+import com.smona.app.propertymanager.data.process.PropertyRequestInfo;
 
 import android.content.Context;
 
@@ -18,7 +19,6 @@ public class PropertyWuyebaoxiuMessageProcessProxy extends
         mNetSubmitJson = new PropertyWuyebaoxiuNetSubmitMessageProcess();
     }
 
-    @Override
     public void requestWuyebaoxiu(Context context, IQuestCallback callback) {
         if (DEBUG) {
             mLocalJson.requestWuyebaoxiu(context, callback);
@@ -27,22 +27,22 @@ public class PropertyWuyebaoxiuMessageProcessProxy extends
         }
     }
 
-    @Override
-    public void requestWuyebaoxiudan(Context context, IQuestCallback callback) {
+    public void requestWuyebaoxiudan(Context context,
+            PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
             mLocalJson.requestWuyebaoxiudan(context, callback);
         } else {
-            mNetRequestJson.requestWuyebaoxiudan(context, callback);
+            mNetRequestJson.requestWuyebaoxiudan(context, request, callback);
         }
     }
 
-    @Override
     public void requestWuyebaoxiudanDetail(Context context,
-            IQuestCallback callback) {
+            PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
             mLocalJson.requestWuyebaoxiudanDetail(context, callback);
         } else {
-            mNetRequestJson.requestWuyebaoxiudanDetail(context, callback);
+            mNetRequestJson.requestWuyebaoxiudanDetail(context, request,
+                    callback);
         }
     }
 
