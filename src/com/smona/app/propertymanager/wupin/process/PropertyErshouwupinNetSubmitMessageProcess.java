@@ -2,46 +2,21 @@ package com.smona.app.propertymanager.wupin.process;
 
 import android.content.Context;
 
-import com.google.gson.Gson;
-import com.jasonwang.informationhuimin.https.DoHttp;
-import com.jasonwang.informationhuimin.json.resp.JSONAuthenticationMessage;
-import com.jasonwang.informationhuimin.utils.ConfigsInfo;
 import com.smona.app.propertymanager.data.process.PropertyNetSubmitMessageProcess;
-import com.smona.app.propertymanager.util.LogUtil;
+import com.smona.app.propertymanager.data.process.PropertyRequestInfo;
 
 public class PropertyErshouwupinNetSubmitMessageProcess extends
         PropertyNetSubmitMessageProcess {
-    private static final String TAG = "PropertyNetMessageProcess";
+    private static final String MSG_ERSHOUWUPIN_SUBMIT = "3300";
+    private static final String MSG_ERSHOUWUPIN_CANCEL_PUBLISH_SUBMIT = "3300";
 
-    private static final String MSG_WUYEBAOXIU_SUBMIT = "3300";
-
-    public void requestErshouwupinSubmit(final IQuestCallback callback) {
-        requestCommonPage(MSG_WUYEBAOXIU_SUBMIT, callback);
+    public void submitErshouwupindan(Context context,
+            PropertyRequestInfo request, IQuestCallback callback) {
+        submitRequest(MSG_ERSHOUWUPIN_SUBMIT, request, callback);
     }
-
-    private void requestCommonPage(final String MSG_CODE,
-            final IQuestCallback callback) {
-        new Thread() {
-            public void run() {
-                JSONAuthenticationMessage message = new JSONAuthenticationMessage();
-                message.setIccode(MSG_CODE);
-                message.setSessionid(ConfigsInfo.sesssionId);
-                message.setLoginname(ConfigsInfo.username);
-                String msg = new Gson().toJson(message);
-                String result = new DoHttp().sendMsg(MSG_CODE, msg);
-                LogUtil.d(TAG, "requestWuyebaoxiu result " + result);
-                if (result.equals("0") || result.equals("1")
-                        || result.equals("2") || result.equals("3")
-                        || result.equals("4") || result.equals("5")
-                        || result.equals("6") || result.equals("7")) {
-                    callback.onResult(false, null);
-                } else {
-                    callback.onResult(true, result);
-                }
-            }
-        }.start();
-    }
-
-    public void submitErshouwupindan(Context context, IQuestCallback callback) {
+    
+    public void submitErshouwupinCancelPublish(Context context,
+            PropertyRequestInfo request, IQuestCallback callback) {
+        submitRequest(MSG_ERSHOUWUPIN_CANCEL_PUBLISH_SUBMIT, request, callback);
     }
 }

@@ -22,18 +22,9 @@ public class PropertyFangwuzulinMessageProcessProxy extends
     public void requestFangwuzulin(Context context,
             PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
-            mLocalJson.requestFangwuzulin(context, callback);
+            //mLocalJson.requestFangwuzulin(context, callback);
         } else {
             mNetRequestJson.requestFangwuzulin(context, request, callback);
-        }
-    }
-
-    public void requestFangwuzulinDetail(Context context,
-            IQuestCallback callback) {
-        if (DEBUG) {
-            mLocalJson.requestFangwuzulinDetail(context, callback);
-        } else {
-            mNetRequestJson.requestFangwuzulinDetail(context, callback);
         }
     }
 
@@ -48,13 +39,20 @@ public class PropertyFangwuzulinMessageProcessProxy extends
     public void requestFangwuzulinMine(Context context,
             PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
-            mLocalJson.requestFangwuzulinMine(context, callback);
+            //mLocalJson.requestFangwuzulinMine(context, callback);
         } else {
             mNetRequestJson.requestFangwuzulinMine(context, request, callback);
         }
     }
 
-    public void submitFangwuzulindan(Context context, IQuestCallback callback) {
-        mNetSubmitJson.submitFangwuzulindan(context, callback);
+    public void submitFangwuzulindan(Context context,
+            PropertyRequestInfo request, IQuestCallback callback) {
+        mNetSubmitJson.submitFangwuzulindan(context, request, callback);
+    }
+
+    public void submitFangwuzulinCancelPublish(Context context,
+            PropertyRequestInfo request, IQuestCallback callback) {
+        mNetSubmitJson.submitFangwuzulinCancelPublish(context, request,
+                callback);
     }
 }

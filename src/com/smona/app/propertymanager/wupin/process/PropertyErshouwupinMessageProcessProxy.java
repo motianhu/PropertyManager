@@ -22,7 +22,7 @@ public class PropertyErshouwupinMessageProcessProxy extends
     public void requestErshouwupin(Context context,
             PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
-            mLocalJson.requestErshouwupin(context, callback);
+            //mLocalJson.requestErshouwupin(context, callback);
         } else {
             mNetRequestJson.requestErshouwupin(context, request, callback);
         }
@@ -31,7 +31,7 @@ public class PropertyErshouwupinMessageProcessProxy extends
     public void requestErshouwupinXinjiuType(Context context,
             IQuestCallback callback) {
         if (DEBUG) {
-            mLocalJson.requestErshouwupinWupinType(context, callback);
+            //mLocalJson.requestErshouwupinWupinType(context, callback);
         } else {
             mNetRequestJson.requestErshouwupinXinjiuType(context, callback);
         }
@@ -40,7 +40,7 @@ public class PropertyErshouwupinMessageProcessProxy extends
     public void requestErshouwupinPinpaiType(Context context,
             PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
-            mLocalJson.requestErshouwupinPinpaiType(context, callback);
+            //mLocalJson.requestErshouwupinPinpaiType(context, callback);
         } else {
             mNetRequestJson.requestErshouwupinPinpaiType(context, request,
                     callback);
@@ -50,13 +50,14 @@ public class PropertyErshouwupinMessageProcessProxy extends
     public void requestErshouwupinMine(Context context,
             PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
-            mLocalJson.requestErshouwupinMine(context, callback);
+            //mLocalJson.requestErshouwupinMine(context, callback);
         } else {
             mNetRequestJson.requestErshouwupinMine(context, request, callback);
         }
     }
 
-    public void submitErshouwupindan(Context context, IQuestCallback callback) {
-        mNetSubmitJson.submitErshouwupindan(context, callback);
+    public void submitErshouwupindan(Context context,
+            PropertyRequestInfo request, IQuestCallback callback) {
+        mNetSubmitJson.submitErshouwupindan(context, request, callback);
     }
 }
