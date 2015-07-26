@@ -1,7 +1,5 @@
 package com.smona.app.propertymanager.wupin;
 
-import java.lang.reflect.Type;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,20 +7,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinContentItem;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
-import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
-import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinMessageProcessProxy;
 
 public class PropertyWupinDetailActivity extends PropertyBaseActivity {
 
     private static final String TAG = "PropertyWupinDetailActivity";
 
     private PropertyErshouwupinContentItem mItem;
+    private boolean mIsMySelf = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,39 +26,14 @@ public class PropertyWupinDetailActivity extends PropertyBaseActivity {
         setContentView(R.layout.property_ershouwupin_detail);
         acquireData();
         initViews();
-        requestLoadData();
+        requestRefreshUI();
     }
 
     private void acquireData() {
         mItem = (PropertyErshouwupinContentItem) getIntent()
                 .getParcelableExtra("iteminfo");
-    }
-
-    protected void loadData() {
-        requestData();
-        loadDBData();
-    }
-
-    private void requestData() {
-        mProcess = new PropertyErshouwupinMessageProcessProxy();
-        ((PropertyErshouwupinMessageProcessProxy) mProcess).requestErshouwupinDetail(this, this);
-    }
-
-    protected void saveData(String content) {
-        LogUtil.d(TAG, "content: " + content);
-        Type type = new TypeToken<PropertyErshouwupinContentItem>() {
-        }.getType();
-        mItem = JsonUtils.parseJson(content, type);
-
-        loadDBData();
-    }
-
-    protected void failedRequest() {
-
-    }
-
-    private void loadDBData() {
-        requestRefreshUI();
+        mIsMySelf = true;
+        LogUtil.d(TAG, "acquireData mItem: " + mItem);
     }
 
     protected void refreshUI() {
@@ -93,11 +64,20 @@ public class PropertyWupinDetailActivity extends PropertyBaseActivity {
         parent = mRoot.findViewById(R.id.wupin_picture);
         ImageView image = (ImageView) parent.findViewById(R.id.image);
         ImageLoaderManager.getInstance().loadImage(mItem.picurl.get(0), image);
+        
 
-        TextView text = (TextView) mRoot.findViewById(R.id.call_phone);
-        text.setText(getResources().getString(
-                R.string.property_common_call_contact_phone)
-                + "(" + mItem.userphone + ")");
+        if (mIsMySelf) {
+            findViewById(R.id.other_operate).setVisibility(View.GONE);
+            initView(R.id.modify_info);
+            initView(R.id.cancel_publish);
+        } else {
+            findViewById(R.id.my_operate).setVisibility(View.GONE);
+            initView(R.id.call_phone);
+            TextView text = (TextView) mRoot.findViewById(R.id.call_phone);
+            text.setText(getResources().getString(
+                    R.string.property_common_call_contact_phone)
+                    + "(" + mItem.userphone + ")");
+        }
     }
 
     @Override

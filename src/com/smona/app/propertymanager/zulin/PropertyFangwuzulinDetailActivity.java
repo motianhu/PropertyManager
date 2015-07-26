@@ -119,6 +119,10 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
         } else {
             findViewById(R.id.my_operate).setVisibility(View.GONE);
             initView(R.id.call_phone);
+            TextView text = (TextView) mRoot.findViewById(R.id.call_phone);
+            text.setText(getResources().getString(
+                    R.string.property_common_call_contact_phone)
+                    + "(" + mItem.userphone + ")");
         }
 
     }

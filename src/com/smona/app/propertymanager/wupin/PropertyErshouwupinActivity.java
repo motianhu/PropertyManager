@@ -15,6 +15,7 @@ import com.smona.app.propertymanager.data.model.PropertyTypeItem;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinMessageProcessProxy;
+import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinRequestInfo;
 
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +25,7 @@ public class PropertyErshouwupinActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyErshouwupinActivity";
 
     // content
+    private PropertyWupinDetailAdapter mAdapter;
     private ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
     private PropertyErshouwupinHomeContentItem mContent;
 
@@ -55,22 +57,30 @@ public class PropertyErshouwupinActivity extends PropertyBaseActivity {
 
     private void initConent() {
         mProcess = new PropertyErshouwupinMessageProcessProxy();
-        ((PropertyErshouwupinMessageProcessProxy)mProcess).requestErshouwupin(this, this);
+
+        mRequestInfo = new PropertyErshouwupinRequestInfo();
+        ((PropertyErshouwupinRequestInfo) mRequestInfo).pageno = "1";
+        ((PropertyErshouwupinRequestInfo) mRequestInfo).pageSize = "12";
+        ((PropertyErshouwupinMessageProcessProxy) mProcess).requestErshouwupin(
+                this, mRequestInfo, this);
     }
 
     private void initPinpaiTypes() {
-        ((PropertyErshouwupinMessageProcessProxy)mProcess).requestErshouwupinPinpaiType(this, this);
+        PropertyErshouwupinRequestInfo request = new PropertyErshouwupinRequestInfo();
+        ((PropertyErshouwupinMessageProcessProxy) mProcess)
+                .requestErshouwupinPinpaiType(this, request, this);
     }
 
     private void initWupinTypes() {
-        ((PropertyErshouwupinMessageProcessProxy)mProcess).requestErshouwupinWupinType(this, this);
+        ((PropertyErshouwupinMessageProcessProxy) mProcess)
+                .requestErshouwupinXinjiuType(this, this);
     }
 
     protected void saveData(String content) {
         Type type = new TypeToken<PropertyItemInfo>() {
         }.getType();
         PropertyItemInfo info = JsonUtils.parseJson(content, type);
-        LogUtil.d(TAG, "content: " + content);
+        LogUtil.d(TAG, "info.iccode: " + info.iccode + "; content: " + content);
 
         if ("4710".equals(info.iccode)) {
             type = new TypeToken<PropertyErshouwupinHomeContentItem>() {
@@ -104,7 +114,7 @@ public class PropertyErshouwupinActivity extends PropertyBaseActivity {
         mTypes.loadDBData(this);
         mPinpaiDatas.clear();
         mWupinDatas.clear();
-        
+
         mPinpaiDatas.addAll(mTypes.pinpais);
         mWupinDatas.addAll(mTypes.wupins);
     }
@@ -115,7 +125,7 @@ public class PropertyErshouwupinActivity extends PropertyBaseActivity {
     }
 
     protected void refreshUI() {
-
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -149,9 +159,9 @@ public class PropertyErshouwupinActivity extends PropertyBaseActivity {
 
         ListView list = (ListView) findViewById(R.id.list_content);
         ArrayList<PropertyItemInfo> data = mDatas;
-        PropertyWupinDetailAdapter adapter = new PropertyWupinDetailAdapter(
+        mAdapter = new PropertyWupinDetailAdapter(
                 this, data);
-        list.setAdapter(adapter);
+        list.setAdapter(mAdapter);
     }
 
     @Override

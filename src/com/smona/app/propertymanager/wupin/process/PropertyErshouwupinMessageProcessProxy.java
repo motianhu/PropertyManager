@@ -1,6 +1,7 @@
 package com.smona.app.propertymanager.wupin.process;
 
 import com.smona.app.propertymanager.data.process.PropertyMessageProcessProxy;
+import com.smona.app.propertymanager.data.process.PropertyRequestInfo;
 
 import android.content.Context;
 
@@ -18,50 +19,43 @@ public class PropertyErshouwupinMessageProcessProxy extends
         mNetSubmitJson = new PropertyErshouwupinNetSubmitMessageProcess();
     }
 
-    public void requestErshouwupin(Context context, IQuestCallback callback) {
+    public void requestErshouwupin(Context context,
+            PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
             mLocalJson.requestErshouwupin(context, callback);
         } else {
-            mNetRequestJson.requestErshouwupin(context, callback);
+            mNetRequestJson.requestErshouwupin(context, request, callback);
         }
     }
 
-    public void requestErshouwupinDetail(Context context, IQuestCallback callback) {
-        if (DEBUG) {
-            mLocalJson.requestErshouwupinDetail(context, callback);
-        } else {
-            mNetRequestJson.requestErshouwupinDetail(context, callback);
-        }
-    }
-
-    public void requestErshouwupinWupinType(Context context,
+    public void requestErshouwupinXinjiuType(Context context,
             IQuestCallback callback) {
         if (DEBUG) {
             mLocalJson.requestErshouwupinWupinType(context, callback);
         } else {
-            mNetRequestJson.requestErshouwupinWupinType(context, callback);
+            mNetRequestJson.requestErshouwupinXinjiuType(context, callback);
         }
     }
-    
 
     public void requestErshouwupinPinpaiType(Context context,
-            IQuestCallback callback) {
+            PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
             mLocalJson.requestErshouwupinPinpaiType(context, callback);
         } else {
-            mNetRequestJson.requestErshouwupinPinpaiType(context, callback);
+            mNetRequestJson.requestErshouwupinPinpaiType(context, request,
+                    callback);
         }
     }
-    
+
     public void requestErshouwupinMine(Context context,
-            IQuestCallback callback) {
+            PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
             mLocalJson.requestErshouwupinMine(context, callback);
         } else {
-            mNetRequestJson.requestErshouwupinMine(context, callback);
+            mNetRequestJson.requestErshouwupinMine(context, request, callback);
         }
     }
-    
+
     public void submitErshouwupindan(Context context, IQuestCallback callback) {
         mNetSubmitJson.submitErshouwupindan(context, callback);
     }

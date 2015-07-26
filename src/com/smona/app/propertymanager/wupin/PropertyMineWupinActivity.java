@@ -13,6 +13,7 @@ import com.smona.app.propertymanager.data.model.PropertyTypeItem;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinMessageProcessProxy;
+import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinRequestInfo;
 
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,7 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyMineWupinActivity";
 
     // content
+    private PropertyWupinDetailAdapter mAdapter;
     private ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
     private PropertyErshouwupinHomeContentItem mContent;
 
@@ -46,8 +48,11 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity {
 
     private void requestData() {
         mProcess = new PropertyErshouwupinMessageProcessProxy();
+        mRequestInfo = new PropertyErshouwupinRequestInfo();
+        ((PropertyErshouwupinRequestInfo) mRequestInfo).pageno = "1";
+        ((PropertyErshouwupinRequestInfo) mRequestInfo).pageSize = "12";
         ((PropertyErshouwupinMessageProcessProxy) mProcess)
-                .requestErshouwupinMine(this, this);
+                .requestErshouwupinMine(this, mRequestInfo, this);
     }
 
     protected void saveData(String content) {
@@ -77,7 +82,7 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity {
     }
 
     protected void refreshUI() {
-
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -116,9 +121,9 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity {
 
         ListView list = (ListView) mRoot.findViewById(R.id.list_content);
         ArrayList<PropertyItemInfo> data = mDatas;
-        PropertyWupinDetailAdapter adapter = new PropertyWupinDetailAdapter(
+        mAdapter = new PropertyWupinDetailAdapter(
                 this, data);
-        list.setAdapter(adapter);
+        list.setAdapter(mAdapter);
     }
 
     @Override
