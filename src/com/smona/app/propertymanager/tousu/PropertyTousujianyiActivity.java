@@ -45,6 +45,7 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
     @SuppressWarnings("deprecation")
     private void requestData() {
         mProcess = new PropertyTousujianyiMessageProcessProxy();
+        
         ((PropertyTousujianyiMessageProcessProxy)mProcess).requestTousujianyi(this, this);
         showDialog(0);
     }

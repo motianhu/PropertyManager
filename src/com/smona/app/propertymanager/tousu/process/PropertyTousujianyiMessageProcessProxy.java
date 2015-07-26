@@ -1,6 +1,7 @@
 package com.smona.app.propertymanager.tousu.process;
 
 import com.smona.app.propertymanager.data.process.PropertyMessageProcessProxy;
+import com.smona.app.propertymanager.data.process.PropertyRequestInfo;
 
 import android.content.Context;
 
@@ -26,20 +27,22 @@ public class PropertyTousujianyiMessageProcessProxy extends
         }
     }
 
-    public void requestTousujianyidan(Context context, IQuestCallback callback) {
+    public void requestTousujianyidan(Context context,
+            PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
-            mLocalJson.requestTousujianyidan(context, callback);
+            //mLocalJson.requestTousujianyidan(context, callback);
         } else {
-            mNetRequestJson.requestTousujianyidan(context, callback);
+            mNetRequestJson.requestTousujianyidan(context, request, callback);
         }
     }
 
     public void requestTousujianyidanDetail(Context context,
-            IQuestCallback callback) {
+            PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
-            mLocalJson.requestTousujianyidanDetail(context, callback);
+            //mLocalJson.requestTousujianyidanDetail(context, callback);
         } else {
-            mNetRequestJson.requestTousujianyidanDetail(context, callback);
+            mNetRequestJson.requestTousujianyidanDetail(context, request,
+                    callback);
         }
     }
 

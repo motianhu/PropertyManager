@@ -36,28 +36,30 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
 
     protected void loadData() {
         requestData();
-        loadDBData();
     }
 
     private void requestData() {
         mProcess = new PropertyTousujianyiMessageProcessProxy();
-        ((PropertyTousujianyiMessageProcessProxy)mProcess).requestTousujianyidanDetail(this, this);
+        mRequestInfo = new PropertyTousujianyiDetailRequestInfo();
+        ((PropertyTousujianyiDetailRequestInfo) mRequestInfo).complaintid = mItem.complaintid;
+        ((PropertyTousujianyiMessageProcessProxy) mProcess)
+                .requestTousujianyidanDetail(this, mRequestInfo, this);
     }
 
     protected void saveData(String content) {
-        LogUtil.d(TAG, "content: " + content);
         Type type = new TypeToken<PropertyTousujianyidanContentItem>() {
         }.getType();
         mItem = JsonUtils.parseJson(content, type);
+        LogUtil.d(TAG, "mItem: " + mItem);
 
-        loadDBData();
+        requestRefreshUI();
     }
 
     protected void failedRequest() {
 
     }
-
-    private void loadDBData() {
+    
+    protected void refreshUI() {
         View view = findViewById(R.id.tousu_time);
         initText(view, R.id.value, mItem.requesttime);
 
@@ -77,8 +79,6 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
 
         view = findViewById(R.id.tousu_fankuishijian);
         initText(view, R.id.value, mItem.feedbacktime);
-
-        requestRefreshUI();
     }
 
     @Override

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.google.gson.reflect.TypeToken;
@@ -23,6 +22,7 @@ import com.smona.app.propertymanager.util.LogUtil;
 public class PropertyMineTousuActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyMineTousuActivity";
 
+    private PropertyTousudanAdapter mAdapter;
     private ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
 
     private PropertyCustomerContentItem customer;
@@ -45,10 +45,14 @@ public class PropertyMineTousuActivity extends PropertyBaseActivity {
     protected void loadData() {
         requestData();
     }
-    
+
     private void requestData() {
         mProcess = new PropertyTousujianyiMessageProcessProxy();
-        ((PropertyTousujianyiMessageProcessProxy)mProcess).requestTousujianyidan(this, this);
+        mRequestInfo = new PropertyTousujianyiRequestInfo();
+        ((PropertyTousujianyiRequestInfo) mRequestInfo).pageno = "1";
+        ((PropertyTousujianyiRequestInfo) mRequestInfo).pageSize = "12";
+        ((PropertyTousujianyiMessageProcessProxy) mProcess)
+                .requestTousujianyidan(this, mRequestInfo, this);
     }
 
     protected void saveData(String content) {
@@ -66,6 +70,11 @@ public class PropertyMineTousuActivity extends PropertyBaseActivity {
 
     private void loadDBData() {
         mDatas.addAll(mBean.icobjct);
+        requestRefreshUI();
+    }
+
+    protected void refreshUI() {
+        mAdapter.notifyDataSetChanged();
     }
 
     protected void initHeader() {
@@ -77,10 +86,10 @@ public class PropertyMineTousuActivity extends PropertyBaseActivity {
         initYezhuxinxi();
 
         ListView list = (ListView) mRoot.findViewById(R.id.list_content);
-        ListAdapter adapter = new PropertyTousudanAdapter(this, mDatas);
-        list.setAdapter(adapter);
+        mAdapter = new PropertyTousudanAdapter(this, mDatas);
+        list.setAdapter(mAdapter);
     }
-    
+
     private void initYezhuxinxi() {
         initText(R.id.yezhuxinxi_xingming, customer.username);
         initText(R.id.yezhuxinxi_dianhua, "(" + customer.userphone + ")");

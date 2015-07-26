@@ -2,38 +2,28 @@ package com.smona.app.propertymanager.notify.process;
 
 import com.google.gson.Gson;
 import com.jasonwang.informationhuimin.https.DoHttp;
-import com.jasonwang.informationhuimin.json.resp.JSONAuthenticationMessage;
 import com.jasonwang.informationhuimin.utils.ConfigsInfo;
 import com.smona.app.propertymanager.data.process.PropertyNetRequestMessageProcess;
+import com.smona.app.propertymanager.data.process.PropertyRequestInfo;
 import com.smona.app.propertymanager.util.LogUtil;
 
 import android.content.Context;
 
-public class PropertyWuyetongzhiNetRequestMessageProcess extends PropertyNetRequestMessageProcess {
-    private static final String TAG = "PropertyNetMessageProcess";
+public class PropertyWuyetongzhiNetRequestMessageProcess extends
+        PropertyNetRequestMessageProcess {
+    private static final String TAG = "PropertyWuyetongzhiNetRequestMessageProcess";
 
     // wuyebaoxiu
-    private static final String MSG_WUYEBAOXIU_SHENGQING = "3200";
-    private static final String MSG_WUYEBAOXIU_DAN = "3400";
-    private static final String MSG_WUYEBAOXIU_DAN_DETAIL = "3500";
-
-    public void requestWuyebaoxiuDan(final IQuestCallback callback) {
-        requestCommon(MSG_WUYEBAOXIU_DAN, callback);
-    }
-
-    public void requestFangwuzulin(final IQuestCallback callback) {
-        requestCommon(MSG_WUYEBAOXIU_DAN_DETAIL, callback);
-    }
+    private static final String MSG_WUYETONGZHI = "5300";
+    private static final String MSG_WUYETONGZHI_DETAIL = "5400";
 
     private void requestCommon(final String MSG_CODE,
-            final IQuestCallback callback) {
+            final PropertyRequestInfo request, final IQuestCallback callback) {
         new Thread() {
             public void run() {
-                JSONAuthenticationMessage message = new JSONAuthenticationMessage();
-                message.setIccode(MSG_CODE);
-                message.setSessionid(ConfigsInfo.sesssionId);
-                message.setLoginname(ConfigsInfo.username);
-                String msg = new Gson().toJson(message);
+                request.sessionid = ConfigsInfo.sesssionId;
+                request.loginname = ConfigsInfo.username;
+                String msg = new Gson().toJson(request);
                 String result = new DoHttp().sendMsg(MSG_CODE, msg);
                 LogUtil.d(TAG, "requestWuyebaoxiu result " + result);
                 if (result.equals("0") || result.equals("1")
@@ -47,20 +37,14 @@ public class PropertyWuyetongzhiNetRequestMessageProcess extends PropertyNetRequ
             }
         }.start();
     }
-    
-    @Override
-    public void requestFangwuzulinDetail(Context context, IQuestCallback callback) {
-        requestCommon(MSG_WUYEBAOXIU_SHENGQING, callback);
+
+    public void requestWuyetongzhiDetail(Context context,
+            PropertyRequestInfo request, IQuestCallback callback) {
+        requestCommon(MSG_WUYETONGZHI_DETAIL, request, callback);
     }
 
-    @Override
-    public void requestFangwuzulinType(Context context, IQuestCallback callback) {
-        requestCommon(MSG_WUYEBAOXIU_DAN, callback);
-    }
-
-    @Override
-    public void requestFangwuzulinMine(Context context,
-            IQuestCallback callback) {
-
+    public void requestWuyetongzhi(Context context,
+            PropertyRequestInfo request, IQuestCallback callback) {
+        requestCommon(MSG_WUYETONGZHI, request, callback);
     }
 }

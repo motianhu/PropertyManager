@@ -88,19 +88,6 @@ public class PropertyNetRequestMessageProcess extends PropertyMessageProcess {
 
     }
 
-    public void requestTousujianyi(Context context, IQuestCallback callback) {
-
-    }
-
-    public void requestTousujianyidan(Context context, IQuestCallback callback) {
-
-    }
-
-    public void requestTousujianyidanDetail(Context context,
-            IQuestCallback callback) {
-
-    }
-
     public void requestWuyetongzhi(Context context, IQuestCallback callback) {
 
     }

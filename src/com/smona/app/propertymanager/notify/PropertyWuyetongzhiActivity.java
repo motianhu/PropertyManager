@@ -10,6 +10,7 @@ import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyWuyetongzhiHomeContentItem;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.notify.process.PropertyWuyetongzhiMessageProcessProxy;
+import com.smona.app.propertymanager.notify.process.PropertyWuyetongzhiRequestInfo;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 
@@ -21,7 +22,9 @@ import android.widget.ListView;
 public class PropertyWuyetongzhiActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyWuyetongzhiActivity";
 
-    ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
+    private ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
+    private PropertyNotifyMessageAdapter mAdapter;
+
     private PropertyWuyetongzhiHomeContentItem mContent;
 
     @Override
@@ -38,7 +41,13 @@ public class PropertyWuyetongzhiActivity extends PropertyBaseActivity {
 
     private void requestData() {
         mProcess = new PropertyWuyetongzhiMessageProcessProxy();
-        ((PropertyWuyetongzhiMessageProcessProxy)mProcess).requestWuyetongzhi(this, this);
+
+        mRequestInfo = new PropertyWuyetongzhiRequestInfo();
+        ((PropertyWuyetongzhiRequestInfo) mRequestInfo).pageno = "1";
+        ((PropertyWuyetongzhiRequestInfo) mRequestInfo).pageSize = "12";
+
+        ((PropertyWuyetongzhiMessageProcessProxy) mProcess).requestWuyetongzhi(
+                this, mRequestInfo, this);
     }
 
     protected void saveData(String content) {
@@ -63,6 +72,7 @@ public class PropertyWuyetongzhiActivity extends PropertyBaseActivity {
 
     protected void refreshUI() {
         initYezhuxinxi();
+        mAdapter.notifyDataSetChanged();
     }
 
     private void initYezhuxinxi() {
@@ -90,9 +100,8 @@ public class PropertyWuyetongzhiActivity extends PropertyBaseActivity {
     @Override
     protected void initBody() {
         ListView list = (ListView) mRoot.findViewById(R.id.list_content);
-        PropertyNotifyMessageAdapter adapter = new PropertyNotifyMessageAdapter(
-                this, mDatas);
-        list.setAdapter(adapter);
+        mAdapter = new PropertyNotifyMessageAdapter(this, mDatas);
+        list.setAdapter(mAdapter);
     }
 
     @Override
