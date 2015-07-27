@@ -7,6 +7,8 @@ import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.baoxiu.process.PropertyWuyebaoxiuDetailRequestInfo;
 import com.smona.app.propertymanager.baoxiu.process.PropertyWuyebaoxiuMessageProcessProxy;
+import com.smona.app.propertymanager.baoxiu.process.PropertyWuyebaoxiuSubmitPingjiaRequestInfo;
+import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyWuyebaoxiudanContentItem;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.util.JsonUtils;
@@ -17,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 
 public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyBaoxiudanDetailActivity";
@@ -51,10 +54,23 @@ public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
 
     protected void saveData(String content) {
         LogUtil.d(TAG, "content: " + content);
-        Type type = new TypeToken<PropertyWuyebaoxiudanContentItem>() {
+        Type type = new TypeToken<PropertyItemInfo>() {
         }.getType();
-        mItem = JsonUtils.parseJson(content, type);
-        requestRefreshUI();
+        PropertyItemInfo info = JsonUtils.parseJson(content, type);
+        if ("3510".equals(info.iccode)) {
+            type = new TypeToken<PropertyWuyebaoxiudanContentItem>() {
+            }.getType();
+            mItem = JsonUtils.parseJson(content, type);
+            requestRefreshUI();
+        } else if ("3610".equals(info.iccode)) {
+            this.runOnUiThread(new Runnable(){
+                @Override
+                public void run() {
+                    showMessage("评价成功");
+                }
+            });
+        }
+
     }
 
     protected void failedRequest() {
@@ -85,6 +101,33 @@ public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
 
         view = findViewById(R.id.baoxiu_wancheng_fee);
         initText(view, R.id.value, mItem.repairstatus);
+
+        // pingjia
+        if (mItem.evalute.size() > 0) {
+            String code = mItem.evalute.get(0).evalcode;
+            String num = mItem.evalute.get(0).evalvalue;
+            if ("1".equals(code)) {
+                view = findViewById(R.id.wancheng_zhiliang);
+                RatingBar bar = (RatingBar) view
+                        .findViewById(R.id.pingjia_result);
+                bar.setNumStars(Integer.valueOf(num));
+            } else if ("2".equals(code)) {
+                view = findViewById(R.id.wancheng_taidu);
+                RatingBar bar = (RatingBar) view
+                        .findViewById(R.id.pingjia_result);
+                bar.setNumStars(Integer.valueOf(num));
+            } else if ("3".equals(code)) {
+                view = findViewById(R.id.wancheng_jishixing);
+                RatingBar bar = (RatingBar) view
+                        .findViewById(R.id.pingjia_result);
+                bar.setNumStars(Integer.valueOf(num));
+            } else if ("4".equals(code)) {
+                view = findViewById(R.id.wancheng_price);
+                RatingBar bar = (RatingBar) view
+                        .findViewById(R.id.pingjia_result);
+                bar.setNumStars(Integer.valueOf(num));
+            }
+        }
 
         ViewGroup list = (ViewGroup) mRoot.findViewById(R.id.list_hor_image);
         for (int i = 0; i < ((PropertyWuyebaoxiudanContentItem) mItem).repairpicture
@@ -151,6 +194,10 @@ public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
         initText(view, R.id.name,
                 R.string.property_wuyebaoxi_baoxiudan_item_wancheng_fee);
 
+        initText(view, R.id.submit_pingjia,
+                R.string.property_common_submit_pingjia);
+        initView(R.id.submit_pingjia);
+
         // pingjia
         view = findViewById(R.id.wancheng_zhiliang);
         initText(view, R.id.pingjia_name,
@@ -173,6 +220,32 @@ public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
         case R.id.back:
             finish();
             break;
+        case R.id.submit_pingjia:
+            clickSubmitPingjia();
+            break;
+        }
+    }
+
+    private void clickSubmitPingjia() {
+        PropertyWuyebaoxiuSubmitPingjiaRequestInfo requestInfo = new PropertyWuyebaoxiuSubmitPingjiaRequestInfo();
+
+        addPingjiaInfo(requestInfo, R.id.wancheng_zhiliang);
+        addPingjiaInfo(requestInfo, R.id.wancheng_taidu);
+        addPingjiaInfo(requestInfo, R.id.wancheng_jishixing);
+        addPingjiaInfo(requestInfo, R.id.wancheng_price);
+
+        requestInfo.repairid = mItem.repairid;
+        ((PropertyWuyebaoxiuMessageProcessProxy) mProcess)
+                .submitWuyebaoxiudanPingjia(this, requestInfo, this);
+    }
+
+    private void addPingjiaInfo(
+            PropertyWuyebaoxiuSubmitPingjiaRequestInfo requestInfo, int resid) {
+        View parent = findViewById(resid);
+        RatingBar bar = (RatingBar) parent.findViewById(R.id.pingjia_result);
+        int num = bar.getNumStars();
+        if (num > 0) {
+            requestInfo.add("1", num);
         }
     }
 }

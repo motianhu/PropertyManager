@@ -16,6 +16,7 @@
     <string name="property_common_cancel_publish">取消发布</string>
     <string name="property_common_alert_dialog_ok">选择</string>
     <string name="property_common_alert_dialog_cancel">取消</string>
+    <string name="property_common_submit_pingjia">提交评价</string>
 
     <!-- 物业报修 -->
     <string name="property_home_wuyebaoxiu">物业报修</string>

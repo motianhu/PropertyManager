@@ -9,6 +9,7 @@ import com.smona.app.propertymanager.data.model.PropertyTousujianyidanContentIte
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.tousu.process.PropertyTousujianyiDetailRequestInfo;
 import com.smona.app.propertymanager.tousu.process.PropertyTousujianyiMessageProcessProxy;
+import com.smona.app.propertymanager.tousu.process.PropertyTousujianyiSubmitPingjiaRequestInfo;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 
 public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyTousudanDetailActivity";
@@ -73,6 +75,9 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
 
         view = findViewById(R.id.tousu_problem);
         initText(view, R.id.value, mItem.complaintdesc);
+        
+        initText(view, R.id.submit_pingjia, R.string.property_common_submit_pingjia);
+        initView(R.id.submit_pingjia);
 
         ViewGroup list = (ViewGroup) mRoot.findViewById(R.id.list_hor_image);
         for (int i = 0; i < mItem.complaintpicture.size(); i++) {
@@ -95,6 +100,23 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
 
         view = findViewById(R.id.tousu_fankuishijian);
         initText(view, R.id.value, mItem.feedbacktime);
+        
+        // pingjia
+        if (mItem.evalute.size() > 0) {
+            String code = mItem.evalute.get(0).evalcode;
+            String num = mItem.evalute.get(0).evalvalue;
+            if ("5".equals(code)) {
+                view = findViewById(R.id.pingjia_fuwutaidu);
+                RatingBar bar = (RatingBar) view
+                        .findViewById(R.id.pingjia_result);
+                bar.setNumStars(Integer.valueOf(num));
+            } else if ("6".equals(code)) {
+                view = findViewById(R.id.pingjia_jishixing);
+                RatingBar bar = (RatingBar) view
+                        .findViewById(R.id.pingjia_result);
+                bar.setNumStars(Integer.valueOf(num));
+            }
+        }
     }
 
     @Override
@@ -133,6 +155,10 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
         view = findViewById(R.id.pingjia_jishixing);
         initText(view, R.id.pingjia_name,
                 R.string.property_tousujianyi_tousudan_item_tousu_jishixing);
+        
+        initText(view, R.id.submit_pingjia,
+                R.string.property_common_submit_pingjia);
+        initView(R.id.submit_pingjia);
 
     }
 
@@ -143,6 +169,30 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
         case R.id.back:
             finish();
             break;
+        case R.id.submit_pingjia:
+            clickSubmitPingjia();
+            break;
+        }
+    }
+    
+    private void clickSubmitPingjia () {
+        PropertyTousujianyiSubmitPingjiaRequestInfo requestInfo = new PropertyTousujianyiSubmitPingjiaRequestInfo();
+
+        addPingjiaInfo(requestInfo, R.id.pingjia_fuwutaidu);
+        addPingjiaInfo(requestInfo, R.id.pingjia_jishixing);
+
+        requestInfo.repairid = mItem.complaintid;
+        ((PropertyTousujianyiMessageProcessProxy) mProcess)
+                .submitTousujianyidanPingjia(this, requestInfo, this);
+    }
+
+    private void addPingjiaInfo(
+            PropertyTousujianyiSubmitPingjiaRequestInfo requestInfo, int resid) {
+        View parent = findViewById(resid);
+        RatingBar bar = (RatingBar) parent.findViewById(R.id.pingjia_result);
+        int num = bar.getNumStars();
+        if (num > 0) {
+            requestInfo.add("1", num);
         }
     }
 }

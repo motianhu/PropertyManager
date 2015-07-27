@@ -15,8 +15,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:paddingBottom="20dp" >
 
             <include
                 android:id="@+id/baoxiu_time"
@@ -140,6 +140,23 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="2dp"
                     layout="@layout/property_common_pingjia" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp" >
+
+                    <Button
+                        android:id="@+id/submit_pingjia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape"
+                        android:text="@string/property_common_publish_information" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
