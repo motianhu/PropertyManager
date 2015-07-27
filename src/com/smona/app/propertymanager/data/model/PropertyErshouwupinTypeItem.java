@@ -21,12 +21,11 @@ public class PropertyErshouwupinTypeItem extends PropertyTypeItem {
     }
 
     public void loadDBData(Context context) {
-        loadPinpais(context);
         loadWupins(context);
         loadXinjius(context);
     }
 
-    private void loadPinpais(Context context) {
+    public void loadPinpais(Context context) {
         setQueryParams(
                 PropertyErshouwupinpinpaiTypeTable.getInstance().mContentUri_NoNotify,
                 null, null, null, null);

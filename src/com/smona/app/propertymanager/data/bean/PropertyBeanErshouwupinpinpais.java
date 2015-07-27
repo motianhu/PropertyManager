@@ -25,6 +25,10 @@ public class PropertyBeanErshouwupinpinpais implements IPersistence {
         }
         PropertyProvider provider = ((PropertyApplication) (context
                 .getApplicationContext())).getPropertyProvider();
+        provider.delete(
+                PropertyErshouwupinpinpaiTypeTable.getInstance().mContentUri_NoNotify,
+                null, null);
+
         int size = icobject.size();
         ArrayList<ContentValues> list = new ArrayList<ContentValues>();
         for (int index = 0; index < size; index++) {

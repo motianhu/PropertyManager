@@ -30,7 +30,8 @@ public class PropertyErshouwupinNetRequestMessageProcess extends
                 message.setLoginname(ConfigsInfo.username);
                 String msg = new Gson().toJson(message);
                 String result = new DoHttp().sendMsg(MSG_CODE, msg);
-                LogUtil.d(TAG, "requestWuyebaoxiu result " + result);
+                LogUtil.d(TAG, "1requestCommon result " + result + ", msg: "
+                        + msg);
                 if (result.equals("0") || result.equals("1")
                         || result.equals("2") || result.equals("3")
                         || result.equals("4") || result.equals("5")
@@ -52,7 +53,8 @@ public class PropertyErshouwupinNetRequestMessageProcess extends
                 request.sessionid = ConfigsInfo.sesssionId;
                 String msg = new Gson().toJson(request);
                 String result = new DoHttp().sendMsg(MSG_CODE, msg);
-                LogUtil.d(TAG, "requestWuyebaoxiu result " + result);
+                LogUtil.d(TAG, "requestCommon result " + result + ", msg: "
+                        + msg);
                 if (result.equals("0") || result.equals("1")
                         || result.equals("2") || result.equals("3")
                         || result.equals("4") || result.equals("5")

@@ -1,14 +1,19 @@
 package com.smona.app.propertymanager.wupin;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.data.bean.PropertyBeanErshouwupinpinpais;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
+import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinMessageProcessProxy;
+import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinPinpaiRequestInfo;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinSubmitRequestInfo;
 
 import android.content.Intent;
@@ -47,11 +52,15 @@ public class PropertyWupinfabuActivity extends PropertyBaseActivity {
     private void loadDBData() {
         mTypes = new PropertyErshouwupinTypeItem();
         mTypes.loadDBData(this);
-        mPinpaiDatas.addAll(mTypes.pinpais);
         mWupinDatas.addAll(mTypes.wupins);
         mXinjiuDatas.addAll(mTypes.xinjius);
-
         requestRefreshUI();
+    }
+
+    private void loadPinpaiTypeData() {
+        mTypes.loadPinpais(this);
+        mPinpaiDatas.clear();
+        mPinpaiDatas.addAll(mTypes.pinpais);
     }
 
     protected void refreshUI() {
@@ -94,6 +103,10 @@ public class PropertyWupinfabuActivity extends PropertyBaseActivity {
                 R.string.property_ershouwupin_item_xinjiu);
         initView(R.id.xinjiu);
 
+        parent = mRoot.findViewById(R.id.goodsname);
+        initText(parent, R.id.name,
+                R.string.property_ershouwupin_item_wupmingcheng);
+
         EditText text = (EditText) mRoot.findViewById(R.id.problem_content);
         text.setHint(R.string.property_ershouwupin_wupinfabu_shuru_wupinmiaoshu);
 
@@ -106,6 +119,7 @@ public class PropertyWupinfabuActivity extends PropertyBaseActivity {
                 R.string.property_ershouwupin_wupinfabu_dianhu);
 
         initView(R.id.start_camera);
+        initView(R.id.publish);
     }
 
     @Override
@@ -141,8 +155,7 @@ public class PropertyWupinfabuActivity extends PropertyBaseActivity {
         intent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
         startActivityForResult(intent, 1);
     }
-    
-    
+
     private void actionPublish() {
         View parent = findViewById(R.id.wupintype);
         Object wupinType = getTag(parent, R.id.select_type);
@@ -150,8 +163,8 @@ public class PropertyWupinfabuActivity extends PropertyBaseActivity {
             showMessage("请选择物品类型");
             return;
         }
-        parent = findViewById(R.id.area);
-        Object pinpaiType = getTag(parent, R.id.pinpai);
+        parent = findViewById(R.id.pinpai);
+        Object pinpaiType = getTag(parent, R.id.select_type);
         if (!(pinpaiType instanceof PropertyTypeItem)) {
             showMessage("请选择品牌");
             return;
@@ -162,6 +175,13 @@ public class PropertyWupinfabuActivity extends PropertyBaseActivity {
             showMessage("请选择新旧");
             return;
         }
+        parent = findViewById(R.id.goodsname);
+        String goodsName = getTextContent(parent, R.id.value);
+        if (TextUtils.isEmpty(goodsName)) {
+            showMessage("请输入联系姓名");
+            return;
+        }
+
         String wupinDesc = getTextContent(R.id.problem_content);
         if (TextUtils.isEmpty(wupinDesc)) {
             showMessage("请填写物品描述");
@@ -188,19 +208,34 @@ public class PropertyWupinfabuActivity extends PropertyBaseActivity {
         request.goodsdesc = ((PropertyTypeItem) wupinType).type_name;
         request.goodsdesc = wupinDesc;
         request.username = lianxiren;
+        request.goodsname = goodsName;
         request.userphone = dianhua;
 
         ((PropertyErshouwupinMessageProcessProxy) mProcess)
                 .submitErshouwupindan(this, request, this);
         showCustomProgrssDialog();
     }
-    
+
     protected void saveData(String content) {
+        Type type = new TypeToken<PropertyBeanErshouwupinpinpais>() {
+        }.getType();
+        PropertyBeanErshouwupinpinpais bean = JsonUtils
+                .parseJson(content, type);
+        bean.saveDataToDB(this);
+        loadPinpaiTypeData();
         hideCustomProgressDialog();
     }
 
     protected void failedRequest() {
         hideCustomProgressDialog();
+    }
+
+    private void initPinpaiTypes(String classCode) {
+        PropertyErshouwupinPinpaiRequestInfo request = new PropertyErshouwupinPinpaiRequestInfo();
+        request.classcode = classCode;
+        ((PropertyErshouwupinMessageProcessProxy) mProcess)
+                .requestErshouwupinPinpaiType(this, request, this);
+        showCustomProgrssDialog();
     }
 
     private void clickChoidWupinType() {
@@ -216,6 +251,7 @@ public class PropertyWupinfabuActivity extends PropertyBaseActivity {
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
                 setTag(parent, R.id.select_type, info);
+                initPinpaiTypes(((PropertyTypeItem) info).type_id);
             }
         });
     }
