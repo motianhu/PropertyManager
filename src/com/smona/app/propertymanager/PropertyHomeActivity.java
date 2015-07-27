@@ -27,7 +27,6 @@ public class PropertyHomeActivity extends PropertyBaseActivity {
         testProvider();
     }
 
-    @SuppressWarnings("deprecation")
     private void testProvider() {
         ContentResolver cr = this.getContentResolver();
         cr.query(PropertyWuyebaoxiudanTable.getInstance().mContentUri_NoNotify,
@@ -36,7 +35,7 @@ public class PropertyHomeActivity extends PropertyBaseActivity {
         // login
         mProcess = new PropertyNetLoginMessageProcess();
         ((PropertyNetLoginMessageProcess) mProcess).login(this);
-        showDialog(0);
+        showCustomProgrssDialog();
     }
 
     protected void saveData(String content) {

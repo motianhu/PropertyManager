@@ -59,7 +59,6 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
 
     protected void loadData() {
         requestData();
-        loadTypeData();
     }
 
     private void requestData() {
@@ -73,6 +72,8 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
                 this, mRequestInfo, this);
         ((PropertyFangwuzulinMessageProcessProxy) mProcess)
                 .requestFangwuzulinType(this, this);
+        
+        showCustomProgrssDialog();
     }
 
     protected void saveData(String content) {
@@ -112,6 +113,7 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
         // has problem
         mDatas.addAll(mContent.icobject);
         requestRefreshUI();
+        hideCustomProgressDialog();
     }
 
     protected void refreshUI() {

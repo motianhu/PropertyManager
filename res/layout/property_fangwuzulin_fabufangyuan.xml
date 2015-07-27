@@ -57,11 +57,18 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="120dp"
                 android:layout_marginTop="5dp"
                 android:background="@color/property_commont_color_select_type_bg"
                 android:orientation="vertical"
-                android:weightSum="2" >
+                android:weightSum="3" >
+
+                <include
+                    android:id="@+id/weizhi"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    layout="@layout/property_common_text_value_editor" />
 
                 <include
                     android:id="@+id/lianxiren"

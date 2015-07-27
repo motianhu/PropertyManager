@@ -41,14 +41,13 @@ public class PropertyWuyebaoxiuActivity extends PropertyBaseActivity {
         requestData();
     }
 
-    @SuppressWarnings("deprecation")
     protected void requestData() {
         mContent = new PropertyWuyebaoxiuContentItem();
 
         mProcess = new PropertyWuyebaoxiuMessageProcessProxy();
         ((PropertyWuyebaoxiuMessageProcessProxy) mProcess).requestWuyebaoxiu(
                 this, this);
-        showDialog(0);
+        showCustomProgrssDialog();
     }
 
     protected void saveData(String content) {

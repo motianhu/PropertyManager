@@ -18,7 +18,8 @@ public class PropertyNetSubmitMessageProcess extends PropertyMessageProcess {
 
                 String msg = new Gson().toJson(request);
                 String result = new DoHttp().sendMsg(MSG_CODE, msg);
-                LogUtil.d(TAG, "submitRequest result " + result);
+                LogUtil.d(TAG, "submitRequest result " + result + ", msg: "
+                        + msg + ", callback: " + callback);
                 if (result.equals("0") || result.equals("1")
                         || result.equals("2") || result.equals("3")
                         || result.equals("4") || result.equals("5")

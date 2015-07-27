@@ -7,7 +7,7 @@ import com.smona.app.propertymanager.data.process.PropertyRequestInfo;
 
 public class PropertyFangwuzulinNetSubmitMessageProcess extends
         PropertyNetSubmitMessageProcess {
-    private static final String MSG_FANGWUZULIN_SUBMIT = "4600";
+    private static final String MSG_FANGWUZULIN_SUBMIT = "4400";
     private static final String MSG_WUYEBAOXIU_CANCEL_SUBMIT = "4600";
 
     public void submitFangwuzulindan(Context context,

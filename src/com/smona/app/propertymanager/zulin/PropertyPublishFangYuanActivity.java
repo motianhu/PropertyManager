@@ -92,12 +92,18 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
         parent = mRoot.findViewById(R.id.lianxiren);
         initText(parent, R.id.name,
                 R.string.property_ershouwupin_wupinfabu_lianxiren);
+        
+        parent = mRoot.findViewById(R.id.weizhi);
+        initText(parent, R.id.name,
+                R.string.property_fangwuzulin_publish_position);
 
         parent = mRoot.findViewById(R.id.dianhua);
         initText(parent, R.id.name,
                 R.string.property_ershouwupin_wupinfabu_dianhu);
 
         initView(R.id.start_camera);
+        
+        initView(R.id.publish);
     }
 
     @Override
@@ -134,7 +140,6 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
         startActivityForResult(intent, 1);
     }
 
-    @SuppressWarnings("deprecation")
     private void actionPublish() {
         View parent = findViewById(R.id.ywtype);
         Object ywlx = getTag(parent, R.id.select_type);
@@ -159,6 +164,14 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
             showMessage("请填写配套描述");
             return;
         }
+        
+        parent = findViewById(R.id.weizhi);
+        String weizhi = getTextContent(parent, R.id.value);
+        if (TextUtils.isEmpty(weizhi)) {
+            showMessage("请填写详细地址");
+            return;
+        }
+        
         parent = findViewById(R.id.lianxiren);
         String lianxiren = getTextContent(parent, R.id.value);
         if (TextUtils.isEmpty(lianxiren)) {
@@ -174,16 +187,17 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
         }
 
         PropertyFangwuzulinSubmitRequestInfo request = new PropertyFangwuzulinSubmitRequestInfo();
-        request.choosetype = ((PropertyTypeItem) ywlx).type_id;
-        request.housecode = ((PropertyTypeItem) huxing).type_id;
-        request.areacode = ((PropertyTypeItem) area).type_id;
-        request.housedesc = peitao;
-        request.username = lianxiren;
-        request.userphone = dianhua;
+        request.house.choosetype = ((PropertyTypeItem) ywlx).type_id;
+        request.house.housecode = ((PropertyTypeItem) huxing).type_id;
+        request.house.areacode = ((PropertyTypeItem) area).type_id;
+        request.house.housedesc = peitao;
+        request.house.username = lianxiren;
+        request.house.userphone = dianhua;
+        request.house.houseaddress = weizhi;
 
         ((PropertyFangwuzulinMessageProcessProxy) mProcess)
                 .submitFangwuzulindan(this, request, this);
-        showDialog(0);
+        showCustomProgrssDialog();
     }
 
     protected void saveData(String content) {

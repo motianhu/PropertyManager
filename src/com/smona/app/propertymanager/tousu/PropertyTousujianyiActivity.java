@@ -44,13 +44,12 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
         loadDBData();
     }
 
-    @SuppressWarnings("deprecation")
     private void requestData() {
         mProcess = new PropertyTousujianyiMessageProcessProxy();
 
         ((PropertyTousujianyiMessageProcessProxy) mProcess).requestTousujianyi(
                 this, this);
-        showDialog(0);
+        showCustomProgrssDialog();
     }
 
     protected void saveData(String content) {

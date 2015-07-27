@@ -143,7 +143,6 @@ public class PropertyWupinfabuActivity extends PropertyBaseActivity {
     }
     
     
-    @SuppressWarnings("deprecation")
     private void actionPublish() {
         View parent = findViewById(R.id.wupintype);
         Object wupinType = getTag(parent, R.id.select_type);
@@ -193,7 +192,7 @@ public class PropertyWupinfabuActivity extends PropertyBaseActivity {
 
         ((PropertyErshouwupinMessageProcessProxy) mProcess)
                 .submitErshouwupindan(this, request, this);
-        showDialog(0);
+        showCustomProgrssDialog();
     }
     
     protected void saveData(String content) {
