@@ -60,6 +60,7 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
         bean.saveDataToDB(this);
 
         loadDBData();
+        hideCustomProgressDialog();
     }
 
     protected void failedRequest() {
@@ -164,13 +165,13 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
     private void clickActionNow() {
         Object obj = getTag(R.id.select_type);
         if (!(obj instanceof PropertyTypeItem)) {
-            showMessage("Type is null!");
+            showMessage("请选择投诉类型!");
             return;
         }
 
         String desc = getTextContent(R.id.problem_content);
         if (TextUtils.isEmpty(desc)) {
-            showMessage("Problem desc is null!");
+            showMessage("请描述问题!");
             return;
         }
 

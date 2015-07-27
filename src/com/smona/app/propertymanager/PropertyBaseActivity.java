@@ -2,7 +2,6 @@ package com.smona.app.propertymanager;
 
 import java.util.ArrayList;
 
-import com.smona.app.propertymanager.baoxiu.PropertySelectedDialog;
 import com.smona.app.propertymanager.common.PropertyTypeAdapter;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.process.PropertyMessageProcess;

@@ -48,6 +48,7 @@ public class PropertyWuyetongzhiActivity extends PropertyBaseActivity {
 
         ((PropertyWuyetongzhiMessageProcessProxy) mProcess).requestWuyetongzhi(
                 this, mRequestInfo, this);
+        showCustomProgrssDialog();
     }
 
     protected void saveData(String content) {
@@ -57,10 +58,11 @@ public class PropertyWuyetongzhiActivity extends PropertyBaseActivity {
         mContent = JsonUtils.parseJson(content, type);
 
         loadDBData();
+        hideCustomProgressDialog();
     }
 
     protected void failedRequest() {
-
+        hideCustomProgressDialog();
     }
 
     private void loadDBData() {

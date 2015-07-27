@@ -47,6 +47,7 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
         ((PropertyTousujianyiDetailRequestInfo) mRequestInfo).complaintid = mItem.complaintid;
         ((PropertyTousujianyiMessageProcessProxy) mProcess)
                 .requestTousujianyidanDetail(this, mRequestInfo, this);
+        showCustomProgrssDialog();
     }
 
     protected void saveData(String content) {
@@ -56,10 +57,11 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
         LogUtil.d(TAG, "mItem: " + mItem);
 
         requestRefreshUI();
+        hideCustomProgressDialog();
     }
 
     protected void failedRequest() {
-
+        hideCustomProgressDialog();
     }
 
     protected void refreshUI() {

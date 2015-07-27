@@ -1,4 +1,4 @@
-package com.smona.app.propertymanager.baoxiu;
+package com.smona.app.propertymanager;
 
 import android.app.AlertDialog;
 import android.content.Context;

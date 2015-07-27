@@ -217,12 +217,25 @@ public class PropertyWupinfabuActivity extends PropertyBaseActivity {
     }
 
     protected void saveData(String content) {
-        Type type = new TypeToken<PropertyBeanErshouwupinpinpais>() {
+        Type type = new TypeToken<PropertyItemInfo>() {
         }.getType();
-        PropertyBeanErshouwupinpinpais bean = JsonUtils
-                .parseJson(content, type);
-        bean.saveDataToDB(this);
-        loadPinpaiTypeData();
+        PropertyItemInfo info = JsonUtils.parseJson(content, type);
+        LogUtil.d(TAG, "info.iccode: " + info.iccode + "; content: " + content);
+        if ("4910".equals(info.iccode)) {
+            type = new TypeToken<PropertyBeanErshouwupinpinpais>() {
+            }.getType();
+            PropertyBeanErshouwupinpinpais bean = JsonUtils.parseJson(content,
+                    type);
+            bean.saveDataToDB(this);
+            loadPinpaiTypeData();
+        } else if ("5010".equals(info.iccode) && "00".equals(info.answercode)) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    showMessage("发布成功");
+                }
+            });
+        }
         hideCustomProgressDialog();
     }
 

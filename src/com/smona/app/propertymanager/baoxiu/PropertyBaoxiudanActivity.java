@@ -56,6 +56,7 @@ public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
 
         ((PropertyWuyebaoxiuMessageProcessProxy) mProcess)
                 .requestWuyebaoxiudan(this, mRequestInfo, this);
+        showCustomProgrssDialog();
     }
 
     protected void saveData(String content) {
@@ -65,10 +66,11 @@ public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
 
         LogUtil.d(TAG, "content: " + mBean);
         loadDBData();
+        hideCustomProgressDialog();
     }
 
     protected void failedRequest() {
-
+        hideCustomProgressDialog();
     }
 
     private void loadDBData() {

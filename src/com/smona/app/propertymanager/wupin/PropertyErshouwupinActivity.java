@@ -94,7 +94,7 @@ public class PropertyErshouwupinActivity extends PropertyBaseActivity {
             PropertyBeanErshouwupinpinpais bean = JsonUtils.parseJson(content,
                     type);
             bean.saveDataToDB(this);
-            loadTypeData();
+            loadPinpaiTypeData();
         } else if ("4810".equals(info.iccode)) {
             LogUtil.d(TAG, "1content: " + content);
             type = new TypeToken<PropertyBeanErshouwupinwupins>() {
@@ -115,11 +115,14 @@ public class PropertyErshouwupinActivity extends PropertyBaseActivity {
     private void loadTypeData() {
         mTypes = new PropertyErshouwupinTypeItem();
         mTypes.loadDBData(this);
-        mPinpaiDatas.clear();
         mWupinDatas.clear();
-
-        mPinpaiDatas.addAll(mTypes.pinpais);
         mWupinDatas.addAll(mTypes.wupins);
+    }
+    
+    private void loadPinpaiTypeData() {
+        mTypes.loadPinpais(this);
+        mPinpaiDatas.clear();
+        mPinpaiDatas.addAll(mTypes.pinpais);
     }
 
     private void loadListData() {

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.data.bean.PropertyBeanErshouwupinpinpais;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinHomeContentItem;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
@@ -13,6 +14,7 @@ import com.smona.app.propertymanager.data.model.PropertyTypeItem;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinMessageProcessProxy;
+import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinPinpaiRequestInfo;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinRequestInfo;
 
 import android.os.Bundle;
@@ -44,6 +46,7 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity {
     protected void loadData() {
         requestData();
         loadTypeData();
+        showCustomProgrssDialog();
     }
 
     private void requestData() {
@@ -59,21 +62,37 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity {
         LogUtil.d(TAG, "content: " + content);
         Type type = new TypeToken<PropertyErshouwupinHomeContentItem>() {
         }.getType();
-        mContent = JsonUtils.parseJson(content, type);
-
-        loadDBData();
+        
+        PropertyItemInfo info = JsonUtils.parseJson(content, type);
+        LogUtil.d(TAG, "info.iccode: " + info.iccode + "; content: " + content);
+        
+        if ("4710".equals(info.iccode)) {
+            mContent = JsonUtils.parseJson(content, type);
+            loadDBData();    
+        } else if("4910".equals(info.iccode)) {
+            PropertyBeanErshouwupinpinpais bean = JsonUtils.parseJson(content,
+                    type);
+            bean.saveDataToDB(this);
+            loadPinpaiTypeData();
+        }
+        hideCustomProgressDialog();
     }
 
     protected void failedRequest() {
-
+        hideCustomProgressDialog();
     }
 
     private void loadTypeData() {
         mTypes = new PropertyErshouwupinTypeItem();
         mTypes.loadDBData(this);
-        mPinpaiDatas.addAll(mTypes.pinpais);
         mWupinDatas.addAll(mTypes.wupins);
         mXinjiuDatas.addAll(mTypes.xinjius);
+    }
+    
+    private void loadPinpaiTypeData() {
+        mPinpaiDatas.clear();
+        mTypes.loadPinpais(this);
+        mPinpaiDatas.addAll(mTypes.pinpais);
     }
 
     private void loadDBData() {
@@ -143,6 +162,14 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity {
             break;
         }
     }
+    
+    private void initPinpaiTypes(String classCode) {
+        PropertyErshouwupinPinpaiRequestInfo request = new PropertyErshouwupinPinpaiRequestInfo();
+        request.classcode = classCode;
+        ((PropertyErshouwupinMessageProcessProxy) mProcess)
+                .requestErshouwupinPinpaiType(this, request, this);
+        showCustomProgrssDialog();
+    }
 
     private void clickChoidWupinType() {
         final ArrayList<PropertyItemInfo> datas = mWupinDatas;
@@ -156,6 +183,7 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity {
                 View parent = mRoot.findViewById(R.id.wupintype);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
+                initPinpaiTypes(((PropertyTypeItem) info).type_id);
             }
         });
     }

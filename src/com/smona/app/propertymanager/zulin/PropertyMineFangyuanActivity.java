@@ -74,6 +74,7 @@ public class PropertyMineFangyuanActivity extends PropertyBaseActivity {
 
         ((PropertyFangwuzulinMessageProcessProxy) mProcess)
                 .requestFangwuzulinMine(this, mRequestInfo, this);
+        showCustomProgrssDialog();
     }
 
     protected void saveData(String content) {
@@ -83,10 +84,11 @@ public class PropertyMineFangyuanActivity extends PropertyBaseActivity {
 
         LogUtil.d(TAG, "mContent.icobject: " + mContent.icobject.size());
         loadDBData();
+        hideCustomProgressDialog();
     }
 
     protected void failedRequest() {
-
+        hideCustomProgressDialog();
     }
 
     private void loadDBData() {

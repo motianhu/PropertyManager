@@ -1,5 +1,6 @@
 package com.smona.app.propertymanager.zulin;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import android.content.Intent;
@@ -9,11 +10,13 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
+import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinMessageProcessProxy;
 import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinSubmitRequestInfo;
@@ -92,7 +95,7 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
         parent = mRoot.findViewById(R.id.lianxiren);
         initText(parent, R.id.name,
                 R.string.property_ershouwupin_wupinfabu_lianxiren);
-        
+
         parent = mRoot.findViewById(R.id.weizhi);
         initText(parent, R.id.name,
                 R.string.property_fangwuzulin_publish_position);
@@ -102,7 +105,7 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
                 R.string.property_ershouwupin_wupinfabu_dianhu);
 
         initView(R.id.start_camera);
-        
+
         initView(R.id.publish);
     }
 
@@ -164,14 +167,14 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
             showMessage("请填写配套描述");
             return;
         }
-        
+
         parent = findViewById(R.id.weizhi);
         String weizhi = getTextContent(parent, R.id.value);
         if (TextUtils.isEmpty(weizhi)) {
             showMessage("请填写详细地址");
             return;
         }
-        
+
         parent = findViewById(R.id.lianxiren);
         String lianxiren = getTextContent(parent, R.id.value);
         if (TextUtils.isEmpty(lianxiren)) {
@@ -201,6 +204,17 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
     }
 
     protected void saveData(String content) {
+        Type type = new TypeToken<PropertyItemInfo>() {
+        }.getType();
+        PropertyItemInfo info = JsonUtils.parseJson(content, type);
+        if ("4410".equals(info.iccode) && "00".equals(info.answercode)) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    showMessage("发布成功");
+                }
+            });
+        }
         hideCustomProgressDialog();
     }
 

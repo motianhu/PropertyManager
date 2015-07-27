@@ -54,6 +54,7 @@ public class PropertyMineTousuActivity extends PropertyBaseActivity {
         ((PropertyTousujianyiRequestInfo) mRequestInfo).pageSize = "12";
         ((PropertyTousujianyiMessageProcessProxy) mProcess)
                 .requestTousujianyidan(this, mRequestInfo, this);
+        showCustomProgrssDialog();
     }
 
     protected void saveData(String content) {
@@ -63,10 +64,11 @@ public class PropertyMineTousuActivity extends PropertyBaseActivity {
         mBean = JsonUtils.parseJson(content, type);
 
         loadDBData();
+        hideCustomProgressDialog();
     }
 
     protected void failedRequest() {
-
+        hideCustomProgressDialog();
     }
 
     private void loadDBData() {
