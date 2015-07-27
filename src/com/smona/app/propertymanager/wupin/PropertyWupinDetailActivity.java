@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.smona.app.propertymanager.PropertyBaseActivity;
@@ -32,7 +34,7 @@ public class PropertyWupinDetailActivity extends PropertyBaseActivity {
     private void acquireData() {
         mItem = (PropertyErshouwupinContentItem) getIntent()
                 .getParcelableExtra("iteminfo");
-        mIsMySelf = true;
+        mIsMySelf = mItem.customerid == mItem.loginname;
         LogUtil.d(TAG, "acquireData mItem: " + mItem);
     }
 
@@ -61,9 +63,21 @@ public class PropertyWupinDetailActivity extends PropertyBaseActivity {
         parent = mRoot.findViewById(R.id.fabushijian);
         initText(parent, R.id.value, mItem.publishtime);
 
-        parent = mRoot.findViewById(R.id.wupin_picture);
-        ImageView image = (ImageView) parent.findViewById(R.id.image);
-        ImageLoaderManager.getInstance().loadImage(mItem.picurl.get(0), image);
+        ViewGroup list = (ViewGroup) mRoot.findViewById(R.id.list_hor_image);
+        for (int i = 0; i < mItem.picurl.size(); i++) {
+            ImageView image = new ImageView(this);
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                    getResources()
+                            .getDimensionPixelSize(
+                                    R.dimen.property_common_paishezhaoping_container_height),
+                    getResources()
+                            .getDimensionPixelSize(
+                                    R.dimen.property_common_paishezhaoping_container_height));
+            param.leftMargin = 10;
+            list.addView(image, param);
+            ImageLoaderManager.getInstance().loadImage(mItem.picurl.get(i),
+                    image);
+        }
 
         if (mIsMySelf) {
             findViewById(R.id.other_operate).setVisibility(View.GONE);

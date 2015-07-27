@@ -14,7 +14,9 @@ import com.smona.app.propertymanager.util.LogUtil;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyTousudanDetailActivity";
@@ -70,10 +72,21 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
         view = findViewById(R.id.tousu_problem);
         initText(view, R.id.value, mItem.complaintdesc);
 
-        view = findViewById(R.id.tousudan_picture);
-        ImageView imageView = (ImageView) view.findViewById(R.id.image);
-        ImageLoaderManager.getInstance().loadImage(mItem.complaintpicture,
-                imageView);
+        ViewGroup list = (ViewGroup) mRoot.findViewById(R.id.list_hor_image);
+        for (int i = 0; i < mItem.complaintpicture.size(); i++) {
+            ImageView image = new ImageView(this);
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                    getResources()
+                            .getDimensionPixelSize(
+                                    R.dimen.property_common_paishezhaoping_container_height),
+                    getResources()
+                            .getDimensionPixelSize(
+                                    R.dimen.property_common_paishezhaoping_container_height));
+            param.leftMargin = 10;
+            list.addView(image, param);
+            ImageLoaderManager.getInstance().loadImage(
+                    mItem.complaintpicture.get(i), image);
+        }
 
         view = findViewById(R.id.tousu_wuyefankui);
         initText(view, R.id.value, mItem.feedback);

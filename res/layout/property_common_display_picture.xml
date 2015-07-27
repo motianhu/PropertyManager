@@ -10,19 +10,21 @@
         android:text="@string/property_wuyebaoxi_baoxiudan_item_zhaopian"
         android:textColor="@color/property_color_common_title" />
 
-    <LinearLayout
+    <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/property_commont_color_select_type_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
 
-        <ImageView
-            android:id="@+id/image"
+        <LinearLayout
+            android:id="@+id/list_hor_image"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
-            android:src="@drawable/baoxiu" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:background="@color/property_commont_color_select_type_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </HorizontalScrollView>
 
 </LinearLayout>

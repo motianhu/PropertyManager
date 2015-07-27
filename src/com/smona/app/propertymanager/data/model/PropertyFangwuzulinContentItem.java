@@ -15,6 +15,7 @@ public class PropertyFangwuzulinContentItem extends PropertyContentItem {
     public String username;
     public String userphone;
     public String publishtime;
+    public String customerid;
     public ArrayList<String> picurl;
 
     public PropertyFangwuzulinContentItem() {
@@ -31,6 +32,7 @@ public class PropertyFangwuzulinContentItem extends PropertyContentItem {
         username = in.readString();
         userphone = in.readString();
         publishtime = in.readString();
+        customerid = in.readString();
 
         picurl = new ArrayList<String>();
         in.readList(picurl, ClassLoader.getSystemClassLoader());
@@ -52,6 +54,7 @@ public class PropertyFangwuzulinContentItem extends PropertyContentItem {
         dest.writeString(username);
         dest.writeString(userphone);
         dest.writeString(publishtime);
+        dest.writeString(customerid);
 
         dest.writeList(picurl);
     }

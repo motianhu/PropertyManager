@@ -8,11 +8,15 @@ import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.baoxiu.process.PropertyWuyebaoxiuDetailRequestInfo;
 import com.smona.app.propertymanager.baoxiu.process.PropertyWuyebaoxiuMessageProcessProxy;
 import com.smona.app.propertymanager.data.model.PropertyWuyebaoxiudanContentItem;
+import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyBaoxiudanDetailActivity";
@@ -81,6 +85,26 @@ public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
 
         view = findViewById(R.id.baoxiu_wancheng_fee);
         initText(view, R.id.value, mItem.repairstatus);
+
+        ViewGroup list = (ViewGroup) mRoot.findViewById(R.id.list_hor_image);
+        for (int i = 0; i < ((PropertyWuyebaoxiudanContentItem) mItem).repairpicture
+                .size(); i++) {
+            ImageView image = new ImageView(this);
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                    getResources()
+                            .getDimensionPixelSize(
+                                    R.dimen.property_common_paishezhaoping_container_height),
+                    getResources()
+                            .getDimensionPixelSize(
+                                    R.dimen.property_common_paishezhaoping_container_height));
+            param.leftMargin = 10;
+            list.addView(image, param);
+            ImageLoaderManager
+                    .getInstance()
+                    .loadImage(
+                            ((PropertyWuyebaoxiudanContentItem) mItem).repairpicture
+                                    .get(i), image);
+        }
     }
 
     @Override

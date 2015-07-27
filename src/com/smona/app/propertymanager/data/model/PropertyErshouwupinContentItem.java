@@ -17,6 +17,7 @@ public class PropertyErshouwupinContentItem extends PropertyContentItem {
     public String userphone;
     public String publishtime;
     public String publishstatus;
+    public String customerid;
 
     public PropertyErshouwupinContentItem() {
 
@@ -33,6 +34,7 @@ public class PropertyErshouwupinContentItem extends PropertyContentItem {
         userphone = in.readString();
         publishtime = in.readString();
         publishstatus = in.readString();
+        customerid = in.readString();
 
         picurl = new ArrayList<String>();
         in.readList(picurl, ClassLoader.getSystemClassLoader());
@@ -55,6 +57,7 @@ public class PropertyErshouwupinContentItem extends PropertyContentItem {
         dest.writeString(userphone);
         dest.writeString(publishtime);
         dest.writeString(publishstatus);
+        dest.writeString(customerid);
 
         dest.writeList(picurl);
     }

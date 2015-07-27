@@ -10,7 +10,7 @@ public class PropertyTousujianyidanContentItem extends PropertyContentItem {
     public String complaintid;
     public String complaintcode;
     public String complaintname;
-    public String complaintpicture;
+    public ArrayList<String> complaintpicture;
     public String complaintdesc;
     public String requesttime;
     public String feedback;
@@ -26,7 +26,10 @@ public class PropertyTousujianyidanContentItem extends PropertyContentItem {
         complaintid = in.readString();
         complaintcode = in.readString();
         complaintname = in.readString();
-        complaintpicture = in.readString();
+        
+        complaintpicture = new ArrayList<String>();
+        in.readList(complaintpicture, ClassLoader.getSystemClassLoader());
+        
         complaintdesc = in.readString();
         requesttime = in.readString();
         feedback = in.readString();
@@ -47,7 +50,9 @@ public class PropertyTousujianyidanContentItem extends PropertyContentItem {
         dest.writeString(complaintid);
         dest.writeString(complaintcode);
         dest.writeString(complaintname);
-        dest.writeString(complaintpicture);
+        
+        dest.writeList(complaintpicture);
+        
         dest.writeString(complaintdesc);
         dest.writeString(requesttime);
         dest.writeString(feedback);

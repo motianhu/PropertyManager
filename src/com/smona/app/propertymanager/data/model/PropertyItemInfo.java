@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 public class PropertyItemInfo implements Parcelable {
     public String iccode;
+    public String loginname;
+    public String answercode;
 
     public PropertyItemInfo() {
     }
