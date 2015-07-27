@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
@@ -14,6 +15,8 @@ import com.smona.app.propertymanager.data.model.PropertyFangwuzulinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
 import com.smona.app.propertymanager.util.LogUtil;
+import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinMessageProcessProxy;
+import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinSubmitRequestInfo;
 
 public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyPublishFangYuanActivity";
@@ -32,10 +35,22 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
     }
 
     private void aquireData() {
+        mProcess = new PropertyFangwuzulinMessageProcessProxy();
+
         mTypes = new PropertyFangwuzulinTypeItem();
         mTypes.loadDBData(this);
 
-        mYewuDatas.addAll(mTypes.yewus);
+        String[] ids = getResources().getStringArray(
+                R.array.fangwuzulin_ywtype_id);
+        String[] ywnames = getResources().getStringArray(
+                R.array.fangwuzulin_ywtype_name);
+
+        for (int i = 0; i < ids.length; i++) {
+            PropertyTypeItem item = new PropertyTypeItem();
+            item.type_id = ids[i];
+            item.type_name = ywnames[i];
+            mYewuDatas.add(item);
+        }
         mHuxingDatas.addAll(mTypes.hourse);
         mAreaDatas.addAll(mTypes.areas);
     }
@@ -107,6 +122,9 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
         case R.id.start_camera:
             actionCamera();
             break;
+        case R.id.publish:
+            actionPublish();
+            break;
         }
     }
 
@@ -114,6 +132,66 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
         startActivityForResult(intent, 1);
+    }
+
+    @SuppressWarnings("deprecation")
+    private void actionPublish() {
+        View parent = findViewById(R.id.ywtype);
+        Object ywlx = getTag(parent, R.id.select_type);
+        if (!(ywlx instanceof PropertyTypeItem)) {
+            showMessage("请选择业务类型");
+            return;
+        }
+        parent = findViewById(R.id.area);
+        Object area = getTag(parent, R.id.select_type);
+        if (!(area instanceof PropertyTypeItem)) {
+            showMessage("请选择面积");
+            return;
+        }
+        parent = findViewById(R.id.housetype);
+        Object huxing = getTag(parent, R.id.select_type);
+        if (!(huxing instanceof PropertyTypeItem)) {
+            showMessage("请选择户型");
+            return;
+        }
+        String peitao = getTextContent(R.id.problem_content);
+        if (TextUtils.isEmpty(peitao)) {
+            showMessage("请填写配套描述");
+            return;
+        }
+        parent = findViewById(R.id.lianxiren);
+        String lianxiren = getTextContent(parent, R.id.value);
+        if (TextUtils.isEmpty(lianxiren)) {
+            showMessage("请输入联系姓名");
+            return;
+        }
+
+        parent = findViewById(R.id.dianhua);
+        String dianhua = getTextContent(parent, R.id.value);
+        if (TextUtils.isEmpty(dianhua)) {
+            showMessage("请输入联系电话");
+            return;
+        }
+
+        PropertyFangwuzulinSubmitRequestInfo request = new PropertyFangwuzulinSubmitRequestInfo();
+        request.choosetype = ((PropertyTypeItem) ywlx).type_id;
+        request.housecode = ((PropertyTypeItem) huxing).type_id;
+        request.areacode = ((PropertyTypeItem) area).type_id;
+        request.housedesc = peitao;
+        request.username = lianxiren;
+        request.userphone = dianhua;
+
+        ((PropertyFangwuzulinMessageProcessProxy) mProcess)
+                .submitFangwuzulindan(this, request, this);
+        showDialog(0);
+    }
+
+    protected void saveData(String content) {
+        hideCustomProgressDialog();
+    }
+
+    protected void failedRequest() {
+        hideCustomProgressDialog();
     }
 
     private void clickSelectType() {
@@ -128,6 +206,7 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
                 View parent = mRoot.findViewById(R.id.ywtype);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
+                setTag(parent, R.id.select_type, info);
             }
         });
     }
@@ -144,6 +223,7 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
                 View parent = mRoot.findViewById(R.id.housetype);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
+                setTag(parent, R.id.select_type, info);
             }
         });
     }
@@ -160,6 +240,7 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
                 View parent = mRoot.findViewById(R.id.area);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
+                setTag(parent, R.id.select_type, info);
             }
         });
     }

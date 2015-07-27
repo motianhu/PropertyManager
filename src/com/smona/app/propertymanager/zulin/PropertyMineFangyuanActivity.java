@@ -45,7 +45,18 @@ public class PropertyMineFangyuanActivity extends PropertyBaseActivity {
         mTypes = new PropertyFangwuzulinTypeItem();
         mTypes.loadDBData(this);
 
-        mYewuDatas.addAll(mTypes.yewus);
+        String[] ids = getResources().getStringArray(
+                R.array.fangwuzulin_ywtype_id);
+        String[] ywnames = getResources().getStringArray(
+                R.array.fangwuzulin_ywtype_name);
+
+        for (int i = 0; i < ids.length; i++) {
+            PropertyTypeItem item = new PropertyTypeItem();
+            item.type_id = ids[i];
+            item.type_name = ywnames[i];
+            mYewuDatas.add(item);
+        }
+        
         mHuxingDatas.addAll(mTypes.hourse);
         mAreaDatas.addAll(mTypes.areas);
     }

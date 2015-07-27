@@ -14,7 +14,7 @@ public class PropertyErshouwupinNetSubmitMessageProcess extends
             PropertyRequestInfo request, IQuestCallback callback) {
         submitRequest(MSG_ERSHOUWUPIN_SUBMIT, request, callback);
     }
-    
+
     public void submitErshouwupinCancelPublish(Context context,
             PropertyRequestInfo request, IQuestCallback callback) {
         submitRequest(MSG_ERSHOUWUPIN_CANCEL_PUBLISH_SUBMIT, request, callback);

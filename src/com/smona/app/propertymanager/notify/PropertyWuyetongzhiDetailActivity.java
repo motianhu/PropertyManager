@@ -7,6 +7,8 @@ import android.widget.TextView;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.model.PropertyWuyetongzhiContentItem;
+import com.smona.app.propertymanager.notify.process.PropertyWuyetongzhiMessageProcessProxy;
+import com.smona.app.propertymanager.notify.process.PropertyWuyetongzhiSubmitRequestInfo;
 
 public class PropertyWuyetongzhiDetailActivity extends PropertyBaseActivity {
 
@@ -18,11 +20,38 @@ public class PropertyWuyetongzhiDetailActivity extends PropertyBaseActivity {
         setContentView(R.layout.property_wuyetongzhi_detail);
         acquireData();
         initViews();
+        requestLoadData();
     }
 
     private void acquireData() {
         mItem = (PropertyWuyetongzhiContentItem) getIntent()
                 .getParcelableExtra("iteminfo");
+    }
+
+    protected void loadData() {
+        requestData();
+    }
+
+    private void requestData() {
+        mProcess = new PropertyWuyetongzhiMessageProcessProxy();
+
+        mRequestInfo = new PropertyWuyetongzhiSubmitRequestInfo();
+        ((PropertyWuyetongzhiSubmitRequestInfo) mRequestInfo).publishid = mItem.publishid;
+
+        ((PropertyWuyetongzhiMessageProcessProxy) mProcess)
+                .submitWuyetongzhiRead(this, mRequestInfo, this);
+    }
+
+    protected void saveData(String content) {
+        requestRefreshUI();
+    }
+
+    protected void refreshUI() {
+        hideCustomProgressDialog();
+    }
+
+    protected void failedRequest() {
+        hideCustomProgressDialog();
     }
 
     @Override

@@ -39,7 +39,22 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.property_fangwuzulin);
         initViews();
+        loadLocalData();
         requestLoadData();
+    }
+    
+    private void loadLocalData() {
+        String[] ids = getResources().getStringArray(
+                R.array.fangwuzulin_ywtype_id);
+        String[] ywnames = getResources().getStringArray(
+                R.array.fangwuzulin_ywtype_name);
+
+        for (int i = 0; i < ids.length; i++) {
+            PropertyTypeItem item = new PropertyTypeItem();
+            item.type_id = ids[i];
+            item.type_name = ywnames[i];
+            mYewuDatas.add(item);
+        }
     }
 
     protected void loadData() {
@@ -89,7 +104,6 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
         mTypes.loadDBData(this);
         LogUtil.d(TAG, "loadDBData mContent: " + mTypes);
 
-        mYewuDatas.addAll(mTypes.yewus);
         mHuxingDatas.addAll(mTypes.hourse);
         mAreaDatas.addAll(mTypes.areas);
     }

@@ -1,5 +1,6 @@
 package com.smona.app.propertymanager.wupin.process;
 
+import com.smona.app.propertymanager.data.process.PropertyLocalSubmitMessageProcess;
 import com.smona.app.propertymanager.data.process.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.data.process.PropertyRequestInfo;
 
@@ -7,14 +8,14 @@ import android.content.Context;
 
 public class PropertyErshouwupinMessageProcessProxy extends
         PropertyMessageProcessProxy {
-    private PropertyErshouwupinNetRequestMessageProcess mLocalJson;
+    private PropertyLocalSubmitMessageProcess mLocalJson;
     private PropertyErshouwupinNetRequestMessageProcess mNetRequestJson;
     private PropertyErshouwupinNetSubmitMessageProcess mNetSubmitJson;
 
     private static final boolean DEBUG = false;
 
     public PropertyErshouwupinMessageProcessProxy() {
-        mLocalJson = new PropertyErshouwupinNetRequestMessageProcess();
+        mLocalJson = new PropertyLocalSubmitMessageProcess();
         mNetRequestJson = new PropertyErshouwupinNetRequestMessageProcess();
         mNetSubmitJson = new PropertyErshouwupinNetSubmitMessageProcess();
     }
@@ -22,7 +23,7 @@ public class PropertyErshouwupinMessageProcessProxy extends
     public void requestErshouwupin(Context context,
             PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
-            //mLocalJson.requestErshouwupin(context, callback);
+             mLocalJson.requestErshouwupin(context, callback);
         } else {
             mNetRequestJson.requestErshouwupin(context, request, callback);
         }
@@ -31,7 +32,7 @@ public class PropertyErshouwupinMessageProcessProxy extends
     public void requestErshouwupinXinjiuType(Context context,
             IQuestCallback callback) {
         if (DEBUG) {
-            //mLocalJson.requestErshouwupinWupinType(context, callback);
+             mLocalJson.requestErshouwupinWupinType(context, callback);
         } else {
             mNetRequestJson.requestErshouwupinXinjiuType(context, callback);
         }
@@ -40,7 +41,7 @@ public class PropertyErshouwupinMessageProcessProxy extends
     public void requestErshouwupinPinpaiType(Context context,
             PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
-            //mLocalJson.requestErshouwupinPinpaiType(context, callback);
+             mLocalJson.requestErshouwupinPinpaiType(context, callback);
         } else {
             mNetRequestJson.requestErshouwupinPinpaiType(context, request,
                     callback);
@@ -50,7 +51,7 @@ public class PropertyErshouwupinMessageProcessProxy extends
     public void requestErshouwupinMine(Context context,
             PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
-            //mLocalJson.requestErshouwupinMine(context, callback);
+             mLocalJson.requestErshouwupinMine(context, callback);
         } else {
             mNetRequestJson.requestErshouwupinMine(context, request, callback);
         }

@@ -1,5 +1,6 @@
 package com.smona.app.propertymanager.baoxiu.process;
 
+import com.smona.app.propertymanager.data.process.PropertyLocalSubmitMessageProcess;
 import com.smona.app.propertymanager.data.process.PropertyMessageProcessProxy;
 import com.smona.app.propertymanager.data.process.PropertyRequestInfo;
 
@@ -7,14 +8,14 @@ import android.content.Context;
 
 public class PropertyWuyebaoxiuMessageProcessProxy extends
         PropertyMessageProcessProxy {
-    private PropertyWuyebaoxiuNetRequestMessageProcess mLocalJson;
+    private PropertyLocalSubmitMessageProcess mLocalJson;
     private PropertyWuyebaoxiuNetRequestMessageProcess mNetRequestJson;
     private PropertyWuyebaoxiuNetSubmitMessageProcess mNetSubmitJson;
 
     private static final boolean DEBUG = false;
 
     public PropertyWuyebaoxiuMessageProcessProxy() {
-        mLocalJson = new PropertyWuyebaoxiuNetRequestMessageProcess();
+        mLocalJson = new PropertyLocalSubmitMessageProcess();
         mNetRequestJson = new PropertyWuyebaoxiuNetRequestMessageProcess();
         mNetSubmitJson = new PropertyWuyebaoxiuNetSubmitMessageProcess();
     }
@@ -30,7 +31,7 @@ public class PropertyWuyebaoxiuMessageProcessProxy extends
     public void requestWuyebaoxiudan(Context context,
             PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
-            //mLocalJson.requestWuyebaoxiudan(context, callback);
+             mLocalJson.requestWuyebaoxiudan(context, callback);
         } else {
             mNetRequestJson.requestWuyebaoxiudan(context, request, callback);
         }
@@ -39,7 +40,7 @@ public class PropertyWuyebaoxiuMessageProcessProxy extends
     public void requestWuyebaoxiudanDetail(Context context,
             PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
-            //mLocalJson.requestWuyebaoxiudanDetail(context, callback);
+             mLocalJson.requestWuyebaoxiudanDetail(context, callback);
         } else {
             mNetRequestJson.requestWuyebaoxiudanDetail(context, request,
                     callback);
