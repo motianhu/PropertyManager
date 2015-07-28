@@ -3,7 +3,7 @@
     android:background="@color/property_commont_color_select_type_bg"
     android:layout_height="match_parent" >
 
-    <com.smona.app.propertymanager.source.listview.RefreshListView
+    <com.smona.app.propertymanager.source.listview.XListView
         android:id="@+id/list_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

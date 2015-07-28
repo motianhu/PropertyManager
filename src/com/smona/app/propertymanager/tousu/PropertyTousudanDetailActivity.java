@@ -5,6 +5,7 @@ import java.lang.reflect.Type;
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTousujianyidanContentItem;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.tousu.process.PropertyTousujianyiDetailRequestInfo;
@@ -14,6 +15,7 @@ import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -53,12 +55,33 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
     }
 
     protected void saveData(String content) {
-        Type type = new TypeToken<PropertyTousujianyidanContentItem>() {
+        LogUtil.d(TAG, "content: " + content);
+        Type type = new TypeToken<PropertyItemInfo>() {
         }.getType();
-        mItem = JsonUtils.parseJson(content, type);
-        LogUtil.d(TAG, "mItem: " + mItem);
+        PropertyItemInfo info = JsonUtils.parseJson(content, type);
+        if ("4010".equals(info.iccode)) {
+            type = new TypeToken<PropertyTousujianyidanContentItem>() {
+            }.getType();
+            mItem = JsonUtils.parseJson(content, type);
+            requestRefreshUI();
+        } else if ("4110".equals(info.iccode)) {
+            if ("00".equals(info.answercode)) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showMessage("评价成功");
+                    }
+                });
+            } else {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showMessage("评价失败");
+                    }
+                });
+            }
+        }
 
-        requestRefreshUI();
         hideCustomProgressDialog();
     }
 
@@ -75,10 +98,27 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
 
         view = findViewById(R.id.tousu_problem);
         initText(view, R.id.value, mItem.complaintdesc);
-        
-        initText(view, R.id.submit_pingjia, R.string.property_common_submit_pingjia);
-        initView(R.id.submit_pingjia);
 
+        view = findViewById(R.id.tousu_wuyefankui);
+        initText(view, R.id.value, mItem.feedback);
+
+        view = findViewById(R.id.tousu_fankuishijian);
+        initText(view, R.id.value, mItem.feedbacktime);
+
+        // pingjia
+        if (mItem.evalute != null) {
+            for (int i = 0; i < mItem.evalute.size(); i++) {
+                String code = mItem.evalute.get(i).evalcode;
+                String num = mItem.evalute.get(i).evalvalue;
+                if ("5".equals(code) && !TextUtils.isEmpty(num)) {
+                    initRatingBar(R.id.pingjia_fuwutaidu, num);
+                } else if ("6".equals(code) && !TextUtils.isEmpty(num)) {
+                    initRatingBar(R.id.pingjia_jishixing, num);
+                }
+            }
+        }
+
+        // piture
         ViewGroup list = (ViewGroup) mRoot.findViewById(R.id.list_hor_image);
         for (int i = 0; i < mItem.complaintpicture.size(); i++) {
             ImageView image = new ImageView(this);
@@ -94,29 +134,12 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
             ImageLoaderManager.getInstance().loadImage(
                     mItem.complaintpicture.get(i), image);
         }
+    }
 
-        view = findViewById(R.id.tousu_wuyefankui);
-        initText(view, R.id.value, mItem.feedback);
-
-        view = findViewById(R.id.tousu_fankuishijian);
-        initText(view, R.id.value, mItem.feedbacktime);
-        
-        // pingjia
-        if (mItem.evalute.size() > 0) {
-            String code = mItem.evalute.get(0).evalcode;
-            String num = mItem.evalute.get(0).evalvalue;
-            if ("5".equals(code)) {
-                view = findViewById(R.id.pingjia_fuwutaidu);
-                RatingBar bar = (RatingBar) view
-                        .findViewById(R.id.pingjia_result);
-                bar.setNumStars(Integer.valueOf(num));
-            } else if ("6".equals(code)) {
-                view = findViewById(R.id.pingjia_jishixing);
-                RatingBar bar = (RatingBar) view
-                        .findViewById(R.id.pingjia_result);
-                bar.setNumStars(Integer.valueOf(num));
-            }
-        }
+    private void initRatingBar(int parentId, String num) {
+        View view = findViewById(parentId);
+        RatingBar bar = (RatingBar) view.findViewById(R.id.pingjia_result);
+        bar.setNumStars(Integer.valueOf(num));
     }
 
     @Override
@@ -155,9 +178,8 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
         view = findViewById(R.id.pingjia_jishixing);
         initText(view, R.id.pingjia_name,
                 R.string.property_tousujianyi_tousudan_item_tousu_jishixing);
-        
-        initText(view, R.id.submit_pingjia,
-                R.string.property_common_submit_pingjia);
+
+        initText(R.id.submit_pingjia, R.string.property_common_submit_pingjia);
         initView(R.id.submit_pingjia);
 
     }
@@ -174,16 +196,17 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
             break;
         }
     }
-    
-    private void clickSubmitPingjia () {
+
+    private void clickSubmitPingjia() {
         PropertyTousujianyiSubmitPingjiaRequestInfo requestInfo = new PropertyTousujianyiSubmitPingjiaRequestInfo();
 
         addPingjiaInfo(requestInfo, R.id.pingjia_fuwutaidu);
         addPingjiaInfo(requestInfo, R.id.pingjia_jishixing);
 
-        requestInfo.repairid = mItem.complaintid;
+        requestInfo.complaintid = mItem.complaintid;
         ((PropertyTousujianyiMessageProcessProxy) mProcess)
                 .submitTousujianyidanPingjia(this, requestInfo, this);
+        showCustomProgrssDialog();
     }
 
     private void addPingjiaInfo(

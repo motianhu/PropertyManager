@@ -11,6 +11,8 @@ import com.smona.app.propertymanager.data.model.PropertyErshouwupinHomeContentIt
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
+import com.smona.app.propertymanager.source.listview.XListView;
+import com.smona.app.propertymanager.source.listview.XListView.IXListViewListener;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinMessageProcessProxy;
@@ -19,12 +21,13 @@ import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinRequestInf
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
 
-public class PropertyMineWupinActivity extends PropertyBaseActivity {
+public class PropertyMineWupinActivity extends PropertyBaseActivity implements
+        IXListViewListener {
     private static final String TAG = "PropertyMineWupinActivity";
 
     // content
+    private XListView mList;
     private PropertyWupinDetailAdapter mAdapter;
     private ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
     private PropertyErshouwupinHomeContentItem mContent;
@@ -62,14 +65,14 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity {
         LogUtil.d(TAG, "content: " + content);
         Type type = new TypeToken<PropertyErshouwupinHomeContentItem>() {
         }.getType();
-        
+
         PropertyItemInfo info = JsonUtils.parseJson(content, type);
         LogUtil.d(TAG, "info.iccode: " + info.iccode + "; content: " + content);
-        
+
         if ("4710".equals(info.iccode)) {
             mContent = JsonUtils.parseJson(content, type);
-            loadDBData();    
-        } else if("4910".equals(info.iccode)) {
+            loadDBData();
+        } else if ("4910".equals(info.iccode)) {
             PropertyBeanErshouwupinpinpais bean = JsonUtils.parseJson(content,
                     type);
             bean.saveDataToDB(this);
@@ -88,7 +91,7 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity {
         mWupinDatas.addAll(mTypes.wupins);
         mXinjiuDatas.addAll(mTypes.xinjius);
     }
-    
+
     private void loadPinpaiTypeData() {
         mPinpaiDatas.clear();
         mTypes.loadPinpais(this);
@@ -138,10 +141,14 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity {
                 R.string.property_ershouwupin_item_xinjiu);
         initView(R.id.xinjiu);
 
-        ListView list = (ListView) mRoot.findViewById(R.id.list_content);
+        mList = (XListView) mRoot.findViewById(R.id.list_content);
         ArrayList<PropertyItemInfo> data = mDatas;
         mAdapter = new PropertyWupinDetailAdapter(this, data);
-        list.setAdapter(mAdapter);
+        mList.setAdapter(mAdapter);
+        mList.setPullRefreshEnable(true);
+        mList.setPullLoadEnable(true);
+        mList.setXListViewListener(this);
+
     }
 
     @Override
@@ -162,7 +169,7 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity {
             break;
         }
     }
-    
+
     private void initPinpaiTypes(String classCode) {
         PropertyErshouwupinPinpaiRequestInfo request = new PropertyErshouwupinPinpaiRequestInfo();
         request.classcode = classCode;
@@ -218,5 +225,20 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity {
                         ((PropertyTypeItem) info).type_name);
             }
         });
+    }
+
+    @Override
+    public void onRefresh() {
+
+    }
+
+    @Override
+    public void onLoadMore() {
+
+    }
+    
+    private void stopRefresh() {
+        mList.stopLoadMore();
+        mList.stopRefresh();
     }
 }
