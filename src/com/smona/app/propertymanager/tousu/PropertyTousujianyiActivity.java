@@ -4,8 +4,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import com.google.gson.reflect.TypeToken;
-import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.common.PropertyStartupCameraActivity;
 import com.smona.app.propertymanager.data.bean.PropertyBeanTousujianyi;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTousujianyiContentItem;
@@ -17,15 +17,18 @@ import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
-public class PropertyTousujianyiActivity extends PropertyBaseActivity {
+public class PropertyTousujianyiActivity extends PropertyStartupCameraActivity {
 
     private static final String TAG = "PropertyTousujianyiActivity";
 
@@ -122,6 +125,8 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
         initView(R.id.start_camera);
         initView(R.id.action_now);
         initView(R.id.call_wuye);
+
+        mPictureContainer = (ViewGroup) findViewById(R.id.list_hor_image);
     }
 
     @Override
@@ -159,7 +164,7 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
     private void actionCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
-        startActivityForResult(intent, 1);
+        startActivityForResult(intent, ACTION_CAMERA);
     }
 
     private void clickActionNow() {
@@ -207,5 +212,20 @@ public class PropertyTousujianyiActivity extends PropertyBaseActivity {
                 setTag(R.id.select_type, info);
             }
         });
+    }
+
+    protected void onCameraCallback(Bitmap bitmap, String fileName) {
+        ImageView image = new ImageView(this);
+        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                getResources()
+                        .getDimensionPixelSize(
+                                R.dimen.property_common_paishezhaoping_container_height),
+                getResources()
+                        .getDimensionPixelSize(
+                                R.dimen.property_common_paishezhaoping_container_height));
+        param.leftMargin = 10;
+        mPictureContainer.addView(image, 0, param);
+        image.setTag(fileName);
+        image.setImageBitmap(bitmap);
     }
 }

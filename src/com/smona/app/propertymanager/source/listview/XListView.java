@@ -1,7 +1,7 @@
 package com.smona.app.propertymanager.source.listview;
 
 import com.smona.app.propertymanager.R;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -94,6 +94,7 @@ public class XListView extends ListView implements OnScrollListener {
         // init header height
         mHeaderView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new OnGlobalLayoutListener() {
+                    @SuppressWarnings("deprecation")
                     @Override
                     public void onGlobalLayout() {
                         mHeaderViewHeight = mHeaderViewContent.getHeight();
@@ -256,6 +257,7 @@ public class XListView extends ListView implements OnScrollListener {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         if (mLastY == -1) {

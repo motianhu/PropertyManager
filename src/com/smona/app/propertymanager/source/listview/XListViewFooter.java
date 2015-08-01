@@ -1,7 +1,7 @@
 package com.smona.app.propertymanager.source.listview;
 
 import com.smona.app.propertymanager.R;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -96,13 +96,14 @@ public class XListViewFooter extends LinearLayout {
         mContentView.setLayoutParams(lp);
     }
 
+    @SuppressLint("InflateParams")
     private void initView(Context context) {
         mContext = context;
         LinearLayout moreView = (LinearLayout) LayoutInflater.from(mContext)
                 .inflate(R.layout.xlistview_footer, null);
         addView(moreView);
         moreView.setLayoutParams(new LinearLayout.LayoutParams(
-                LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
         mContentView = moreView.findViewById(R.id.xlistview_footer_content);
         mProgressBar = moreView.findViewById(R.id.xlistview_footer_progressbar);
