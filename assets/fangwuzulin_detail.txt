@@ -1,6 +1,6 @@
 {
     "publishid": "2",
-    "choosetype": "0",
+    "choosetype": "1",
     "housetype": "三室两厅",
     "housearea": "全部",
     "picurl": [

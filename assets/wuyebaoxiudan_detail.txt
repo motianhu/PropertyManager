@@ -10,7 +10,7 @@
     },
     "repairid": "3",
     "repairname": "空调不工作",
-    "repairpicture": null,
+    "repairpicture": [],
     "repairdesc": "换led灯泡",
     "workbegintime": "2015-07-12",
     "worker": "11",

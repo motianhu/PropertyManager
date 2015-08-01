@@ -1,10 +1,19 @@
 package com.smona.app.propertymanager.zulin;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
+import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinContentItem;
+import com.smona.app.propertymanager.data.model.PropertyItemInfo;
+import com.smona.app.propertymanager.data.model.PropertyTypeItem;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
+import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
+import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinDetailRequestInfo;
+import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinMessageProcessProxy;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -21,6 +30,8 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
     private PropertyFangwuzulinContentItem mItem;
     private boolean mIsMySelf = false;
 
+    private ArrayList<PropertyItemInfo> mYewuDatas = new ArrayList<PropertyItemInfo>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +46,35 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
                 .getParcelableExtra("iteminfo");
         mIsMySelf = mItem.loginname == mItem.customerid;
         LogUtil.d(TAG, "acquireData mItem: " + mItem);
+        initYewuDatas();
+    }
+
+    private void initYewuDatas() {
+        String[] ids = getResources().getStringArray(
+                R.array.fangwuzulin_ywtype_id);
+        String[] ywnames = getResources().getStringArray(
+                R.array.fangwuzulin_ywtype_name);
+
+        for (int i = 0; i < ids.length; i++) {
+            PropertyTypeItem item = new PropertyTypeItem();
+            item.type_id = ids[i];
+            item.type_name = ywnames[i];
+            mYewuDatas.add(item);
+        }
     }
 
     protected void refreshUI() {
         View parent = mRoot.findViewById(R.id.ywtype);
-        initText(parent, R.id.value, mItem.choosetype);
+        String chooseName = "";
+        int size = mYewuDatas.size();
+        for (int i = 0; i < size; i++) {
+            if (((PropertyTypeItem) mYewuDatas.get(i)).type_id
+                    .equals(mItem.choosetype)) {
+                chooseName = ((PropertyTypeItem) mYewuDatas.get(i)).type_name;
+                break;
+            }
+        }
+        initText(parent, R.id.value, chooseName);
 
         parent = mRoot.findViewById(R.id.area);
         initText(parent, R.id.value, mItem.housearea);
@@ -151,7 +186,47 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
         case R.id.call_phone:
             clickCall();
             break;
+        case R.id.modify_info:
+            gotoModifyActivity();
+            break;
+        case R.id.cancel_publish:
+            cancelPublish();
+            break;
         }
+    }
+
+    protected void gotoModifyActivity() {
+        Intent intent = new Intent();
+        intent.setClass(this, PropertyPublishFangYuanActivity.class);
+        intent.putExtra("iteminfo", mItem);
+        startActivity(intent);
+    }
+
+    protected void cancelPublish() {
+        mProcess = new PropertyFangwuzulinMessageProcessProxy();
+
+        mRequestInfo = new PropertyFangwuzulinDetailRequestInfo();
+        ((PropertyFangwuzulinDetailRequestInfo) mRequestInfo).publishid = mItem.publishid;
+
+        ((PropertyFangwuzulinMessageProcessProxy) mProcess)
+                .submitFangwuzulinCancelPublish(this, mRequestInfo, this);
+        showCustomProgrssDialog();
+    }
+    
+    protected void saveData(String content) {
+        Type type = new TypeToken<PropertyItemInfo>() {
+        }.getType();
+        PropertyItemInfo info = JsonUtils.parseJson(content, type);
+        if("4610".equals(info.iccode) && "00".equals(info.answercode)) {
+            showMessage("取消发布失败");
+        } else {
+            showMessage("取消发布失败");
+        }
+        hideCustomProgressDialog();
+    }
+
+    protected void failedRequest() {
+        hideCustomProgressDialog();
     }
 
     private void clickCall() {

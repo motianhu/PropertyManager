@@ -17,7 +17,7 @@
         {
             "repairid": "3",
             "repairname": "空调不工作",
-            "repairpicture": null,
+            "repairpicture": [],
             "repairdesc": "换led灯泡",
             "requesttime": "2015-07-14",
             "repairstatus": "未处理"
@@ -25,7 +25,7 @@
         {
             "repairid": "4",
             "repairname": "水管漏水",
-            "repairpicture": null,
+            "repairpicture": [],
             "repairdesc": "换led灯泡",
             "requesttime": "2015-07-14",
             "repairstatus": "已处理"

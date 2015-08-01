@@ -13,6 +13,7 @@ import android.widget.EditText;
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.data.model.PropertyFangwuzulinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
@@ -23,6 +24,8 @@ import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinSubmitRequ
 
 public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyPublishFangYuanActivity";
+
+    private PropertyFangwuzulinContentItem mItem;
 
     // type
     private PropertyFangwuzulinTypeItem mTypes;
@@ -39,10 +42,26 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
 
     private void aquireData() {
         mProcess = new PropertyFangwuzulinMessageProcessProxy();
+        initType();
 
+        // modify info
+        mItem = (PropertyFangwuzulinContentItem) getIntent()
+                .getParcelableExtra("iteminfo");
+        if (mItem != null) {
+            requestRefreshUI();
+        }
+    }
+
+    private void initType() {
         mTypes = new PropertyFangwuzulinTypeItem();
         mTypes.loadDBData(this);
+        mHuxingDatas.addAll(mTypes.hourse);
+        mAreaDatas.addAll(mTypes.areas);
 
+        initYewuDatas();
+    }
+
+    private void initYewuDatas() {
         String[] ids = getResources().getStringArray(
                 R.array.fangwuzulin_ywtype_id);
         String[] ywnames = getResources().getStringArray(
@@ -54,15 +73,18 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
             item.type_name = ywnames[i];
             mYewuDatas.add(item);
         }
-        mHuxingDatas.addAll(mTypes.hourse);
-        mAreaDatas.addAll(mTypes.areas);
     }
 
     @Override
     protected void initHeader() {
         initText(R.id.title, R.string.property_fangwuzulin_publish_fangyuan);
-        initText(R.id.detail, R.string.property_fangwuzulin_mine);
-        initView(R.id.detail);
+        if (mItem != null) {
+            findViewById(R.id.detail).setVisibility(View.GONE);
+        } else {
+            findViewById(R.id.detail).setVisibility(View.VISIBLE);
+            initText(R.id.detail, R.string.property_fangwuzulin_mine);
+            initView(R.id.detail);
+        }
         initView(R.id.back);
     }
 
@@ -107,6 +129,38 @@ public class PropertyPublishFangYuanActivity extends PropertyBaseActivity {
         initView(R.id.start_camera);
 
         initView(R.id.publish);
+    }
+
+    @Override
+    public void refreshUI() {
+        if (mItem == null) {
+            return;
+        }
+
+        View parent = mRoot.findViewById(R.id.ywtype);
+        int size = mYewuDatas.size();
+        String chooseName = "";
+        for (int i = 0; i < size; i++) {
+            if (((PropertyTypeItem) mYewuDatas.get(i)).type_id.equals(mItem.choosetype)) {
+                chooseName = ((PropertyTypeItem) mYewuDatas.get(i)).type_name;
+                break;
+            }
+        }
+        initText(parent, R.id.select_type, chooseName);
+
+        parent = mRoot.findViewById(R.id.area);
+        initText(parent, R.id.select_type, mItem.housearea);
+        parent = mRoot.findViewById(R.id.housetype);
+        initText(parent, R.id.select_type, mItem.housetype);
+
+        initText(R.id.problem_content, mItem.housedesc);
+
+        parent = mRoot.findViewById(R.id.weizhi);
+        initText(parent, R.id.value, mItem.houseaddress);
+        parent = mRoot.findViewById(R.id.lianxiren);
+        initText(parent, R.id.value, mItem.username);
+        parent = mRoot.findViewById(R.id.dianhua);
+        initText(parent, R.id.value, mItem.userphone);
     }
 
     @Override
