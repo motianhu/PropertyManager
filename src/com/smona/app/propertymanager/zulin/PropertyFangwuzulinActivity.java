@@ -4,15 +4,13 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import com.google.gson.reflect.TypeToken;
-import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.common.PropertyFetchListActivity;
 import com.smona.app.propertymanager.data.bean.PropertyBeanFangwuzulinType;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinHomeContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
-import com.smona.app.propertymanager.source.listview.XListView;
-import com.smona.app.propertymanager.source.listview.XListView.IXListViewListener;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinMessageProcessProxy;
@@ -21,17 +19,10 @@ import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinRequestInf
 import android.os.Bundle;
 import android.view.View;
 
-public class PropertyFangwuzulinActivity extends PropertyBaseActivity implements
-        IXListViewListener {
+public class PropertyFangwuzulinActivity extends PropertyFetchListActivity {
     private static final String TAG = "PropertyFangwuzulinActivity";
 
-    private int mCurrPage = 1;
-    private static final int PAGE_SIZE = 10;
-    private boolean mIsDataOver = false;
-
     // content
-    private XListView mList;
-    private PropertyZulinDetailAdapter mAdapter;
     private ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
     private PropertyFangwuzulinHomeContentItem mContent;
 
@@ -72,16 +63,20 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity implements
         mProcess = new PropertyFangwuzulinMessageProcessProxy();
 
         mRequestInfo = new PropertyFangwuzulinRequestInfo();
-        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageno = mCurrPage + "";
-        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageSize = PAGE_SIZE
-                + "";
-
-        ((PropertyFangwuzulinMessageProcessProxy) mProcess).requestFangwuzulin(
-                this, mRequestInfo, this);
+        requestListData();
+        
         ((PropertyFangwuzulinMessageProcessProxy) mProcess)
                 .requestFangwuzulinType(this, this);
 
-         showCustomProgrssDialog();
+        showCustomProgrssDialog();
+    }
+
+    private void requestListData() {
+        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageno = getCurrentPage() + "";
+        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageSize = PAGE_SIZE
+                + "";
+        ((PropertyFangwuzulinMessageProcessProxy) mProcess).requestFangwuzulin(
+                this, mRequestInfo, this);
     }
 
     protected void saveData(String content) {
@@ -93,8 +88,7 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity implements
             }.getType();
             mContent = JsonUtils.parseJson(content, type);
             loadListData();
-            mCurrPage += 1;
-            mIsDataOver = Integer.valueOf(mContent.pagesize) < PAGE_SIZE;
+            setDataPos(Integer.valueOf(mContent.pagesize));
         } else if ("4310".equals(info.iccode)) {
             LogUtil.d(TAG, "1content: " + content);
             type = new TypeToken<PropertyBeanFangwuzulinType>() {
@@ -128,7 +122,7 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity implements
     }
 
     protected void refreshUI() {
-        mAdapter.notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     @Override
@@ -167,12 +161,7 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity implements
                 R.string.property_fangwuzulin_item_huxing);
         initView(R.id.housetype);
 
-        mList = (XListView) mRoot.findViewById(R.id.list_content);
-        mAdapter = new PropertyZulinDetailAdapter(this, mDatas);
-        mList.setAdapter(mAdapter);
-        mList.setPullRefreshEnable(true);
-        mList.setPullLoadEnable(true);
-        mList.setXListViewListener(this);
+        setFetchListener(mDatas);
     }
 
     @Override
@@ -238,29 +227,10 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity implements
             }
         });
     }
-
+    
     @Override
-    public void onRefresh() {
-        stopRefresh();
-    }
-
-    @Override
-    public void onLoadMore() {
-        if (mIsDataOver) {
-            stopRefresh();
-            showMessage("数据到达终点");
-            return;
-        }
-        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageno = mCurrPage + "";
-        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageSize = PAGE_SIZE
-                + "";
-        ((PropertyFangwuzulinMessageProcessProxy) mProcess).requestFangwuzulin(
-                this, mRequestInfo, this);
+    public void loadMore() {
+        requestListData();
         showCustomProgrssDialog();
-    }
-
-    private void stopRefresh() {
-        mList.stopLoadMore();
-        mList.stopRefresh();
     }
 }
