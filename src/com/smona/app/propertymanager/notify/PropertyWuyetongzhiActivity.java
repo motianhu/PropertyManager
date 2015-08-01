@@ -4,8 +4,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import com.google.gson.reflect.TypeToken;
-import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.common.PropertyFetchListActivity;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyWuyetongzhiHomeContentItem;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
@@ -17,13 +17,11 @@ import com.smona.app.propertymanager.util.LogUtil;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 
-public class PropertyWuyetongzhiActivity extends PropertyBaseActivity {
+public class PropertyWuyetongzhiActivity extends PropertyFetchListActivity {
     private static final String TAG = "PropertyWuyetongzhiActivity";
 
     private ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
-    private PropertyNotifyMessageAdapter mAdapter;
 
     private PropertyWuyetongzhiHomeContentItem mContent;
 
@@ -43,8 +41,14 @@ public class PropertyWuyetongzhiActivity extends PropertyBaseActivity {
         mProcess = new PropertyWuyetongzhiMessageProcessProxy();
 
         mRequestInfo = new PropertyWuyetongzhiRequestInfo();
-        ((PropertyWuyetongzhiRequestInfo) mRequestInfo).pageno = "1";
-        ((PropertyWuyetongzhiRequestInfo) mRequestInfo).pageSize = "12";
+        fetchListData();
+    }
+
+    private void fetchListData() {
+        ((PropertyWuyetongzhiRequestInfo) mRequestInfo).pageno = getCurrentPage()
+                + "";
+        ((PropertyWuyetongzhiRequestInfo) mRequestInfo).pageSize = PAGE_SIZE
+                + "";
 
         ((PropertyWuyetongzhiMessageProcessProxy) mProcess).requestWuyetongzhi(
                 this, mRequestInfo, this);
@@ -56,13 +60,15 @@ public class PropertyWuyetongzhiActivity extends PropertyBaseActivity {
         Type type = new TypeToken<PropertyWuyetongzhiHomeContentItem>() {
         }.getType();
         mContent = JsonUtils.parseJson(content, type);
-
-        loadDBData();
-        hideCustomProgressDialog();
+        if ("5310".equals(mContent) && "00".equals(mContent.answercode)) {
+            loadDBData();
+            setDataPos(Integer.valueOf(mContent.pageno));
+        }
+        finishDialogAndRefresh();
     }
 
     protected void failedRequest() {
-        hideCustomProgressDialog();
+        finishDialogAndRefresh();
     }
 
     private void loadDBData() {
@@ -74,7 +80,7 @@ public class PropertyWuyetongzhiActivity extends PropertyBaseActivity {
 
     protected void refreshUI() {
         initYezhuxinxi();
-        mAdapter.notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     private void initYezhuxinxi() {
@@ -101,9 +107,7 @@ public class PropertyWuyetongzhiActivity extends PropertyBaseActivity {
 
     @Override
     protected void initBody() {
-        ListView list = (ListView) mRoot.findViewById(R.id.list_content);
-        mAdapter = new PropertyNotifyMessageAdapter(this, mDatas);
-        list.setAdapter(mAdapter);
+        setFetchListener(mDatas);
     }
 
     @Override
@@ -114,5 +118,10 @@ public class PropertyWuyetongzhiActivity extends PropertyBaseActivity {
             finish();
             break;
         }
+    }
+
+    @Override
+    protected void loadMore() {
+        fetchListData();
     }
 }

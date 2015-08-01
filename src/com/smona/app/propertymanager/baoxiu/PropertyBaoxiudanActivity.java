@@ -4,10 +4,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import com.google.gson.reflect.TypeToken;
-import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.baoxiu.process.PropertyWuyebaoxiuMessageProcessProxy;
 import com.smona.app.propertymanager.baoxiu.process.PropertyWuyebaoxiuRequestInfo;
+import com.smona.app.propertymanager.common.PropertyFetchListActivity;
 import com.smona.app.propertymanager.data.model.PropertyCustomerContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyWuyebaoxiudanHomeContentItem;
@@ -18,13 +18,11 @@ import com.smona.app.propertymanager.util.LogUtil;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 
-public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
+public class PropertyBaoxiudanActivity extends PropertyFetchListActivity {
 
     private static final String TAG = "PropertyBaoxiudanActivity";
 
-    private PropertyBaoxiudansAdapter mAdapter;
     private ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
 
     private PropertyCustomerContentItem customer;
@@ -51,9 +49,14 @@ public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
     private void requestData() {
         mProcess = new PropertyWuyebaoxiuMessageProcessProxy();
         mRequestInfo = new PropertyWuyebaoxiuRequestInfo();
-        ((PropertyWuyebaoxiuRequestInfo) mRequestInfo).pageno = "1";
-        ((PropertyWuyebaoxiuRequestInfo) mRequestInfo).pageSize = "12";
+        fetchListData();
+    }
 
+    private void fetchListData() {
+        ((PropertyWuyebaoxiuRequestInfo) mRequestInfo).pageno = getCurrentPage()
+                + "";
+        ((PropertyWuyebaoxiuRequestInfo) mRequestInfo).pageSize = PAGE_SIZE
+                + "";
         ((PropertyWuyebaoxiuMessageProcessProxy) mProcess)
                 .requestWuyebaoxiudan(this, mRequestInfo, this);
         showCustomProgrssDialog();
@@ -65,12 +68,15 @@ public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
         mBean = JsonUtils.parseJson(content, type);
 
         LogUtil.d(TAG, "content: " + mBean);
-        loadDBData();
-        hideCustomProgressDialog();
+        if ("3410".equals(mBean) && "00".equals(mBean.answercode)) {
+            loadDBData();
+            setDataPos(Integer.valueOf(mBean.pageno));
+        }
+        finishDialogAndRefresh();
     }
 
     protected void failedRequest() {
-        hideCustomProgressDialog();
+        finishDialogAndRefresh();
     }
 
     private void loadDBData() {
@@ -79,7 +85,7 @@ public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
     }
 
     protected void refreshUI() {
-        mAdapter.notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     @Override
@@ -97,9 +103,7 @@ public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
     protected void initBody() {
         initYezhuxinxi();
 
-        ListView list = (ListView) mRoot.findViewById(R.id.list_content);
-        mAdapter = new PropertyBaoxiudansAdapter(this, mDatas);
-        list.setAdapter(mAdapter);
+        setFetchListener(mDatas);
     }
 
     private void initYezhuxinxi() {
@@ -123,5 +127,10 @@ public class PropertyBaoxiudanActivity extends PropertyBaseActivity {
             finish();
             break;
         }
+    }
+
+    @Override
+    protected void loadMore() {
+        fetchListData();
     }
 }

@@ -6,11 +6,10 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 
 import com.google.gson.reflect.TypeToken;
-import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.common.PropertyFetchListActivity;
 import com.smona.app.propertymanager.data.model.PropertyCustomerContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTousujianyidanHomeContentItem;
@@ -20,10 +19,9 @@ import com.smona.app.propertymanager.tousu.process.PropertyTousujianyiRequestInf
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 
-public class PropertyMineTousuActivity extends PropertyBaseActivity {
+public class PropertyMineTousuActivity extends PropertyFetchListActivity {
     private static final String TAG = "PropertyMineTousuActivity";
 
-    private PropertyTousudanAdapter mAdapter;
     private ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
 
     private PropertyCustomerContentItem customer;
@@ -50,8 +48,14 @@ public class PropertyMineTousuActivity extends PropertyBaseActivity {
     private void requestData() {
         mProcess = new PropertyTousujianyiMessageProcessProxy();
         mRequestInfo = new PropertyTousujianyiRequestInfo();
-        ((PropertyTousujianyiRequestInfo) mRequestInfo).pageno = "1";
-        ((PropertyTousujianyiRequestInfo) mRequestInfo).pageSize = "12";
+        fetchListData();
+    }
+
+    private void fetchListData() {
+        ((PropertyTousujianyiRequestInfo) mRequestInfo).pageno = getCurrentPage()
+                + "";
+        ((PropertyTousujianyiRequestInfo) mRequestInfo).pageSize = PAGE_SIZE
+                + "";
         ((PropertyTousujianyiMessageProcessProxy) mProcess)
                 .requestTousujianyidan(this, mRequestInfo, this);
         showCustomProgrssDialog();
@@ -62,13 +66,16 @@ public class PropertyMineTousuActivity extends PropertyBaseActivity {
         Type type = new TypeToken<PropertyTousujianyidanHomeContentItem>() {
         }.getType();
         mBean = JsonUtils.parseJson(content, type);
-
-        loadDBData();
-        hideCustomProgressDialog();
+        LogUtil.d(TAG, "content: " + mBean);
+        if ("3910".equals(mBean) && "00".equals(mBean.answercode)) {
+            loadDBData();
+            setDataPos(Integer.valueOf(mBean.pageno));
+        }
+        finishDialogAndRefresh();
     }
 
     protected void failedRequest() {
-        hideCustomProgressDialog();
+        finishDialogAndRefresh();
     }
 
     private void loadDBData() {
@@ -77,7 +84,7 @@ public class PropertyMineTousuActivity extends PropertyBaseActivity {
     }
 
     protected void refreshUI() {
-        mAdapter.notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     protected void initHeader() {
@@ -88,9 +95,7 @@ public class PropertyMineTousuActivity extends PropertyBaseActivity {
     protected void initBody() {
         initYezhuxinxi();
 
-        ListView list = (ListView) mRoot.findViewById(R.id.list_content);
-        mAdapter = new PropertyTousudanAdapter(this, mDatas);
-        list.setAdapter(mAdapter);
+        setFetchListener(mDatas);
     }
 
     private void initYezhuxinxi() {
@@ -119,6 +124,11 @@ public class PropertyMineTousuActivity extends PropertyBaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    protected void loadMore() {
+        fetchListData();
     }
 
 }
