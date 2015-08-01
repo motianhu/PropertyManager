@@ -61,4 +61,10 @@ public class PropertyErshouwupinMessageProcessProxy extends
             PropertyRequestInfo request, IQuestCallback callback) {
         mNetSubmitJson.submitErshouwupindan(context, request, callback);
     }
+    
+    public void submitErshouwupinCancelPublish(Context context,
+            PropertyRequestInfo request, IQuestCallback callback) {
+        mNetSubmitJson.submitErshouwupinCancelPublish(context, request,
+                callback);
+    }
 }

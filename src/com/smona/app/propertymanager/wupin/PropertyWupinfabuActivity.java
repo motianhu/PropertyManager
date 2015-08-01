@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.bean.PropertyBeanErshouwupinpinpais;
+import com.smona.app.propertymanager.data.model.PropertyErshouwupinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
@@ -26,6 +27,8 @@ import android.widget.EditText;
 public class PropertyWupinfabuActivity extends PropertyBaseActivity {
     private static final String TAG = "PropertyWupinfabuActivity";
 
+    private PropertyErshouwupinContentItem mItem;
+
     // type
     private PropertyErshouwupinTypeItem mTypes;
     private ArrayList<PropertyItemInfo> mPinpaiDatas = new ArrayList<PropertyItemInfo>();
@@ -36,8 +39,18 @@ public class PropertyWupinfabuActivity extends PropertyBaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.property_ershouwupin_fabu);
+        aquireData();
         initViews();
         requestLoadData();
+    }
+
+    private void aquireData() {
+        // modify info
+        mItem = (PropertyErshouwupinContentItem) getIntent()
+                .getParcelableExtra("iteminfo");
+        if (mItem != null) {
+            requestRefreshUI();
+        }
     }
 
     protected void loadData() {
@@ -64,7 +77,27 @@ public class PropertyWupinfabuActivity extends PropertyBaseActivity {
     }
 
     protected void refreshUI() {
+        if (mItem == null) {
+            return;
+        }
+        
+        View parent = mRoot.findViewById(R.id.wupintype);
+        initText(parent, R.id.select_type, mItem.classname);
 
+        parent = mRoot.findViewById(R.id.pinpai);
+        initText(parent, R.id.select_type, mItem.brand);
+        parent = mRoot.findViewById(R.id.xinjiu);
+        initText(parent, R.id.select_type, mItem.goosstatus);
+
+        initText(R.id.problem_content, mItem.goodsdesc);
+
+        parent = mRoot.findViewById(R.id.goodsname);
+        initText(parent, R.id.value, mItem.goodsname);
+        
+        parent = mRoot.findViewById(R.id.lianxiren);
+        initText(parent, R.id.value, mItem.username);
+        parent = mRoot.findViewById(R.id.dianhua);
+        initText(parent, R.id.value, mItem.userphone);
     }
 
     @Override
@@ -75,8 +108,13 @@ public class PropertyWupinfabuActivity extends PropertyBaseActivity {
     @Override
     protected void initHeader() {
         initText(R.id.title, R.string.property_ershouwupin_wupinfabu);
-        initText(R.id.detail, R.string.property_ershouwupin_mine);
-        initView(R.id.detail);
+        if (mItem != null) {
+            findViewById(R.id.detail).setVisibility(View.GONE);
+        } else {
+            findViewById(R.id.detail).setVisibility(View.VISIBLE);
+            initText(R.id.detail, R.string.property_ershouwupin_mine);
+            initView(R.id.detail);
+        }
         initView(R.id.back);
     }
 

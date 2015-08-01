@@ -1,5 +1,7 @@
 package com.smona.app.propertymanager.wupin;
 
+import java.lang.reflect.Type;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,11 +11,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinContentItem;
+import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
+import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
+import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinDetailRequestInfo;
+import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinMessageProcessProxy;
 
 public class PropertyWupinDetailActivity extends PropertyBaseActivity {
 
@@ -36,6 +43,38 @@ public class PropertyWupinDetailActivity extends PropertyBaseActivity {
                 .getParcelableExtra("iteminfo");
         mIsMySelf = mItem.customerid == mItem.loginname;
         LogUtil.d(TAG, "acquireData mItem: " + mItem);
+    }
+
+    @Override
+    protected void initBody() {
+        View parent = mRoot.findViewById(R.id.wupinfenlei);
+        initText(parent, R.id.name,
+                R.string.property_ershouwupin_detail_wupinfenlei);
+
+        parent = mRoot.findViewById(R.id.pinpai);
+        initText(parent, R.id.name, R.string.property_ershouwupin_detail_pinpai);
+
+        parent = mRoot.findViewById(R.id.wupinmingchen);
+        initText(parent, R.id.name, R.string.property_ershouwupin_wupinmingchen);
+
+        parent = mRoot.findViewById(R.id.wupinmiaoshu);
+        initText(parent, R.id.name,
+                R.string.property_ershouwupin_wupinfabu_wupinmiaoshu);
+
+        parent = mRoot.findViewById(R.id.xinjiu);
+        initText(parent, R.id.name, R.string.property_ershouwupin_xuanzexinjiu);
+
+        parent = mRoot.findViewById(R.id.lianxiren);
+        initText(parent, R.id.name,
+                R.string.property_ershouwupin_wupinfabu_lianxiren);
+
+        parent = mRoot.findViewById(R.id.dianhua);
+        initText(parent, R.id.name,
+                R.string.property_ershouwupin_wupinfabu_dianhu);
+
+        parent = mRoot.findViewById(R.id.fabushijian);
+        initText(parent, R.id.name,
+                R.string.property_ershouwupin_item_pulish_time);
     }
 
     protected void refreshUI() {
@@ -105,38 +144,6 @@ public class PropertyWupinDetailActivity extends PropertyBaseActivity {
     }
 
     @Override
-    protected void initBody() {
-        View parent = mRoot.findViewById(R.id.wupinfenlei);
-        initText(parent, R.id.name,
-                R.string.property_ershouwupin_detail_wupinfenlei);
-
-        parent = mRoot.findViewById(R.id.pinpai);
-        initText(parent, R.id.name, R.string.property_ershouwupin_detail_pinpai);
-
-        parent = mRoot.findViewById(R.id.wupinmingchen);
-        initText(parent, R.id.name, R.string.property_ershouwupin_wupinmingchen);
-
-        parent = mRoot.findViewById(R.id.wupinmiaoshu);
-        initText(parent, R.id.name,
-                R.string.property_ershouwupin_wupinfabu_wupinmiaoshu);
-
-        parent = mRoot.findViewById(R.id.xinjiu);
-        initText(parent, R.id.name, R.string.property_ershouwupin_xuanzexinjiu);
-
-        parent = mRoot.findViewById(R.id.lianxiren);
-        initText(parent, R.id.name,
-                R.string.property_ershouwupin_wupinfabu_lianxiren);
-
-        parent = mRoot.findViewById(R.id.dianhua);
-        initText(parent, R.id.name,
-                R.string.property_ershouwupin_wupinfabu_dianhu);
-
-        parent = mRoot.findViewById(R.id.fabushijian);
-        initText(parent, R.id.name,
-                R.string.property_ershouwupin_item_pulish_time);
-    }
-
-    @Override
     protected void clickView(View v) {
         int id = v.getId();
         switch (id) {
@@ -146,7 +153,47 @@ public class PropertyWupinDetailActivity extends PropertyBaseActivity {
         case R.id.call_phone:
             clickCall();
             break;
+        case R.id.modify_info:
+            gotoModifyActivity();
+            break;
+        case R.id.cancel_publish:
+            cancelPublish();
+            break;
         }
+    }
+
+    protected void gotoModifyActivity() {
+        Intent intent = new Intent();
+        intent.setClass(this, PropertyWupinfabuActivity.class);
+        intent.putExtra("iteminfo", mItem);
+        startActivity(intent);
+    }
+
+    protected void cancelPublish() {
+        mProcess = new PropertyErshouwupinMessageProcessProxy();
+
+        mRequestInfo = new PropertyErshouwupinDetailRequestInfo();
+        ((PropertyErshouwupinDetailRequestInfo) mRequestInfo).publishid = mItem.publishid;
+
+        ((PropertyErshouwupinMessageProcessProxy) mProcess)
+                .submitErshouwupinCancelPublish(this, mRequestInfo, this);
+        showCustomProgrssDialog();
+    }
+
+    protected void saveData(String content) {
+        Type type = new TypeToken<PropertyItemInfo>() {
+        }.getType();
+        PropertyItemInfo info = JsonUtils.parseJson(content, type);
+        if ("5110".equals(info.iccode) && "00".equals(info.answercode)) {
+            showMessage("取消发布成功");
+        } else {
+            showMessage("取消发布失败");
+        }
+        hideCustomProgressDialog();
+    }
+
+    protected void failedRequest() {
+        hideCustomProgressDialog();
     }
 
     private void clickCall() {

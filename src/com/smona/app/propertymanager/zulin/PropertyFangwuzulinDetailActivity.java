@@ -218,7 +218,7 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
         }.getType();
         PropertyItemInfo info = JsonUtils.parseJson(content, type);
         if("4610".equals(info.iccode) && "00".equals(info.answercode)) {
-            showMessage("取消发布失败");
+            showMessage("取消发布成功");
         } else {
             showMessage("取消发布失败");
         }
