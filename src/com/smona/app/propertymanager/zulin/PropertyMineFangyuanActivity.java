@@ -5,11 +5,10 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
 
 import com.google.gson.reflect.TypeToken;
-import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.common.PropertyFetchListActivity;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinHomeContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
@@ -19,11 +18,10 @@ import com.smona.app.propertymanager.util.LogUtil;
 import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinMessageProcessProxy;
 import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinRequestInfo;
 
-public class PropertyMineFangyuanActivity extends PropertyBaseActivity {
+public class PropertyMineFangyuanActivity extends PropertyFetchListActivity {
     private static final String TAG = "PropertyMineFangyuanActivity";
 
     // content
-    private PropertyZulinDetailAdapter mAdapter;
     private PropertyFangwuzulinHomeContentItem mContent;
     private ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
 
@@ -56,7 +54,7 @@ public class PropertyMineFangyuanActivity extends PropertyBaseActivity {
             item.type_name = ywnames[i];
             mYewuDatas.add(item);
         }
-        
+
         mHuxingDatas.addAll(mTypes.hourse);
         mAreaDatas.addAll(mTypes.areas);
     }
@@ -69,11 +67,16 @@ public class PropertyMineFangyuanActivity extends PropertyBaseActivity {
         mProcess = new PropertyFangwuzulinMessageProcessProxy();
 
         mRequestInfo = new PropertyFangwuzulinRequestInfo();
+        fetchListData();
+    }
+
+    private void fetchListData() {
         ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageno = "1";
         ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageSize = "12";
 
         ((PropertyFangwuzulinMessageProcessProxy) mProcess)
                 .requestFangwuzulinMine(this, mRequestInfo, this);
+
         showCustomProgrssDialog();
     }
 
@@ -83,22 +86,25 @@ public class PropertyMineFangyuanActivity extends PropertyBaseActivity {
         mContent = JsonUtils.parseJson(content, type);
 
         LogUtil.d(TAG, "mContent.icobject: " + mContent.icobject.size());
-        loadDBData();
-        hideCustomProgressDialog();
+        if ("4510".equals(mContent.iccode)
+                && "00".endsWith(mContent.answercode)) {
+            loadDBData();
+            setDataPos(Integer.valueOf(mContent.pagesize));
+        }
+        finishDialogAndRefresh();
     }
 
     protected void failedRequest() {
-        hideCustomProgressDialog();
+        finishDialogAndRefresh();
     }
 
     private void loadDBData() {
         mDatas.addAll(mContent.icobject);
-
         requestRefreshUI();
     }
 
     protected void refreshUI() {
-        mAdapter.notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     @Override
@@ -130,10 +136,8 @@ public class PropertyMineFangyuanActivity extends PropertyBaseActivity {
                 R.string.property_fangwuzulin_item_huxing);
         initView(R.id.housetype);
 
-        ListView list = (ListView) mRoot.findViewById(R.id.list_content);
         ArrayList<PropertyItemInfo> data = mDatas;
-        mAdapter = new PropertyZulinDetailAdapter(this, data);
-        list.setAdapter(mAdapter);
+        setFetchListener(data);
     }
 
     @Override
@@ -201,5 +205,10 @@ public class PropertyMineFangyuanActivity extends PropertyBaseActivity {
                         ((PropertyTypeItem) info).type_name);
             }
         });
+    }
+
+    @Override
+    protected void loadMore() {
+        fetchListData();
     }
 }

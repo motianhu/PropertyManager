@@ -58,9 +58,14 @@ public abstract class PropertyFetchListActivity extends PropertyBaseActivity imp
         mAdapter.notifyDataSetChanged();
     }
 
-    protected void stopRefresh() {
+    private void stopRefresh() {
         mList.stopLoadMore();
         mList.stopRefresh();
+    }
+    
+    protected void finishDialogAndRefresh() {
+        stopRefresh();
+        hideCustomProgressDialog();
     }
 
 }

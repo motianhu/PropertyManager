@@ -64,7 +64,7 @@ public class PropertyFangwuzulinActivity extends PropertyFetchListActivity {
 
         mRequestInfo = new PropertyFangwuzulinRequestInfo();
         requestListData();
-        
+
         ((PropertyFangwuzulinMessageProcessProxy) mProcess)
                 .requestFangwuzulinType(this, this);
 
@@ -72,7 +72,8 @@ public class PropertyFangwuzulinActivity extends PropertyFetchListActivity {
     }
 
     private void requestListData() {
-        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageno = getCurrentPage() + "";
+        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageno = getCurrentPage()
+                + "";
         ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageSize = PAGE_SIZE
                 + "";
         ((PropertyFangwuzulinMessageProcessProxy) mProcess).requestFangwuzulin(
@@ -84,11 +85,14 @@ public class PropertyFangwuzulinActivity extends PropertyFetchListActivity {
         }.getType();
         PropertyItemInfo info = JsonUtils.parseJson(content, type);
         if ("4210".equals(info.iccode)) {
-            type = new TypeToken<PropertyFangwuzulinHomeContentItem>() {
-            }.getType();
-            mContent = JsonUtils.parseJson(content, type);
-            loadListData();
-            setDataPos(Integer.valueOf(mContent.pagesize));
+            if ("00".equals(info.answercode)) {
+                type = new TypeToken<PropertyFangwuzulinHomeContentItem>() {
+                }.getType();
+                mContent = JsonUtils.parseJson(content, type);
+                loadListData();
+                setDataPos(Integer.valueOf(mContent.pagesize));
+            }
+            finishDialogAndRefresh();
         } else if ("4310".equals(info.iccode)) {
             LogUtil.d(TAG, "1content: " + content);
             type = new TypeToken<PropertyBeanFangwuzulinType>() {
@@ -98,11 +102,10 @@ public class PropertyFangwuzulinActivity extends PropertyFetchListActivity {
             bean.saveDataToDB(this);
             loadTypeData();
         }
-        stopRefresh();
     }
 
     protected void failedRequest() {
-        stopRefresh();
+        finishDialogAndRefresh();
     }
 
     private void loadTypeData() {
@@ -118,7 +121,6 @@ public class PropertyFangwuzulinActivity extends PropertyFetchListActivity {
         // has problem
         mDatas.addAll(mContent.icobject);
         requestRefreshUI();
-        hideCustomProgressDialog();
     }
 
     protected void refreshUI() {
@@ -227,7 +229,7 @@ public class PropertyFangwuzulinActivity extends PropertyFetchListActivity {
             }
         });
     }
-    
+
     @Override
     public void loadMore() {
         requestListData();
