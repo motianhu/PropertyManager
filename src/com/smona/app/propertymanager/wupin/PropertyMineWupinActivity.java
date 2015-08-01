@@ -5,8 +5,9 @@ import java.util.ArrayList;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.common.PropertyFetchListActivity;
+import com.smona.app.propertymanager.common.PropertyFilterTypeActivity;
 import com.smona.app.propertymanager.data.bean.PropertyBeanErshouwupinpinpais;
+import com.smona.app.propertymanager.data.model.PropertyErshouwupinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinHomeContentItem;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
@@ -20,11 +21,10 @@ import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinRequestInf
 import android.os.Bundle;
 import android.view.View;
 
-public class PropertyMineWupinActivity extends PropertyFetchListActivity {
+public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
     private static final String TAG = "PropertyMineWupinActivity";
 
     // content
-    private ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
     private PropertyErshouwupinHomeContentItem mContent;
 
     // type
@@ -103,7 +103,7 @@ public class PropertyMineWupinActivity extends PropertyFetchListActivity {
     }
 
     private void loadDBData() {
-        mDatas.addAll(mContent.icobject);
+        mAllDatas.addAll(mContent.icobject);
         requestRefreshUI();
     }
 
@@ -145,8 +145,8 @@ public class PropertyMineWupinActivity extends PropertyFetchListActivity {
                 R.string.property_ershouwupin_item_xinjiu);
         initView(R.id.xinjiu);
 
-        ArrayList<PropertyItemInfo> data = mDatas;
-        setFetchListener(data);
+        mShowDatas.addAll(mAllDatas);
+        setFetchListener(mShowDatas);
     }
 
     @Override
@@ -188,6 +188,7 @@ public class PropertyMineWupinActivity extends PropertyFetchListActivity {
                 View parent = mRoot.findViewById(R.id.wupintype);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
+                filterWupinType(((PropertyTypeItem) info).type_name);
                 initPinpaiTypes(((PropertyTypeItem) info).type_id);
             }
         });
@@ -203,6 +204,7 @@ public class PropertyMineWupinActivity extends PropertyFetchListActivity {
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 View parent = mRoot.findViewById(R.id.xinjiu);
+                filterXinjiuType(((PropertyTypeItem) info).type_name);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
@@ -219,10 +221,45 @@ public class PropertyMineWupinActivity extends PropertyFetchListActivity {
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 View parent = mRoot.findViewById(R.id.pinpai);
+                filterPinpaiType(((PropertyTypeItem) info).type_name);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
         });
+    }
+    
+
+    private void filterWupinType(String filterName) {
+        mShowDatas.clear();
+        for (PropertyItemInfo info : mAllDatas) {
+            if (filterName
+                    .equals(((PropertyErshouwupinContentItem) info).classname)) {
+                mShowDatas.add(info);
+            }
+        }
+        requestRefreshUI();
+    }
+
+    private void filterPinpaiType(String filterName) {
+        mShowDatas.clear();
+        for (PropertyItemInfo info : mAllDatas) {
+            if (filterName
+                    .equals(((PropertyErshouwupinContentItem) info).brand)) {
+                mShowDatas.add(info);
+            }
+        }
+        requestRefreshUI();
+    }
+    
+    private void filterXinjiuType(String filterName) {
+        mShowDatas.clear();
+        for (PropertyItemInfo info : mAllDatas) {
+            if (filterName
+                    .equals(((PropertyErshouwupinContentItem) info).goosstatus)) {
+                mShowDatas.add(info);
+            }
+        }
+        requestRefreshUI();
     }
 
     @Override
