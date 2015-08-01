@@ -11,6 +11,7 @@ import com.smona.app.propertymanager.data.model.PropertyErshouwupinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
+import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinMessageProcessProxy;
@@ -102,6 +103,22 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
         initText(parent, R.id.value, mItem.username);
         parent = mRoot.findViewById(R.id.dianhua);
         initText(parent, R.id.value, mItem.userphone);
+        
+        ViewGroup list = (ViewGroup) mRoot.findViewById(R.id.list_hor_image);
+        for (int i = 0; i < mItem.picurl.size(); i++) {
+            ImageView image = new ImageView(this);
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                    getResources()
+                            .getDimensionPixelSize(
+                                    R.dimen.property_common_paishezhaoping_container_height),
+                    getResources()
+                            .getDimensionPixelSize(
+                                    R.dimen.property_common_paishezhaoping_container_height));
+            param.leftMargin = 10;
+            list.addView(image, param);
+            ImageLoaderManager.getInstance().loadImage(mItem.picurl.get(i),
+                    image);
+        }
     }
 
     @Override
