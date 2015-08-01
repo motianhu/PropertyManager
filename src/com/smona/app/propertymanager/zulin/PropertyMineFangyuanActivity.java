@@ -71,8 +71,8 @@ public class PropertyMineFangyuanActivity extends PropertyFetchListActivity {
     }
 
     private void fetchListData() {
-        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageno = "1";
-        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageSize = "12";
+        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageno = getCurrentPage() + "";
+        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageSize = PAGE_SIZE + "";
 
         ((PropertyFangwuzulinMessageProcessProxy) mProcess)
                 .requestFangwuzulinMine(this, mRequestInfo, this);

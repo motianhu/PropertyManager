@@ -4,15 +4,13 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import com.google.gson.reflect.TypeToken;
-import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.common.PropertyFetchListActivity;
 import com.smona.app.propertymanager.data.bean.PropertyBeanErshouwupinpinpais;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinHomeContentItem;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
-import com.smona.app.propertymanager.source.listview.XListView;
-import com.smona.app.propertymanager.source.listview.XListView.IXListViewListener;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinMessageProcessProxy;
@@ -22,13 +20,10 @@ import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinRequestInf
 import android.os.Bundle;
 import android.view.View;
 
-public class PropertyMineWupinActivity extends PropertyBaseActivity implements
-        IXListViewListener {
+public class PropertyMineWupinActivity extends PropertyFetchListActivity {
     private static final String TAG = "PropertyMineWupinActivity";
 
     // content
-    private XListView mList;
-    private PropertyWupinDetailAdapter mAdapter;
     private ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
     private PropertyErshouwupinHomeContentItem mContent;
 
@@ -55,8 +50,14 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity implements
     private void requestData() {
         mProcess = new PropertyErshouwupinMessageProcessProxy();
         mRequestInfo = new PropertyErshouwupinRequestInfo();
-        ((PropertyErshouwupinRequestInfo) mRequestInfo).pageno = "1";
-        ((PropertyErshouwupinRequestInfo) mRequestInfo).pageSize = "12";
+        fetchListData();
+    }
+
+    private void fetchListData() {
+        ((PropertyErshouwupinRequestInfo) mRequestInfo).pageno = ""
+                + getCurrentPage();
+        ((PropertyErshouwupinRequestInfo) mRequestInfo).pageSize = PAGE_SIZE
+                + "";
         ((PropertyErshouwupinMessageProcessProxy) mProcess)
                 .requestErshouwupinMine(this, mRequestInfo, this);
     }
@@ -70,19 +71,22 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity implements
         LogUtil.d(TAG, "info.iccode: " + info.iccode + "; content: " + content);
 
         if ("4710".equals(info.iccode)) {
-            mContent = JsonUtils.parseJson(content, type);
-            loadDBData();
+            if ("00".equals(info.answercode)) {
+                mContent = JsonUtils.parseJson(content, type);
+                loadDBData();
+                setDataPos(Integer.valueOf(mContent.pageno));
+            }
         } else if ("4910".equals(info.iccode)) {
             PropertyBeanErshouwupinpinpais bean = JsonUtils.parseJson(content,
                     type);
             bean.saveDataToDB(this);
             loadPinpaiTypeData();
         }
-        hideCustomProgressDialog();
+        finishDialogAndRefresh();
     }
 
     protected void failedRequest() {
-        hideCustomProgressDialog();
+        finishDialogAndRefresh();
     }
 
     private void loadTypeData() {
@@ -104,7 +108,7 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity implements
     }
 
     protected void refreshUI() {
-        mAdapter.notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     @Override
@@ -141,14 +145,8 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity implements
                 R.string.property_ershouwupin_item_xinjiu);
         initView(R.id.xinjiu);
 
-        mList = (XListView) mRoot.findViewById(R.id.list_content);
         ArrayList<PropertyItemInfo> data = mDatas;
-        mAdapter = new PropertyWupinDetailAdapter(this, data);
-        mList.setAdapter(mAdapter);
-        mList.setPullRefreshEnable(true);
-        mList.setPullLoadEnable(true);
-        mList.setXListViewListener(this);
-
+        setFetchListener(data);
     }
 
     @Override
@@ -228,17 +226,8 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity implements
     }
 
     @Override
-    public void onRefresh() {
-        stopRefresh();
-    }
-
-    @Override
-    public void onLoadMore() {
-
-    }
-    
-    private void stopRefresh() {
-        mList.stopLoadMore();
-        mList.stopRefresh();
+    protected void loadMore() {
+        fetchListData();
+        showCustomProgrssDialog();
     }
 }
