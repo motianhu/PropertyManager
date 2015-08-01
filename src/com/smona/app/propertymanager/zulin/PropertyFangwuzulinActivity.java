@@ -11,6 +11,8 @@ import com.smona.app.propertymanager.data.model.PropertyFangwuzulinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinHomeContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
+import com.smona.app.propertymanager.source.listview.XListView;
+import com.smona.app.propertymanager.source.listview.XListView.IXListViewListener;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinMessageProcessProxy;
@@ -18,12 +20,17 @@ import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinRequestInf
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
 
-public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
+public class PropertyFangwuzulinActivity extends PropertyBaseActivity implements
+        IXListViewListener {
     private static final String TAG = "PropertyFangwuzulinActivity";
 
+    private int mCurrPage = 1;
+    private static final int PAGE_SIZE = 10;
+    private boolean mIsDataOver = false;
+
     // content
+    private XListView mList;
     private PropertyZulinDetailAdapter mAdapter;
     private ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
     private PropertyFangwuzulinHomeContentItem mContent;
@@ -42,7 +49,7 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
         loadLocalData();
         requestLoadData();
     }
-    
+
     private void loadLocalData() {
         String[] ids = getResources().getStringArray(
                 R.array.fangwuzulin_ywtype_id);
@@ -65,15 +72,16 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
         mProcess = new PropertyFangwuzulinMessageProcessProxy();
 
         mRequestInfo = new PropertyFangwuzulinRequestInfo();
-        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageno = "1";
-        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageSize = "12";
+        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageno = mCurrPage + "";
+        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageSize = PAGE_SIZE
+                + "";
 
         ((PropertyFangwuzulinMessageProcessProxy) mProcess).requestFangwuzulin(
                 this, mRequestInfo, this);
         ((PropertyFangwuzulinMessageProcessProxy) mProcess)
                 .requestFangwuzulinType(this, this);
-        
-        showCustomProgrssDialog();
+
+         showCustomProgrssDialog();
     }
 
     protected void saveData(String content) {
@@ -85,6 +93,8 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
             }.getType();
             mContent = JsonUtils.parseJson(content, type);
             loadListData();
+            mCurrPage += 1;
+            mIsDataOver = Integer.valueOf(mContent.pagesize) < PAGE_SIZE;
         } else if ("4310".equals(info.iccode)) {
             LogUtil.d(TAG, "1content: " + content);
             type = new TypeToken<PropertyBeanFangwuzulinType>() {
@@ -94,10 +104,11 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
             bean.saveDataToDB(this);
             loadTypeData();
         }
+        stopRefresh();
     }
 
     protected void failedRequest() {
-
+        stopRefresh();
     }
 
     private void loadTypeData() {
@@ -156,9 +167,12 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
                 R.string.property_fangwuzulin_item_huxing);
         initView(R.id.housetype);
 
-        ListView list = (ListView) mRoot.findViewById(R.id.list_content);
+        mList = (XListView) mRoot.findViewById(R.id.list_content);
         mAdapter = new PropertyZulinDetailAdapter(this, mDatas);
-        list.setAdapter(mAdapter);
+        mList.setAdapter(mAdapter);
+        mList.setPullRefreshEnable(true);
+        mList.setPullLoadEnable(true);
+        mList.setXListViewListener(this);
     }
 
     @Override
@@ -223,5 +237,30 @@ public class PropertyFangwuzulinActivity extends PropertyBaseActivity {
                         ((PropertyTypeItem) info).type_name);
             }
         });
+    }
+
+    @Override
+    public void onRefresh() {
+        stopRefresh();
+    }
+
+    @Override
+    public void onLoadMore() {
+        if (mIsDataOver) {
+            stopRefresh();
+            showMessage("数据到达终点");
+            return;
+        }
+        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageno = mCurrPage + "";
+        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageSize = PAGE_SIZE
+                + "";
+        ((PropertyFangwuzulinMessageProcessProxy) mProcess).requestFangwuzulin(
+                this, mRequestInfo, this);
+        showCustomProgrssDialog();
+    }
+
+    private void stopRefresh() {
+        mList.stopLoadMore();
+        mList.stopRefresh();
     }
 }

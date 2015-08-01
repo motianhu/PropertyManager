@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinRequestInfo;
+
 public class PropertyLocalSubmitMessageProcess extends PropertyMessageProcess {
 
     // wuyebaoxiu
@@ -75,11 +77,14 @@ public class PropertyLocalSubmitMessageProcess extends PropertyMessageProcess {
     }
 
     // fangwuzulin
-    public void requestFangwuzulin(Context context, IQuestCallback callback) {
+    public void requestFangwuzulin(Context context,
+            PropertyRequestInfo request, IQuestCallback callback) {
         if (callback == null) {
             return;
         }
-        callback.onResult(true, geFileFromAssets(context, "fangwuzulin.txt"));
+        String fileName = "fangwuzulin_"
+                + ((PropertyFangwuzulinRequestInfo) request).pageno + ".txt";
+        callback.onResult(true, geFileFromAssets(context, fileName));
     }
 
     public void requestFangwuzulinDetail(Context context,

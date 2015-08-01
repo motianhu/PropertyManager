@@ -229,7 +229,7 @@ public class PropertyMineWupinActivity extends PropertyBaseActivity implements
 
     @Override
     public void onRefresh() {
-
+        stopRefresh();
     }
 
     @Override

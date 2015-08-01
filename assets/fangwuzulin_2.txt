@@ -1,0 +1,151 @@
+{
+    "pageno": "2",
+    "pagesize": "10",
+    "totalrecord": "000002",
+    "icobject": [
+        {
+            "publishid": "20",
+            "choosetype": "1",
+            "housetype": "三室两厅",
+            "housearea": "全部",
+            "picurl": [
+                "http://171.8.187.205:8080/CommDataSyncService/img/123.jpg"
+            ],
+            "housedesc": "经装修",
+            "houseaddress": "郑州市高新区瑞达路1号",
+            "username": "温峤",
+            "userphone": "22222",
+            "publishtime": "2015-07-14 11:49:05"
+        },
+        {
+            "publishid": "21",
+            "choosetype": "1",
+            "housetype": "三室两厅",
+            "housearea": "全部",
+            "picurl": [
+                "http://171.8.187.205:8080/CommDataSyncService/img/123.jpg"
+            ],
+            "housedesc": "经装修",
+            "houseaddress": "郑州市高新区瑞达路1号",
+            "username": "温峤",
+            "userphone": "12345678901",
+            "publishtime": "2015-07-14 11:49:05"
+        },
+        {
+            "publishid": "22",
+            "choosetype": "1",
+            "housetype": "三室两厅",
+            "housearea": "全部",
+            "picurl": [
+                "http://171.8.187.205:8080/CommDataSyncService/img/123.jpg"
+            ],
+            "housedesc": "经装修",
+            "houseaddress": "郑州市高新区瑞达路1号",
+            "username": "温峤",
+            "userphone": "12345678901",
+            "publishtime": "2015-07-14 11:49:23"
+        },
+        {
+            "publishid": "23",
+            "choosetype": "1",
+            "housetype": "三室两厅",
+            "housearea": "全部",
+            "picurl": [
+                "http://171.8.187.205:8080/CommDataSyncService/img/123.jpg"
+            ],
+            "housedesc": "经装修",
+            "houseaddress": "郑州市高新区瑞达路1号",
+            "username": "温峤",
+            "userphone": "12345678901",
+            "publishtime": "2015-07-14 11:49:23"
+        },
+        {
+            "publishid": "24",
+            "choosetype": "1",
+            "housetype": "三室两厅",
+            "housearea": "全部",
+            "picurl": [
+                "http://171.8.187.205:8080/CommDataSyncService/img/123.jpg"
+            ],
+            "housedesc": "经装修",
+            "houseaddress": "郑州市高新区瑞达路1号",
+            "username": "温峤",
+            "userphone": "12345678901",
+            "publishtime": "2015-07-14 11:49:23"
+        },
+        {
+            "publishid": "25",
+            "choosetype": "1",
+            "housetype": "三室两厅",
+            "housearea": "全部",
+            "picurl": [
+                "http://171.8.187.205:8080/CommDataSyncService/img/123.jpg"
+            ],
+            "housedesc": "经装修",
+            "houseaddress": "郑州市高新区瑞达路1号",
+            "username": "温峤",
+            "userphone": "12345678901",
+            "publishtime": "2015-07-14 11:49:23"
+        },
+        {
+            "publishid": "26",
+            "choosetype": "1",
+            "housetype": "三室两厅",
+            "housearea": "全部",
+            "picurl": [
+                "http://171.8.187.205:8080/CommDataSyncService/img/123.jpg"
+            ],
+            "housedesc": "经装修",
+            "houseaddress": "郑州市高新区瑞达路1号",
+            "username": "温峤",
+            "userphone": "12345678901",
+            "publishtime": "2015-07-14 11:49:23"
+        },
+        {
+            "publishid": "27",
+            "choosetype": "1",
+            "housetype": "三室两厅",
+            "housearea": "全部",
+            "picurl": [
+                "http://171.8.187.205:8080/CommDataSyncService/img/123.jpg"
+            ],
+            "housedesc": "经装修",
+            "houseaddress": "郑州市高新区瑞达路1号",
+            "username": "温峤",
+            "userphone": "12345678901",
+            "publishtime": "2015-07-14 11:49:23"
+        },
+        {
+            "publishid": "28",
+            "choosetype": "1",
+            "housetype": "三室两厅",
+            "housearea": "全部",
+            "picurl": [
+                "http://171.8.187.205:8080/CommDataSyncService/img/123.jpg"
+            ],
+            "housedesc": "经装修",
+            "houseaddress": "郑州市高新区瑞达路1号",
+            "username": "温峤",
+            "userphone": "12345678901",
+            "publishtime": "2015-07-14 11:49:23"
+        },
+        {
+            "publishid": "29",
+            "choosetype": "1",
+            "housetype": "三室两厅",
+            "housearea": "全部",
+            "picurl": [
+                "http://171.8.187.205:8080/CommDataSyncService/img/123.jpg"
+            ],
+            "housedesc": "经装修",
+            "houseaddress": "郑州市高新区瑞达路1号",
+            "username": "温峤",
+            "userphone": "12345678901",
+            "publishtime": "2015-07-14 11:49:23"
+        }
+    ],
+    "iccode": "4210",
+    "loginname": null,
+    "sessionid": null,
+    "answercode": "00"
+}
