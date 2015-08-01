@@ -5,8 +5,9 @@ import java.util.ArrayList;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.common.PropertyFetchListActivity;
+import com.smona.app.propertymanager.common.PropertyFilterTypeActivity;
 import com.smona.app.propertymanager.data.bean.PropertyBeanFangwuzulinType;
+import com.smona.app.propertymanager.data.model.PropertyFangwuzulinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinHomeContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
@@ -19,11 +20,10 @@ import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinRequestInf
 import android.os.Bundle;
 import android.view.View;
 
-public class PropertyFangwuzulinActivity extends PropertyFetchListActivity {
+public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
     private static final String TAG = "PropertyFangwuzulinActivity";
 
     // content
-    private ArrayList<PropertyItemInfo> mDatas = new ArrayList<PropertyItemInfo>();
     private PropertyFangwuzulinHomeContentItem mContent;
 
     // type
@@ -119,7 +119,7 @@ public class PropertyFangwuzulinActivity extends PropertyFetchListActivity {
 
     private void loadListData() {
         // has problem
-        mDatas.addAll(mContent.icobject);
+        mAllDatas.addAll(mContent.icobject);
         requestRefreshUI();
     }
 
@@ -163,7 +163,8 @@ public class PropertyFangwuzulinActivity extends PropertyFetchListActivity {
                 R.string.property_fangwuzulin_item_huxing);
         initView(R.id.housetype);
 
-        setFetchListener(mDatas);
+        mShowDatas.addAll(mAllDatas);
+        setFetchListener(mShowDatas);
     }
 
     @Override
@@ -196,6 +197,7 @@ public class PropertyFangwuzulinActivity extends PropertyFetchListActivity {
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 View parent = mRoot.findViewById(R.id.ywtype);
+                filterYewuType(((PropertyTypeItem) info).type_id);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
@@ -210,6 +212,7 @@ public class PropertyFangwuzulinActivity extends PropertyFetchListActivity {
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 View parent = mRoot.findViewById(R.id.housetype);
+                filterHuxingType(((PropertyTypeItem) info).type_id);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
@@ -224,10 +227,44 @@ public class PropertyFangwuzulinActivity extends PropertyFetchListActivity {
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 View parent = mRoot.findViewById(R.id.area);
+                filterAreaType(((PropertyTypeItem) info).type_name);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
         });
+    }
+
+    private void filterYewuType(String filterName) {
+        mShowDatas.clear();
+        for (PropertyItemInfo info : mAllDatas) {
+            if (filterName
+                    .equals(((PropertyFangwuzulinContentItem) info).choosetype)) {
+                mShowDatas.add(info);
+            }
+        }
+        requestRefreshUI();
+    }
+
+    private void filterHuxingType(String filterName) {
+        mShowDatas.clear();
+        for (PropertyItemInfo info : mAllDatas) {
+            if (filterName
+                    .equals(((PropertyFangwuzulinContentItem) info).housetype)) {
+                mShowDatas.add(info);
+            }
+        }
+        requestRefreshUI();
+    }
+
+    private void filterAreaType(String filterName) {
+        mShowDatas.clear();
+        for (PropertyItemInfo info : mAllDatas) {
+            if (filterName
+                    .equals(((PropertyFangwuzulinContentItem) info).housearea)) {
+                mShowDatas.add(info);
+            }
+        }
+        requestRefreshUI();
     }
 
     @Override
