@@ -72,13 +72,12 @@ public class PropertyMineFangyuanActivity extends PropertyFilterTypeActivity {
     }
 
     private void fetchListData() {
+        showCustomProgrssDialog();
         ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageno = getCurrentPage() + "";
         ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageSize = PAGE_SIZE + "";
-
         ((PropertyFangwuzulinMessageProcessProxy) mProcess)
                 .requestFangwuzulinMine(this, mRequestInfo, this);
 
-        showCustomProgrssDialog();
     }
 
     protected void saveData(String content) {
@@ -101,6 +100,9 @@ public class PropertyMineFangyuanActivity extends PropertyFilterTypeActivity {
 
     private void loadDBData() {
         mAllDatas.addAll(mContent.icobject);
+        mShowDatas.clear();
+        mShowDatas.addAll(mAllDatas);
+        
         requestRefreshUI();
     }
 

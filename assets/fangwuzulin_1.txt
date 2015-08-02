@@ -5,7 +5,7 @@
     "icobject": [
         {
             "publishid": "10",
-            "choosetype": "1",
+            "choosetype": "0",
             "housetype": "三室两厅",
             "housearea": "全部",
             "picurl": [
@@ -19,7 +19,7 @@
         },
         {
             "publishid": "1",
-            "choosetype": "1",
+            "choosetype": "0",
             "housetype": "三室两厅",
             "housearea": "全部",
             "picurl": [
@@ -33,7 +33,7 @@
         },
         {
             "publishid": "2",
-            "choosetype": "1",
+            "choosetype": "0",
             "housetype": "三室两厅",
             "housearea": "全部",
             "picurl": [
@@ -47,7 +47,7 @@
         },
         {
             "publishid": "3",
-            "choosetype": "1",
+            "choosetype": "0",
             "housetype": "三室两厅",
             "housearea": "全部",
             "picurl": [
@@ -61,7 +61,7 @@
         },
         {
             "publishid": "4",
-            "choosetype": "1",
+            "choosetype": "0",
             "housetype": "三室两厅",
             "housearea": "全部",
             "picurl": [
@@ -75,7 +75,7 @@
         },
         {
             "publishid": "5",
-            "choosetype": "1",
+            "choosetype": "0",
             "housetype": "三室两厅",
             "housearea": "全部",
             "picurl": [
@@ -89,7 +89,7 @@
         },
         {
             "publishid": "6",
-            "choosetype": "1",
+            "choosetype": "0",
             "housetype": "三室两厅",
             "housearea": "全部",
             "picurl": [
@@ -103,7 +103,7 @@
         },
         {
             "publishid": "7",
-            "choosetype": "1",
+            "choosetype": "0",
             "housetype": "三室两厅",
             "housearea": "全部",
             "picurl": [
@@ -117,7 +117,7 @@
         },
         {
             "publishid": "8",
-            "choosetype": "1",
+            "choosetype": "0",
             "housetype": "三室两厅",
             "housearea": "全部",
             "picurl": [
@@ -131,7 +131,7 @@
         },
         {
             "publishid": "9",
-            "choosetype": "1",
+            "choosetype": "0",
             "housetype": "三室两厅",
             "housearea": "全部",
             "picurl": [

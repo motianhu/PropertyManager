@@ -105,6 +105,9 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
 
     private void loadDBData() {
         mAllDatas.addAll(mContent.icobject);
+        mShowDatas.clear();
+        mShowDatas.addAll(mAllDatas);
+        
         requestRefreshUI();
     }
 
@@ -170,11 +173,11 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
     }
 
     private void initPinpaiTypes(String classCode) {
+        showCustomProgrssDialog();
         PropertyErshouwupinPinpaiRequestInfo request = new PropertyErshouwupinPinpaiRequestInfo();
         request.classcode = classCode;
         ((PropertyErshouwupinMessageProcessProxy) mProcess)
                 .requestErshouwupinPinpaiType(this, request, this);
-        showCustomProgrssDialog();
     }
 
     private void clickChoidWupinType() {
@@ -265,8 +268,8 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
 
     @Override
     protected void loadMore() {
-        fetchListData();
         showCustomProgrssDialog();
+        fetchListData();
     }
     
     @Override

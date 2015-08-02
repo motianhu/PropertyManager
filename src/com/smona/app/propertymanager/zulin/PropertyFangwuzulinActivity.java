@@ -61,15 +61,13 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
     }
 
     private void requestData() {
+        showCustomProgrssDialog();
+        
         mProcess = new PropertyFangwuzulinMessageProcessProxy();
-
         mRequestInfo = new PropertyFangwuzulinRequestInfo();
         requestListData();
-
         ((PropertyFangwuzulinMessageProcessProxy) mProcess)
                 .requestFangwuzulinType(this, this);
-
-        showCustomProgrssDialog();
     }
 
     private void requestListData() {
@@ -85,6 +83,7 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
         Type type = new TypeToken<PropertyItemInfo>() {
         }.getType();
         PropertyItemInfo info = JsonUtils.parseJson(content, type);
+        LogUtil.d(TAG, "info: " + info);
         if ("4210".equals(info.iccode)) {
             if ("00".equals(info.answercode)) {
                 type = new TypeToken<PropertyFangwuzulinHomeContentItem>() {
@@ -119,8 +118,10 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
     }
 
     private void loadListData() {
-        // has problem
         mAllDatas.addAll(mContent.icobject);
+        mShowDatas.clear();
+        mShowDatas.addAll(mAllDatas);
+        
         requestRefreshUI();
     }
 
@@ -270,8 +271,8 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
 
     @Override
     public void loadMore() {
-        requestListData();
         showCustomProgrssDialog();
+        requestListData();
     }
     
     @Override

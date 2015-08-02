@@ -133,6 +133,9 @@ public class PropertyErshouwupinActivity extends PropertyFilterTypeActivity {
 
     private void loadListData() {
         mAllDatas.addAll(mContent.icobject);
+        mShowDatas.clear();
+        mShowDatas.addAll(mAllDatas);
+        
         requestRefreshUI();
     }
 
@@ -253,8 +256,8 @@ public class PropertyErshouwupinActivity extends PropertyFilterTypeActivity {
 
     @Override
     protected void loadMore() {
-        fetchListData();
         showCustomProgrssDialog();
+        fetchListData();
     }
 
     @Override
