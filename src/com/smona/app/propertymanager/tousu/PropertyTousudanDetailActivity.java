@@ -46,12 +46,12 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
     }
 
     private void requestData() {
+        showCustomProgrssDialog();
         mProcess = new PropertyTousujianyiMessageProcessProxy();
         mRequestInfo = new PropertyTousujianyiDetailRequestInfo();
         ((PropertyTousujianyiDetailRequestInfo) mRequestInfo).complaintid = mItem.complaintid;
         ((PropertyTousujianyiMessageProcessProxy) mProcess)
                 .requestTousujianyidanDetail(this, mRequestInfo, this);
-        showCustomProgrssDialog();
     }
 
     protected void saveData(String content) {

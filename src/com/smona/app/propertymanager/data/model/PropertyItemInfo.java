@@ -34,4 +34,9 @@ public class PropertyItemInfo implements Parcelable {
             return new PropertyItemInfo(in);
         }
     };
+
+    public String toString() {
+        return "PropertyItemInfo[iccode: " + iccode + ", answercode: "
+                + answercode + "]";
+    }
 }

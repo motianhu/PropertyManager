@@ -54,13 +54,13 @@ public class PropertyBaoxiudanActivity extends PropertyFetchListActivity {
     }
 
     private void fetchListData() {
+        showCustomProgrssDialog();
         ((PropertyWuyebaoxiuRequestInfo) mRequestInfo).pageno = getCurrentPage()
                 + "";
         ((PropertyWuyebaoxiuRequestInfo) mRequestInfo).pageSize = PAGE_SIZE
                 + "";
         ((PropertyWuyebaoxiuMessageProcessProxy) mProcess)
                 .requestWuyebaoxiudan(this, mRequestInfo, this);
-        showCustomProgrssDialog();
     }
 
     protected void saveData(String content) {
@@ -104,7 +104,6 @@ public class PropertyBaoxiudanActivity extends PropertyFetchListActivity {
     @Override
     protected void initBody() {
         initYezhuxinxi();
-
         setFetchListener(mDatas);
     }
 

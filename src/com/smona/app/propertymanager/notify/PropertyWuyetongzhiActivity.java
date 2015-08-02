@@ -46,6 +46,7 @@ public class PropertyWuyetongzhiActivity extends PropertyFetchListActivity {
     }
 
     private void fetchListData() {
+        showCustomProgrssDialog();
         ((PropertyWuyetongzhiRequestInfo) mRequestInfo).pageno = getCurrentPage()
                 + "";
         ((PropertyWuyetongzhiRequestInfo) mRequestInfo).pageSize = PAGE_SIZE
@@ -53,7 +54,6 @@ public class PropertyWuyetongzhiActivity extends PropertyFetchListActivity {
 
         ((PropertyWuyetongzhiMessageProcessProxy) mProcess).requestWuyetongzhi(
                 this, mRequestInfo, this);
-        showCustomProgrssDialog();
     }
 
     protected void saveData(String content) {
@@ -61,7 +61,7 @@ public class PropertyWuyetongzhiActivity extends PropertyFetchListActivity {
         Type type = new TypeToken<PropertyWuyetongzhiHomeContentItem>() {
         }.getType();
         mContent = JsonUtils.parseJson(content, type);
-        if ("5310".equals(mContent) && "00".equals(mContent.answercode)) {
+        if ("5310".equals(mContent.iccode) && "00".equals(mContent.answercode)) {
             loadDBData();
             setDataPos(Integer.valueOf(mContent.pageno));
         }

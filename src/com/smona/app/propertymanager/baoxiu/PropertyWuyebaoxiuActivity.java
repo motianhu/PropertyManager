@@ -45,20 +45,20 @@ public class PropertyWuyebaoxiuActivity extends PropertyStartupCameraActivity {
     }
 
     protected void requestData() {
-        mContent = new PropertyWuyebaoxiuContentItem();
+        showCustomProgrssDialog();
 
+        mContent = new PropertyWuyebaoxiuContentItem();
         mProcess = new PropertyWuyebaoxiuMessageProcessProxy();
         ((PropertyWuyebaoxiuMessageProcessProxy) mProcess).requestWuyebaoxiu(
                 this, this);
-        showCustomProgrssDialog();
     }
 
     protected void saveData(String content) {
-        LogUtil.d(TAG, "content: " + content);
         Type type = new TypeToken<PropertyBeanWuyebaoxiu>() {
         }.getType();
         PropertyBeanWuyebaoxiu bean = JsonUtils.parseJson(content, type);
-        if ("3710".equals(bean.iccode) && "00".equals(bean.answercode)) {
+        LogUtil.d(TAG, "bean: " + bean);
+        if ("3210".equals(bean.iccode) && "00".equals(bean.answercode)) {
             bean.saveDataToDB(this);
             loadDBData();
         }
@@ -71,12 +71,7 @@ public class PropertyWuyebaoxiuActivity extends PropertyStartupCameraActivity {
 
     private void loadDBData() {
         mContent.loadDBData(this);
-        LogUtil.d(TAG, "loadDBData mContent: " + mContent);
         requestRefreshUI();
-
-        if (mContent.types != null && mContent.types.size() > 0) {
-            hideCustomProgressDialog();
-        }
     }
 
     protected void refreshUI() {

@@ -53,22 +53,21 @@ public class PropertyMineTousuActivity extends PropertyFetchListActivity {
     }
 
     private void fetchListData() {
+        showCustomProgrssDialog();
         ((PropertyTousujianyiRequestInfo) mRequestInfo).pageno = getCurrentPage()
                 + "";
         ((PropertyTousujianyiRequestInfo) mRequestInfo).pageSize = PAGE_SIZE
                 + "";
         ((PropertyTousujianyiMessageProcessProxy) mProcess)
                 .requestTousujianyidan(this, mRequestInfo, this);
-        showCustomProgrssDialog();
     }
 
     protected void saveData(String content) {
-        LogUtil.d(TAG, "content: " + content);
         Type type = new TypeToken<PropertyTousujianyidanHomeContentItem>() {
         }.getType();
         mBean = JsonUtils.parseJson(content, type);
         LogUtil.d(TAG, "content: " + mBean);
-        if ("3910".equals(mBean) && "00".equals(mBean.answercode)) {
+        if ("3910".equals(mBean.iccode) && "00".equals(mBean.answercode)) {
             loadDBData();
             setDataPos(Integer.valueOf(mBean.pageno));
         }

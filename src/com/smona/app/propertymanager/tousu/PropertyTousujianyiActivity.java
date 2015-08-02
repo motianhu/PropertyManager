@@ -56,10 +56,10 @@ public class PropertyTousujianyiActivity extends PropertyStartupCameraActivity {
     }
 
     protected void saveData(String content) {
-        LogUtil.d(TAG, "content: " + content);
         Type type = new TypeToken<PropertyBeanTousujianyi>() {
         }.getType();
         PropertyBeanTousujianyi bean = JsonUtils.parseJson(content, type);
+        LogUtil.d(TAG, "loadDBData bean: " + bean);
         if ("3710".equals(bean.iccode) && "00".equals(bean.answercode)) {
             bean.saveDataToDB(this);
             loadDBData();
@@ -74,7 +74,6 @@ public class PropertyTousujianyiActivity extends PropertyStartupCameraActivity {
     private void loadDBData() {
         mContent = new PropertyTousujianyiContentItem();
         mContent.loadDBData(this);
-        LogUtil.d(TAG, "loadDBData mContent: " + mContent);
         requestRefreshUI();
         if (mContent.types != null && mContent.types.size() > 0) {
             hideCustomProgressDialog();

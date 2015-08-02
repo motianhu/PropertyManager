@@ -13,7 +13,7 @@
     },
     "complaintcode": "11",
     "complaintname": "",
-    "complaintpicture": null,
+    "complaintpicture": [],
     "complaintdesc": "投诉建议测试",
     "requesttime": "2015-07-14 11:35:49",
     "feedback": "",

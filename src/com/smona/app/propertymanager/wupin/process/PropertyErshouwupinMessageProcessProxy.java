@@ -12,7 +12,7 @@ public class PropertyErshouwupinMessageProcessProxy extends
     private PropertyErshouwupinNetRequestMessageProcess mNetRequestJson;
     private PropertyErshouwupinNetSubmitMessageProcess mNetSubmitJson;
 
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
 
     public PropertyErshouwupinMessageProcessProxy() {
         mLocalJson = new PropertyLocalSubmitMessageProcess();

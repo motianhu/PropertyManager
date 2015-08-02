@@ -11,6 +11,7 @@ public class PropertyTousujianyidanHomeContentItem extends PropertyContentItem {
     public String toString() {
         return "PropertyTousujianyidanHomeContentItem[pageno: " + pageno
                 + "pagesize: " + pagesize + ", totalrecord: " + totalrecord
-                + ", icobjct: " + icobjct + "]";
+                + ", icobjct: " + icobjct + ", iccode: " + iccode
+                + ", answercode: " + answercode + "]";
     }
 }
