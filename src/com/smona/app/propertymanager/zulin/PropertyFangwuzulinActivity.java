@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.common.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.common.PropertyFilterTypeActivity;
 import com.smona.app.propertymanager.data.bean.PropertyBeanFangwuzulinType;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinContentItem;
@@ -271,5 +272,11 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
     public void loadMore() {
         requestListData();
         showCustomProgrssDialog();
+    }
+    
+    @Override
+    public PropertyBaseDataAdapter createAdapter(
+            ArrayList<PropertyItemInfo> data) {
+        return new PropertyZulinDetailAdapter(this, data);
     }
 }

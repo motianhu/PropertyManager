@@ -1,6 +1,6 @@
-package com.smona.app.propertymanager;
+package com.smona.app.propertymanager.common;
 
-import com.smona.app.propertymanager.common.LoadingDialog;
+import com.smona.app.propertymanager.R;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -9,7 +9,7 @@ import android.view.Gravity;
 
 public class PropertyDialogActivity extends Activity {
 
-    protected LoadingDialog mDialog;
+    protected PropertyLoadingDialog mDialog;
     
     protected void showCustomProgrssDialog() {
         showCustomProgrssDialog("");
@@ -17,7 +17,7 @@ public class PropertyDialogActivity extends Activity {
 
     protected void showCustomProgrssDialog(String msg) {
         hideCustomProgressDialog();
-        mDialog = new LoadingDialog(this, R.style.Property_Progress_Dialog);
+        mDialog = new PropertyLoadingDialog(this, R.style.Property_Progress_Dialog);
         mDialog.setContentView(R.layout.property_common_loading);
         mDialog.getWindow().getAttributes().gravity = Gravity.CENTER;
         mDialog.startAnim();

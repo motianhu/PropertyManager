@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.common.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.common.PropertyFilterTypeActivity;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinTypeItem;
@@ -247,5 +248,11 @@ public class PropertyMineFangyuanActivity extends PropertyFilterTypeActivity {
     @Override
     protected void loadMore() {
         fetchListData();
+    }
+    
+    @Override
+    public PropertyBaseDataAdapter createAdapter(
+            ArrayList<PropertyItemInfo> data) {
+        return new PropertyZulinDetailAdapter(this, data);
     }
 }

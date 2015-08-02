@@ -2,8 +2,8 @@ package com.smona.app.propertymanager.wupin;
 
 import java.util.ArrayList;
 
-import com.smona.app.propertymanager.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.common.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 

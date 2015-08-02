@@ -58,8 +58,11 @@ public class PropertyWuyebaoxiuActivity extends PropertyStartupCameraActivity {
         Type type = new TypeToken<PropertyBeanWuyebaoxiu>() {
         }.getType();
         PropertyBeanWuyebaoxiu bean = JsonUtils.parseJson(content, type);
-        bean.saveDataToDB(this);
-        loadDBData();
+        if ("3710".equals(bean.iccode) && "00".equals(bean.answercode)) {
+            bean.saveDataToDB(this);
+            loadDBData();
+        }
+        hideCustomProgressDialog();
     }
 
     protected void failedRequest() {
@@ -116,8 +119,8 @@ public class PropertyWuyebaoxiuActivity extends PropertyStartupCameraActivity {
         initView(R.id.start_camera);
         initView(R.id.action_now);
         initView(R.id.call_wuye);
-        
-        mPictureContainer = (ViewGroup)findViewById(R.id.list_hor_image);
+
+        mPictureContainer = (ViewGroup) findViewById(R.id.list_hor_image);
     }
 
     protected void clickView(View v) {
@@ -159,7 +162,6 @@ public class PropertyWuyebaoxiuActivity extends PropertyStartupCameraActivity {
         intent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
         startActivityForResult(intent, ACTION_CAMERA);
     }
-    
 
     protected void onCameraCallback(Bitmap bitmap, String fileName) {
         ImageView image = new ImageView(this);
@@ -171,7 +173,7 @@ public class PropertyWuyebaoxiuActivity extends PropertyStartupCameraActivity {
                         .getDimensionPixelSize(
                                 R.dimen.property_common_paishezhaoping_container_height));
         param.leftMargin = 10;
-        mPictureContainer.addView(image,0, param);
+        mPictureContainer.addView(image, 0, param);
         image.setTag(fileName);
         image.setImageBitmap(bitmap);
     }
@@ -188,6 +190,20 @@ public class PropertyWuyebaoxiuActivity extends PropertyStartupCameraActivity {
         if (TextUtils.isEmpty(desc)) {
             showMessage("请描述问题!");
             return;
+        }
+
+        final ArrayList<String> files = new ArrayList<String>();
+        for (int i = 0; i < mPictureContainer.getChildCount(); i++) {
+            String tag = (String) mPictureContainer.getChildAt(i).getTag();
+            files.add(tag);
+        }
+        if (files.size() > 0) {
+            new Thread(new Runnable() {
+                public void run() {
+                    //HttpUploadFile.submitPost(PropertyConstants.UPLOAD, files);
+                }
+            }).start();
+
         }
 
         PropertyWuyebaoxiuSubmitRequestInfo submit = new PropertyWuyebaoxiuSubmitRequestInfo();

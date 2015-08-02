@@ -1,4 +1,4 @@
-package com.smona.app.propertymanager.common;
+package com.smona.app.propertymanager.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,12 +14,10 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
-import com.smona.app.propertymanager.util.LogUtil;
-
 public class HttpUploadFile {
     private static final String TAG = "HttpUploadFile";
 
-    public void SubmitPost(String url, ArrayList<String> files) {
+    public static void submitPost(String url, ArrayList<String> files) {
         CloseableHttpClient httpclient = HttpClientBuilder.create().build();
         CloseableHttpResponse response = null;
         try {

@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.baoxiu.process.PropertyWuyebaoxiuMessageProcessProxy;
 import com.smona.app.propertymanager.baoxiu.process.PropertyWuyebaoxiuRequestInfo;
+import com.smona.app.propertymanager.common.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.common.PropertyFetchListActivity;
 import com.smona.app.propertymanager.data.model.PropertyCustomerContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
@@ -68,7 +69,8 @@ public class PropertyBaoxiudanActivity extends PropertyFetchListActivity {
         mBean = JsonUtils.parseJson(content, type);
 
         LogUtil.d(TAG, "content: " + mBean);
-        if ("3410".equals(mBean) && "00".equals(mBean.answercode)) {
+        if ("3410".equals(mBean.iccode) && "00".equals(mBean.answercode)) {
+            LogUtil.d(TAG, "content: " + mBean.icobjct.size());
             loadDBData();
             setDataPos(Integer.valueOf(mBean.pageno));
         }
@@ -132,5 +134,11 @@ public class PropertyBaoxiudanActivity extends PropertyFetchListActivity {
     @Override
     protected void loadMore() {
         fetchListData();
+    }
+
+    @Override
+    public PropertyBaseDataAdapter createAdapter(
+            ArrayList<PropertyItemInfo> data) {
+        return new PropertyBaoxiudansAdapter(this, data);
     }
 }

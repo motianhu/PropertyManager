@@ -3,8 +3,8 @@ package com.smona.app.propertymanager.tousu;
 import java.lang.reflect.Type;
 
 import com.google.gson.reflect.TypeToken;
-import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.common.PropertyBaseActivity;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTousujianyidanContentItem;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;

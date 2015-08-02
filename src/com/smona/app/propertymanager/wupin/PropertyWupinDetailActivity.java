@@ -12,8 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
-import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.common.PropertyBaseActivity;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;

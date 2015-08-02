@@ -1,4 +1,4 @@
-package com.smona.app.propertymanager;
+package com.smona.app.propertymanager.common;
 
 import java.util.ArrayList;
 

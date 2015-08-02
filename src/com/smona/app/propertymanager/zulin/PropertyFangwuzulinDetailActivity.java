@@ -4,8 +4,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import com.google.gson.reflect.TypeToken;
-import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.common.PropertyBaseActivity;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;

@@ -1,8 +1,8 @@
-package com.smona.app.propertymanager;
+package com.smona.app.propertymanager.common;
 
 import java.util.ArrayList;
 
-import com.smona.app.propertymanager.common.PropertyTypeAdapter;
+import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.process.PropertyMessageProcess;
 import com.smona.app.propertymanager.data.process.PropertyMessageProcess.IQuestCallback;

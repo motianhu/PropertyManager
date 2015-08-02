@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.common.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.common.PropertyFetchListActivity;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyWuyetongzhiHomeContentItem;
@@ -123,5 +124,11 @@ public class PropertyWuyetongzhiActivity extends PropertyFetchListActivity {
     @Override
     protected void loadMore() {
         fetchListData();
+    }
+    
+    @Override
+    public PropertyBaseDataAdapter createAdapter(
+            ArrayList<PropertyItemInfo> data) {
+        return new PropertyNotifyMessageAdapter(this, data);
     }
 }

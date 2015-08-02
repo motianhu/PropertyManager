@@ -1,4 +1,4 @@
-package com.smona.app.propertymanager;
+package com.smona.app.propertymanager.common;
 
 import android.app.AlertDialog;
 import android.content.Context;

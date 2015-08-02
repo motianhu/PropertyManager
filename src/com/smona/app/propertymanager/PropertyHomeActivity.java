@@ -1,6 +1,7 @@
 package com.smona.app.propertymanager;
 
 import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuActivity;
+import com.smona.app.propertymanager.common.PropertyBaseActivity;
 import com.smona.app.propertymanager.data.table.PropertyWuyebaoxiudanTable;
 import com.smona.app.propertymanager.notify.PropertyWuyetongzhiActivity;
 import com.smona.app.propertymanager.tousu.PropertyTousujianyiActivity;
@@ -16,7 +17,7 @@ import android.widget.Toast;
 
 public class PropertyHomeActivity extends PropertyBaseActivity {
 
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
     private boolean mIsLogin = false;
 
     @Override

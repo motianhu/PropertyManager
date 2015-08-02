@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.ViewGroup;
 
-import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.util.LogUtil;
 
 public abstract class PropertyStartupCameraActivity extends

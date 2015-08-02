@@ -2,7 +2,6 @@ package com.smona.app.propertymanager.common;
 
 import java.util.ArrayList;
 
-import com.smona.app.propertymanager.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;

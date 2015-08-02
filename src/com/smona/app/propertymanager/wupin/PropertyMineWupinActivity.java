@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.common.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.common.PropertyFilterTypeActivity;
 import com.smona.app.propertymanager.data.bean.PropertyBeanErshouwupinpinpais;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinContentItem;
@@ -266,5 +267,11 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
     protected void loadMore() {
         fetchListData();
         showCustomProgrssDialog();
+    }
+    
+    @Override
+    public PropertyBaseDataAdapter createAdapter(
+            ArrayList<PropertyItemInfo> data) {
+        return new PropertyWupinDetailAdapter(this, data);
     }
 }

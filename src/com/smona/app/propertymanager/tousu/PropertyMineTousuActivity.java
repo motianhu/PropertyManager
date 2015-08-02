@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.common.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.common.PropertyFetchListActivity;
 import com.smona.app.propertymanager.data.model.PropertyCustomerContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
@@ -129,6 +130,12 @@ public class PropertyMineTousuActivity extends PropertyFetchListActivity {
     @Override
     protected void loadMore() {
         fetchListData();
+    }
+    
+    @Override
+    public PropertyBaseDataAdapter createAdapter(
+            ArrayList<PropertyItemInfo> data) {
+        return new PropertyTousudanAdapter(this, data);
     }
 
 }

@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.smona.app.propertymanager.PropertyBaseActivity;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.common.PropertyBaseActivity;
 import com.smona.app.propertymanager.data.model.PropertyWuyetongzhiContentItem;
 import com.smona.app.propertymanager.notify.process.PropertyWuyetongzhiMessageProcessProxy;
 import com.smona.app.propertymanager.notify.process.PropertyWuyetongzhiSubmitRequestInfo;
