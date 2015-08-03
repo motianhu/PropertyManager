@@ -284,8 +284,12 @@ public class PropertyPublishFangYuanActivity extends PropertyStartupCameraActivi
         Type type = new TypeToken<PropertyItemInfo>() {
         }.getType();
         PropertyItemInfo info = JsonUtils.parseJson(content, type);
-        if ("4410".equals(info.iccode) && "00".equals(info.answercode)) {
-            showMessage("发布成功");
+        if ("4410".equals(info.iccode)) {
+            if("00".equals(info.answercode)) {
+                showMessage("发布成功");
+            } else {
+                showMessage("发布失败");
+            }
         }
         hideCustomProgressDialog();
     }

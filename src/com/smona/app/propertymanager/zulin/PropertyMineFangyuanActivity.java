@@ -4,6 +4,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.google.gson.reflect.TypeToken;
@@ -31,6 +32,11 @@ public class PropertyMineFangyuanActivity extends PropertyFilterTypeActivity {
     private ArrayList<PropertyItemInfo> mYewuDatas = new ArrayList<PropertyItemInfo>();
     private ArrayList<PropertyItemInfo> mHuxingDatas = new ArrayList<PropertyItemInfo>();
     private ArrayList<PropertyItemInfo> mAreaDatas = new ArrayList<PropertyItemInfo>();
+    
+    // filter
+    private String mFilterChooseType = "";
+    private String mFilterAreaCode = "";
+    private String mFilterHouseCode = "";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -163,16 +169,16 @@ public class PropertyMineFangyuanActivity extends PropertyFilterTypeActivity {
     }
 
     private void clickSelectType() {
-        final ArrayList<PropertyItemInfo> datas = mYewuDatas;
-
-        showSingleChoiceType(datas, new IChoiceCallback() {
+        showSingleChoiceType(mYewuDatas, new IChoiceCallback() {
             @Override
             public void onChoice(int which) {
-                PropertyItemInfo info = datas.get(which);
-                LogUtil.d(TAG, "clickSelectType: info: "
-                        + ((PropertyTypeItem) info).type_name);
+                PropertyItemInfo info = mYewuDatas.get(which);
+                LogUtil.d(TAG, "clickSelectType: type_name: "
+                        + ((PropertyTypeItem) info).type_name + ", type_id: "
+                        + ((PropertyTypeItem) info).type_id);
                 View parent = mRoot.findViewById(R.id.ywtype);
-                filterYewuType(((PropertyTypeItem) info).type_id);
+                mFilterChooseType = ((PropertyTypeItem) info).type_id;
+                filterType(((PropertyTypeItem) info).type_id);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
@@ -180,16 +186,16 @@ public class PropertyMineFangyuanActivity extends PropertyFilterTypeActivity {
     }
 
     private void clickSelectHuxing() {
-        final ArrayList<PropertyItemInfo> datas = mHuxingDatas;
-
-        showSingleChoiceType(datas, new IChoiceCallback() {
+        showSingleChoiceType(mHuxingDatas, new IChoiceCallback() {
             @Override
             public void onChoice(int which) {
-                PropertyItemInfo info = datas.get(which);
-                LogUtil.d(TAG, "clickSelectType: info: "
-                        + ((PropertyTypeItem) info).type_name);
+                PropertyItemInfo info = mHuxingDatas.get(which);
+                LogUtil.d(TAG, "clickSelectHuxing: type_name: "
+                        + ((PropertyTypeItem) info).type_name + ", type_id: "
+                        + ((PropertyTypeItem) info).type_id);
                 View parent = mRoot.findViewById(R.id.housetype);
-                filterHuxingType(((PropertyTypeItem) info).type_id);
+                mFilterHouseCode = ((PropertyTypeItem) info).type_id;
+                filterType(((PropertyTypeItem) info).type_id);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
@@ -197,16 +203,16 @@ public class PropertyMineFangyuanActivity extends PropertyFilterTypeActivity {
     }
 
     private void clickSelectArea() {
-        final ArrayList<PropertyItemInfo> datas = mAreaDatas;
-
-        showSingleChoiceType(datas, new IChoiceCallback() {
+        showSingleChoiceType(mAreaDatas, new IChoiceCallback() {
             @Override
             public void onChoice(int which) {
-                PropertyItemInfo info = datas.get(which);
-                LogUtil.d(TAG, "clickSelectType: info: "
-                        + ((PropertyTypeItem) info).type_name);
+                PropertyItemInfo info = mAreaDatas.get(which);
+                LogUtil.d(TAG, "clickSelectArea: type_name: "
+                        + ((PropertyTypeItem) info).type_name + ", type_id: "
+                        + ((PropertyTypeItem) info).type_id);
                 View parent = mRoot.findViewById(R.id.area);
-                filterAreaType(((PropertyTypeItem) info).type_id);
+                mFilterAreaCode = ((PropertyTypeItem) info).type_id;
+                filterType(((PropertyTypeItem) info).type_id);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
@@ -214,37 +220,37 @@ public class PropertyMineFangyuanActivity extends PropertyFilterTypeActivity {
     }
     
 
-    private void filterYewuType(String filterId) {
+
+    private void filterType(String filteId) {
         mShowDatas.clear();
         for (PropertyItemInfo info : mAllDatas) {
-            if (filterId
-                    .equals(((PropertyFangwuzulinContentItem) info).choosetype)) {
+            LogUtil.d(TAG, "info: " + (PropertyFangwuzulinContentItem) info);
+            if (isFitFilter((PropertyFangwuzulinContentItem) info)) {
                 mShowDatas.add(info);
             }
         }
         requestRefreshUI();
     }
 
-    private void filterHuxingType(String filterId) {
-        mShowDatas.clear();
-        for (PropertyItemInfo info : mAllDatas) {
-            if (filterId
-                    .equals(((PropertyFangwuzulinContentItem) info).housecode)) {
-                mShowDatas.add(info);
-            }
-        }
-        requestRefreshUI();
-    }
+    private boolean isFitFilter(PropertyFangwuzulinContentItem info) {
+        boolean result = true;
 
-    private void filterAreaType(String filterId) {
-        mShowDatas.clear();
-        for (PropertyItemInfo info : mAllDatas) {
-            if (filterId
-                    .equals(((PropertyFangwuzulinContentItem) info).areacode)) {
-                mShowDatas.add(info);
-            }
+        if (!TextUtils.isEmpty(mFilterChooseType)) {
+            result = mFilterChooseType
+                    .equals(((PropertyFangwuzulinContentItem) info).choosetype);
         }
-        requestRefreshUI();
+
+        if (!TextUtils.isEmpty(mFilterAreaCode)) {
+            result = mFilterAreaCode
+                    .equals(((PropertyFangwuzulinContentItem) info).areacode);
+        }
+
+        if (!TextUtils.isEmpty(mFilterHouseCode)) {
+            result = mFilterHouseCode
+                    .equals(((PropertyFangwuzulinContentItem) info).housecode);
+        }
+
+        return result;
     }
 
     @Override
