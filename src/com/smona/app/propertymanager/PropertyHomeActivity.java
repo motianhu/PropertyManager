@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 public class PropertyHomeActivity extends PropertyBaseActivity {
 
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
     private boolean mIsLogin = false;
 
     @Override

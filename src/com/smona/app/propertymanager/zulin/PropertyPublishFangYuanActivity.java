@@ -156,9 +156,9 @@ public class PropertyPublishFangYuanActivity extends PropertyStartupCameraActivi
         initText(parent, R.id.select_type, chooseName);
 
         parent = mRoot.findViewById(R.id.area);
-        initText(parent, R.id.select_type, mItem.housearea);
+        initText(parent, R.id.select_type, mItem.areacode);
         parent = mRoot.findViewById(R.id.housetype);
-        initText(parent, R.id.select_type, mItem.housetype);
+        initText(parent, R.id.select_type, mItem.housename);
 
         initText(R.id.problem_content, mItem.housedesc);
 
@@ -285,12 +285,7 @@ public class PropertyPublishFangYuanActivity extends PropertyStartupCameraActivi
         }.getType();
         PropertyItemInfo info = JsonUtils.parseJson(content, type);
         if ("4410".equals(info.iccode) && "00".equals(info.answercode)) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    showMessage("发布成功");
-                }
-            });
+            showMessage("发布成功");
         }
         hideCustomProgressDialog();
     }

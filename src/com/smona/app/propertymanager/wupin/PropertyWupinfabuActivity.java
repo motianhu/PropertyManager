@@ -85,7 +85,7 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
         if (mItem == null) {
             return;
         }
-        
+
         View parent = mRoot.findViewById(R.id.wupintype);
         initText(parent, R.id.select_type, mItem.classname);
 
@@ -98,12 +98,12 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
 
         parent = mRoot.findViewById(R.id.goodsname);
         initText(parent, R.id.value, mItem.goodsname);
-        
+
         parent = mRoot.findViewById(R.id.lianxiren);
         initText(parent, R.id.value, mItem.username);
         parent = mRoot.findViewById(R.id.dianhua);
         initText(parent, R.id.value, mItem.userphone);
-        
+
         ViewGroup list = (ViewGroup) mRoot.findViewById(R.id.list_hor_image);
         for (int i = 0; i < mItem.picurl.size(); i++) {
             ImageView image = new ImageView(this);
@@ -179,7 +179,7 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
 
         initView(R.id.start_camera);
         initView(R.id.publish);
-        
+
         mPictureContainer = (ViewGroup) findViewById(R.id.list_hor_image);
     }
 
@@ -290,12 +290,7 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
             bean.saveDataToDB(this);
             loadPinpaiTypeData();
         } else if ("5010".equals(info.iccode) && "00".equals(info.answercode)) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    showMessage("发布成功");
-                }
-            });
+            showMessage("发布成功");
         }
         hideCustomProgressDialog();
     }
@@ -363,7 +358,7 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
             }
         });
     }
-    
+
     protected void onCameraCallback(Bitmap bitmap, String fileName) {
         ImageView image = new ImageView(this);
         LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(

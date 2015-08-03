@@ -223,12 +223,23 @@ public abstract class PropertyBaseActivity extends PropertyDialogActivity
         super.onDestroy();
     }
 
-    protected void showMessage(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    protected void showMessage(final String text) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(PropertyBaseActivity.this, text,
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    protected void showMessage(int text) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    protected void showMessage(final int text) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(PropertyBaseActivity.this, text, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

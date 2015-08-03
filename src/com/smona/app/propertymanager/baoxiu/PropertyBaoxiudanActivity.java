@@ -72,7 +72,7 @@ public class PropertyBaoxiudanActivity extends PropertyFetchListActivity {
         if ("3410".equals(mBean.iccode) && "00".equals(mBean.answercode)) {
             LogUtil.d(TAG, "content: " + mBean.icobjct.size());
             loadDBData();
-            setDataPos(Integer.valueOf(mBean.pageno));
+            setDataPos(mBean.icobjct.size());
         }
         finishDialogAndRefresh();
     }

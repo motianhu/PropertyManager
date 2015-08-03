@@ -61,6 +61,12 @@ public class PropertyWuyebaoxiuActivity extends PropertyStartupCameraActivity {
         if ("3210".equals(bean.iccode) && "00".equals(bean.answercode)) {
             bean.saveDataToDB(this);
             loadDBData();
+        } else if ("3310".equals(bean.iccode)) {
+            if ("00".equals(bean.answercode)) {
+                showMessage("提交成功");
+            } else {
+                showMessage("提交失败");
+            }
         }
         hideCustomProgressDialog();
     }
@@ -195,17 +201,19 @@ public class PropertyWuyebaoxiuActivity extends PropertyStartupCameraActivity {
         if (files.size() > 0) {
             new Thread(new Runnable() {
                 public void run() {
-                    //HttpUploadFile.submitPost(PropertyConstants.UPLOAD, files);
+                    // HttpUploadFile.submitPost(PropertyConstants.UPLOAD,
+                    // files);
                 }
             }).start();
 
         }
 
+        showCustomProgrssDialog();
         PropertyWuyebaoxiuSubmitRequestInfo submit = new PropertyWuyebaoxiuSubmitRequestInfo();
         submit.repaircode = ((PropertyTypeItem) obj).type_id;
         submit.repairdesc = desc;
         ((PropertyWuyebaoxiuMessageProcessProxy) mProcess).submitWuyebaoxiudan(
-                this, submit, null);
+                this, submit, this);
     }
 
     private void clickCallWuye() {

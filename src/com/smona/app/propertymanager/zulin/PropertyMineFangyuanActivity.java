@@ -89,7 +89,7 @@ public class PropertyMineFangyuanActivity extends PropertyFilterTypeActivity {
         if ("4510".equals(mContent.iccode)
                 && "00".endsWith(mContent.answercode)) {
             loadDBData();
-            setDataPos(Integer.valueOf(mContent.pagesize));
+            setDataPos(mContent.icobject.size());
         }
         finishDialogAndRefresh();
     }
@@ -206,7 +206,7 @@ public class PropertyMineFangyuanActivity extends PropertyFilterTypeActivity {
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 View parent = mRoot.findViewById(R.id.area);
-                filterAreaType(((PropertyTypeItem) info).type_name);
+                filterAreaType(((PropertyTypeItem) info).type_id);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
@@ -214,10 +214,10 @@ public class PropertyMineFangyuanActivity extends PropertyFilterTypeActivity {
     }
     
 
-    private void filterYewuType(String filterName) {
+    private void filterYewuType(String filterId) {
         mShowDatas.clear();
         for (PropertyItemInfo info : mAllDatas) {
-            if (filterName
+            if (filterId
                     .equals(((PropertyFangwuzulinContentItem) info).choosetype)) {
                 mShowDatas.add(info);
             }
@@ -225,22 +225,22 @@ public class PropertyMineFangyuanActivity extends PropertyFilterTypeActivity {
         requestRefreshUI();
     }
 
-    private void filterHuxingType(String filterName) {
+    private void filterHuxingType(String filterId) {
         mShowDatas.clear();
         for (PropertyItemInfo info : mAllDatas) {
-            if (filterName
-                    .equals(((PropertyFangwuzulinContentItem) info).housetype)) {
+            if (filterId
+                    .equals(((PropertyFangwuzulinContentItem) info).housecode)) {
                 mShowDatas.add(info);
             }
         }
         requestRefreshUI();
     }
 
-    private void filterAreaType(String filterName) {
+    private void filterAreaType(String filterId) {
         mShowDatas.clear();
         for (PropertyItemInfo info : mAllDatas) {
-            if (filterName
-                    .equals(((PropertyFangwuzulinContentItem) info).housearea)) {
+            if (filterId
+                    .equals(((PropertyFangwuzulinContentItem) info).areacode)) {
                 mShowDatas.add(info);
             }
         }

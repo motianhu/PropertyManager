@@ -77,10 +77,10 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
         initText(parent, R.id.value, chooseName);
 
         parent = mRoot.findViewById(R.id.area);
-        initText(parent, R.id.value, mItem.housearea);
+        initText(parent, R.id.value, mItem.areaname);
 
         parent = mRoot.findViewById(R.id.housetype);
-        initText(parent, R.id.value, mItem.housetype);
+        initText(parent, R.id.value, mItem.housename);
 
         parent = mRoot.findViewById(R.id.peitaomiaoshu);
         initText(parent, R.id.value, mItem.housedesc);

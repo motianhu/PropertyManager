@@ -63,7 +63,7 @@ public class PropertyWuyetongzhiActivity extends PropertyFetchListActivity {
         mContent = JsonUtils.parseJson(content, type);
         if ("5310".equals(mContent.iccode) && "00".equals(mContent.answercode)) {
             loadDBData();
-            setDataPos(Integer.valueOf(mContent.pageno));
+            setDataPos(mContent.icobject.size());
         }
         finishDialogAndRefresh();
     }

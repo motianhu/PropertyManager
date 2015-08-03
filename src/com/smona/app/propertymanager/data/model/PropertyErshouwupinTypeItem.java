@@ -26,6 +26,7 @@ public class PropertyErshouwupinTypeItem extends PropertyTypeItem {
     }
 
     public void loadPinpais(Context context) {
+        pinpais.clear();
         setQueryParams(
                 PropertyErshouwupinpinpaiTypeTable.getInstance().mContentUri_NoNotify,
                 null, null, null, null);

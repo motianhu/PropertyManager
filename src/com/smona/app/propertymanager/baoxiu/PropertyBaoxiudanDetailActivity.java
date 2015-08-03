@@ -65,19 +65,9 @@ public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
             requestRefreshUI();
         } else if ("3610".equals(info.iccode)) {
             if ("00".equals(info.answercode)) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showMessage("评价成功");
-                    }
-                });
+                showMessage("评价成功");
             } else {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showMessage("评价失败");
-                    }
-                });
+                showMessage("评价失败");
             }
         }
 

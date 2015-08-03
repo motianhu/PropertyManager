@@ -8,8 +8,10 @@ import android.os.Parcelable;
 public class PropertyFangwuzulinContentItem extends PropertyContentItem {
     public String publishid;
     public String choosetype;
-    public String housetype;
-    public String housearea;
+    public String housecode;
+    public String housename;
+    public String areacode;
+    public String areaname;
     public String housedesc;
     public String houseaddress;
     public String username;
@@ -25,8 +27,10 @@ public class PropertyFangwuzulinContentItem extends PropertyContentItem {
     public PropertyFangwuzulinContentItem(Parcel in) {
         publishid = in.readString();
         choosetype = in.readString();
-        housetype = in.readString();
-        housearea = in.readString();
+        housecode = in.readString();
+        housename = in.readString();
+        areacode = in.readString();
+        areaname = in.readString();
         housedesc = in.readString();
         houseaddress = in.readString();
         username = in.readString();
@@ -47,8 +51,10 @@ public class PropertyFangwuzulinContentItem extends PropertyContentItem {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(publishid);
         dest.writeString(choosetype);
-        dest.writeString(housetype);
-        dest.writeString(housearea);
+        dest.writeString(housecode);
+        dest.writeString(housename);
+        dest.writeString(areacode);
+        dest.writeString(areaname);
         dest.writeString(housedesc);
         dest.writeString(houseaddress);
         dest.writeString(username);
@@ -61,7 +67,8 @@ public class PropertyFangwuzulinContentItem extends PropertyContentItem {
 
     public String toString() {
         return "PropertyFangwuzulinContentItem[" + "publishid: " + publishid
-                + ", userphone: " + userphone + ", username: " + username + "]";
+                + ", userphone: " + userphone + ", username: " + username
+                + ", housecode: " + housecode + ", areacode: " + areacode + "]";
     }
 
     public static final Parcelable.Creator<PropertyFangwuzulinContentItem> CREATOR = new Creator<PropertyFangwuzulinContentItem>() {

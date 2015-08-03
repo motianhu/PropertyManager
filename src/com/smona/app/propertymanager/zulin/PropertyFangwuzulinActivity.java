@@ -19,6 +19,7 @@ import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinMessagePro
 import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinRequestInfo;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
@@ -32,6 +33,11 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
     private ArrayList<PropertyItemInfo> mYewuDatas = new ArrayList<PropertyItemInfo>();
     private ArrayList<PropertyItemInfo> mHuxingDatas = new ArrayList<PropertyItemInfo>();
     private ArrayList<PropertyItemInfo> mAreaDatas = new ArrayList<PropertyItemInfo>();
+
+    // filter
+    private String mFilterChooseType = "";
+    private String mFilterAreaCode = "";
+    private String mFilterHouseCode = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,7 +68,7 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
 
     private void requestData() {
         showCustomProgrssDialog();
-        
+
         mProcess = new PropertyFangwuzulinMessageProcessProxy();
         mRequestInfo = new PropertyFangwuzulinRequestInfo();
         requestListData();
@@ -90,7 +96,7 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
                 }.getType();
                 mContent = JsonUtils.parseJson(content, type);
                 loadListData();
-                setDataPos(Integer.valueOf(mContent.pagesize));
+                setDataPos(mContent.icobject.size());
             }
             finishDialogAndRefresh();
         } else if ("4310".equals(info.iccode)) {
@@ -121,7 +127,7 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
         mAllDatas.addAll(mContent.icobject);
         mShowDatas.clear();
         mShowDatas.addAll(mAllDatas);
-        
+
         requestRefreshUI();
     }
 
@@ -196,10 +202,12 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
             @Override
             public void onChoice(int which) {
                 PropertyItemInfo info = mYewuDatas.get(which);
-                LogUtil.d(TAG, "clickSelectType: info: "
-                        + ((PropertyTypeItem) info).type_name);
+                LogUtil.d(TAG, "clickSelectType: type_name: "
+                        + ((PropertyTypeItem) info).type_name + ", type_id: "
+                        + ((PropertyTypeItem) info).type_id);
                 View parent = mRoot.findViewById(R.id.ywtype);
-                filterYewuType(((PropertyTypeItem) info).type_id);
+                mFilterChooseType = ((PropertyTypeItem) info).type_id;
+                filterType(((PropertyTypeItem) info).type_id);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
@@ -211,10 +219,12 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
             @Override
             public void onChoice(int which) {
                 PropertyItemInfo info = mHuxingDatas.get(which);
-                LogUtil.d(TAG, "clickSelectType: info: "
-                        + ((PropertyTypeItem) info).type_name);
+                LogUtil.d(TAG, "clickSelectHuxing: type_name: "
+                        + ((PropertyTypeItem) info).type_name + ", type_id: "
+                        + ((PropertyTypeItem) info).type_id);
                 View parent = mRoot.findViewById(R.id.housetype);
-                filterHuxingType(((PropertyTypeItem) info).type_id);
+                mFilterHouseCode = ((PropertyTypeItem) info).type_id;
+                filterType(((PropertyTypeItem) info).type_id);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
@@ -226,47 +236,48 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
             @Override
             public void onChoice(int which) {
                 PropertyItemInfo info = mAreaDatas.get(which);
-                LogUtil.d(TAG, "clickSelectType: info: "
-                        + ((PropertyTypeItem) info).type_name);
+                LogUtil.d(TAG, "clickSelectArea: type_name: "
+                        + ((PropertyTypeItem) info).type_name + ", type_id: "
+                        + ((PropertyTypeItem) info).type_id);
                 View parent = mRoot.findViewById(R.id.area);
-                filterAreaType(((PropertyTypeItem) info).type_name);
+                mFilterAreaCode = ((PropertyTypeItem) info).type_id;
+                filterType(((PropertyTypeItem) info).type_id);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
         });
     }
 
-    private void filterYewuType(String filterName) {
+    private void filterType(String filteId) {
         mShowDatas.clear();
         for (PropertyItemInfo info : mAllDatas) {
-            if (filterName
-                    .equals(((PropertyFangwuzulinContentItem) info).choosetype)) {
+            LogUtil.d(TAG, "info: " + (PropertyFangwuzulinContentItem) info);
+            if (isFitFilter((PropertyFangwuzulinContentItem) info)) {
                 mShowDatas.add(info);
             }
         }
         requestRefreshUI();
     }
 
-    private void filterHuxingType(String filterName) {
-        mShowDatas.clear();
-        for (PropertyItemInfo info : mAllDatas) {
-            if (filterName
-                    .equals(((PropertyFangwuzulinContentItem) info).housetype)) {
-                mShowDatas.add(info);
-            }
-        }
-        requestRefreshUI();
-    }
+    private boolean isFitFilter(PropertyFangwuzulinContentItem info) {
+        boolean result = true;
 
-    private void filterAreaType(String filterName) {
-        mShowDatas.clear();
-        for (PropertyItemInfo info : mAllDatas) {
-            if (filterName
-                    .equals(((PropertyFangwuzulinContentItem) info).housearea)) {
-                mShowDatas.add(info);
-            }
+        if (!TextUtils.isEmpty(mFilterChooseType)) {
+            result = mFilterChooseType
+                    .equals(((PropertyFangwuzulinContentItem) info).choosetype);
         }
-        requestRefreshUI();
+
+        if (!TextUtils.isEmpty(mFilterAreaCode)) {
+            result = mFilterAreaCode
+                    .equals(((PropertyFangwuzulinContentItem) info).areacode);
+        }
+
+        if (!TextUtils.isEmpty(mFilterHouseCode)) {
+            result = mFilterHouseCode
+                    .equals(((PropertyFangwuzulinContentItem) info).housecode);
+        }
+
+        return result;
     }
 
     @Override
@@ -274,7 +285,7 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
         showCustomProgrssDialog();
         requestListData();
     }
-    
+
     @Override
     public PropertyBaseDataAdapter createAdapter(
             ArrayList<PropertyItemInfo> data) {

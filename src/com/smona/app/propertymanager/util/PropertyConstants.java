@@ -1,7 +1,7 @@
 package com.smona.app.propertymanager.util;
 
 public class PropertyConstants {
-    private static final String IP = "123.52.163.132";
+    private static final String IP = "1.193.54.126";
     public static final String URL = "http://" + IP
             + ":3715/AppCommDataHandler.ashx";
 

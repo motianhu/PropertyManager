@@ -69,7 +69,7 @@ public class PropertyMineTousuActivity extends PropertyFetchListActivity {
         LogUtil.d(TAG, "content: " + mBean);
         if ("3910".equals(mBean.iccode) && "00".equals(mBean.answercode)) {
             loadDBData();
-            setDataPos(Integer.valueOf(mBean.pageno));
+            setDataPos(mBean.icobjct.size());
         }
         finishDialogAndRefresh();
     }

@@ -93,7 +93,7 @@ public class PropertyErshouwupinActivity extends PropertyFilterTypeActivity {
                 }.getType();
                 mContent = JsonUtils.parseJson(content, type);
                 loadListData();
-                setDataPos(Integer.valueOf(mContent.pagesize));
+                setDataPos(mContent.icobject.size());
             }
         } else if ("4910".equals(info.iccode)) {
             type = new TypeToken<PropertyBeanErshouwupinpinpais>() {

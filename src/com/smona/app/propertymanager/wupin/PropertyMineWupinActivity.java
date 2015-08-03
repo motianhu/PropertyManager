@@ -75,7 +75,7 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
             if ("00".equals(info.answercode)) {
                 mContent = JsonUtils.parseJson(content, type);
                 loadDBData();
-                setDataPos(Integer.valueOf(mContent.pageno));
+                setDataPos(mContent.icobject.size());
             }
         } else if ("4910".equals(info.iccode)) {
             PropertyBeanErshouwupinpinpais bean = JsonUtils.parseJson(content,
