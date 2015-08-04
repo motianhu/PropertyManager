@@ -60,10 +60,14 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
         }.getType();
         PropertyItemInfo info = JsonUtils.parseJson(content, type);
         if ("4010".equals(info.iccode)) {
-            type = new TypeToken<PropertyTousujianyidanContentItem>() {
-            }.getType();
-            mItem = JsonUtils.parseJson(content, type);
-            requestRefreshUI();
+            if ("00".equals(info.answercode)) {
+                type = new TypeToken<PropertyTousujianyidanContentItem>() {
+                }.getType();
+                mItem = JsonUtils.parseJson(content, type);
+                requestRefreshUI();
+            } else {
+                showMessage("失败");
+            }
         } else if ("4110".equals(info.iccode)) {
             if ("00".equals(info.answercode)) {
                 showMessage("评价成功");
@@ -71,7 +75,6 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
                 showMessage("评价失败");
             }
         }
-
         hideCustomProgressDialog();
     }
 
@@ -129,7 +132,7 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
     private void initRatingBar(int parentId, String num) {
         View view = findViewById(parentId);
         RatingBar bar = (RatingBar) view.findViewById(R.id.pingjia_result);
-        bar.setNumStars(Integer.valueOf(num));
+        bar.setRating(Integer.valueOf(num));
     }
 
     @Override
@@ -188,24 +191,26 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
     }
 
     private void clickSubmitPingjia() {
+        showCustomProgrssDialog();
         PropertyTousujianyiSubmitPingjiaRequestInfo requestInfo = new PropertyTousujianyiSubmitPingjiaRequestInfo();
 
-        addPingjiaInfo(requestInfo, R.id.pingjia_fuwutaidu);
-        addPingjiaInfo(requestInfo, R.id.pingjia_jishixing);
+        addPingjiaInfo(requestInfo, R.id.pingjia_fuwutaidu, "5");
+        addPingjiaInfo(requestInfo, R.id.pingjia_jishixing, "6");
 
         requestInfo.complaintid = mItem.complaintid;
         ((PropertyTousujianyiMessageProcessProxy) mProcess)
                 .submitTousujianyidanPingjia(this, requestInfo, this);
-        showCustomProgrssDialog();
+       
     }
 
     private void addPingjiaInfo(
-            PropertyTousujianyiSubmitPingjiaRequestInfo requestInfo, int resid) {
+            PropertyTousujianyiSubmitPingjiaRequestInfo requestInfo, int resid,
+            String eveCode) {
         View parent = findViewById(resid);
         RatingBar bar = (RatingBar) parent.findViewById(R.id.pingjia_result);
-        int num = bar.getNumStars();
+        int num = (int) bar.getRating();
         if (num > 0) {
-            requestInfo.add("1", num);
+            requestInfo.add(eveCode, num);
         }
     }
 }

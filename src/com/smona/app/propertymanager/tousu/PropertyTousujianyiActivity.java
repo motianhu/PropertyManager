@@ -48,11 +48,10 @@ public class PropertyTousujianyiActivity extends PropertyStartupCameraActivity {
     }
 
     private void requestData() {
+        showCustomProgrssDialog();
         mProcess = new PropertyTousujianyiMessageProcessProxy();
-
         ((PropertyTousujianyiMessageProcessProxy) mProcess).requestTousujianyi(
                 this, this);
-        showCustomProgrssDialog();
     }
 
     protected void saveData(String content) {
@@ -60,9 +59,19 @@ public class PropertyTousujianyiActivity extends PropertyStartupCameraActivity {
         }.getType();
         PropertyBeanTousujianyi bean = JsonUtils.parseJson(content, type);
         LogUtil.d(TAG, "loadDBData bean: " + bean);
-        if ("3710".equals(bean.iccode) && "00".equals(bean.answercode)) {
-            bean.saveDataToDB(this);
-            loadDBData();
+        if ("3710".equals(bean.iccode)) {
+            if ("00".equals(bean.answercode)) {
+                bean.saveDataToDB(this);
+                loadDBData();
+            } else {
+                showMessage("失败");
+            }
+        } else if ("3810".equals(bean.iccode)) {
+            if ("00".equals(bean.answercode)) {
+                showMessage("提交成功");
+            } else {
+                showMessage("提交失败");
+            }
         }
         hideCustomProgressDialog();
     }
@@ -180,11 +189,12 @@ public class PropertyTousujianyiActivity extends PropertyStartupCameraActivity {
             return;
         }
 
+        showCustomProgrssDialog();
         PropertyTousujianyiSubmitRequestInfo submit = new PropertyTousujianyiSubmitRequestInfo();
         submit.complaintcode = ((PropertyTypeItem) obj).type_id;
         submit.complaintdesc = desc;
         ((PropertyTousujianyiMessageProcessProxy) mProcess)
-                .submitTousujianyidan(this, submit, null);
+                .submitTousujianyidan(this, submit, this);
     }
 
     private void clickCallWuye() {
