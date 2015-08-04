@@ -51,8 +51,8 @@ public class PropertyNotifyMessageAdapter extends PropertyBaseDataAdapter {
         time.setText(item.publishtime);
 
         ImageView image = (ImageView) convertView.findViewById(R.id.image_read);
-        int resId = "1".equals(item.noticestatus) ? R.drawable.property_wuyetongzhi_message_unread
-                : R.drawable.property_wuyetongzhi_message_read;
+        int resId = "1".equals(item.noticestatus) ? R.drawable.property_wuyetongzhi_message_read
+                : R.drawable.property_wuyetongzhi_message_unread;
         image.setImageResource(resId);
     }
 
