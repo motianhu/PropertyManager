@@ -46,6 +46,7 @@ public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
     }
 
     private void requestData() {
+        showCustomProgrssDialog();
         mProcess = new PropertyWuyebaoxiuMessageProcessProxy();
         mRequestInfo = new PropertyWuyebaoxiuDetailRequestInfo();
         ((PropertyWuyebaoxiuDetailRequestInfo) mRequestInfo).repairid = mItem.repairid;
@@ -59,10 +60,14 @@ public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
         }.getType();
         PropertyItemInfo info = JsonUtils.parseJson(content, type);
         if ("3510".equals(info.iccode)) {
-            type = new TypeToken<PropertyWuyebaoxiudanContentItem>() {
-            }.getType();
-            mItem = JsonUtils.parseJson(content, type);
-            requestRefreshUI();
+            if ("00".equals(info.answercode)) {
+                type = new TypeToken<PropertyWuyebaoxiudanContentItem>() {
+                }.getType();
+                mItem = JsonUtils.parseJson(content, type);
+                requestRefreshUI();
+            } else {
+                showMessage("失败");
+            }
         } else if ("3610".equals(info.iccode)) {
             if ("00".equals(info.answercode)) {
                 showMessage("评价成功");
@@ -70,14 +75,15 @@ public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
                 showMessage("评价失败");
             }
         }
-
+        hideCustomProgressDialog();
     }
 
     protected void failedRequest() {
-
+        hideCustomProgressDialog();
     }
 
     protected void refreshUI() {
+        LogUtil.d(TAG, "refreshUI mItem: " + mItem);
         View view = findViewById(R.id.baoxiu_time);
         initText(view, R.id.value, mItem.requesttime);
 
@@ -107,6 +113,7 @@ public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
             for (int i = 0; i < mItem.evalute.size(); i++) {
                 String code = mItem.evalute.get(i).evalcode;
                 String num = mItem.evalute.get(i).evalvalue;
+                LogUtil.d(TAG, "refreshUI num: " + num + ", code: " + code);
                 if ("1".equals(code) && !TextUtils.isEmpty(num)) {
                     initRatingBar(R.id.wancheng_zhiliang, num);
                 } else if ("2".equals(code) && !TextUtils.isEmpty(num)) {
@@ -144,7 +151,7 @@ public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
     private void initRatingBar(int parentId, String num) {
         View view = findViewById(parentId);
         RatingBar bar = (RatingBar) view.findViewById(R.id.pingjia_result);
-        bar.setNumStars(Integer.valueOf(num));
+        bar.setRating(Integer.valueOf(num));
     }
 
     @Override
@@ -223,12 +230,13 @@ public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
     }
 
     private void clickSubmitPingjia() {
+        showCustomProgrssDialog();
         PropertyWuyebaoxiuSubmitPingjiaRequestInfo requestInfo = new PropertyWuyebaoxiuSubmitPingjiaRequestInfo();
 
-        addPingjiaInfo(requestInfo, R.id.wancheng_zhiliang);
-        addPingjiaInfo(requestInfo, R.id.wancheng_taidu);
-        addPingjiaInfo(requestInfo, R.id.wancheng_jishixing);
-        addPingjiaInfo(requestInfo, R.id.wancheng_price);
+        addPingjiaInfo(requestInfo, R.id.wancheng_zhiliang, "1");
+        addPingjiaInfo(requestInfo, R.id.wancheng_taidu, "2");
+        addPingjiaInfo(requestInfo, R.id.wancheng_jishixing, "3");
+        addPingjiaInfo(requestInfo, R.id.wancheng_price, "4");
 
         requestInfo.repairid = mItem.repairid;
         ((PropertyWuyebaoxiuMessageProcessProxy) mProcess)
@@ -236,12 +244,12 @@ public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
     }
 
     private void addPingjiaInfo(
-            PropertyWuyebaoxiuSubmitPingjiaRequestInfo requestInfo, int resid) {
+            PropertyWuyebaoxiuSubmitPingjiaRequestInfo requestInfo, int resid, String eveCode) {
         View parent = findViewById(resid);
         RatingBar bar = (RatingBar) parent.findViewById(R.id.pingjia_result);
-        int num = bar.getNumStars();
+        int num = (int)bar.getRating();
         if (num > 0) {
-            requestInfo.add("1", num);
+            requestInfo.add(eveCode, num);
         }
     }
 }

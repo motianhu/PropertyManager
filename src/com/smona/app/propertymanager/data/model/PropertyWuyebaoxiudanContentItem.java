@@ -21,15 +21,24 @@ public class PropertyWuyebaoxiudanContentItem extends PropertyContentItem {
 
     }
 
+    public String toString() {
+        return "PropertyWuyebaoxiudanContentItem[repairid: " + repairid
+                + ", repairname: " + repairname + ", requesttime: "
+                + requesttime + ", repairstatus: " + repairstatus
+                + ", repairdesc: " + repairdesc + ", workbegintime: "
+                + workbegintime + ", worker: " + worker + ", workendtime: "
+                + workendtime + "]";
+    }
+
     public PropertyWuyebaoxiudanContentItem(Parcel in) {
         repairid = in.readString();
         repairname = in.readString();
         requesttime = in.readString();
         repairstatus = in.readString();
-        
+
         repairpicture = new ArrayList<String>();
         in.readList(repairpicture, ClassLoader.getSystemClassLoader());
-        
+
         repairdesc = in.readString();
         workbegintime = in.readString();
         worker = in.readString();
@@ -50,9 +59,9 @@ public class PropertyWuyebaoxiudanContentItem extends PropertyContentItem {
         dest.writeString(repairname);
         dest.writeString(requesttime);
         dest.writeString(repairstatus);
-        
+
         dest.writeList(repairpicture);
-        
+
         dest.writeString(repairdesc);
         dest.writeString(workbegintime);
         dest.writeString(worker);
