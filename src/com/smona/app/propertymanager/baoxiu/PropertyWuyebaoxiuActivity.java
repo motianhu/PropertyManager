@@ -13,8 +13,10 @@ import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyWuyebaoxiuContentItem;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
+import com.smona.app.propertymanager.util.HttpUploadFile;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
+import com.smona.app.propertymanager.util.PropertyConstants;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -201,8 +203,8 @@ public class PropertyWuyebaoxiuActivity extends PropertyStartupCameraActivity {
         if (files.size() > 0) {
             new Thread(new Runnable() {
                 public void run() {
-                    // HttpUploadFile.submitPost(PropertyConstants.UPLOAD,
-                    // files);
+                    HttpUploadFile.submitPost(PropertyConstants.UPLOAD,
+                            files.get(0));
                 }
             }).start();
 

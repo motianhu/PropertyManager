@@ -1,54 +1,48 @@
 package com.smona.app.propertymanager.util;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
 
 public class HttpUploadFile {
     private static final String TAG = "HttpUploadFile";
+    
+    public static void submitPost(String url, String filePath) {
+        RequestParams params = new RequestParams();
+        params.addBodyParameter(filePath.replace("/", ""), new File(filePath));
+        uploadMethod(params, url);
+    }
 
-    public static void submitPost(String url, ArrayList<String> files) {
-        CloseableHttpClient httpclient = HttpClientBuilder.create().build();
-        CloseableHttpResponse response = null;
-        try {
-            HttpPost httppost = new HttpPost(url);
-            MultipartEntityBuilder multi = MultipartEntityBuilder.create()
-                    .setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+    public static void uploadMethod(final RequestParams params,
+            final String uploadHost) {
+        HttpUtils http = new HttpUtils();
+        http.send(HttpRequest.HttpMethod.POST, uploadHost, params,
+                new RequestCallBack<String>() {
+                    @Override
+                    public void onStart() {
+                    }
 
-            int size = files.size();
-            for (int i = 0; i < size; i++) {
-                multi.addPart("files", new FileBody(new File(files.get(i))));
-            }
+                    @Override
+                    public void onLoading(long total, long current,
+                            boolean isUploading) {
+                    }
 
-            HttpEntity req = multi.build();
-            httppost.setEntity(req);
-            response = httpclient.execute(httppost);
+                    @Override
+                    public void onSuccess(ResponseInfo<String> responseInfo) {
+                        LogUtil.d(TAG, "responseInfo: " + responseInfo.result);
+                    }
 
-            HttpEntity re = response.getEntity();
-            LogUtil.d(TAG, "getStatusLine: " + response.getStatusLine());
-            LogUtil.d(TAG, "HttpEntity re: " + re);
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-            LogUtil.d(TAG, "ClientProtocolException error: " + e);
-        } catch (IOException e) {
-            e.printStackTrace();
-            LogUtil.d(TAG, "IOException error: " + e);
-        } finally {
-            try {
-                response.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+                    @Override
+                    public void onFailure(HttpException error, String msg) {
+                    }
+                });
+    }
+
+    public interface UploadCallback {
+        
     }
 }
