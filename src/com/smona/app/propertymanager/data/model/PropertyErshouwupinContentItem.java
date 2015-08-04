@@ -8,7 +8,9 @@ import android.os.Parcelable;
 public class PropertyErshouwupinContentItem extends PropertyContentItem {
     public String publishid;
     public String brand;
+    public String brandcode;
     public String classname;
+    public String classcode;
     public String goodsname;
     public String goodsdesc;
     public String goosstatus;
@@ -26,7 +28,9 @@ public class PropertyErshouwupinContentItem extends PropertyContentItem {
     public PropertyErshouwupinContentItem(Parcel in) {
         publishid = in.readString();
         brand = in.readString();
+        brandcode = in.readString();
         classname = in.readString();
+        classcode = in.readString();
         goodsname = in.readString();
         goodsdesc = in.readString();
         goosstatus = in.readString();
@@ -49,7 +53,9 @@ public class PropertyErshouwupinContentItem extends PropertyContentItem {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(publishid);
         dest.writeString(brand);
+        dest.writeString(brandcode);
         dest.writeString(classname);
+        dest.writeString(classcode);
         dest.writeString(goodsname);
         dest.writeString(goodsdesc);
         dest.writeString(goosstatus);
@@ -76,9 +82,10 @@ public class PropertyErshouwupinContentItem extends PropertyContentItem {
 
     public String toString() {
         return "PropertyErshouwupinContentItem[publishid: " + publishid
-                + ",brand: " + brand + ",classname: " + classname
-                + ",goodsname: " + goodsname + ", goodsdesc: " + goodsdesc
+                + ",brand: " + brand + ",brandcode: " + brandcode
+                + ",classname: " + classname + ",classcode: " + classcode
                 + ", goosstatus: " + goosstatus + ",username: " + username
+                + ",goodsname: " + goodsname + ", goodsdesc: " + goodsdesc
                 + ", userphone: " + userphone + ",publishtime: " + publishtime
                 + ", publishstatus: " + publishstatus + "]";
     }

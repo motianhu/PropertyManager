@@ -250,9 +250,10 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
 
     private void filterType(String filteId) {
         mShowDatas.clear();
+        notifyDataSetChanged();
         for (PropertyItemInfo info : mAllDatas) {
-            LogUtil.d(TAG, "info: " + (PropertyFangwuzulinContentItem) info);
             if (isFitFilter((PropertyFangwuzulinContentItem) info)) {
+                LogUtil.d(TAG, "info: " + (PropertyFangwuzulinContentItem) info);
                 mShowDatas.add(info);
             }
         }

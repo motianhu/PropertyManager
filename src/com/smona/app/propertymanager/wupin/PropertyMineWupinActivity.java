@@ -20,6 +20,7 @@ import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinPinpaiRequ
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinRequestInfo;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
@@ -34,6 +35,11 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
     private ArrayList<PropertyItemInfo> mWupinDatas = new ArrayList<PropertyItemInfo>();
     private ArrayList<PropertyItemInfo> mXinjiuDatas = new ArrayList<PropertyItemInfo>();
 
+    // filter
+    private String mFilterWupinType = "";
+    private String mFilterPinpaiCode = "";
+    private String mFilterXinjiuCode = "";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +49,9 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
     }
 
     protected void loadData() {
+        showCustomProgrssDialog();
         requestData();
         loadTypeData();
-        showCustomProgrssDialog();
     }
 
     private void requestData() {
@@ -64,24 +70,34 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
     }
 
     protected void saveData(String content) {
-        LogUtil.d(TAG, "content: " + content);
-        Type type = new TypeToken<PropertyErshouwupinHomeContentItem>() {
+        Type type = new TypeToken<PropertyItemInfo>() {
         }.getType();
 
         PropertyItemInfo info = JsonUtils.parseJson(content, type);
-        LogUtil.d(TAG, "info.iccode: " + info.iccode + "; content: " + content);
+        LogUtil.d(TAG, "iccode: " + info.iccode + ", answer: "
+                + info.answercode + "; content: " + content);
 
-        if ("4710".equals(info.iccode)) {
+        if ("5210".equals(info.iccode)) {
             if ("00".equals(info.answercode)) {
+                type = new TypeToken<PropertyErshouwupinHomeContentItem>() {
+                }.getType();
                 mContent = JsonUtils.parseJson(content, type);
                 loadDBData();
                 setDataPos(mContent.icobject.size());
+            } else {
+
             }
         } else if ("4910".equals(info.iccode)) {
-            PropertyBeanErshouwupinpinpais bean = JsonUtils.parseJson(content,
-                    type);
-            bean.saveDataToDB(this);
-            loadPinpaiTypeData();
+            if ("00".equals(info.answercode)) {
+                type = new TypeToken<PropertyBeanErshouwupinpinpais>() {
+                }.getType();
+                PropertyBeanErshouwupinpinpais bean = JsonUtils.parseJson(
+                        content, type);
+                bean.saveDataToDB(this);
+                loadPinpaiTypeData();
+            } else {
+
+            }
         }
         finishDialogAndRefresh();
     }
@@ -107,7 +123,7 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
         mAllDatas.addAll(mContent.icobject);
         mShowDatas.clear();
         mShowDatas.addAll(mAllDatas);
-        
+
         requestRefreshUI();
     }
 
@@ -192,8 +208,20 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
                 View parent = mRoot.findViewById(R.id.wupintype);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
-                filterWupinType(((PropertyTypeItem) info).type_name);
-                initPinpaiTypes(((PropertyTypeItem) info).type_id);
+                
+                if (((PropertyTypeItem) info).type_id.equals(mFilterWupinType)) {
+
+                } else {
+                    mFilterWupinType = ((PropertyTypeItem) info).type_id;
+                    mFilterPinpaiCode = "";
+                    filterType(mFilterWupinType);
+
+                    parent = mRoot.findViewById(R.id.pinpai);
+                    initText(parent, R.id.select_type, "");
+                    parent.setTag(null);
+
+                    initPinpaiTypes(((PropertyTypeItem) info).type_id);
+                }
             }
         });
     }
@@ -208,7 +236,10 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 View parent = mRoot.findViewById(R.id.xinjiu);
-                filterXinjiuType(((PropertyTypeItem) info).type_name);
+                
+                mFilterXinjiuCode = ((PropertyTypeItem) info).type_name;
+                filterType(mFilterXinjiuCode);
+                
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
@@ -225,45 +256,47 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 View parent = mRoot.findViewById(R.id.pinpai);
-                filterPinpaiType(((PropertyTypeItem) info).type_name);
+                
+                mFilterPinpaiCode = ((PropertyTypeItem) info).type_id;
+                filterType(mFilterPinpaiCode);
+                
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
         });
     }
-    
 
-    private void filterWupinType(String filterName) {
+    private void filterType(String filteId) {
         mShowDatas.clear();
+        notifyDataSetChanged();
         for (PropertyItemInfo info : mAllDatas) {
-            if (filterName
-                    .equals(((PropertyErshouwupinContentItem) info).classname)) {
+            if (isFitFilter((PropertyErshouwupinContentItem) info)) {
+                LogUtil.d(TAG, "info: " + (PropertyErshouwupinContentItem) info);
                 mShowDatas.add(info);
             }
         }
         requestRefreshUI();
     }
 
-    private void filterPinpaiType(String filterName) {
-        mShowDatas.clear();
-        for (PropertyItemInfo info : mAllDatas) {
-            if (filterName
-                    .equals(((PropertyErshouwupinContentItem) info).brand)) {
-                mShowDatas.add(info);
-            }
+    private boolean isFitFilter(PropertyErshouwupinContentItem info) {
+        boolean result = true;
+
+        if (!TextUtils.isEmpty(mFilterWupinType)) {
+            result = mFilterWupinType
+                    .equals(info.classcode);
         }
-        requestRefreshUI();
-    }
-    
-    private void filterXinjiuType(String filterName) {
-        mShowDatas.clear();
-        for (PropertyItemInfo info : mAllDatas) {
-            if (filterName
-                    .equals(((PropertyErshouwupinContentItem) info).goosstatus)) {
-                mShowDatas.add(info);
-            }
+
+        if (!TextUtils.isEmpty(mFilterPinpaiCode)) {
+            result = mFilterPinpaiCode
+                    .equals(info.brandcode);
         }
-        requestRefreshUI();
+
+        if (!TextUtils.isEmpty(mFilterXinjiuCode)) {
+            result = mFilterXinjiuCode
+                    .equals(info.goosstatus);
+        }
+
+        return result;
     }
 
     @Override
@@ -271,7 +304,7 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
         showCustomProgrssDialog();
         fetchListData();
     }
-    
+
     @Override
     public PropertyBaseDataAdapter createAdapter(
             ArrayList<PropertyItemInfo> data) {
