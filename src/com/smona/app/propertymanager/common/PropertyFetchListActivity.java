@@ -47,7 +47,7 @@ public abstract class PropertyFetchListActivity extends PropertyBaseActivity
         mList = (XListView) mRoot.findViewById(R.id.list_content);
         mAdapter = createAdapter(data);
         mList.setAdapter(mAdapter);
-        mList.setPullRefreshEnable(true);
+        mList.setPullRefreshEnable(false);
         mList.setPullLoadEnable(true);
         mList.setXListViewListener(this);
     }
