@@ -91,7 +91,7 @@ public class LogUtil {
             FileOutputStream out = null;
             try {
                 out = new FileOutputStream(path);
-                bitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {

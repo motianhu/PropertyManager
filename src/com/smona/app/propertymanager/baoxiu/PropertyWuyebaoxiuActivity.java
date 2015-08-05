@@ -13,13 +13,10 @@ import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyWuyebaoxiuContentItem;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
-import com.smona.app.propertymanager.util.HttpUploadFile;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
-import com.smona.app.propertymanager.util.PropertyConstants;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -27,7 +24,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 public class PropertyWuyebaoxiuActivity extends PropertyStartupCameraActivity {
     private static final String TAG = "PropertyWuyebaoxiuActivity";
@@ -56,12 +52,15 @@ public class PropertyWuyebaoxiuActivity extends PropertyStartupCameraActivity {
     }
 
     protected void saveData(String content) {
-        Type type = new TypeToken<PropertyBeanWuyebaoxiu>() {
+        Type type = new TypeToken<PropertyItemInfo>() {
         }.getType();
-        PropertyBeanWuyebaoxiu bean = JsonUtils.parseJson(content, type);
+        PropertyItemInfo bean = JsonUtils.parseJson(content, type);
         LogUtil.d(TAG, "bean: " + bean);
         if ("3210".equals(bean.iccode) && "00".equals(bean.answercode)) {
-            bean.saveDataToDB(this);
+            type = new TypeToken<PropertyBeanWuyebaoxiu>() {
+            }.getType();
+            PropertyBeanWuyebaoxiu baoxiu = JsonUtils.parseJson(content, type);
+            baoxiu.saveDataToDB(this);
             loadDBData();
         } else if ("3310".equals(bean.iccode)) {
             if ("00".equals(bean.answercode)) {
@@ -166,21 +165,6 @@ public class PropertyWuyebaoxiuActivity extends PropertyStartupCameraActivity {
         startActivityForResult(intent, ACTION_CAMERA);
     }
 
-    protected void onCameraCallback(Bitmap bitmap, String fileName) {
-        ImageView image = new ImageView(this);
-        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                getResources()
-                        .getDimensionPixelSize(
-                                R.dimen.property_common_paishezhaoping_container_height),
-                getResources()
-                        .getDimensionPixelSize(
-                                R.dimen.property_common_paishezhaoping_container_height));
-        param.leftMargin = 10;
-        mPictureContainer.addView(image, 0, param);
-        image.setTag(fileName);
-        image.setImageBitmap(bitmap);
-    }
-
     private void clickActionNow() {
 
         Object obj = getTag(R.id.select_type);
@@ -200,20 +184,12 @@ public class PropertyWuyebaoxiuActivity extends PropertyStartupCameraActivity {
             String tag = (String) mPictureContainer.getChildAt(i).getTag();
             files.add(tag);
         }
-        if (files.size() > 0) {
-            new Thread(new Runnable() {
-                public void run() {
-                    HttpUploadFile.submitPost(PropertyConstants.UPLOAD,
-                            files.get(0));
-                }
-            }).start();
-
-        }
 
         showCustomProgrssDialog();
         PropertyWuyebaoxiuSubmitRequestInfo submit = new PropertyWuyebaoxiuSubmitRequestInfo();
         submit.repaircode = ((PropertyTypeItem) obj).type_id;
         submit.repairdesc = desc;
+        submit.icobject = files;
         ((PropertyWuyebaoxiuMessageProcessProxy) mProcess).submitWuyebaoxiudan(
                 this, submit, this);
     }

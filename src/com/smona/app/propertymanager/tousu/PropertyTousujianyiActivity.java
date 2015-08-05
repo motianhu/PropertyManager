@@ -17,7 +17,6 @@ import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -26,7 +25,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 public class PropertyTousujianyiActivity extends PropertyStartupCameraActivity {
 
@@ -222,20 +220,5 @@ public class PropertyTousujianyiActivity extends PropertyStartupCameraActivity {
                 setTag(R.id.select_type, info);
             }
         });
-    }
-
-    protected void onCameraCallback(Bitmap bitmap, String fileName) {
-        ImageView image = new ImageView(this);
-        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                getResources()
-                        .getDimensionPixelSize(
-                                R.dimen.property_common_paishezhaoping_container_height),
-                getResources()
-                        .getDimensionPixelSize(
-                                R.dimen.property_common_paishezhaoping_container_height));
-        param.leftMargin = 10;
-        mPictureContainer.addView(image, 0, param);
-        image.setTag(fileName);
-        image.setImageBitmap(bitmap);
     }
 }

@@ -4,7 +4,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -347,21 +346,5 @@ public class PropertyPublishFangYuanActivity extends PropertyStartupCameraActivi
                 setTag(parent, R.id.select_type, info);
             }
         });
-    }
-    
-    
-    protected void onCameraCallback(Bitmap bitmap, String fileName) {
-        ImageView image = new ImageView(this);
-        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                getResources()
-                        .getDimensionPixelSize(
-                                R.dimen.property_common_paishezhaoping_container_height),
-                getResources()
-                        .getDimensionPixelSize(
-                                R.dimen.property_common_paishezhaoping_container_height));
-        param.leftMargin = 10;
-        mPictureContainer.addView(image, 0, param);
-        image.setTag(fileName);
-        image.setImageBitmap(bitmap);
     }
 }
