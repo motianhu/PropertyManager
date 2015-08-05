@@ -169,7 +169,7 @@ public class PropertyPublishFangYuanActivity extends PropertyStartupCameraActivi
         initText(parent, R.id.value, mItem.userphone);
         
         ViewGroup list = (ViewGroup) mRoot.findViewById(R.id.list_hor_image);
-        for (int i = 0; i < mItem.picurl.size(); i++) {
+        for (int i = 0; i < mItem.icobject.size(); i++) {
             ImageView image = new ImageView(this);
             LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
                     getResources()
@@ -180,7 +180,7 @@ public class PropertyPublishFangYuanActivity extends PropertyStartupCameraActivi
                                     R.dimen.property_common_paishezhaoping_container_height));
             param.leftMargin = 10;
             list.addView(image, param);
-            ImageLoaderManager.getInstance().loadImage(mItem.picurl.get(i),
+            ImageLoaderManager.getInstance().loadImage(mItem.icobject.get(i),
                     image);
         }
     }
@@ -264,6 +264,12 @@ public class PropertyPublishFangYuanActivity extends PropertyStartupCameraActivi
             showMessage("请输入联系电话");
             return;
         }
+        
+        final ArrayList<String> files = new ArrayList<String>();
+        for (int i = 0; i < mPictureContainer.getChildCount(); i++) {
+            String tag = (String) mPictureContainer.getChildAt(i).getTag();
+            files.add(tag);
+        }
 
         PropertyFangwuzulinSubmitRequestInfo request = new PropertyFangwuzulinSubmitRequestInfo();
         request.house.choosetype = ((PropertyTypeItem) ywlx).type_id;
@@ -273,6 +279,7 @@ public class PropertyPublishFangYuanActivity extends PropertyStartupCameraActivi
         request.house.username = lianxiren;
         request.house.userphone = dianhua;
         request.house.houseaddress = weizhi;
+        request.house.icobject = files;
 
         ((PropertyFangwuzulinMessageProcessProxy) mProcess)
                 .submitFangwuzulindan(this, request, this);

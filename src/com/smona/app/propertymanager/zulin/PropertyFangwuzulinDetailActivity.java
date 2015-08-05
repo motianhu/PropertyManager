@@ -98,7 +98,7 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
         initText(parent, R.id.value, mItem.publishtime);
 
         ViewGroup list = (ViewGroup) mRoot.findViewById(R.id.list_hor_image);
-        for (int i = 0; i < mItem.picurl.size(); i++) {
+        for (int i = 0; i < mItem.icobject.size(); i++) {
             ImageView image = new ImageView(this);
             LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
                     getResources()
@@ -109,7 +109,7 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
                                     R.dimen.property_common_paishezhaoping_container_height));
             param.leftMargin = 10;
             list.addView(image, param);
-            ImageLoaderManager.getInstance().loadImage(mItem.picurl.get(i),
+            ImageLoaderManager.getInstance().loadImage(mItem.icobject.get(i),
                     image);
         }
 

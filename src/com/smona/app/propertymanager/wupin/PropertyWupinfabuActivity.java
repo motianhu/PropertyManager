@@ -260,6 +260,12 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
             showMessage("请输入联系电话");
             return;
         }
+        
+        final ArrayList<String> files = new ArrayList<String>();
+        for (int i = 0; i < mPictureContainer.getChildCount(); i++) {
+            String tag = (String) mPictureContainer.getChildAt(i).getTag();
+            files.add(tag);
+        }
 
         PropertyErshouwupinSubmitRequestInfo request = new PropertyErshouwupinSubmitRequestInfo();
         request.classcode = ((PropertyTypeItem) wupinType).type_id;
@@ -270,6 +276,7 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
         request.username = lianxiren;
         request.goodsname = goodsName;
         request.userphone = dianhua;
+        request.icobject = files;
 
         ((PropertyErshouwupinMessageProcessProxy) mProcess)
                 .submitErshouwupindan(this, request, this);

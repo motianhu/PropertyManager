@@ -53,13 +53,19 @@ public class PropertyTousujianyiActivity extends PropertyStartupCameraActivity {
     }
 
     protected void saveData(String content) {
-        Type type = new TypeToken<PropertyBeanTousujianyi>() {
+        Type type = new TypeToken<PropertyItemInfo>() {
         }.getType();
-        PropertyBeanTousujianyi bean = JsonUtils.parseJson(content, type);
+        PropertyItemInfo bean = JsonUtils.parseJson(content, type);
+        LogUtil.d(TAG, "bean: " + bean);
+
         LogUtil.d(TAG, "loadDBData bean: " + bean);
         if ("3710".equals(bean.iccode)) {
             if ("00".equals(bean.answercode)) {
-                bean.saveDataToDB(this);
+                type = new TypeToken<PropertyBeanTousujianyi>() {
+                }.getType();
+                PropertyBeanTousujianyi tousu = JsonUtils.parseJson(content,
+                        type);
+                tousu.saveDataToDB(this);
                 loadDBData();
             } else {
                 showMessage("失败");
@@ -186,11 +192,18 @@ public class PropertyTousujianyiActivity extends PropertyStartupCameraActivity {
             showMessage("请描述问题!");
             return;
         }
+        
+        final ArrayList<String> files = new ArrayList<String>();
+        for (int i = 0; i < mPictureContainer.getChildCount(); i++) {
+            String tag = (String) mPictureContainer.getChildAt(i).getTag();
+            files.add(tag);
+        }
 
         showCustomProgrssDialog();
         PropertyTousujianyiSubmitRequestInfo submit = new PropertyTousujianyiSubmitRequestInfo();
         submit.complaintcode = ((PropertyTypeItem) obj).type_id;
         submit.complaintdesc = desc;
+        submit.icobject = files;
         ((PropertyTousujianyiMessageProcessProxy) mProcess)
                 .submitTousujianyidan(this, submit, this);
     }
