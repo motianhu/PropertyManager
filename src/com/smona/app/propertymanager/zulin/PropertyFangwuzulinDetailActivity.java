@@ -4,6 +4,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import com.google.gson.reflect.TypeToken;
+import com.jasonwang.informationhuimin.utils.ConfigsInfo;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.common.PropertyBaseActivity;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinContentItem;
@@ -44,8 +45,8 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
     private void acquireData() {
         mItem = (PropertyFangwuzulinContentItem) getIntent()
                 .getParcelableExtra("iteminfo");
-        mIsMySelf = mItem.loginname == mItem.customerid;
         LogUtil.d(TAG, "acquireData mItem: " + mItem);
+        mIsMySelf = ConfigsInfo.username.equals(mItem.customerid);
         initYewuDatas();
     }
 

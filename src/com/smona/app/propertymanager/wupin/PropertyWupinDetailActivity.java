@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
+import com.jasonwang.informationhuimin.utils.ConfigsInfo;
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.common.PropertyBaseActivity;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinContentItem;
@@ -41,8 +42,8 @@ public class PropertyWupinDetailActivity extends PropertyBaseActivity {
     private void acquireData() {
         mItem = (PropertyErshouwupinContentItem) getIntent()
                 .getParcelableExtra("iteminfo");
-        mIsMySelf = mItem.customerid == mItem.loginname;
         LogUtil.d(TAG, "acquireData mItem: " + mItem);
+        mIsMySelf = ConfigsInfo.username.equalsIgnoreCase(mItem.customerid);
     }
 
     @Override
