@@ -41,11 +41,13 @@ public class PropertyHomeActivity extends PropertyBaseActivity {
 
     protected void saveData(String content) {
         mIsLogin = true;
+        showMessage("登录成功");
         hideCustomProgressDialog();
     }
 
     protected void failedRequest() {
         mIsLogin = false;
+        showMessage("登录失败");
         hideCustomProgressDialog();
     }
 
