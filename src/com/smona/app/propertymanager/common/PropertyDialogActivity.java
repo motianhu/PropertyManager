@@ -58,8 +58,7 @@ public class PropertyDialogActivity extends Activity {
         mDialog.setOnCancelListener(new OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
-                dialog.dismiss();
-                finish();
+                hideDialogForMessage();
             }
         });
     }

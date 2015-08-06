@@ -105,14 +105,13 @@ public class PropertyMineFangyuanActivity extends PropertyFilterTypeActivity {
     }
 
     private void loadDBData() {
-        mAllDatas.addAll(mContent.icobject);
-        mShowDatas.clear();
-        mShowDatas.addAll(mAllDatas);
-        
         requestRefreshUI();
     }
 
     protected void refreshUI() {
+        mAllDatas.addAll(mContent.icobject);
+        mShowDatas.clear();
+        mShowDatas.addAll(mAllDatas);
         notifyDataSetChanged();
     }
 
