@@ -75,11 +75,11 @@ public class PropertyWuyetongzhiActivity extends PropertyFetchListActivity {
     private void loadDBData() {
         mContent.loadDBData(this);
         LogUtil.d(TAG, "loadDBData mContent: " + mContent);
-        mDatas.addAll(mContent.icobject);
         requestRefreshUI();
     }
 
     protected void refreshUI() {
+        mDatas.addAll(mContent.icobject);
         initYezhuxinxi();
         notifyDataSetChanged();
     }

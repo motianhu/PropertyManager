@@ -137,14 +137,14 @@ public class PropertyErshouwupinActivity extends PropertyFilterTypeActivity {
     }
 
     private void loadListData() {
-        mAllDatas.addAll(mContent.icobject);
-        mShowDatas.clear();
-        mShowDatas.addAll(mAllDatas);
-
         requestRefreshUI();
     }
 
     protected void refreshUI() {
+        mAllDatas.addAll(mContent.icobject);
+        mShowDatas.clear();
+        mShowDatas.addAll(mAllDatas);
+        
         notifyDataSetChanged();
     }
 

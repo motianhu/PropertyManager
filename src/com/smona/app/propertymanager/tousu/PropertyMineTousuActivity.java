@@ -79,11 +79,11 @@ public class PropertyMineTousuActivity extends PropertyFetchListActivity {
     }
 
     private void loadDBData() {
-        mDatas.addAll(mBean.icobjct);
         requestRefreshUI();
     }
 
     protected void refreshUI() {
+        mDatas.addAll(mBean.icobjct);
         notifyDataSetChanged();
     }
 
