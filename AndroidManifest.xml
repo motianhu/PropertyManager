@@ -30,6 +30,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".PropertyHomeActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,73 +41,89 @@
         <!-- 物业报修 -->
         <activity
             android:name="com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuActivity"
+            android:screenOrientation="portrait"
             android:label="@string/property_home_wuyebaoxiu" >
         </activity>
         <activity
             android:name="com.smona.app.propertymanager.baoxiu.PropertyBaoxiudanActivity"
+            android:screenOrientation="portrait"
             android:label="@string/property_home_wuyebaoxiu" >
         </activity>
         <activity
             android:name="com.smona.app.propertymanager.baoxiu.PropertyBaoxiudanDetailActivity"
+            android:screenOrientation="portrait"
             android:label="@string/property_wuyebaoxiu_baoxiudandetail" >
         </activity>
 
         <!-- 投诉建议 -->
         <activity
             android:name="com.smona.app.propertymanager.tousu.PropertyTousujianyiActivity"
+            android:screenOrientation="portrait"
             android:label="@string/property_home_tousujianyi" >
         </activity>
         <activity
             android:name="com.smona.app.propertymanager.tousu.PropertyMineTousuActivity"
+            android:screenOrientation="portrait"
             android:label="@string/property_tousujianyi_mine_suggest" >
         </activity>
         <activity
             android:name="com.smona.app.propertymanager.tousu.PropertyTousudanDetailActivity"
+            android:screenOrientation="portrait"
             android:label="@string/property_tousudan_detail" >
         </activity>
 
         <!-- 物业通知 -->
         <activity
             android:name="com.smona.app.propertymanager.notify.PropertyWuyetongzhiActivity"
+            android:screenOrientation="portrait"
             android:label="@string/property_home_wuyetongzhi" >
         </activity>
         <activity
             android:name="com.smona.app.propertymanager.notify.PropertyWuyetongzhiDetailActivity"
+            android:screenOrientation="portrait"
             android:label="@string/property_home_wuyetongzhi" >
         </activity>
 
         <!-- 房屋租赁 -->
         <activity
             android:name="com.smona.app.propertymanager.zulin.PropertyFangwuzulinActivity"
+            android:screenOrientation="portrait"
             android:label="@string/property_home_fangwuzulin" >
         </activity>
         <activity
             android:name="com.smona.app.propertymanager.zulin.PropertyFangwuzulinDetailActivity"
+            android:screenOrientation="portrait"
             android:label="@string/property_home_fangwuzulin" >
         </activity>
         <activity
             android:name="com.smona.app.propertymanager.zulin.PropertyPublishFangYuanActivity"
+            android:screenOrientation="portrait"
             android:label="@string/property_home_fangwuzulin" >
         </activity>
         <activity
             android:name="com.smona.app.propertymanager.zulin.PropertyMineFangyuanActivity"
+            android:screenOrientation="portrait"
             android:label="@string/property_fangwuzulin_mine" >
         </activity>
 
         <!-- 二手物品 -->
         <activity
             android:name="com.smona.app.propertymanager.wupin.PropertyErshouwupinActivity"
+            android:screenOrientation="portrait"
             android:label="@string/property_home_ershouwupin" >
         </activity>
         <activity
             android:name="com.smona.app.propertymanager.wupin.PropertyWupinfabuActivity"
+            android:screenOrientation="portrait"
             android:label="@string/property_ershouwupin_wupinfabu" >
         </activity>
         <activity
             android:name="com.smona.app.propertymanager.wupin.PropertyMineWupinActivity"
+            android:screenOrientation="portrait"
             android:label="@string/property_ershouwupin_mine" />
         <activity
             android:name="com.smona.app.propertymanager.wupin.PropertyWupinDetailActivity"
+            android:screenOrientation="portrait"
             android:label="@string/property_ershouwupin_wupin_detail" />
 
         <!-- provider -->
