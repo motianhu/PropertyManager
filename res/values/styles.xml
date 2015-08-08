@@ -22,4 +22,8 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
+        <style name="Property_DialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground"> @android:color/transparent </item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
 </resources>

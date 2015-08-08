@@ -17,6 +17,10 @@
     <string name="property_common_alert_dialog_ok">选择</string>
     <string name="property_common_alert_dialog_cancel">取消</string>
     <string name="property_common_submit_pingjia">提交评价</string>
+    <string name="property_common_delTitle">删除</string>
+    <string name="property_common_delYes">是</string>
+    <string name="property_common_delNo">否</string>
+    <string name="property_common_delContent">确定删除?</string>
 
     <!-- 物业报修 -->
     <string name="property_home_wuyebaoxiu">物业报修</string>

@@ -4,6 +4,7 @@ import java.lang.ref.WeakReference;
 
 import com.smona.app.propertymanager.data.db.PropertyProvider;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
+import com.smona.app.propertymanager.util.PropertyCommonHelper;
 
 import android.app.Application;
 
@@ -14,6 +15,7 @@ public class PropertyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ImageLoaderManager.getInstance().initImageLoader(this);
+        PropertyCommonHelper.initParams(this);
     }
 
     public void setPropertyProvider(PropertyProvider provider) {
