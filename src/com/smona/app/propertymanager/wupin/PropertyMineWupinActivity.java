@@ -120,11 +120,11 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
     }
 
     private void loadDBData() {
+        mAllDatas.addAll(mContent.icobject);
         requestRefreshUI();
     }
 
     protected void refreshUI() {
-        mAllDatas.addAll(mContent.icobject);
         mShowDatas.clear();
         mShowDatas.addAll(mAllDatas);
         notifyDataSetChanged();
@@ -267,14 +267,13 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
 
     private void filterType(String filteId) {
         mShowDatas.clear();
-        notifyDataSetChanged();
         for (PropertyItemInfo info : mAllDatas) {
             if (isFitFilter((PropertyErshouwupinContentItem) info)) {
                 LogUtil.d(TAG, "info: " + (PropertyErshouwupinContentItem) info);
                 mShowDatas.add(info);
             }
         }
-        requestRefreshUI();
+        notifyDataSetChanged();
     }
 
     private boolean isFitFilter(PropertyErshouwupinContentItem info) {

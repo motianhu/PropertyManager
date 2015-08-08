@@ -124,11 +124,11 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
     }
 
     private void loadListData() {
+        mAllDatas.addAll(mContent.icobject);
         requestRefreshUI();
     }
 
     protected void refreshUI() {
-        mAllDatas.addAll(mContent.icobject);
         mShowDatas.clear();
         mShowDatas.addAll(mAllDatas);
         notifyDataSetChanged();
@@ -249,14 +249,13 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
 
     private void filterType(String filteId) {
         mShowDatas.clear();
-        notifyDataSetChanged();
         for (PropertyItemInfo info : mAllDatas) {
             if (isFitFilter((PropertyFangwuzulinContentItem) info)) {
                 LogUtil.d(TAG, "info: " + (PropertyFangwuzulinContentItem) info);
                 mShowDatas.add(info);
             }
         }
-        requestRefreshUI();
+        notifyDataSetChanged();
     }
 
     private boolean isFitFilter(PropertyFangwuzulinContentItem info) {

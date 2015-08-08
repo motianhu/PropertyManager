@@ -137,11 +137,11 @@ public class PropertyErshouwupinActivity extends PropertyFilterTypeActivity {
     }
 
     private void loadListData() {
+        mAllDatas.addAll(mContent.icobject);
         requestRefreshUI();
     }
 
     protected void refreshUI() {
-        mAllDatas.addAll(mContent.icobject);
         mShowDatas.clear();
         mShowDatas.addAll(mAllDatas);
         
@@ -254,14 +254,13 @@ public class PropertyErshouwupinActivity extends PropertyFilterTypeActivity {
 
     private void filterType(String filteId) {
         mShowDatas.clear();
-        notifyDataSetChanged();
         for (PropertyItemInfo info : mAllDatas) {
             if (isFitFilter((PropertyErshouwupinContentItem) info)) {
                 LogUtil.d(TAG, "info: " + (PropertyErshouwupinContentItem) info);
                 mShowDatas.add(info);
             }
         }
-        requestRefreshUI();
+        notifyDataSetChanged();
     }
 
     private boolean isFitFilter(PropertyErshouwupinContentItem info) {
