@@ -206,9 +206,10 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
                         + ((PropertyTypeItem) info).type_id);
                 View parent = mRoot.findViewById(R.id.ywtype);
                 mFilterChooseType = ((PropertyTypeItem) info).type_id;
-                filterType(((PropertyTypeItem) info).type_id);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
+                
+                filterType(((PropertyTypeItem) info).type_id);
             }
         });
     }
@@ -223,9 +224,11 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
                         + ((PropertyTypeItem) info).type_id);
                 View parent = mRoot.findViewById(R.id.housetype);
                 mFilterHouseCode = ((PropertyTypeItem) info).type_id;
-                filterType(((PropertyTypeItem) info).type_id);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
+                
+                
+                filterType(((PropertyTypeItem) info).type_id);
             }
         });
     }
@@ -240,9 +243,11 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
                         + ((PropertyTypeItem) info).type_id);
                 View parent = mRoot.findViewById(R.id.area);
                 mFilterAreaCode = ((PropertyTypeItem) info).type_id;
-                filterType(((PropertyTypeItem) info).type_id);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
+                
+                
+                filterType(((PropertyTypeItem) info).type_id);
             }
         });
     }
@@ -261,17 +266,17 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
     private boolean isFitFilter(PropertyFangwuzulinContentItem info) {
         boolean result = true;
 
-        if (!TextUtils.isEmpty(mFilterChooseType)) {
+        if (result && !TextUtils.isEmpty(mFilterChooseType)) {
             result = mFilterChooseType
                     .equals(((PropertyFangwuzulinContentItem) info).choosetype);
         }
 
-        if (!TextUtils.isEmpty(mFilterAreaCode)) {
+        if (result && !TextUtils.isEmpty(mFilterAreaCode)) {
             result = mFilterAreaCode
                     .equals(((PropertyFangwuzulinContentItem) info).areacode);
         }
 
-        if (!TextUtils.isEmpty(mFilterHouseCode)) {
+        if (result && !TextUtils.isEmpty(mFilterHouseCode)) {
             result = mFilterHouseCode
                     .equals(((PropertyFangwuzulinContentItem) info).housecode);
         }

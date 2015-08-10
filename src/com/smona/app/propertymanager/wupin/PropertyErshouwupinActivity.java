@@ -266,11 +266,11 @@ public class PropertyErshouwupinActivity extends PropertyFilterTypeActivity {
     private boolean isFitFilter(PropertyErshouwupinContentItem info) {
         boolean result = true;
 
-        if (!TextUtils.isEmpty(mFilterWupinType)) {
+        if (result && !TextUtils.isEmpty(mFilterWupinType)) {
             result = mFilterWupinType.equals(info.classcode);
         }
 
-        if (!TextUtils.isEmpty(mFilterPinpaiCode)) {
+        if (result && !TextUtils.isEmpty(mFilterPinpaiCode)) {
             result = mFilterPinpaiCode.equals(info.brandcode);
         }
 
