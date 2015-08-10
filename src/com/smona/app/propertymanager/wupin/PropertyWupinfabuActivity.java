@@ -291,6 +291,9 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
         }
 
         PropertyErshouwupinSubmitRequestInfo request = new PropertyErshouwupinSubmitRequestInfo();
+        if(mIsModify) {
+            request.publishid = mItem.publishid;
+        }
         request.classcode = ((PropertyTypeItem) wupinType).type_id;
         request.newcode = ((PropertyTypeItem) xinjiuType).type_id;
         request.brandcode = ((PropertyTypeItem) pinpaiType).type_id;

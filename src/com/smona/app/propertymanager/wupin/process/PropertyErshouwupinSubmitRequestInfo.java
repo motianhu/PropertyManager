@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.smona.app.propertymanager.data.process.PropertyRequestInfo;
 
 public class PropertyErshouwupinSubmitRequestInfo extends PropertyRequestInfo {
+    public String publishid;
     public String brandcode;
     public String classcode;
     public String goodsname;

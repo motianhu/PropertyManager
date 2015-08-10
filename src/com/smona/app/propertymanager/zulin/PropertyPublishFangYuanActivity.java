@@ -296,6 +296,9 @@ public class PropertyPublishFangYuanActivity extends
         }
 
         PropertyFangwuzulinSubmitRequestInfo request = new PropertyFangwuzulinSubmitRequestInfo();
+        if(mIsModify) {
+            request.house.publishid = mItem.publishid;
+        }
         request.house.choosetype = ((PropertyTypeItem) ywlx).type_id;
         request.house.housecode = ((PropertyTypeItem) huxing).type_id;
         request.house.areacode = ((PropertyTypeItem) area).type_id;

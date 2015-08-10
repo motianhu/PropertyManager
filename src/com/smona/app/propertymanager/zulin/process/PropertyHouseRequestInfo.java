@@ -3,6 +3,7 @@ package com.smona.app.propertymanager.zulin.process;
 import java.util.ArrayList;
 
 public class PropertyHouseRequestInfo {
+    public String publishid;
     public String choosetype;
     public String housecode;
     public String areacode;
