@@ -11,7 +11,6 @@ import com.smona.app.propertymanager.data.model.PropertyErshouwupinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
-import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinMessageProcessProxy;
@@ -25,13 +24,13 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
     private static final String TAG = "PropertyWupinfabuActivity";
 
     private PropertyErshouwupinContentItem mItem;
+    
+    private boolean mIsModify = false;
 
     // type
     private PropertyErshouwupinTypeItem mTypes;
@@ -52,9 +51,7 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
         // modify info
         mItem = (PropertyErshouwupinContentItem) getIntent()
                 .getParcelableExtra("iteminfo");
-        if (mItem != null) {
-            requestRefreshUI();
-        }
+        mIsModify = mItem != null;
     }
 
     protected void loadData() {
@@ -81,18 +78,56 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
     }
 
     protected void refreshUI() {
-        if (mItem == null) {
+        if (!mIsModify) {
             return;
         }
 
         View parent = mRoot.findViewById(R.id.wupintype);
-        initText(parent, R.id.select_type, mItem.classname);
+        //wupinType
+        int size = mWupinDatas.size();
+        PropertyTypeItem wupinType = null;
+        for (int i = 0; i < size; i++) {
+            if (((PropertyTypeItem) mWupinDatas.get(i)).type_id
+                    .equals(mItem.classcode)) {
+                wupinType = ((PropertyTypeItem) mWupinDatas.get(i));
+                break;
+            }
+        }
 
+        if (wupinType != null) {
+            initText(parent, R.id.select_type,  mItem.classname);
+            setTag(parent, R.id.select_type, wupinType);
+        }
+
+        //brand
         parent = mRoot.findViewById(R.id.pinpai);
+        PropertyTypeItem pinpaiType = new PropertyTypeItem();
+        pinpaiType.type_id = mItem.brandcode;
+        pinpaiType.type_name = mItem.brand;
+        
         initText(parent, R.id.select_type, mItem.brand);
+        setTag(parent, R.id.select_type, pinpaiType);
+        
+        
+        
+        //good newcode
         parent = mRoot.findViewById(R.id.xinjiu);
-        initText(parent, R.id.select_type, mItem.goosstatus);
+        size = mXinjiuDatas.size();
+        PropertyTypeItem xinjiuType = null;
+        for (int i = 0; i < size; i++) {
+            if (((PropertyTypeItem) mXinjiuDatas.get(i)).type_id
+                    .equals(mItem.goosstatus)) {
+                xinjiuType = ((PropertyTypeItem) mXinjiuDatas.get(i));
+                break;
+            }
+        }
 
+        if (xinjiuType != null) {
+            initText(parent, R.id.select_type,  mItem.goosstatus);
+            setTag(parent, R.id.select_type, xinjiuType);
+        }
+
+        
         initText(R.id.problem_content, mItem.goodsdesc);
 
         parent = mRoot.findViewById(R.id.goodsname);
@@ -103,20 +138,8 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
         parent = mRoot.findViewById(R.id.dianhua);
         initText(parent, R.id.value, mItem.userphone);
 
-        ViewGroup list = (ViewGroup) mRoot.findViewById(R.id.list_hor_image);
         for (int i = 0; i < mItem.picurl.size(); i++) {
-            ImageView image = new ImageView(this);
-            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                    getResources()
-                            .getDimensionPixelSize(
-                                    R.dimen.property_common_paishezhaoping_container_height),
-                    getResources()
-                            .getDimensionPixelSize(
-                                    R.dimen.property_common_paishezhaoping_container_height));
-            param.leftMargin = 10;
-            list.addView(image, param);
-            ImageLoaderManager.getInstance().loadImage(mItem.picurl.get(i),
-                    image);
+            addImageView(mItem.picurl.get(i));
         }
     }
 
@@ -128,7 +151,7 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
     @Override
     protected void initHeader() {
         initText(R.id.title, R.string.property_ershouwupin_wupinfabu);
-        if (mItem != null) {
+        if (mIsModify) {
             findViewById(R.id.detail).setVisibility(View.GONE);
         } else {
             findViewById(R.id.detail).setVisibility(View.VISIBLE);

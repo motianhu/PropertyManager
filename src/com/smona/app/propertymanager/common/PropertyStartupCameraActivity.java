@@ -1,12 +1,14 @@
 package com.smona.app.propertymanager.common;
 
 import java.lang.ref.WeakReference;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +18,9 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.util.HttpUploadFile;
 import com.smona.app.propertymanager.util.LogUtil;
 import com.smona.app.propertymanager.util.PropertyCommonHelper;
@@ -52,7 +56,7 @@ public abstract class PropertyStartupCameraActivity extends
         }
     }
 
-    protected View onCameraCallback(Bitmap bitmap) {
+    private View onCameraCallback(Bitmap bitmap) {
         if (bitmap == null) {
             return null;
         }
@@ -69,6 +73,24 @@ public abstract class PropertyStartupCameraActivity extends
         image.setOnLongClickListener(mOnLongClickListener);
         image.setImageBitmap(bitmap);
         return image;
+    }
+
+    protected void addImageView(String url) {
+        if (TextUtils.isEmpty(url)) {
+            return;
+        }
+        ImageView image = new ImageView(this);
+        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                getResources()
+                        .getDimensionPixelSize(
+                                R.dimen.property_common_paishezhaoping_container_height),
+                getResources()
+                        .getDimensionPixelSize(
+                                R.dimen.property_common_paishezhaoping_container_height));
+
+        param.leftMargin = 10;
+        ImageLoaderManager.getInstance().loadImage(url, image);
+        image.setOnLongClickListener(mOnLongClickListener);
     }
 
     private OnLongClickListener mOnLongClickListener = new OnLongClickListener() {

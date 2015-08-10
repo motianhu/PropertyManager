@@ -10,8 +10,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.R;
@@ -20,16 +18,18 @@ import com.smona.app.propertymanager.data.model.PropertyFangwuzulinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinTypeItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
-import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinMessageProcessProxy;
 import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinSubmitRequestInfo;
 
-public class PropertyPublishFangYuanActivity extends PropertyStartupCameraActivity {
+public class PropertyPublishFangYuanActivity extends
+        PropertyStartupCameraActivity {
     private static final String TAG = "PropertyPublishFangYuanActivity";
 
     private PropertyFangwuzulinContentItem mItem;
+
+    private boolean mIsModify = false;
 
     // type
     private PropertyFangwuzulinTypeItem mTypes;
@@ -51,7 +51,9 @@ public class PropertyPublishFangYuanActivity extends PropertyStartupCameraActivi
         // modify info
         mItem = (PropertyFangwuzulinContentItem) getIntent()
                 .getParcelableExtra("iteminfo");
-        if (mItem != null) {
+
+        mIsModify = mItem != null;
+        if (mIsModify) {
             requestRefreshUI();
         }
     }
@@ -82,7 +84,7 @@ public class PropertyPublishFangYuanActivity extends PropertyStartupCameraActivi
     @Override
     protected void initHeader() {
         initText(R.id.title, R.string.property_fangwuzulin_publish_fangyuan);
-        if (mItem != null) {
+        if (mIsModify) {
             findViewById(R.id.detail).setVisibility(View.GONE);
         } else {
             findViewById(R.id.detail).setVisibility(View.VISIBLE);
@@ -133,32 +135,66 @@ public class PropertyPublishFangYuanActivity extends PropertyStartupCameraActivi
         initView(R.id.start_camera);
 
         initView(R.id.publish);
-        
+
         mPictureContainer = (ViewGroup) findViewById(R.id.list_hor_image);
     }
 
     @Override
     public void refreshUI() {
-        if (mItem == null) {
+        if (!mIsModify) {
             return;
         }
 
+        //ywType
         View parent = mRoot.findViewById(R.id.ywtype);
         int size = mYewuDatas.size();
-        String chooseName = "";
+        PropertyTypeItem chooseType = null;
         for (int i = 0; i < size; i++) {
-            if (((PropertyTypeItem) mYewuDatas.get(i)).type_id.equals(mItem.choosetype)) {
-                chooseName = ((PropertyTypeItem) mYewuDatas.get(i)).type_name;
+            if (((PropertyTypeItem) mYewuDatas.get(i)).type_id
+                    .equals(mItem.choosetype)) {
+                chooseType = ((PropertyTypeItem) mYewuDatas.get(i));
                 break;
             }
         }
-        initText(parent, R.id.select_type, chooseName);
 
+        if (chooseType != null) {
+            initText(parent, R.id.select_type, chooseType.type_name);
+            setTag(parent, R.id.select_type, chooseType);
+        }
+
+        //areaType
         parent = mRoot.findViewById(R.id.area);
-        initText(parent, R.id.select_type, mItem.areacode);
-        parent = mRoot.findViewById(R.id.housetype);
-        initText(parent, R.id.select_type, mItem.housename);
+        PropertyTypeItem chooseArea = null;
+        size = mAreaDatas.size();
+        for (int i = 0; i < size; i++) {
+            if (((PropertyTypeItem) mAreaDatas.get(i)).type_id
+                    .equals(mItem.areacode)) {
+                chooseArea = ((PropertyTypeItem) mAreaDatas.get(i));
+                break;
+            }
+        }
+        if (chooseArea != null) {
+            initText(parent, R.id.select_type, mItem.areacode);
+            setTag(parent, R.id.select_type, chooseArea);
+        }
 
+        //houseType
+        parent = mRoot.findViewById(R.id.housetype);
+        PropertyTypeItem chooseHouse = null;
+        size = mHuxingDatas.size();
+        for (int i = 0; i < size; i++) {
+            if (((PropertyTypeItem) mHuxingDatas.get(i)).type_id
+                    .equals(mItem.housecode)) {
+                chooseHouse = ((PropertyTypeItem) mHuxingDatas.get(i));
+                break;
+            }
+        }
+        if (chooseHouse != null) {
+            initText(parent, R.id.select_type, mItem.housename);
+            setTag(parent, R.id.select_type, chooseHouse);
+        }
+
+        
         initText(R.id.problem_content, mItem.housedesc);
 
         parent = mRoot.findViewById(R.id.weizhi);
@@ -167,21 +203,9 @@ public class PropertyPublishFangYuanActivity extends PropertyStartupCameraActivi
         initText(parent, R.id.value, mItem.username);
         parent = mRoot.findViewById(R.id.dianhua);
         initText(parent, R.id.value, mItem.userphone);
-        
-        ViewGroup list = (ViewGroup) mRoot.findViewById(R.id.list_hor_image);
+
         for (int i = 0; i < mItem.icobject.size(); i++) {
-            ImageView image = new ImageView(this);
-            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                    getResources()
-                            .getDimensionPixelSize(
-                                    R.dimen.property_common_paishezhaoping_container_height),
-                    getResources()
-                            .getDimensionPixelSize(
-                                    R.dimen.property_common_paishezhaoping_container_height));
-            param.leftMargin = 10;
-            list.addView(image, param);
-            ImageLoaderManager.getInstance().loadImage(mItem.icobject.get(i),
-                    image);
+            addImageView(mItem.icobject.get(i));
         }
     }
 
@@ -264,7 +288,7 @@ public class PropertyPublishFangYuanActivity extends PropertyStartupCameraActivi
             showMessage("请输入联系电话");
             return;
         }
-        
+
         final ArrayList<String> files = new ArrayList<String>();
         for (int i = 0; i < mPictureContainer.getChildCount(); i++) {
             String tag = (String) mPictureContainer.getChildAt(i).getTag();
@@ -291,7 +315,7 @@ public class PropertyPublishFangYuanActivity extends PropertyStartupCameraActivi
         }.getType();
         PropertyItemInfo info = JsonUtils.parseJson(content, type);
         if ("4410".equals(info.iccode)) {
-            if("00".equals(info.answercode)) {
+            if ("00".equals(info.answercode)) {
                 showMessage("发布成功");
             } else {
                 showMessage("发布失败");
