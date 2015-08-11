@@ -10,6 +10,9 @@ public class PropertyWuyebaoxiudanContentItem extends PropertyContentItem {
     public String repairname;
     public String requesttime;
     public String repairstatus;
+    public String starttime;
+    public String repairresult;
+    public String repairfare;
     public ArrayList<String> repairpicture;
     public String repairdesc;
     public String workbegintime;
@@ -35,6 +38,9 @@ public class PropertyWuyebaoxiudanContentItem extends PropertyContentItem {
         repairname = in.readString();
         requesttime = in.readString();
         repairstatus = in.readString();
+        starttime = in.readString();
+        repairresult = in.readString();
+        repairfare = in.readString();
 
         repairpicture = new ArrayList<String>();
         in.readList(repairpicture, ClassLoader.getSystemClassLoader());
@@ -59,6 +65,9 @@ public class PropertyWuyebaoxiudanContentItem extends PropertyContentItem {
         dest.writeString(repairname);
         dest.writeString(requesttime);
         dest.writeString(repairstatus);
+        dest.writeString(starttime);
+        dest.writeString(repairresult);
+        dest.writeString(repairfare);
 
         dest.writeList(repairpicture);
 

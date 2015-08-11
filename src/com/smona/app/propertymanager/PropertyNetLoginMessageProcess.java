@@ -10,19 +10,16 @@ public class PropertyNetLoginMessageProcess extends
         PropertyNetRequestMessageProcess {
     private static final String TAG = "PropertyNetLoginMessageProcess";
 
-    public void login(final IQuestCallback callback) {
+    public void login(final IQuestCallback callback, final String username,
+            final String passwd) {
 
         ConfigsInfo.FWURL = PropertyConstants.URL;
-        // ConfigsInfo.FWURL =
-        // "http://zhyj189.eicp.net:8080/CommDataSyncService/AppCommDataHandler.ashx";
         new Thread() {
             public void run() {
                 boolean flag = new DoHttp().authentication();
                 LogUtil.d(TAG, "login flag: " + flag);
                 if (flag) {
-                    String result = new DoHttp().doLogin(
-                            PropertyConstants.USERNAMRE,
-                            PropertyConstants.PASSWORD);
+                    String result = new DoHttp().doLogin(username, passwd);
                     LogUtil.d(TAG, "login result: " + result
                             + ", ConfigsInfo: " + ConfigsInfo.sesssionId);
                     callback.onResult("1".equals(result), "");

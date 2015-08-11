@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.smona.app.propertymanager"
     android:versionCode="1"
-    android:versionName="1.0.0.a" >
+    android:versionName="1.0.0.b" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -32,11 +32,6 @@
             android:name=".PropertyHomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <!-- 物业报修 -->
         <activity
@@ -126,12 +121,22 @@
             android:label="@string/property_ershouwupin_wupin_detail"
             android:screenOrientation="portrait" />
 
-        <!--  -->
+        <!-- 预览 -->
         <activity
             android:name="com.smona.app.propertymanager.common.PropertyPreviewActivity"
-            android:theme="@style/Property_Transparent"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Property_Transparent" />
+        
+        <!-- 登录-->
+        <activity
+            android:name="com.smona.app.propertymanager.PropertyLoginActivity"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <!-- provider -->
         <provider
             android:name="com.smona.app.propertymanager.data.db.PropertyProvider"

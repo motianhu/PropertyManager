@@ -85,7 +85,7 @@ public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
     protected void refreshUI() {
         LogUtil.d(TAG, "refreshUI mItem: " + mItem);
         View view = findViewById(R.id.baoxiu_time);
-        initText(view, R.id.value, mItem.requesttime);
+        initText(view, R.id.value, mItem.starttime);
 
         view = findViewById(R.id.baoxiu_type);
         initText(view, R.id.value, mItem.repairname);
@@ -103,10 +103,10 @@ public class PropertyBaoxiudanDetailActivity extends PropertyBaseActivity {
         initText(view, R.id.value, mItem.workendtime);
 
         view = findViewById(R.id.baoxiu_wancheng_result);
-        initText(view, R.id.value, mItem.repairstatus);
+        initText(view, R.id.value, mItem.repairresult);
 
         view = findViewById(R.id.baoxiu_wancheng_fee);
-        initText(view, R.id.value, mItem.repairstatus);
+        initText(view, R.id.value, mItem.repairfare);
 
         // pingjia
         if (mItem.evalute != null) {

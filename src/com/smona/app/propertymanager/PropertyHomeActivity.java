@@ -2,53 +2,23 @@ package com.smona.app.propertymanager;
 
 import com.smona.app.propertymanager.baoxiu.PropertyWuyebaoxiuActivity;
 import com.smona.app.propertymanager.common.PropertyBaseActivity;
-import com.smona.app.propertymanager.data.table.PropertyWuyebaoxiudanTable;
 import com.smona.app.propertymanager.notify.PropertyWuyetongzhiActivity;
 import com.smona.app.propertymanager.tousu.PropertyTousujianyiActivity;
 import com.smona.app.propertymanager.wupin.PropertyErshouwupinActivity;
 import com.smona.app.propertymanager.zulin.PropertyFangwuzulinActivity;
 
-import android.content.ContentResolver;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class PropertyHomeActivity extends PropertyBaseActivity {
-
-    private static final boolean DEBUG = false;
-    private boolean mIsLogin = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.property_home);
         initViews();
-        testProvider();
-    }
-
-    private void testProvider() {
-        ContentResolver cr = this.getContentResolver();
-        cr.query(PropertyWuyebaoxiudanTable.getInstance().mContentUri_NoNotify,
-                null, null, null, null);
-
-        // login
-        mProcess = new PropertyNetLoginMessageProcess();
-        ((PropertyNetLoginMessageProcess) mProcess).login(this);
-        showCustomProgrssDialog();
-    }
-
-    protected void saveData(String content) {
-        mIsLogin = true;
-        showMessage("登录成功");
-        hideCustomProgressDialog();
-    }
-
-    protected void failedRequest() {
-        mIsLogin = false;
-        showMessage("登录失败");
-        hideCustomProgressDialog();
     }
 
     protected void initHeader() {
@@ -95,11 +65,6 @@ public class PropertyHomeActivity extends PropertyBaseActivity {
         int id = v.getId();
         if (R.id.back == id) {
             finish();
-            return;
-        }
-
-        if (!mIsLogin && !DEBUG) {
-            Toast.makeText(this, "未登录", Toast.LENGTH_SHORT).show();
             return;
         }
 
