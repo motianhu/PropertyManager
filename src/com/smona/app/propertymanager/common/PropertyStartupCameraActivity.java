@@ -55,6 +55,11 @@ public abstract class PropertyStartupCameraActivity extends
             }
         }
     }
+    
+    protected boolean isPictureMaxCount() {
+        int count = mPictureContainer.getChildCount();
+        return count >= 3;
+    }
 
     private View onCameraCallback(Bitmap bitmap) {
         if (bitmap == null) {

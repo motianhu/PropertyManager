@@ -234,6 +234,9 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
     }
 
     private void actionCamera() {
+        if (isPictureMaxCount()) {
+            return;
+        }
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
         startActivityForResult(intent, ACTION_CAMERA);
