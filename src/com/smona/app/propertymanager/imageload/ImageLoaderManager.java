@@ -36,6 +36,11 @@ public class ImageLoaderManager {
         ImageLoader.getInstance().displayImage(uri, imageView,
                 ImageLoaderConfig.getDefaultOptions(), mImageListenser);
     }
+    
+    public void loadFangwuzulin(String uri, ImageView imageView) {
+        ImageLoader.getInstance().displayImage(uri, imageView,
+                ImageLoaderConfig.getFangwuzulinOptions(), mImageListenser);
+    }
 
     ImageLoadingListener mImageListenser = new ImageLoadingListener() {
 

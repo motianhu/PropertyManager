@@ -1,7 +1,7 @@
 package com.smona.app.propertymanager.common;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.smona.app.propertymanager.R;
+import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ public class PropertyPreviewActivity extends Activity {
         setContentView(R.layout.property_common_preview_picture);
         String url = getIntent().getStringExtra("url");
         ImageView image = (ImageView)findViewById(R.id.image);
-        ImageLoader.getInstance().displayImage(url, image);
+        ImageLoaderManager.getInstance().loadImage(url, image);
     }
 
     @Override

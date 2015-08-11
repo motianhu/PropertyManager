@@ -68,7 +68,8 @@ public class PropertyFangwuzulinContentItem extends PropertyContentItem {
     public String toString() {
         return "PropertyFangwuzulinContentItem[" + "publishid: " + publishid
                 + ", userphone: " + userphone + ", username: " + username
-                + ", housecode: " + housecode + ", areacode: " + areacode + "]";
+                + ", housecode: " + housecode + ", areacode: " + areacode
+                + ", icobject: " + icobject + "]";
     }
 
     public static final Parcelable.Creator<PropertyFangwuzulinContentItem> CREATOR = new Creator<PropertyFangwuzulinContentItem>() {

@@ -9,7 +9,7 @@
         android:layout_height="100dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
-        android:src="@drawable/baoxiu" />
+        android:src="@drawable/property_fangwuzulin_default" />
 
     <LinearLayout
         android:layout_width="match_parent"

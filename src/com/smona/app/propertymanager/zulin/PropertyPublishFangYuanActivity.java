@@ -51,6 +51,7 @@ public class PropertyPublishFangYuanActivity extends
         // modify info
         mItem = (PropertyFangwuzulinContentItem) getIntent()
                 .getParcelableExtra("iteminfo");
+        LogUtil.d(TAG, "mItem: " + mItem);
 
         mIsModify = mItem != null;
         if (mIsModify) {

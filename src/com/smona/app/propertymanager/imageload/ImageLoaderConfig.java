@@ -27,6 +27,18 @@ public class ImageLoaderConfig {
         return options;
     }
 
+    public static DisplayImageOptions getFangwuzulinOptions() {
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.property_fangwuzulin_default)
+                .showImageForEmptyUri(R.drawable.property_fangwuzulin_default)
+                .showImageOnFail(R.drawable.property_fangwuzulin_default)
+                .cacheInMemory(true).cacheOnDisc(true).considerExifParams(true)
+                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
+                .bitmapConfig(Bitmap.Config.RGB_565).considerExifParams(true)
+                .build();
+        return options;
+    }
+
     /**
      * 异步图片加载ImageLoader的初始化操作，在Application中调用此方法
      * 

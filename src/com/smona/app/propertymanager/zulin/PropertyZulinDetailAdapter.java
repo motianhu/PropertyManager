@@ -6,6 +6,7 @@ import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.common.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
+import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,6 +15,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class PropertyZulinDetailAdapter extends PropertyBaseDataAdapter {
@@ -64,6 +66,10 @@ public class PropertyZulinDetailAdapter extends PropertyBaseDataAdapter {
         TextView text = (TextView) parent.findViewById(R.id.value);
         text.setTextColor(Color.rgb(0x37, 0x86, 0xbe));
 
+        ImageView image = (ImageView) convertView.findViewById(R.id.image);
+        if (item.icobject != null && item.icobject.size() > 0) {
+            ImageLoaderManager.getInstance().loadFangwuzulin(item.icobject.get(0), image);
+        }
     }
 
     public Intent createIntent() {

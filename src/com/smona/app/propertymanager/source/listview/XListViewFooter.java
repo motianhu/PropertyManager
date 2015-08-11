@@ -31,16 +31,16 @@ public class XListViewFooter extends LinearLayout {
     }
 
     public void setState(int state) {
-        mHintView.setVisibility(View.INVISIBLE);
-        mProgressBar.setVisibility(View.INVISIBLE);
-        mHintView.setVisibility(View.INVISIBLE);
+        mHintView.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.GONE);
+        mHintView.setVisibility(View.GONE);
         if (state == STATE_READY) {
             mHintView.setVisibility(View.VISIBLE);
             mHintView.setText(R.string.xlistview_footer_hint_ready);
         } else if (state == STATE_LOADING) {
             mProgressBar.setVisibility(View.VISIBLE);
         } else {
-            mHintView.setVisibility(View.VISIBLE);
+            mHintView.setVisibility(View.GONE);
             mHintView.setText(R.string.xlistview_footer_hint_normal);
         }
     }

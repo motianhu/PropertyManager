@@ -6,6 +6,7 @@ import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.common.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
+import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,6 +14,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class PropertyWupinDetailAdapter extends PropertyBaseDataAdapter {
@@ -63,6 +65,10 @@ public class PropertyWupinDetailAdapter extends PropertyBaseDataAdapter {
         parent = convertView.findViewById(R.id.goodstatus);
         initText(parent, R.id.value, item.goosstatus);
 
+        ImageView image = (ImageView) convertView.findViewById(R.id.image);
+        if (item.picurl != null && item.picurl.size() > 0) {
+            ImageLoaderManager.getInstance().loadFangwuzulin(item.picurl.get(0), image);
+        }
     }
 
     public Intent createIntent() {

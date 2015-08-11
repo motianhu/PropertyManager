@@ -100,6 +100,7 @@ public abstract class PropertyStartupCameraActivity extends
         image.setTag(url);
         image.setOnClickListener(mOnClick);
         image.setOnLongClickListener(mOnLongClickListener);
+        mPictureContainer.addView(image);
     }
 
     private OnLongClickListener mOnLongClickListener = new OnLongClickListener() {
