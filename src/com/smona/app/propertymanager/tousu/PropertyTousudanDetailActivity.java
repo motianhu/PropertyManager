@@ -87,7 +87,7 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
         initText(view, R.id.value, mItem.requesttime);
 
         view = findViewById(R.id.tousu_type);
-        initText(view, R.id.value, mItem.complaintcode);
+        initText(view, R.id.value, mItem.complaintname);
 
         view = findViewById(R.id.tousu_problem);
         initText(view, R.id.value, mItem.complaintdesc);

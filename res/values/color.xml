@@ -16,5 +16,7 @@
 
     <!-- 首页 -->
     <color name="listview_refresh_color">#ffffff</color>
+    
+    <color name="property_commont_transport">#f4f4f4</color>
 
 </resources>

@@ -44,7 +44,7 @@ public abstract class PropertyStartupCameraActivity extends
                         + "/"
                         + System.currentTimeMillis()
                         + ".jpg";
-                View image = onCameraCallback(bitmap);
+                View image = onCameraCallback(bitmap, fileName);
                 if (image == null) {
                     return;
                 }
@@ -55,13 +55,13 @@ public abstract class PropertyStartupCameraActivity extends
             }
         }
     }
-    
+
     protected boolean isPictureMaxCount() {
         int count = mPictureContainer.getChildCount();
         return count >= 3;
     }
 
-    private View onCameraCallback(Bitmap bitmap) {
+    private View onCameraCallback(Bitmap bitmap, String fileName) {
         if (bitmap == null) {
             return null;
         }
@@ -75,6 +75,8 @@ public abstract class PropertyStartupCameraActivity extends
                                 R.dimen.property_common_paishezhaoping_container_height));
         param.leftMargin = 10;
         mPictureContainer.addView(image, 0, param);
+        image.setOnClickListener(mOnClick);
+        image.setTag("file//:" + fileName);
         image.setOnLongClickListener(mOnLongClickListener);
         image.setImageBitmap(bitmap);
         return image;
@@ -95,6 +97,8 @@ public abstract class PropertyStartupCameraActivity extends
 
         param.leftMargin = 10;
         ImageLoaderManager.getInstance().loadImage(url, image);
+        image.setTag(url);
+        image.setOnClickListener(mOnClick);
         image.setOnLongClickListener(mOnLongClickListener);
     }
 
@@ -107,6 +111,23 @@ public abstract class PropertyStartupCameraActivity extends
         }
 
     };
+
+    private OnClickListener mOnClick = new OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            gotoPreview(v);
+        }
+    };
+    
+    private void gotoPreview(View v) {
+        String url = (String) v.getTag();
+        Intent intent = new Intent();
+        intent.putExtra("url", url);
+        intent.setClass(PropertyStartupCameraActivity.this,
+                PropertyPreviewActivity.class);
+        startActivity(intent);
+    }
 
     @SuppressLint({ "InflateParams", "NewApi" })
     private void showDeleteDialog(final View source) {
