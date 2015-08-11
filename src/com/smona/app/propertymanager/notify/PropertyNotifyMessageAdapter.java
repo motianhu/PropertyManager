@@ -34,6 +34,7 @@ public class PropertyNotifyMessageAdapter extends PropertyBaseDataAdapter {
         convertView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((PropertyWuyetongzhiContentItem) info).noticestatus = "1"; 
                 gotoDetail(info);
             }
         });

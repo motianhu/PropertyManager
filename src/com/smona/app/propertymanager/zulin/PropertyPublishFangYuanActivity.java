@@ -174,7 +174,7 @@ public class PropertyPublishFangYuanActivity extends
             }
         }
         if (chooseArea != null) {
-            initText(parent, R.id.select_type, mItem.areacode);
+            initText(parent, R.id.select_type, mItem.areaname);
             setTag(parent, R.id.select_type, chooseArea);
         }
 
