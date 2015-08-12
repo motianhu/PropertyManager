@@ -49,7 +49,8 @@ public abstract class PropertyStartupCameraActivity extends
                     return;
                 }
                 LogUtil.saveBitmap(bitmap, fileName);
-                HttpUploadFile.submitPost(PropertyConstants.UPLOAD, fileName,
+                HttpUploadFile.submitPost(PropertyConstants.HTTP_IP_PORT
+                        + PropertyConstants.URL_UPLOAD, fileName,
                         new WeakReference<View>(image));
 
             }
@@ -120,7 +121,7 @@ public abstract class PropertyStartupCameraActivity extends
             gotoPreview(v);
         }
     };
-    
+
     private void gotoPreview(View v) {
         String url = (String) v.getTag();
         Intent intent = new Intent();

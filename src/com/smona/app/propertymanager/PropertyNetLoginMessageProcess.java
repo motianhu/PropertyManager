@@ -10,14 +10,19 @@ public class PropertyNetLoginMessageProcess extends
         PropertyNetRequestMessageProcess {
     private static final String TAG = "PropertyNetLoginMessageProcess";
 
-    public void login(final IQuestCallback callback, final String username,
-            final String passwd) {
+    public void login(final IQuestCallback callback, String ip, String port,
+            final String username, final String passwd) {
 
-        ConfigsInfo.FWURL = PropertyConstants.URL;
+        PropertyConstants.HTTP_IP_PORT = PropertyConstants.HTTP + ip + ":"
+                + port;
+
+        ConfigsInfo.FWURL = PropertyConstants.HTTP_IP_PORT
+                + PropertyConstants.URL_SUFFIX;
         new Thread() {
             public void run() {
                 boolean flag = new DoHttp().authentication();
-                LogUtil.d(TAG, "login flag: " + flag);
+                LogUtil.d(TAG, "login flag: " + flag + ", username: "
+                        + username + ", passwd: " + passwd);
                 if (flag) {
                     String result = new DoHttp().doLogin(username, passwd);
                     LogUtil.d(TAG, "login result: " + result

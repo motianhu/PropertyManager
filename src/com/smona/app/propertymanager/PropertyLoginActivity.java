@@ -58,6 +58,8 @@ public class PropertyLoginActivity extends PropertyBaseActivity {
     }
 
     private void login() {
+        TextView ip = (TextView) findViewById(R.id.ipaddress);
+        TextView port = (TextView) findViewById(R.id.port);
         TextView user = (TextView) findViewById(R.id.user_name);
         TextView pass = (TextView) findViewById(R.id.password);
         if (TextUtils.isEmpty(user.getText())
@@ -67,7 +69,8 @@ public class PropertyLoginActivity extends PropertyBaseActivity {
 
         // login
         mProcess = new PropertyNetLoginMessageProcess();
-        ((PropertyNetLoginMessageProcess) mProcess).login(this, user.getText()
+        ((PropertyNetLoginMessageProcess) mProcess).login(this, ip.getText()
+                .toString(), port.getText().toString(), user.getText()
                 .toString(), pass.getText().toString());
         showCustomProgrssDialog();
     }

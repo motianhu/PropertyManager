@@ -16,6 +16,18 @@
         android:orientation="vertical" >
 
         <EditText
+            android:id="@+id/ipaddress"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="106.46.231.144" />
+
+        <EditText
+            android:id="@+id/port"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="3718" />
+
+        <EditText
             android:id="@+id/user_name"
             android:layout_width="200dp"
             android:layout_height="50dp"
@@ -25,8 +37,6 @@
             android:id="@+id/password"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            android:inputType="textPassword"
             android:text="888888" />
 
         <Button
