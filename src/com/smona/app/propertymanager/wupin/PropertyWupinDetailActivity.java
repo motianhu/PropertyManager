@@ -7,23 +7,20 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.jasonwang.informationhuimin.utils.ConfigsInfo;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.common.PropertyBaseActivity;
+import com.smona.app.propertymanager.common.PropertyPictureZoomActivity;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
-import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinDetailRequestInfo;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinMessageProcessProxy;
 
-public class PropertyWupinDetailActivity extends PropertyBaseActivity {
+public class PropertyWupinDetailActivity extends PropertyPictureZoomActivity {
 
     private static final String TAG = "PropertyWupinDetailActivity";
 
@@ -103,20 +100,11 @@ public class PropertyWupinDetailActivity extends PropertyBaseActivity {
         parent = mRoot.findViewById(R.id.fabushijian);
         initText(parent, R.id.value, mItem.publishtime);
 
-        ViewGroup list = (ViewGroup) mRoot.findViewById(R.id.list_hor_image);
-        for (int i = 0; i < mItem.picurl.size(); i++) {
-            ImageView image = new ImageView(this);
-            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                    getResources()
-                            .getDimensionPixelSize(
-                                    R.dimen.property_common_paishezhaoping_container_height),
-                    getResources()
-                            .getDimensionPixelSize(
-                                    R.dimen.property_common_paishezhaoping_container_height));
-            param.leftMargin = 10;
-            list.addView(image, param);
-            ImageLoaderManager.getInstance().loadImage(mItem.picurl.get(i),
-                    image);
+        mPictureContainer = (ViewGroup) mRoot.findViewById(R.id.list_hor_image);
+        if (mItem.picurl != null) {
+            for (int i = 0; i < mItem.picurl.size(); i++) {
+                addImageView(mItem.picurl.get(i));
+            }
         }
 
         if (mIsMySelf) {
@@ -202,6 +190,12 @@ public class PropertyWupinDetailActivity extends PropertyBaseActivity {
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(phone));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    protected boolean isDelete() {
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }

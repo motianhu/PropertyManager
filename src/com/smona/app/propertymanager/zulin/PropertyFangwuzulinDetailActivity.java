@@ -6,11 +6,10 @@ import java.util.ArrayList;
 import com.google.gson.reflect.TypeToken;
 import com.jasonwang.informationhuimin.utils.ConfigsInfo;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.common.PropertyBaseActivity;
+import com.smona.app.propertymanager.common.PropertyPictureZoomActivity;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
-import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
 import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinDetailRequestInfo;
@@ -21,11 +20,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
+public class PropertyFangwuzulinDetailActivity extends
+        PropertyPictureZoomActivity {
     private static final String TAG = "PropertyFangwuzulinDetailActivity";
 
     private PropertyFangwuzulinContentItem mItem;
@@ -98,20 +96,11 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
         parent = mRoot.findViewById(R.id.fabushijian);
         initText(parent, R.id.value, mItem.publishtime);
 
-        ViewGroup list = (ViewGroup) mRoot.findViewById(R.id.list_hor_image);
-        for (int i = 0; i < mItem.icobject.size(); i++) {
-            ImageView image = new ImageView(this);
-            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                    getResources()
-                            .getDimensionPixelSize(
-                                    R.dimen.property_common_paishezhaoping_container_height),
-                    getResources()
-                            .getDimensionPixelSize(
-                                    R.dimen.property_common_paishezhaoping_container_height));
-            param.leftMargin = 10;
-            list.addView(image, param);
-            ImageLoaderManager.getInstance().loadImage(mItem.icobject.get(i),
-                    image);
+        mPictureContainer = (ViewGroup) mRoot.findViewById(R.id.list_hor_image);
+        if (mItem.icobject != null) {
+            for (int i = 0; i < mItem.icobject.size(); i++) {
+                addImageView(mItem.icobject.get(i));
+            }
         }
 
         TextView text = (TextView) mRoot.findViewById(R.id.call_phone);
@@ -213,12 +202,12 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
                 .submitFangwuzulinCancelPublish(this, mRequestInfo, this);
         showCustomProgrssDialog();
     }
-    
+
     protected void saveData(String content) {
         Type type = new TypeToken<PropertyItemInfo>() {
         }.getType();
         PropertyItemInfo info = JsonUtils.parseJson(content, type);
-        if("4610".equals(info.iccode) && "00".equals(info.answercode)) {
+        if ("4610".equals(info.iccode) && "00".equals(info.answercode)) {
             showMessage("取消发布成功");
         } else {
             showMessage("取消发布失败");
@@ -235,5 +224,11 @@ public class PropertyFangwuzulinDetailActivity extends PropertyBaseActivity {
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(phone));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    protected boolean isDelete() {
+        // TODO Auto-generated method stub
+        return false;
     }
 }

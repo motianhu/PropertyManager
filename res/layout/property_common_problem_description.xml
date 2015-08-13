@@ -11,6 +11,8 @@
         android:gravity="top|left"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:maxLength="200"
         android:hint="@string/property_wuyebaoxiu_baoxiuwentimiaoshu" />
 
 </LinearLayout>

@@ -35,9 +35,9 @@
             <include
                 android:id="@+id/baoxiu_problem"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="80dp"
                 android:layout_marginTop="1dp"
-                layout="@layout/property_common_text_value" />
+                layout="@layout/property_common_problem_description_display" />
 
             <include
                 android:id="@+id/baoxiu_picture"

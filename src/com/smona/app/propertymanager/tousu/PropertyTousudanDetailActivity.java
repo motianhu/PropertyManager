@@ -4,10 +4,9 @@ import java.lang.reflect.Type;
 
 import com.google.gson.reflect.TypeToken;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.common.PropertyBaseActivity;
+import com.smona.app.propertymanager.common.PropertyPictureZoomActivity;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTousujianyidanContentItem;
-import com.smona.app.propertymanager.imageload.ImageLoaderManager;
 import com.smona.app.propertymanager.tousu.process.PropertyTousujianyiDetailRequestInfo;
 import com.smona.app.propertymanager.tousu.process.PropertyTousujianyiMessageProcessProxy;
 import com.smona.app.propertymanager.tousu.process.PropertyTousujianyiSubmitPingjiaRequestInfo;
@@ -18,11 +17,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 
-public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
+public class PropertyTousudanDetailActivity extends PropertyPictureZoomActivity {
     private static final String TAG = "PropertyTousudanDetailActivity";
 
     private PropertyTousujianyidanContentItem mItem;
@@ -112,20 +109,11 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
         }
 
         // piture
-        ViewGroup list = (ViewGroup) mRoot.findViewById(R.id.list_hor_image);
-        for (int i = 0; i < mItem.complaintpicture.size(); i++) {
-            ImageView image = new ImageView(this);
-            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                    getResources()
-                            .getDimensionPixelSize(
-                                    R.dimen.property_common_paishezhaoping_container_height),
-                    getResources()
-                            .getDimensionPixelSize(
-                                    R.dimen.property_common_paishezhaoping_container_height));
-            param.leftMargin = 10;
-            list.addView(image, param);
-            ImageLoaderManager.getInstance().loadImage(
-                    mItem.complaintpicture.get(i), image);
+        mPictureContainer = (ViewGroup) mRoot.findViewById(R.id.list_hor_image);
+        if (mItem.complaintpicture != null) {
+            for (int i = 0; i < mItem.complaintpicture.size(); i++) {
+                addImageView(mItem.complaintpicture.get(i));
+            }
         }
     }
 
@@ -200,7 +188,7 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
         requestInfo.complaintid = mItem.complaintid;
         ((PropertyTousujianyiMessageProcessProxy) mProcess)
                 .submitTousujianyidanPingjia(this, requestInfo, this);
-       
+
     }
 
     private void addPingjiaInfo(
@@ -212,5 +200,11 @@ public class PropertyTousudanDetailActivity extends PropertyBaseActivity {
         if (num > 0) {
             requestInfo.add(eveCode, num);
         }
+    }
+
+    @Override
+    protected boolean isDelete() {
+        // TODO Auto-generated method stub
+        return false;
     }
 }
