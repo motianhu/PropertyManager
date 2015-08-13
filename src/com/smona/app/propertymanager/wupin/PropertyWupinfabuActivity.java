@@ -17,9 +17,7 @@ import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinMessagePro
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinPinpaiRequestInfo;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinSubmitRequestInfo;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -162,6 +160,7 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
 
     @Override
     protected void initBody() {
+        super.initBody();
         View parent = mRoot.findViewById(R.id.wupintype);
         initTextHint(parent, R.id.select_type,
                 R.string.property_ershouwupin_xuanzewupinfenlei);
@@ -198,7 +197,6 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
         initText(parent, R.id.name,
                 R.string.property_ershouwupin_wupinfabu_dianhu);
 
-        initView(R.id.start_camera);
         initView(R.id.publish);
 
         mPictureContainer = (ViewGroup) findViewById(R.id.list_hor_image);
@@ -206,6 +204,7 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
 
     @Override
     protected void clickView(View v) {
+        super.clickView(v);
         int id = v.getId();
         switch (id) {
         case R.id.back:
@@ -223,22 +222,10 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
         case R.id.xinjiu:
             clickChoiceXinjiu();
             break;
-        case R.id.start_camera:
-            actionCamera();
-            break;
         case R.id.publish:
             actionPublish();
             break;
         }
-    }
-
-    private void actionCamera() {
-        if (isPictureMaxCount()) {
-            return;
-        }
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
-        startActivityForResult(intent, ACTION_CAMERA);
     }
 
     private void actionPublish() {

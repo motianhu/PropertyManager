@@ -19,7 +19,6 @@ import com.smona.app.propertymanager.util.LogUtil;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -124,6 +123,7 @@ public class PropertyTousujianyiActivity extends PropertyStartupCameraActivity {
     }
 
     protected void initBody() {
+        super.initBody();
         initTextHint(R.id.select_type,
                 R.string.property_tousujianyi_xuanzetousuleixing);
         initText(R.id.select_type_value,
@@ -135,7 +135,6 @@ public class PropertyTousujianyiActivity extends PropertyStartupCameraActivity {
         text.setHint(R.string.property_tousujianyi_tousuwentimiaoshu);
 
         initView(R.id.select_type_container);
-        initView(R.id.start_camera);
         initView(R.id.action_now);
         initView(R.id.call_wuye);
 
@@ -144,6 +143,7 @@ public class PropertyTousujianyiActivity extends PropertyStartupCameraActivity {
 
     @Override
     protected void clickView(View v) {
+        super.clickView(v);
         int id = v.getId();
         switch (id) {
         case R.id.back:
@@ -161,9 +161,6 @@ public class PropertyTousujianyiActivity extends PropertyStartupCameraActivity {
         case R.id.call_wuye:
             clickCallWuye();
             break;
-        case R.id.start_camera:
-            actionCamera();
-            break;
         }
     }
 
@@ -172,15 +169,6 @@ public class PropertyTousujianyiActivity extends PropertyStartupCameraActivity {
         intent.putExtra("customer", mContent.customer);
         intent.setClass(this, PropertyMineTousuActivity.class);
         startActivity(intent);
-    }
-
-    private void actionCamera() {
-        if (isPictureMaxCount()) {
-            return;
-        }
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
-        startActivityForResult(intent, ACTION_CAMERA);
     }
 
     private void clickActionNow() {
@@ -195,7 +183,7 @@ public class PropertyTousujianyiActivity extends PropertyStartupCameraActivity {
             showMessage("请描述问题!");
             return;
         }
-        
+
         final ArrayList<String> files = new ArrayList<String>();
         for (int i = 0; i < mPictureContainer.getChildCount(); i++) {
             String tag = (String) mPictureContainer.getChildAt(i).getTag();

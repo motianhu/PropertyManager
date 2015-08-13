@@ -3,9 +3,7 @@ package com.smona.app.propertymanager.zulin;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,6 +95,7 @@ public class PropertyPublishFangYuanActivity extends
 
     @Override
     protected void initBody() {
+        super.initBody();
         View parent = mRoot.findViewById(R.id.ywtype);
         initTextHint(parent, R.id.select_type,
                 R.string.property_fangwuzulin_xuanzeyewuleixing);
@@ -132,8 +131,6 @@ public class PropertyPublishFangYuanActivity extends
         parent = mRoot.findViewById(R.id.dianhua);
         initText(parent, R.id.name,
                 R.string.property_ershouwupin_wupinfabu_dianhu);
-
-        initView(R.id.start_camera);
 
         initView(R.id.publish);
 
@@ -212,6 +209,7 @@ public class PropertyPublishFangYuanActivity extends
 
     @Override
     protected void clickView(View v) {
+        super.clickView(v);
         int id = v.getId();
         switch (id) {
         case R.id.back:
@@ -229,22 +227,10 @@ public class PropertyPublishFangYuanActivity extends
         case R.id.housetype:
             clickSelectHuxing();
             break;
-        case R.id.start_camera:
-            actionCamera();
-            break;
         case R.id.publish:
             actionPublish();
             break;
         }
-    }
-
-    private void actionCamera() {
-        if (isPictureMaxCount()) {
-            return;
-        }
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
-        startActivityForResult(intent, ACTION_CAMERA);
     }
 
     private void actionPublish() {

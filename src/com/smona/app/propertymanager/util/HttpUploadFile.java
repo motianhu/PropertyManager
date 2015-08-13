@@ -53,6 +53,7 @@ public class HttpUploadFile {
 
                     @Override
                     public void onFailure(HttpException error, String msg) {
+                        LogUtil.d(TAG, "onFailure: " + msg + ", error: " + error);
                     }
                 });
     }
