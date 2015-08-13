@@ -116,7 +116,7 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
         PropertyTypeItem xinjiuType = null;
         for (int i = 0; i < size; i++) {
             if (((PropertyTypeItem) mXinjiuDatas.get(i)).type_id
-                    .equals(mItem.goosstatus)) {
+                    .equals(mItem.goodscode)) {
                 xinjiuType = ((PropertyTypeItem) mXinjiuDatas.get(i));
                 break;
             }

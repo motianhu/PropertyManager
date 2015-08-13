@@ -13,6 +13,7 @@ public class PropertyErshouwupinContentItem extends PropertyContentItem {
     public String classcode;
     public String goodsname;
     public String goodsdesc;
+    public String goodscode;
     public String goosstatus;
     public ArrayList<String> picurl;
     public String username;
@@ -33,6 +34,7 @@ public class PropertyErshouwupinContentItem extends PropertyContentItem {
         classcode = in.readString();
         goodsname = in.readString();
         goodsdesc = in.readString();
+        goodscode = in.readString();
         goosstatus = in.readString();
         username = in.readString();
         userphone = in.readString();
@@ -58,6 +60,7 @@ public class PropertyErshouwupinContentItem extends PropertyContentItem {
         dest.writeString(classcode);
         dest.writeString(goodsname);
         dest.writeString(goodsdesc);
+        dest.writeString(goodscode);
         dest.writeString(goosstatus);
         dest.writeString(username);
         dest.writeString(userphone);
@@ -84,9 +87,10 @@ public class PropertyErshouwupinContentItem extends PropertyContentItem {
         return "PropertyErshouwupinContentItem[publishid: " + publishid
                 + ",brand: " + brand + ",brandcode: " + brandcode
                 + ",classname: " + classname + ",classcode: " + classcode
-                + ", goosstatus: " + goosstatus + ",username: " + username
-                + ",goodsname: " + goodsname + ", goodsdesc: " + goodsdesc
-                + ", userphone: " + userphone + ",publishtime: " + publishtime
-                + ", publishstatus: " + publishstatus + "]";
+                + ", goodscode: " + goodscode + ", goosstatus: " + goosstatus
+                + ",username: " + username + ",goodsname: " + goodsname
+                + ", goodsdesc: " + goodsdesc + ", userphone: " + userphone
+                + ",publishtime: " + publishtime + ", publishstatus: "
+                + publishstatus + "]";
     }
 }

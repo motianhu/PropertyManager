@@ -60,7 +60,7 @@ public class PropertyWupinDetailActivity extends PropertyPictureZoomActivity {
                 R.string.property_ershouwupin_wupinfabu_wupinmiaoshu);
 
         parent = mRoot.findViewById(R.id.xinjiu);
-        initText(parent, R.id.name, R.string.property_ershouwupin_xuanzexinjiu);
+        initText(parent, R.id.name, R.string.property_ershouwupin_item_xinjiu);
 
         parent = mRoot.findViewById(R.id.lianxiren);
         initText(parent, R.id.name,

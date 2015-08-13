@@ -236,7 +236,7 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
                         + ((PropertyTypeItem) info).type_name);
                 View parent = mRoot.findViewById(R.id.xinjiu);
                 
-                mFilterXinjiuCode = ((PropertyTypeItem) info).type_name;
+                mFilterXinjiuCode = ((PropertyTypeItem) info).type_id;
                 filterType(mFilterXinjiuCode);
                 
                 initText(parent, R.id.select_type,
@@ -291,7 +291,7 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
 
         if (result && !TextUtils.isEmpty(mFilterXinjiuCode)) {
             result = mFilterXinjiuCode
-                    .equals(info.goosstatus);
+                    .equals(info.goodscode);
         }
 
         return result;
