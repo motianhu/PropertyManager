@@ -204,23 +204,29 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
                 PropertyItemInfo info = datas.get(which);
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
+                String typeid = ((PropertyTypeItem) info).type_id;
+
+                if (typeid.equals(mFilterWupinType)) {
+                    return;
+                }
+
                 View parent = mRoot.findViewById(R.id.wupintype);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
-                
-                if (((PropertyTypeItem) info).type_id.equals(mFilterWupinType)) {
 
-                } else {
-                    mFilterWupinType = ((PropertyTypeItem) info).type_id;
-                    mFilterPinpaiCode = "";
-                    filterType(mFilterWupinType);
+                mFilterWupinType = typeid;
+                mFilterPinpaiCode = "";
+                filterType(mFilterWupinType);
 
-                    parent = mRoot.findViewById(R.id.pinpai);
-                    initText(parent, R.id.select_type, "");
-                    parent.setTag(null);
+                parent = mRoot.findViewById(R.id.pinpai);
+                initTextHint(parent, R.id.select_type,
+                        R.string.property_ershouwupin_pinpaifenlei);
+                initText(parent, R.id.select_type, "");
 
-                    initPinpaiTypes(((PropertyTypeItem) info).type_id);
-                }
+                parent.setTag(null);
+
+                mPinpaiDatas.clear();
+                initPinpaiTypes(((PropertyTypeItem) info).type_id);
             }
         });
     }
@@ -235,10 +241,10 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 View parent = mRoot.findViewById(R.id.xinjiu);
-                
+
                 mFilterXinjiuCode = ((PropertyTypeItem) info).type_id;
                 filterType(mFilterXinjiuCode);
-                
+
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
@@ -255,10 +261,10 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
                 View parent = mRoot.findViewById(R.id.pinpai);
-                
+
                 mFilterPinpaiCode = ((PropertyTypeItem) info).type_id;
                 filterType(mFilterPinpaiCode);
-                
+
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
             }
@@ -280,18 +286,15 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
         boolean result = true;
 
         if (result && !TextUtils.isEmpty(mFilterWupinType)) {
-            result = mFilterWupinType
-                    .equals(info.classcode);
+            result = mFilterWupinType.equals(info.classcode);
         }
 
         if (result && !TextUtils.isEmpty(mFilterPinpaiCode)) {
-            result = mFilterPinpaiCode
-                    .equals(info.brandcode);
+            result = mFilterPinpaiCode.equals(info.brandcode);
         }
 
         if (result && !TextUtils.isEmpty(mFilterXinjiuCode)) {
-            result = mFilterXinjiuCode
-                    .equals(info.goodscode);
+            result = mFilterXinjiuCode.equals(info.goodscode);
         }
 
         return result;

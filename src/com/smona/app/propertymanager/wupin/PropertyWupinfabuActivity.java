@@ -29,7 +29,7 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
     private static final String TAG = "PropertyWupinfabuActivity";
 
     private PropertyErshouwupinContentItem mItem;
-    
+
     private boolean mIsModify = false;
 
     // type
@@ -37,6 +37,8 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
     private ArrayList<PropertyItemInfo> mPinpaiDatas = new ArrayList<PropertyItemInfo>();
     private ArrayList<PropertyItemInfo> mWupinDatas = new ArrayList<PropertyItemInfo>();
     private ArrayList<PropertyItemInfo> mXinjiuDatas = new ArrayList<PropertyItemInfo>();
+
+    private String mWupinType = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,7 +85,7 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
         }
 
         View parent = mRoot.findViewById(R.id.wupintype);
-        //wupinType
+        // wupinType
         int size = mWupinDatas.size();
         PropertyTypeItem wupinType = null;
         for (int i = 0; i < size; i++) {
@@ -95,22 +97,20 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
         }
 
         if (wupinType != null) {
-            initText(parent, R.id.select_type,  mItem.classname);
+            initText(parent, R.id.select_type, mItem.classname);
             setTag(parent, R.id.select_type, wupinType);
         }
 
-        //brand
+        // brand
         parent = mRoot.findViewById(R.id.pinpai);
         PropertyTypeItem pinpaiType = new PropertyTypeItem();
         pinpaiType.type_id = mItem.brandcode;
         pinpaiType.type_name = mItem.brand;
-        
+
         initText(parent, R.id.select_type, mItem.brand);
         setTag(parent, R.id.select_type, pinpaiType);
-        
-        
-        
-        //good newcode
+
+        // good newcode
         parent = mRoot.findViewById(R.id.xinjiu);
         size = mXinjiuDatas.size();
         PropertyTypeItem xinjiuType = null;
@@ -123,11 +123,10 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
         }
 
         if (xinjiuType != null) {
-            initText(parent, R.id.select_type,  mItem.goosstatus);
+            initText(parent, R.id.select_type, mItem.goosstatus);
             setTag(parent, R.id.select_type, xinjiuType);
         }
 
-        
         initText(R.id.problem_content, mItem.goodsdesc);
 
         parent = mRoot.findViewById(R.id.goodsname);
@@ -286,7 +285,7 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
             showMessage("请输入联系电话");
             return;
         }
-        
+
         final ArrayList<String> files = new ArrayList<String>();
         for (int i = 0; i < mPictureContainer.getChildCount(); i++) {
             String tag = (String) mPictureContainer.getChildAt(i).getTag();
@@ -294,7 +293,7 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
         }
 
         PropertyErshouwupinSubmitRequestInfo request = new PropertyErshouwupinSubmitRequestInfo();
-        if(mIsModify) {
+        if (mIsModify) {
             request.publishid = mItem.publishid;
         }
         request.classcode = ((PropertyTypeItem) wupinType).type_id;
@@ -351,10 +350,25 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
                 PropertyItemInfo info = datas.get(which);
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
+                String typeid = ((PropertyTypeItem) info).type_id;
+
+                if (typeid.equals(mWupinType)) {
+                    return;
+                }
+
                 View parent = mRoot.findViewById(R.id.wupintype);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
-                setTag(parent, R.id.select_type, info);
+
+                mWupinType = ((PropertyTypeItem) info).type_id;
+                parent = mRoot.findViewById(R.id.pinpai);
+                initTextHint(parent, R.id.select_type,
+                        R.string.property_ershouwupin_pinpaifenlei);
+                initText(parent, R.id.select_type, "");
+
+                parent.setTag(null);
+
+                mPinpaiDatas.clear();
                 initPinpaiTypes(((PropertyTypeItem) info).type_id);
             }
         });

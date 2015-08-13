@@ -144,7 +144,7 @@ public class PropertyErshouwupinActivity extends PropertyFilterTypeActivity {
     protected void refreshUI() {
         mShowDatas.clear();
         mShowDatas.addAll(mAllDatas);
-        
+
         notifyDataSetChanged();
     }
 
@@ -209,24 +209,29 @@ public class PropertyErshouwupinActivity extends PropertyFilterTypeActivity {
                 PropertyItemInfo info = datas.get(which);
                 LogUtil.d(TAG, "clickSelectType: info: "
                         + ((PropertyTypeItem) info).type_name);
+                String typeid = ((PropertyTypeItem) info).type_id;
+
+                if (typeid.equals(mFilterWupinType)) {
+                    return;
+                }
+
                 View parent = mRoot.findViewById(R.id.wupintype);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
-                setTag(parent, R.id.select_type, info);
 
-                if (((PropertyTypeItem) info).type_id.equals(mFilterWupinType)) {
+                mFilterWupinType = typeid;
+                mFilterPinpaiCode = "";
+                filterType(mFilterWupinType);
 
-                } else {
-                    mFilterWupinType = ((PropertyTypeItem) info).type_id;
-                    mFilterPinpaiCode = "";
-                    filterType(mFilterWupinType);
+                parent = mRoot.findViewById(R.id.pinpai);
+                initTextHint(parent, R.id.select_type,
+                        R.string.property_ershouwupin_pinpaifenlei);
+                initText(parent, R.id.select_type, "");
 
-                    parent = mRoot.findViewById(R.id.pinpai);
-                    initText(parent, R.id.select_type, "");
-                    parent.setTag(null);
+                parent.setTag(null);
 
-                    initPinpaiTypes(((PropertyTypeItem) info).type_id);
-                }
+                mPinpaiDatas.clear();
+                initPinpaiTypes(((PropertyTypeItem) info).type_id);
             }
         });
     }
