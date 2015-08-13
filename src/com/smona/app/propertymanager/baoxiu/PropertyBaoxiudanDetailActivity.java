@@ -217,6 +217,10 @@ public class PropertyBaoxiudanDetailActivity extends
     }
 
     private void clickSubmitPingjia() {
+        if (mItem == null || !("已处理".equalsIgnoreCase(mItem.repairstatus))) {
+            return;
+        }
+
         showCustomProgrssDialog();
         PropertyWuyebaoxiuSubmitPingjiaRequestInfo requestInfo = new PropertyWuyebaoxiuSubmitPingjiaRequestInfo();
 

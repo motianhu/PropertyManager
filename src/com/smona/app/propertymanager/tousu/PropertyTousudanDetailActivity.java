@@ -179,6 +179,10 @@ public class PropertyTousudanDetailActivity extends PropertyPictureZoomActivity 
     }
 
     private void clickSubmitPingjia() {
+        if (mItem == null || TextUtils.isEmpty(mItem.feedback)) {
+            return;
+        }
+
         showCustomProgrssDialog();
         PropertyTousujianyiSubmitPingjiaRequestInfo requestInfo = new PropertyTousujianyiSubmitPingjiaRequestInfo();
 
