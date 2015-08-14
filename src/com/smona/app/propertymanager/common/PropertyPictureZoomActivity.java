@@ -47,7 +47,7 @@ public abstract class PropertyPictureZoomActivity extends PropertyBaseActivity {
         if (isDelete()) {
             image.setOnLongClickListener(mOnLongClickListener);
         }
-        mPictureContainer.addView(image);
+        mPictureContainer.addView(image, param);
     }
 
     protected abstract boolean isDelete();
