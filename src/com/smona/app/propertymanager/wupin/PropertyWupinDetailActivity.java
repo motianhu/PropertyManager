@@ -17,6 +17,7 @@ import com.smona.app.propertymanager.data.model.PropertyErshouwupinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
+import com.smona.app.propertymanager.util.PropertyConstants;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinDetailRequestInfo;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinMessageProcessProxy;
 
@@ -26,7 +27,6 @@ public class PropertyWupinDetailActivity extends PropertyModifyResultActivity {
 
     private PropertyErshouwupinContentItem mItem;
     private boolean mIsMySelf = false;
-    private boolean mIsModify = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class PropertyWupinDetailActivity extends PropertyModifyResultActivity {
 
     private void acquireData() {
         mItem = (PropertyErshouwupinContentItem) getIntent()
-                .getParcelableExtra("iteminfo");
+                .getParcelableExtra(PropertyConstants.DATA_ITEM_INFO);
         LogUtil.d(TAG, "acquireData mItem: " + mItem);
         mIsMySelf = ConfigsInfo.username.equalsIgnoreCase(mItem.customerid);
     }
@@ -136,11 +136,9 @@ public class PropertyWupinDetailActivity extends PropertyModifyResultActivity {
 
     @Override
     protected void clickView(View v) {
+        super.clickView(v);
         int id = v.getId();
         switch (id) {
-        case R.id.back:
-            finish();
-            break;
         case R.id.call_phone:
             clickCall();
             break;
@@ -156,7 +154,7 @@ public class PropertyWupinDetailActivity extends PropertyModifyResultActivity {
     protected void gotoModifyActivity() {
         Intent intent = new Intent();
         intent.setClass(this, PropertyWupinfabuActivity.class);
-        intent.putExtra("iteminfo", mItem);
+        intent.putExtra(PropertyConstants.DATA_ITEM_INFO, mItem);
         startActivityForResult(intent, ACTION_MODIFY);
     }
 
@@ -176,7 +174,11 @@ public class PropertyWupinDetailActivity extends PropertyModifyResultActivity {
         }.getType();
         PropertyItemInfo info = JsonUtils.parseJson(content, type);
         if ("5110".equals(info.iccode) && "00".equals(info.answercode)) {
+            Intent intent = new Intent();
+            intent.putExtra(PropertyConstants.DATA_CANCEL_ITEM, mItem);
+            setResult(RESULT_OK, intent);
             showMessage("取消发布成功");
+            finish();
         } else {
             showMessage("取消发布失败");
         }
@@ -201,23 +203,7 @@ public class PropertyWupinDetailActivity extends PropertyModifyResultActivity {
 
     @Override
     protected void modifySuccess() {
-        mItem.brand = ((PropertyErshouwupinContentItem) mModifyItem).brand;
-        mItem.brandcode = ((PropertyErshouwupinContentItem) mModifyItem).brandcode;
-        mItem.classname = ((PropertyErshouwupinContentItem) mModifyItem).classname;
-        mItem.classcode = ((PropertyErshouwupinContentItem) mModifyItem).classcode;
-        mItem.goodsname = ((PropertyErshouwupinContentItem) mModifyItem).goodsname;
-        mItem.goodsdesc = ((PropertyErshouwupinContentItem) mModifyItem).goodsdesc;
-        mItem.goodscode = ((PropertyErshouwupinContentItem) mModifyItem).goodscode;
-        mItem.goosstatus = ((PropertyErshouwupinContentItem) mModifyItem).goosstatus;
-        mItem.username = ((PropertyErshouwupinContentItem) mModifyItem).username;
-        mItem.userphone = ((PropertyErshouwupinContentItem) mModifyItem).userphone;
-        mItem.publishtime = ((PropertyErshouwupinContentItem) mModifyItem).publishtime;
-        mItem.publishstatus = ((PropertyErshouwupinContentItem) mModifyItem).publishstatus;
-
-        mItem.picurl.clear();
-        mItem.picurl
-                .addAll(((PropertyErshouwupinContentItem) mModifyItem).picurl);
-        mIsModify = true;
+        mItem.cloneData((PropertyErshouwupinContentItem) mModifyItem);
         requestRefreshUI();
     }
 

@@ -13,6 +13,7 @@ import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
+import com.smona.app.propertymanager.util.PropertyConstants;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinMessageProcessProxy;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinPinpaiRequestInfo;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinSubmitRequestInfo;
@@ -51,7 +52,7 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
     private void aquireData() {
         // modify info
         mItem = (PropertyErshouwupinContentItem) getIntent()
-                .getParcelableExtra("iteminfo");
+                .getParcelableExtra(PropertyConstants.DATA_ITEM_INFO);
         mIsModify = mItem != null;
     }
 
@@ -321,9 +322,8 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
             if ("00".equals(info.answercode)) {
                 if (mIsModify) {
                     showMessage("修改成功");
-                    Intent intent = new Intent(this,
-                            PropertyWupinDetailActivity.class);
-                    intent.putExtra("modify_item", mItem);
+                    Intent intent = new Intent();
+                    intent.putExtra(PropertyConstants.DATA_MODIFY_ITEM, mItem);
                     setResult(RESULT_OK, intent);
                     finish();
                 } else {

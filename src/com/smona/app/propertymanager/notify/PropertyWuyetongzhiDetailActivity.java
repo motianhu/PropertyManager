@@ -9,6 +9,7 @@ import com.smona.app.propertymanager.common.PropertyBaseActivity;
 import com.smona.app.propertymanager.data.model.PropertyWuyetongzhiContentItem;
 import com.smona.app.propertymanager.notify.process.PropertyWuyetongzhiMessageProcessProxy;
 import com.smona.app.propertymanager.notify.process.PropertyWuyetongzhiSubmitRequestInfo;
+import com.smona.app.propertymanager.util.PropertyConstants;
 
 public class PropertyWuyetongzhiDetailActivity extends PropertyBaseActivity {
 
@@ -25,7 +26,7 @@ public class PropertyWuyetongzhiDetailActivity extends PropertyBaseActivity {
 
     private void acquireData() {
         mItem = (PropertyWuyetongzhiContentItem) getIntent()
-                .getParcelableExtra("iteminfo");
+                .getParcelableExtra(PropertyConstants.DATA_ITEM_INFO);
     }
 
     protected void loadData() {

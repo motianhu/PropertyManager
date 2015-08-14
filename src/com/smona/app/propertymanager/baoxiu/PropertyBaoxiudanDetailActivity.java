@@ -12,6 +12,7 @@ import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyWuyebaoxiudanContentItem;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
+import com.smona.app.propertymanager.util.PropertyConstants;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -36,7 +37,7 @@ public class PropertyBaoxiudanDetailActivity extends
 
     private void acquireData() {
         mItem = (PropertyWuyebaoxiudanContentItem) getIntent()
-                .getParcelableExtra("iteminfo");
+                .getParcelableExtra(PropertyConstants.DATA_ITEM_INFO);
     }
 
     protected void loadData() {

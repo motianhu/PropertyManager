@@ -12,6 +12,7 @@ import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
+import com.smona.app.propertymanager.util.PropertyConstants;
 import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinDetailRequestInfo;
 import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinMessageProcessProxy;
 
@@ -28,7 +29,6 @@ public class PropertyFangwuzulinDetailActivity extends
 
     private PropertyFangwuzulinContentItem mItem;
     private boolean mIsMySelf = false;
-    private boolean mIsModify = false;
 
     private ArrayList<PropertyItemInfo> mYewuDatas = new ArrayList<PropertyItemInfo>();
 
@@ -43,7 +43,7 @@ public class PropertyFangwuzulinDetailActivity extends
 
     private void acquireData() {
         mItem = (PropertyFangwuzulinContentItem) getIntent()
-                .getParcelableExtra("iteminfo");
+                .getParcelableExtra(PropertyConstants.DATA_ITEM_INFO);
         LogUtil.d(TAG, "acquireData mItem: " + mItem);
         mIsMySelf = ConfigsInfo.username.equals(mItem.customerid);
         initYewuDatas();
@@ -170,11 +170,9 @@ public class PropertyFangwuzulinDetailActivity extends
 
     @Override
     protected void clickView(View v) {
+        super.clickView(v);
         int id = v.getId();
         switch (id) {
-        case R.id.back:
-            finish();
-            break;
         case R.id.call_phone:
             clickCall();
             break;
@@ -190,7 +188,7 @@ public class PropertyFangwuzulinDetailActivity extends
     protected void gotoModifyActivity() {
         Intent intent = new Intent();
         intent.setClass(this, PropertyPublishFangYuanActivity.class);
-        intent.putExtra("iteminfo", mItem);
+        intent.putExtra(PropertyConstants.DATA_ITEM_INFO, mItem);
         startActivityForResult(intent, ACTION_MODIFY);
     }
 
@@ -198,7 +196,7 @@ public class PropertyFangwuzulinDetailActivity extends
         mProcess = new PropertyFangwuzulinMessageProcessProxy();
 
         mRequestInfo = new PropertyFangwuzulinDetailRequestInfo();
-        ((PropertyFangwuzulinDetailRequestInfo) mRequestInfo).publishid = ((PropertyFangwuzulinContentItem) mModifyItem).publishid;
+        ((PropertyFangwuzulinDetailRequestInfo) mRequestInfo).publishid = ((PropertyFangwuzulinContentItem) mItem).publishid;
 
         ((PropertyFangwuzulinMessageProcessProxy) mProcess)
                 .submitFangwuzulinCancelPublish(this, mRequestInfo, this);
@@ -210,7 +208,11 @@ public class PropertyFangwuzulinDetailActivity extends
         }.getType();
         PropertyItemInfo info = JsonUtils.parseJson(content, type);
         if ("4610".equals(info.iccode) && "00".equals(info.answercode)) {
+            Intent intent = new Intent();
+            intent.putExtra(PropertyConstants.DATA_CANCEL_ITEM, mItem);
+            setResult(RESULT_OK, intent);
             showMessage("取消发布成功");
+            finish();
         } else {
             showMessage("取消发布失败");
         }
@@ -235,21 +237,7 @@ public class PropertyFangwuzulinDetailActivity extends
 
     @Override
     protected void modifySuccess() {
-        mItem.choosetype = ((PropertyFangwuzulinContentItem) mModifyItem).choosetype;
-        mItem.housecode = ((PropertyFangwuzulinContentItem) mModifyItem).housecode;
-        mItem.housename = ((PropertyFangwuzulinContentItem) mModifyItem).housename;
-        mItem.areacode = ((PropertyFangwuzulinContentItem) mModifyItem).areacode;
-        mItem.areaname = ((PropertyFangwuzulinContentItem) mModifyItem).areaname;
-        mItem.areaname = ((PropertyFangwuzulinContentItem) mModifyItem).areaname;
-        mItem.houseaddress = ((PropertyFangwuzulinContentItem) mModifyItem).houseaddress;
-        mItem.username = ((PropertyFangwuzulinContentItem) mModifyItem).username;
-        mItem.userphone = ((PropertyFangwuzulinContentItem) mModifyItem).userphone;
-        mItem.publishtime = ((PropertyFangwuzulinContentItem) mModifyItem).publishtime;
-
-        mItem.icobject.clear();
-        mItem.icobject
-                .addAll(((PropertyFangwuzulinContentItem) mModifyItem).icobject);
-        mIsModify = true;
+        mItem.cloneData((PropertyFangwuzulinContentItem) mModifyItem);
         requestRefreshUI();
     }
 }

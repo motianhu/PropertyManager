@@ -7,8 +7,10 @@ import com.smona.app.propertymanager.common.PropertyBaseDataAdapter;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.imageload.ImageLoaderManager;
+import com.smona.app.propertymanager.util.PropertyConstants;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -68,8 +70,16 @@ public class PropertyZulinDetailAdapter extends PropertyBaseDataAdapter {
 
         ImageView image = (ImageView) convertView.findViewById(R.id.image);
         if (item.icobject != null && item.icobject.size() > 0) {
-            ImageLoaderManager.getInstance().loadFangwuzulin(item.icobject.get(0), image);
+            ImageLoaderManager.getInstance().loadFangwuzulin(
+                    item.icobject.get(0), image);
         }
+    }
+
+    protected void gotoDetail(PropertyItemInfo info) {
+        Intent intent = createIntent();
+        intent.putExtra(PropertyConstants.DATA_ITEM_INFO, info);
+        ((Activity) mContext).startActivityForResult(intent,
+                PropertyConstants.ACTION_MODIFY_LIST);
     }
 
     public Intent createIntent() {

@@ -12,6 +12,7 @@ import com.smona.app.propertymanager.tousu.process.PropertyTousujianyiMessagePro
 import com.smona.app.propertymanager.tousu.process.PropertyTousujianyiSubmitPingjiaRequestInfo;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
+import com.smona.app.propertymanager.util.PropertyConstants;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -35,7 +36,7 @@ public class PropertyTousudanDetailActivity extends PropertyPictureZoomActivity 
 
     private void acquireData() {
         mItem = (PropertyTousujianyidanContentItem) getIntent()
-                .getParcelableExtra("iteminfo");
+                .getParcelableExtra(PropertyConstants.DATA_ITEM_INFO);
     }
 
     protected void loadData() {

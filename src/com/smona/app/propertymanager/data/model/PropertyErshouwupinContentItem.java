@@ -46,6 +46,24 @@ public class PropertyErshouwupinContentItem extends PropertyContentItem {
         in.readList(picurl, ClassLoader.getSystemClassLoader());
     }
 
+    public void cloneData(PropertyErshouwupinContentItem modifyItem) {
+        brand = ((PropertyErshouwupinContentItem) modifyItem).brand;
+        brandcode = ((PropertyErshouwupinContentItem) modifyItem).brandcode;
+        classname = ((PropertyErshouwupinContentItem) modifyItem).classname;
+        classcode = ((PropertyErshouwupinContentItem) modifyItem).classcode;
+        goodsname = ((PropertyErshouwupinContentItem) modifyItem).goodsname;
+        goodsdesc = ((PropertyErshouwupinContentItem) modifyItem).goodsdesc;
+        goodscode = ((PropertyErshouwupinContentItem) modifyItem).goodscode;
+        goosstatus = ((PropertyErshouwupinContentItem) modifyItem).goosstatus;
+        username = ((PropertyErshouwupinContentItem) modifyItem).username;
+        userphone = ((PropertyErshouwupinContentItem) modifyItem).userphone;
+        publishtime = ((PropertyErshouwupinContentItem) modifyItem).publishtime;
+        publishstatus = ((PropertyErshouwupinContentItem) modifyItem).publishstatus;
+
+        picurl.clear();
+        picurl.addAll(((PropertyErshouwupinContentItem) modifyItem).picurl);
+    }
+
     @Override
     public int describeContents() {
         return 0;

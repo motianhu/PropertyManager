@@ -42,6 +42,22 @@ public class PropertyFangwuzulinContentItem extends PropertyContentItem {
         in.readList(icobject, ClassLoader.getSystemClassLoader());
     }
 
+    public void cloneData(PropertyFangwuzulinContentItem modifyItem) {
+        choosetype = modifyItem.choosetype;
+        housecode = modifyItem.housecode;
+        housename = modifyItem.housename;
+        areacode = modifyItem.areacode;
+        areaname = modifyItem.areaname;
+        areaname = modifyItem.areaname;
+        houseaddress = modifyItem.houseaddress;
+        username = modifyItem.username;
+        userphone = modifyItem.userphone;
+        publishtime = modifyItem.publishtime;
+
+        icobject.clear();
+        icobject.addAll(modifyItem.icobject);
+    }
+
     @Override
     public int describeContents() {
         return 0;

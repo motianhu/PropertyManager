@@ -3,6 +3,7 @@ package com.smona.app.propertymanager.common;
 import java.util.ArrayList;
 
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
+import com.smona.app.propertymanager.util.PropertyConstants;
 
 import android.content.Context;
 import android.content.Intent;
@@ -52,7 +53,7 @@ public abstract class PropertyBaseDataAdapter extends BaseAdapter {
 
     protected void gotoDetail(PropertyItemInfo info) {
         Intent intent = createIntent();
-        intent.putExtra("iteminfo", info);
+        intent.putExtra(PropertyConstants.DATA_ITEM_INFO, info);
         mContext.startActivity(intent);
     }
 

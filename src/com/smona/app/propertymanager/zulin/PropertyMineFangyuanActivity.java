@@ -32,7 +32,7 @@ public class PropertyMineFangyuanActivity extends PropertyFilterTypeActivity {
     private ArrayList<PropertyItemInfo> mYewuDatas = new ArrayList<PropertyItemInfo>();
     private ArrayList<PropertyItemInfo> mHuxingDatas = new ArrayList<PropertyItemInfo>();
     private ArrayList<PropertyItemInfo> mAreaDatas = new ArrayList<PropertyItemInfo>();
-    
+
     // filter
     private String mFilterChooseType = "";
     private String mFilterAreaCode = "";
@@ -79,8 +79,10 @@ public class PropertyMineFangyuanActivity extends PropertyFilterTypeActivity {
 
     private void fetchListData() {
         showCustomProgrssDialog();
-        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageno = getCurrentPage() + "";
-        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageSize = PAGE_SIZE + "";
+        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageno = getCurrentPage()
+                + "";
+        ((PropertyFangwuzulinRequestInfo) mRequestInfo).pageSize = PAGE_SIZE
+                + "";
         ((PropertyFangwuzulinMessageProcessProxy) mProcess)
                 .requestFangwuzulinMine(this, mRequestInfo, this);
 
@@ -217,8 +219,6 @@ public class PropertyMineFangyuanActivity extends PropertyFilterTypeActivity {
             }
         });
     }
-    
-
 
     private void filterType(String filteId) {
         mShowDatas.clear();
@@ -256,10 +256,11 @@ public class PropertyMineFangyuanActivity extends PropertyFilterTypeActivity {
     protected void loadMore() {
         fetchListData();
     }
-    
+
     @Override
     public PropertyBaseDataAdapter createAdapter(
             ArrayList<PropertyItemInfo> data) {
         return new PropertyZulinDetailAdapter(this, data);
     }
+
 }

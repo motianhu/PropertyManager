@@ -208,7 +208,7 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
                 mFilterChooseType = ((PropertyTypeItem) info).type_id;
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
-                
+
                 filterType(((PropertyTypeItem) info).type_id);
             }
         });
@@ -226,8 +226,7 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
                 mFilterHouseCode = ((PropertyTypeItem) info).type_id;
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
-                
-                
+
                 filterType(((PropertyTypeItem) info).type_id);
             }
         });
@@ -245,8 +244,7 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
                 mFilterAreaCode = ((PropertyTypeItem) info).type_id;
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
-                
-                
+
                 filterType(((PropertyTypeItem) info).type_id);
             }
         });
@@ -295,4 +293,5 @@ public class PropertyFangwuzulinActivity extends PropertyFilterTypeActivity {
             ArrayList<PropertyItemInfo> data) {
         return new PropertyZulinDetailAdapter(this, data);
     }
+
 }

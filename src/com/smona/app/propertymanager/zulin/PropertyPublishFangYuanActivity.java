@@ -19,6 +19,7 @@ import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
 import com.smona.app.propertymanager.util.JsonUtils;
 import com.smona.app.propertymanager.util.LogUtil;
+import com.smona.app.propertymanager.util.PropertyConstants;
 import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinMessageProcessProxy;
 import com.smona.app.propertymanager.zulin.process.PropertyFangwuzulinSubmitRequestInfo;
 
@@ -49,7 +50,7 @@ public class PropertyPublishFangYuanActivity extends
 
         // modify info
         mItem = (PropertyFangwuzulinContentItem) getIntent()
-                .getParcelableExtra("iteminfo");
+                .getParcelableExtra(PropertyConstants.DATA_ITEM_INFO);
         LogUtil.d(TAG, "mItem: " + mItem);
 
         mIsModify = mItem != null;
@@ -330,9 +331,8 @@ public class PropertyPublishFangYuanActivity extends
     private void resultSuccess() {
         if (mIsModify) {
             showMessage("修改成功");
-            Intent intent = new Intent(this,
-                    PropertyFangwuzulinDetailActivity.class);
-            intent.putExtra("modify_item", mItem);
+            Intent intent = new Intent();
+            intent.putExtra(PropertyConstants.DATA_MODIFY_ITEM, mItem);
             setResult(RESULT_OK, intent);
             finish();
         } else {
