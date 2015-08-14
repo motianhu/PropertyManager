@@ -3,6 +3,7 @@ package com.smona.app.propertymanager.zulin;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -143,7 +144,7 @@ public class PropertyPublishFangYuanActivity extends
             return;
         }
 
-        //ywType
+        // ywType
         View parent = mRoot.findViewById(R.id.ywtype);
         int size = mYewuDatas.size();
         PropertyTypeItem chooseType = null;
@@ -160,7 +161,7 @@ public class PropertyPublishFangYuanActivity extends
             setTag(parent, R.id.select_type, chooseType);
         }
 
-        //areaType
+        // areaType
         parent = mRoot.findViewById(R.id.area);
         PropertyTypeItem chooseArea = null;
         size = mAreaDatas.size();
@@ -176,7 +177,7 @@ public class PropertyPublishFangYuanActivity extends
             setTag(parent, R.id.select_type, chooseArea);
         }
 
-        //houseType
+        // houseType
         parent = mRoot.findViewById(R.id.housetype);
         PropertyTypeItem chooseHouse = null;
         size = mHuxingDatas.size();
@@ -192,7 +193,6 @@ public class PropertyPublishFangYuanActivity extends
             setTag(parent, R.id.select_type, chooseHouse);
         }
 
-        
         initText(R.id.problem_content, mItem.housedesc);
 
         parent = mRoot.findViewById(R.id.weizhi);
@@ -286,8 +286,14 @@ public class PropertyPublishFangYuanActivity extends
         }
 
         PropertyFangwuzulinSubmitRequestInfo request = new PropertyFangwuzulinSubmitRequestInfo();
-        if(mIsModify) {
+        if (mIsModify) {
             request.house.publishid = mItem.publishid;
+            // modify info
+            mItem.housedesc = peitao;
+            mItem.username = lianxiren;
+            mItem.userphone = dianhua;
+            mItem.houseaddress = weizhi;
+            mItem.icobject = files;
         }
         request.house.choosetype = ((PropertyTypeItem) ywlx).type_id;
         request.house.housecode = ((PropertyTypeItem) huxing).type_id;
@@ -308,13 +314,30 @@ public class PropertyPublishFangYuanActivity extends
         }.getType();
         PropertyItemInfo info = JsonUtils.parseJson(content, type);
         if ("4410".equals(info.iccode)) {
-            if ("00".equals(info.answercode)) {
-                showMessage("发布成功");
-            } else {
-                showMessage("发布失败");
-            }
+            processResult(info);
         }
         hideCustomProgressDialog();
+    }
+
+    private void processResult(PropertyItemInfo info) {
+        if ("00".equals(info.answercode)) {
+            resultSuccess();
+        } else {
+            showMessage("发布失败");
+        }
+    }
+
+    private void resultSuccess() {
+        if (mIsModify) {
+            showMessage("修改成功");
+            Intent intent = new Intent(this,
+                    PropertyFangwuzulinDetailActivity.class);
+            intent.putExtra("modify_item", mItem);
+            setResult(RESULT_OK, intent);
+            finish();
+        } else {
+            showMessage("发布成功");
+        }
     }
 
     protected void failedRequest() {
@@ -334,6 +357,10 @@ public class PropertyPublishFangYuanActivity extends
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
                 setTag(parent, R.id.select_type, info);
+
+                if (mIsModify) {
+                    mItem.choosetype = ((PropertyTypeItem) info).type_id;
+                }
             }
         });
     }
@@ -351,6 +378,11 @@ public class PropertyPublishFangYuanActivity extends
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
                 setTag(parent, R.id.select_type, info);
+
+                if (mIsModify) {
+                    mItem.housecode = ((PropertyTypeItem) info).type_id;
+                    mItem.housename = ((PropertyTypeItem) info).type_name;
+                }
             }
         });
     }
@@ -368,6 +400,11 @@ public class PropertyPublishFangYuanActivity extends
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
                 setTag(parent, R.id.select_type, info);
+
+                if (mIsModify) {
+                    mItem.areacode = ((PropertyTypeItem) info).type_id;
+                    mItem.areaname = ((PropertyTypeItem) info).type_name;
+                }
             }
         });
     }

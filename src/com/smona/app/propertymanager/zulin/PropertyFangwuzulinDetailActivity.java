@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import com.google.gson.reflect.TypeToken;
 import com.jasonwang.informationhuimin.utils.ConfigsInfo;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.common.PropertyPictureZoomActivity;
+import com.smona.app.propertymanager.common.PropertyModifyResultActivity;
 import com.smona.app.propertymanager.data.model.PropertyFangwuzulinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.data.model.PropertyTypeItem;
@@ -23,11 +23,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class PropertyFangwuzulinDetailActivity extends
-        PropertyPictureZoomActivity {
+        PropertyModifyResultActivity {
     private static final String TAG = "PropertyFangwuzulinDetailActivity";
 
     private PropertyFangwuzulinContentItem mItem;
     private boolean mIsMySelf = false;
+    private boolean mIsModify = false;
 
     private ArrayList<PropertyItemInfo> mYewuDatas = new ArrayList<PropertyItemInfo>();
 
@@ -97,6 +98,7 @@ public class PropertyFangwuzulinDetailActivity extends
         initText(parent, R.id.value, mItem.publishtime);
 
         mPictureContainer = (ViewGroup) mRoot.findViewById(R.id.list_hor_image);
+        mPictureContainer.removeAllViews();
         if (mItem.icobject != null) {
             for (int i = 0; i < mItem.icobject.size(); i++) {
                 addImageView(mItem.icobject.get(i));
@@ -189,14 +191,14 @@ public class PropertyFangwuzulinDetailActivity extends
         Intent intent = new Intent();
         intent.setClass(this, PropertyPublishFangYuanActivity.class);
         intent.putExtra("iteminfo", mItem);
-        startActivity(intent);
+        startActivityForResult(intent, ACTION_MODIFY);
     }
 
     protected void cancelPublish() {
         mProcess = new PropertyFangwuzulinMessageProcessProxy();
 
         mRequestInfo = new PropertyFangwuzulinDetailRequestInfo();
-        ((PropertyFangwuzulinDetailRequestInfo) mRequestInfo).publishid = mItem.publishid;
+        ((PropertyFangwuzulinDetailRequestInfo) mRequestInfo).publishid = ((PropertyFangwuzulinContentItem) mModifyItem).publishid;
 
         ((PropertyFangwuzulinMessageProcessProxy) mProcess)
                 .submitFangwuzulinCancelPublish(this, mRequestInfo, this);
@@ -228,7 +230,26 @@ public class PropertyFangwuzulinDetailActivity extends
 
     @Override
     protected boolean isDelete() {
-        // TODO Auto-generated method stub
         return false;
+    }
+
+    @Override
+    protected void modifySuccess() {
+        mItem.choosetype = ((PropertyFangwuzulinContentItem) mModifyItem).choosetype;
+        mItem.housecode = ((PropertyFangwuzulinContentItem) mModifyItem).housecode;
+        mItem.housename = ((PropertyFangwuzulinContentItem) mModifyItem).housename;
+        mItem.areacode = ((PropertyFangwuzulinContentItem) mModifyItem).areacode;
+        mItem.areaname = ((PropertyFangwuzulinContentItem) mModifyItem).areaname;
+        mItem.areaname = ((PropertyFangwuzulinContentItem) mModifyItem).areaname;
+        mItem.houseaddress = ((PropertyFangwuzulinContentItem) mModifyItem).houseaddress;
+        mItem.username = ((PropertyFangwuzulinContentItem) mModifyItem).username;
+        mItem.userphone = ((PropertyFangwuzulinContentItem) mModifyItem).userphone;
+        mItem.publishtime = ((PropertyFangwuzulinContentItem) mModifyItem).publishtime;
+
+        mItem.icobject.clear();
+        mItem.icobject
+                .addAll(((PropertyFangwuzulinContentItem) mModifyItem).icobject);
+        mIsModify = true;
+        requestRefreshUI();
     }
 }

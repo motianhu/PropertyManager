@@ -17,6 +17,7 @@ import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinMessagePro
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinPinpaiRequestInfo;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinSubmitRequestInfo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -282,11 +283,17 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
         PropertyErshouwupinSubmitRequestInfo request = new PropertyErshouwupinSubmitRequestInfo();
         if (mIsModify) {
             request.publishid = mItem.publishid;
+            // modify info
+            mItem.goodsdesc = wupinDesc;
+            mItem.username = lianxiren;
+            mItem.userphone = dianhua;
+            mItem.goodsname = goodsName;
+            mItem.picurl = files;
+
         }
         request.classcode = ((PropertyTypeItem) wupinType).type_id;
         request.newcode = ((PropertyTypeItem) xinjiuType).type_id;
         request.brandcode = ((PropertyTypeItem) pinpaiType).type_id;
-        request.goodsdesc = ((PropertyTypeItem) wupinType).type_name;
         request.goodsdesc = wupinDesc;
         request.username = lianxiren;
         request.goodsname = goodsName;
@@ -310,8 +317,19 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
                     type);
             bean.saveDataToDB(this);
             loadPinpaiTypeData();
-        } else if ("5010".equals(info.iccode) && "00".equals(info.answercode)) {
-            showMessage("发布成功");
+        } else if ("5010".equals(info.iccode)) {
+            if ("00".equals(info.answercode)) {
+                if (mIsModify) {
+                    showMessage("修改成功");
+                    Intent intent = new Intent(this,
+                            PropertyWupinDetailActivity.class);
+                    intent.putExtra("modify_item", mItem);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                } else {
+                    showMessage("发布成功");
+                }
+            }
         }
         hideCustomProgressDialog();
     }
@@ -357,6 +375,13 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
 
                 mPinpaiDatas.clear();
                 initPinpaiTypes(((PropertyTypeItem) info).type_id);
+
+                if (mIsModify) {
+                    mItem.brand = "";
+                    mItem.brandcode = "";
+                    mItem.classcode = ((PropertyTypeItem) info).type_id;
+                    mItem.classname = ((PropertyTypeItem) info).type_name;
+                }
             }
         });
     }
@@ -374,6 +399,11 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
                 setTag(parent, R.id.select_type, info);
+
+                if (mIsModify) {
+                    mItem.goodscode = ((PropertyTypeItem) info).type_id;
+                    mItem.goosstatus = ((PropertyTypeItem) info).type_name;
+                }
             }
         });
     }
@@ -391,6 +421,11 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
                 setTag(parent, R.id.select_type, info);
+
+                if (mIsModify) {
+                    mItem.brandcode = ((PropertyTypeItem) info).type_id;
+                    mItem.brand = ((PropertyTypeItem) info).type_name;
+                }
             }
         });
     }

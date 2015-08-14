@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import com.jasonwang.informationhuimin.utils.ConfigsInfo;
 import com.smona.app.propertymanager.R;
-import com.smona.app.propertymanager.common.PropertyPictureZoomActivity;
+import com.smona.app.propertymanager.common.PropertyModifyResultActivity;
 import com.smona.app.propertymanager.data.model.PropertyErshouwupinContentItem;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
 import com.smona.app.propertymanager.util.JsonUtils;
@@ -20,12 +20,13 @@ import com.smona.app.propertymanager.util.LogUtil;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinDetailRequestInfo;
 import com.smona.app.propertymanager.wupin.process.PropertyErshouwupinMessageProcessProxy;
 
-public class PropertyWupinDetailActivity extends PropertyPictureZoomActivity {
+public class PropertyWupinDetailActivity extends PropertyModifyResultActivity {
 
     private static final String TAG = "PropertyWupinDetailActivity";
 
     private PropertyErshouwupinContentItem mItem;
     private boolean mIsMySelf = false;
+    private boolean mIsModify = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,6 +102,7 @@ public class PropertyWupinDetailActivity extends PropertyPictureZoomActivity {
         initText(parent, R.id.value, mItem.publishtime);
 
         mPictureContainer = (ViewGroup) mRoot.findViewById(R.id.list_hor_image);
+        mPictureContainer.removeAllViews();
         if (mItem.picurl != null) {
             for (int i = 0; i < mItem.picurl.size(); i++) {
                 addImageView(mItem.picurl.get(i));
@@ -155,7 +157,7 @@ public class PropertyWupinDetailActivity extends PropertyPictureZoomActivity {
         Intent intent = new Intent();
         intent.setClass(this, PropertyWupinfabuActivity.class);
         intent.putExtra("iteminfo", mItem);
-        startActivity(intent);
+        startActivityForResult(intent, ACTION_MODIFY);
     }
 
     protected void cancelPublish() {
@@ -194,8 +196,29 @@ public class PropertyWupinDetailActivity extends PropertyPictureZoomActivity {
 
     @Override
     protected boolean isDelete() {
-        // TODO Auto-generated method stub
         return false;
+    }
+
+    @Override
+    protected void modifySuccess() {
+        mItem.brand = ((PropertyErshouwupinContentItem) mModifyItem).brand;
+        mItem.brandcode = ((PropertyErshouwupinContentItem) mModifyItem).brandcode;
+        mItem.classname = ((PropertyErshouwupinContentItem) mModifyItem).classname;
+        mItem.classcode = ((PropertyErshouwupinContentItem) mModifyItem).classcode;
+        mItem.goodsname = ((PropertyErshouwupinContentItem) mModifyItem).goodsname;
+        mItem.goodsdesc = ((PropertyErshouwupinContentItem) mModifyItem).goodsdesc;
+        mItem.goodscode = ((PropertyErshouwupinContentItem) mModifyItem).goodscode;
+        mItem.goosstatus = ((PropertyErshouwupinContentItem) mModifyItem).goosstatus;
+        mItem.username = ((PropertyErshouwupinContentItem) mModifyItem).username;
+        mItem.userphone = ((PropertyErshouwupinContentItem) mModifyItem).userphone;
+        mItem.publishtime = ((PropertyErshouwupinContentItem) mModifyItem).publishtime;
+        mItem.publishstatus = ((PropertyErshouwupinContentItem) mModifyItem).publishstatus;
+
+        mItem.picurl.clear();
+        mItem.picurl
+                .addAll(((PropertyErshouwupinContentItem) mModifyItem).picurl);
+        mIsModify = true;
+        requestRefreshUI();
     }
 
 }
