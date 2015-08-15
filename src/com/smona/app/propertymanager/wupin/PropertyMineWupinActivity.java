@@ -223,8 +223,6 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
                         R.string.property_ershouwupin_pinpaifenlei);
                 initText(parent, R.id.select_type, "");
 
-                parent.setTag(null);
-
                 mPinpaiDatas.clear();
                 initPinpaiTypes(((PropertyTypeItem) info).type_id);
             }

@@ -237,6 +237,7 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
             showMessage("请选择物品类型");
             return;
         }
+        
         parent = findViewById(R.id.pinpai);
         Object pinpaiType = getTag(parent, R.id.select_type);
         if (!(pinpaiType instanceof PropertyTypeItem)) {
@@ -246,13 +247,13 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
         parent = findViewById(R.id.xinjiu);
         Object xinjiuType = getTag(parent, R.id.select_type);
         if (!(xinjiuType instanceof PropertyTypeItem)) {
-            showMessage("请选择新旧");
+            showMessage("请选择新旧程度");
             return;
         }
         parent = findViewById(R.id.goodsname);
         String goodsName = getTextContent(parent, R.id.value);
         if (TextUtils.isEmpty(goodsName)) {
-            showMessage("请输入联系姓名");
+            showMessage("请输入物品名称");
             return;
         }
 
@@ -361,17 +362,19 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
                     return;
                 }
 
+                //wupin
                 View parent = mRoot.findViewById(R.id.wupintype);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
-
+                setTag(parent, R.id.select_type, info);
                 mWupinType = ((PropertyTypeItem) info).type_id;
+                
+                //pinpai
                 parent = mRoot.findViewById(R.id.pinpai);
                 initTextHint(parent, R.id.select_type,
                         R.string.property_ershouwupin_pinpaifenlei);
                 initText(parent, R.id.select_type, "");
-
-                parent.setTag(null);
+                setTag(parent, R.id.select_type, null);
 
                 mPinpaiDatas.clear();
                 initPinpaiTypes(((PropertyTypeItem) info).type_id);
