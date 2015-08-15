@@ -181,6 +181,7 @@ public class PropertyTousudanDetailActivity extends PropertyPictureZoomActivity 
 
     private void clickSubmitPingjia() {
         if (mItem == null || TextUtils.isEmpty(mItem.feedback)) {
+            showMessage("未处理完，不能评价");
             return;
         }
 
@@ -209,7 +210,6 @@ public class PropertyTousudanDetailActivity extends PropertyPictureZoomActivity 
 
     @Override
     protected boolean isDelete() {
-        // TODO Auto-generated method stub
         return false;
     }
 }

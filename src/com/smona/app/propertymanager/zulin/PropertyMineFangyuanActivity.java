@@ -263,4 +263,9 @@ public class PropertyMineFangyuanActivity extends PropertyFilterTypeActivity {
         return new PropertyZulinDetailAdapter(this, data);
     }
 
+    @Override
+    protected boolean isFileterItem(PropertyItemInfo modifyItem) {
+        return !isFitFilter((PropertyFangwuzulinContentItem) modifyItem);
+    }
+
 }

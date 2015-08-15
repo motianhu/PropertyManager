@@ -49,13 +49,16 @@ public abstract class PropertyFilterTypeActivity extends
 
     protected void modifySuccess(PropertyItemInfo modifyItem, boolean isRemove) {
         boolean modifyAll = modifyDatas(modifyItem, mAllDatas, isRemove);
-        boolean modifyShow = modifyDatas(modifyItem, mShowDatas, isRemove);
+        boolean modifyRemove = isRemove || isFileterItem(modifyItem);
+        boolean modifyShow = modifyDatas(modifyItem, mShowDatas, modifyRemove);
         LogUtil.d(TAG, "modifyAll: " + modifyAll + ", modifyShow :"
                 + modifyShow);
         if (modifyAll || modifyShow) {
             notifyDataSetChanged();
         }
     }
+    
+    protected abstract boolean isFileterItem(PropertyItemInfo modifyItem);
 
     private boolean modifyDatas(PropertyItemInfo modifyItem,
             ArrayList<PropertyItemInfo> datas, boolean isRemove) {

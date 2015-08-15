@@ -219,6 +219,7 @@ public class PropertyBaoxiudanDetailActivity extends
 
     private void clickSubmitPingjia() {
         if (mItem == null || !("已处理".equalsIgnoreCase(mItem.repairstatus))) {
+            showMessage("未处理完，不能评价");
             return;
         }
 

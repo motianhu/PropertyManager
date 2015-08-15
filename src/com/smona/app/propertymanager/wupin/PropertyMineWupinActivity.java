@@ -311,4 +311,9 @@ public class PropertyMineWupinActivity extends PropertyFilterTypeActivity {
             ArrayList<PropertyItemInfo> data) {
         return new PropertyWupinDetailAdapter(this, data);
     }
+
+    @Override
+    protected boolean isFileterItem(PropertyItemInfo modifyItem) {
+        return !isFitFilter((PropertyErshouwupinContentItem) modifyItem);
+    }
 }
