@@ -10,7 +10,7 @@
         android:id="@+id/action_now"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape"
+        android:background="@drawable/property_shape"
         android:textColor="@color/property_color_common_title" />
 
     <Button
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@drawable/shape"
+        android:background="@drawable/property_shape"
         android:text="@string/property_common_wuyedianhua"
         android:textColor="@color/property_color_common_title" />
 

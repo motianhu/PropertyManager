@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class XListViewFooter extends LinearLayout {
+public class PropertyXListViewFooter extends LinearLayout {
     public final static int STATE_NORMAL = 0;
     public final static int STATE_READY = 1;
     public final static int STATE_LOADING = 2;
@@ -20,12 +20,12 @@ public class XListViewFooter extends LinearLayout {
     private View mProgressBar;
     private TextView mHintView;
 
-    public XListViewFooter(Context context) {
+    public PropertyXListViewFooter(Context context) {
         super(context);
         initView(context);
     }
 
-    public XListViewFooter(Context context, AttributeSet attrs) {
+    public PropertyXListViewFooter(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView(context);
     }
@@ -36,12 +36,12 @@ public class XListViewFooter extends LinearLayout {
         mHintView.setVisibility(View.GONE);
         if (state == STATE_READY) {
             mHintView.setVisibility(View.VISIBLE);
-            mHintView.setText(R.string.xlistview_footer_hint_ready);
+            mHintView.setText(R.string.property_xlistview_footer_hint_ready);
         } else if (state == STATE_LOADING) {
             mProgressBar.setVisibility(View.VISIBLE);
         } else {
             mHintView.setVisibility(View.GONE);
-            mHintView.setText(R.string.xlistview_footer_hint_normal);
+            mHintView.setText(R.string.property_xlistview_footer_hint_normal);
         }
     }
 
@@ -100,7 +100,7 @@ public class XListViewFooter extends LinearLayout {
     private void initView(Context context) {
         mContext = context;
         LinearLayout moreView = (LinearLayout) LayoutInflater.from(mContext)
-                .inflate(R.layout.xlistview_footer, null);
+                .inflate(R.layout.property_xlistview_footer, null);
         addView(moreView);
         moreView.setLayoutParams(new LinearLayout.LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));

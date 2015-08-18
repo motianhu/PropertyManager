@@ -110,7 +110,7 @@
                     android:id="@+id/call_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/shape"
+                    android:background="@drawable/property_shape"
                     android:text="@string/property_common_call_contact_phone" />
             </LinearLayout>
 
@@ -127,7 +127,7 @@
                     android:id="@+id/modify_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/shape"
+                    android:background="@drawable/property_shape"
                     android:text="@string/property_common_modify_info" />
 
                 <Button
@@ -135,7 +135,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/shape"
+                    android:background="@drawable/property_shape"
                     android:text="@string/property_common_cancel_publish" />
             </LinearLayout>
         </LinearLayout>

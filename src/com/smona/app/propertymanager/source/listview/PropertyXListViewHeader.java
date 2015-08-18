@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class XListViewHeader extends LinearLayout {
+public class PropertyXListViewHeader extends LinearLayout {
     private LinearLayout mContainer;
     private ImageView mArrowImageView;
     private ProgressBar mProgressBar;
@@ -30,7 +30,7 @@ public class XListViewHeader extends LinearLayout {
     public final static int STATE_READY = 1;
     public final static int STATE_REFRESHING = 2;
 
-    public XListViewHeader(Context context) {
+    public PropertyXListViewHeader(Context context) {
         super(context);
         initView(context);
     }
@@ -39,7 +39,7 @@ public class XListViewHeader extends LinearLayout {
      * @param context
      * @param attrs
      */
-    public XListViewHeader(Context context, AttributeSet attrs) {
+    public PropertyXListViewHeader(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView(context);
     }
@@ -50,7 +50,7 @@ public class XListViewHeader extends LinearLayout {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LayoutParams.MATCH_PARENT, 0);
         mContainer = (LinearLayout) LayoutInflater.from(context).inflate(
-                R.layout.xlistview_header, null);
+                R.layout.property_xlistview_header, null);
         addView(mContainer, lp);
         setGravity(Gravity.BOTTOM);
 
@@ -91,17 +91,17 @@ public class XListViewHeader extends LinearLayout {
             if (mState == STATE_REFRESHING) {
                 mArrowImageView.clearAnimation();
             }
-            mHintTextView.setText(R.string.xlistview_header_hint_normal);
+            mHintTextView.setText(R.string.property_xlistview_header_hint_normal);
             break;
         case STATE_READY:
             if (mState != STATE_READY) {
                 mArrowImageView.clearAnimation();
                 mArrowImageView.startAnimation(mRotateUpAnim);
-                mHintTextView.setText(R.string.xlistview_header_hint_ready);
+                mHintTextView.setText(R.string.property_xlistview_header_hint_ready);
             }
             break;
         case STATE_REFRESHING:
-            mHintTextView.setText(R.string.xlistview_header_hint_loading);
+            mHintTextView.setText(R.string.property_xlistview_header_hint_loading);
             break;
         default:
         }

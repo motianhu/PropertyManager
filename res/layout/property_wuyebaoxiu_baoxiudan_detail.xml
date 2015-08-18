@@ -154,7 +154,7 @@
                         android:id="@+id/submit_pingjia"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/shape"
+                        android:background="@drawable/property_shape"
                         android:text="@string/property_common_publish_information" />
                 </LinearLayout>
             </LinearLayout>

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import com.smona.app.propertymanager.R;
 import com.smona.app.propertymanager.data.model.PropertyItemInfo;
-import com.smona.app.propertymanager.source.listview.XListView;
-import com.smona.app.propertymanager.source.listview.XListView.IXListViewListener;
+import com.smona.app.propertymanager.source.listview.PropertyXListView;
+import com.smona.app.propertymanager.source.listview.PropertyXListView.IXListViewListener;
 
 public abstract class PropertyFetchListActivity extends PropertyBaseActivity
         implements IXListViewListener {
@@ -14,7 +14,7 @@ public abstract class PropertyFetchListActivity extends PropertyBaseActivity
     private int mCurrPage = 1;
     private boolean mIsDataOver = false;
 
-    protected XListView mList;
+    protected PropertyXListView mList;
     private PropertyBaseDataAdapter mAdapter;
 
     @Override
@@ -44,7 +44,7 @@ public abstract class PropertyFetchListActivity extends PropertyBaseActivity
     }
 
     protected void setFetchListener(ArrayList<PropertyItemInfo> data) {
-        mList = (XListView) mRoot.findViewById(R.id.list_content);
+        mList = (PropertyXListView) mRoot.findViewById(R.id.list_content);
         mAdapter = createAdapter(data);
         mList.setAdapter(mAdapter);
         mList.setPullRefreshEnable(false);
