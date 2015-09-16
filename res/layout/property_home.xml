@@ -7,57 +7,90 @@
 
     <include layout="@layout/property_common_header" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/property_home_margin_left"
-        android:layout_marginRight="@dimen/property_home_margin_right"
-        android:layout_marginTop="@dimen/property_home_margin_top"
-        android:orientation="horizontal" >
+        android:layout_height="match_parent" >
 
-        <include
-            android:id="@+id/wuyebaoxiu"
-            android:layout_width="@dimen/property_home_item_width"
-            android:layout_height="@dimen/property_home_item_height"
-            android:layout_marginLeft="@dimen/property_home_item_margin_left"
-            layout="@layout/property_wuyefuwu_home_item" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-        <include
-            android:id="@+id/tousujianyi"
-            android:layout_width="@dimen/property_home_item_width"
-            android:layout_height="@dimen/property_home_item_height"
-            android:layout_marginLeft="@dimen/property_home_item_margin_left"
-            layout="@layout/property_wuyefuwu_home_item" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/property_color_common_home_bg_content" />
 
-        <include
-            android:id="@+id/wuyetongzhi"
-            android:layout_width="@dimen/property_home_item_width"
-            android:layout_height="@dimen/property_home_item_height"
-            android:layout_marginLeft="@dimen/property_home_item_margin_left"
-            layout="@layout/property_wuyefuwu_home_item" />
-    </LinearLayout>
+            <include
+                android:id="@+id/wuyebaoxiu"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/property_home_item_height"
+                android:layout_marginBottom="@dimen/property__home_margin_top_item"
+                android:layout_marginLeft="@dimen/property_home_item_margin_left"
+                android:layout_marginTop="@dimen/property__home_margin_top_item"
+                layout="@layout/property_wuyefuwu_home_item" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/property_home_margin_left"
-        android:layout_marginRight="@dimen/property_home_margin_right"
-        android:layout_marginTop="@dimen/property_home_margin_top"
-        android:orientation="horizontal" >
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/property_color_common_home_bg_content" />
 
-        <include
-            android:id="@+id/fangwuzulin"
-            android:layout_width="@dimen/property_home_item_width"
-            android:layout_height="@dimen/property_home_item_height"
-            android:layout_marginLeft="@dimen/property_home_item_margin_left"
-            layout="@layout/property_wuyefuwu_home_item" />
+            <include
+                android:id="@+id/tousujianyi"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/property_home_item_height"
+                android:layout_marginBottom="@dimen/property__home_margin_top_item"
+                android:layout_marginLeft="@dimen/property_home_item_margin_left"
+                android:layout_marginTop="@dimen/property__home_margin_top_item"
+                layout="@layout/property_wuyefuwu_home_item" />
 
-        <include
-            android:id="@+id/ershouwupin"
-            android:layout_width="@dimen/property_home_item_width"
-            android:layout_height="@dimen/property_home_item_height"
-            android:layout_marginLeft="@dimen/property_home_item_margin_left"
-            layout="@layout/property_wuyefuwu_home_item" />
-    </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/property_color_common_home_bg_content" />
+
+            <include
+                android:id="@+id/wuyetongzhi"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/property_home_item_height"
+                android:layout_marginBottom="@dimen/property__home_margin_top_item"
+                android:layout_marginLeft="@dimen/property_home_item_margin_left"
+                android:layout_marginTop="@dimen/property__home_margin_top_item"
+                layout="@layout/property_wuyefuwu_home_item" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/property_color_common_home_bg_content" />
+
+            <include
+                android:id="@+id/fangwuzulin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/property_home_item_height"
+                android:layout_marginBottom="@dimen/property__home_margin_top_item"
+                android:layout_marginLeft="@dimen/property_home_item_margin_left"
+                android:layout_marginTop="@dimen/property__home_margin_top_item"
+                layout="@layout/property_wuyefuwu_home_item" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/property_color_common_home_bg_content" />
+
+            <include
+                android:id="@+id/ershouwupin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/property_home_item_height"
+                android:layout_marginBottom="@dimen/property__home_margin_top_item"
+                android:layout_marginLeft="@dimen/property_home_item_margin_left"
+                android:layout_marginTop="@dimen/property__home_margin_top_item"
+                layout="@layout/property_wuyefuwu_home_item" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/property_color_common_home_bg_content" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

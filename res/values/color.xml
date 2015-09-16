@@ -6,6 +6,7 @@
     <color name="property_color_common_header_detail">#f4f4f4</color>
     <color name="property_color_common_header_title">#f4f4f4</color>
     <color name="property_color_common_home_bg">#f4f4f4</color>
+    <color name="property_color_common_home_bg_content">#AAAAAA</color>
     <color name="property_color_common_title">#000000</color>
     <color name="property_color_common_danhua_title">#60000000</color>
     <color name="property_color_common_wenzi_qianse">#939393</color>

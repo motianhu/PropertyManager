@@ -26,11 +26,12 @@
     <dimen name="property_common_paishezhaoping_text_height">30dp</dimen>
 
     <!-- 首页 -->
-    <dimen name="property_home_item_height">120dp</dimen>
+    <dimen name="property_home_item_height">55dp</dimen>
     <dimen name="property_home_item_width">90dp</dimen>
     <dimen name="property_home_margin_left">5dp</dimen>
     <dimen name="property_home_margin_right">5dp</dimen>
     <dimen name="property_home_item_margin_left">20dp</dimen>
     <dimen name="property_home_margin_top">40dp</dimen>
+    <dimen name="property__home_margin_top_item">5dp</dimen>
 
 </resources>
