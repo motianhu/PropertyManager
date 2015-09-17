@@ -69,10 +69,12 @@ public abstract class PropertyStartupCameraActivity extends
     }
 
     @SuppressLint("NewApi")
-    public static String getRealPathFromURI(final Context context, final Uri uri) {
+    public String getRealPathFromURI(final Context context, final Uri uri) {
 
         final boolean isKitKat = Build.VERSION.SDK_INT >= 19;
-
+        if(!isKitKat) {
+            return this.getRealPathFromUriLessKitkat(uri);
+        } else
         // DocumentProvider
         if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
             // ExternalStorageProvider
@@ -297,5 +299,20 @@ public abstract class PropertyStartupCameraActivity extends
     @Override
     protected boolean isDelete() {
         return true;
+    }
+    
+    private String getRealPathFromUriLessKitkat(Uri contentUri) {
+        String res = null;
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getContentResolver().query(contentUri, proj, null,
+                null, null);
+        if (cursor.moveToFirst()) {
+            ;
+            int column_index = cursor
+                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            res = cursor.getString(column_index);
+        }
+        cursor.close();
+        return res;
     }
 }
