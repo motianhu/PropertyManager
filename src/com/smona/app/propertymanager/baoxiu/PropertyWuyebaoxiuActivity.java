@@ -64,6 +64,7 @@ public class PropertyWuyebaoxiuActivity extends PropertyStartupCameraActivity {
         } else if ("3310".equals(bean.iccode)) {
             if ("00".equals(bean.answercode)) {
                 showMessage("提交成功");
+                finish();
             } else {
                 showMessage("提交失败");
             }
@@ -172,6 +173,9 @@ public class PropertyWuyebaoxiuActivity extends PropertyStartupCameraActivity {
         final ArrayList<String> files = new ArrayList<String>();
         for (int i = 0; i < mPictureContainer.getChildCount(); i++) {
             String tag = (String) mPictureContainer.getChildAt(i).getTag();
+            if (TextUtils.isEmpty(tag)) {
+                continue;
+            }
             files.add(tag);
         }
 

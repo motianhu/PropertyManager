@@ -72,6 +72,7 @@ public class PropertyTousujianyiActivity extends PropertyStartupCameraActivity {
         } else if ("3810".equals(bean.iccode)) {
             if ("00".equals(bean.answercode)) {
                 showMessage("提交成功");
+                finish();
             } else {
                 showMessage("提交失败");
             }

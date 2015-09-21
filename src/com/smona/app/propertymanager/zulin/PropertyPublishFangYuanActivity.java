@@ -337,6 +337,7 @@ public class PropertyPublishFangYuanActivity extends
             finish();
         } else {
             showMessage("发布成功");
+            finish();
         }
     }
 

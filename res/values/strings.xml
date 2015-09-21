@@ -21,6 +21,11 @@
     <string name="property_common_delYes">是</string>
     <string name="property_common_delNo">否</string>
     <string name="property_common_delContent">确定删除?</string>
+    <string name="property_common_uploading_defaul"></string>
+    <string name="property_common_uploading_hint">上传中...</string>
+    <string name="property_common_upload_failed">上传失败</string>
+    <string name="property_common_upload_success">上传成功</string>
+    <string name="property_common_upload_control_max">只允许最多上传三张图片</string>
 
     <!-- 物业报修 -->
     <string name="property_home_wuyebaoxiu">物业报修</string>

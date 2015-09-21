@@ -329,6 +329,7 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
                     finish();
                 } else {
                     showMessage("发布成功");
+                    finish();
                 }
             }
         }

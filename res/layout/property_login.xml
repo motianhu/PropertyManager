@@ -19,25 +19,25 @@
             android:id="@+id/ipaddress"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:text="171.15.157.216" />
+            android:text="110.249.154.91" />
 
         <EditText
             android:id="@+id/port"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:text="3718" />
+            android:text="8092" />
 
         <EditText
             android:id="@+id/user_name"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:text="18937113913" />
+            android:text="13939093625" />
 
         <EditText
             android:id="@+id/password"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:text="888888" />
+            android:text="093625" />
 
         <Button
             android:id="@+id/login"
