@@ -1,6 +1,7 @@
 package com.smona.app.propertymanager.notify;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
@@ -74,7 +75,13 @@ public class PropertyWuyetongzhiDetailActivity extends PropertyBaseActivity {
         text.setText(mItem.title);
 
         text = (TextView) mRoot.findViewById(R.id.notify_content);
-        text.setText(mItem.notice);
+        
+        String content = mItem.notice;
+        content = content.replace(" ", "&nbsp;");
+        content = content.replace("<A>", "<font color='blue'>");
+        content = content.replace("</A>", "</font>");
+        content = content.replace("\n", "<br/>");
+        text.setText(Html.fromHtml(content));
     }
 
     @Override

@@ -39,12 +39,11 @@
         android:orientation="vertical" >
 
         <TextView
-            android:paddingLeft="2dp"
+            android:paddingLeft="10dp"
             android:paddingRight="1dp"
             android:id="@+id/notify_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autoLink="phone|email|web"
             android:lineSpacingExtra="3dp"
             android:lineSpacingMultiplier="1.3"
             android:textColor="@color/property_color_common_title"

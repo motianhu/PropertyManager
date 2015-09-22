@@ -174,7 +174,8 @@ public class PropertyWuyebaoxiuActivity extends PropertyStartupCameraActivity {
         for (int i = 0; i < mPictureContainer.getChildCount(); i++) {
             String tag = (String) mPictureContainer.getChildAt(i).getTag();
             if (TextUtils.isEmpty(tag)) {
-                continue;
+                showMessage(R.string.property_common_upload_control_hint);
+                return;
             }
             files.add(tag);
         }

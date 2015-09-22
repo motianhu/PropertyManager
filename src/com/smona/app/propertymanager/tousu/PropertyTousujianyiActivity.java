@@ -188,6 +188,10 @@ public class PropertyTousujianyiActivity extends PropertyStartupCameraActivity {
         final ArrayList<String> files = new ArrayList<String>();
         for (int i = 0; i < mPictureContainer.getChildCount(); i++) {
             String tag = (String) mPictureContainer.getChildAt(i).getTag();
+            if (TextUtils.isEmpty(tag)) {
+                showMessage(R.string.property_common_upload_control_hint);
+                return;
+            }
             files.add(tag);
         }
 
