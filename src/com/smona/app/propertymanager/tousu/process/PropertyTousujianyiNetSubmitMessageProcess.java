@@ -14,8 +14,7 @@ public class PropertyTousujianyiNetSubmitMessageProcess extends
             PropertyRequestInfo request, IQuestCallback callback) {
         submitRequest(MSG_TOUSUJIANYI_SUBMIT, request, callback);
     }
-    
-    
+
     public void submitTousujianyidanPingjia(Context context,
             PropertyRequestInfo request, IQuestCallback callback) {
         submitRequest(MSG_TOUSUJIANYI_PINGJIA_SUBMIT, request, callback);

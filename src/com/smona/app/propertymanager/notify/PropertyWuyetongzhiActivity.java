@@ -125,7 +125,7 @@ public class PropertyWuyetongzhiActivity extends PropertyFetchListActivity {
     protected void loadMore() {
         fetchListData();
     }
-    
+
     @Override
     public PropertyBaseDataAdapter createAdapter(
             ArrayList<PropertyItemInfo> data) {

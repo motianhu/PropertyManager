@@ -14,7 +14,7 @@ public class PropertyWuyebaoxiuNetSubmitMessageProcess extends
             PropertyRequestInfo request, IQuestCallback callback) {
         submitRequest(MSG_WUYEBAOXIU_SUBMIT, request, callback);
     }
-    
+
     public void submitWuyebaoxiudanPingjia(Context context,
             PropertyRequestInfo request, IQuestCallback callback) {
         submitRequest(MSG_WUYEBAOXIU_PINGJIA_SUBMIT, request, callback);

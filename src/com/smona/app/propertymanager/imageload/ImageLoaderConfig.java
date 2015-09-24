@@ -19,8 +19,8 @@ public class ImageLoaderConfig {
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.property_default_icon)
                 .showImageForEmptyUri(R.drawable.property_default_icon)
-                .showImageOnFail(R.drawable.property_default_icon).cacheInMemory(true)
-                .cacheOnDisc(true).considerExifParams(true)
+                .showImageOnFail(R.drawable.property_default_icon)
+                .cacheInMemory(true).cacheOnDisc(true).considerExifParams(true)
                 .imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
                 .bitmapConfig(Bitmap.Config.RGB_565).considerExifParams(true)
                 .build();

@@ -289,7 +289,8 @@ public class PropertyXListView extends ListView implements OnScrollListener {
                 if (mEnablePullRefresh
                         && mHeaderView.getVisiableHeight() > mHeaderViewHeight) {
                     mPullRefreshing = true;
-                    mHeaderView.setState(PropertyXListViewHeader.STATE_REFRESHING);
+                    mHeaderView
+                            .setState(PropertyXListViewHeader.STATE_REFRESHING);
                     if (mListViewListener != null) {
                         mListViewListener.onRefresh();
                     }

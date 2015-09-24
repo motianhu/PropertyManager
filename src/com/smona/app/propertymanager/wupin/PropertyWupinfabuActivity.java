@@ -237,7 +237,7 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
             showMessage("请选择物品类型");
             return;
         }
-        
+
         parent = findViewById(R.id.pinpai);
         Object pinpaiType = getTag(parent, R.id.select_type);
         if (!(pinpaiType instanceof PropertyTypeItem)) {
@@ -367,14 +367,14 @@ public class PropertyWupinfabuActivity extends PropertyStartupCameraActivity {
                     return;
                 }
 
-                //wupin
+                // wupin
                 View parent = mRoot.findViewById(R.id.wupintype);
                 initText(parent, R.id.select_type,
                         ((PropertyTypeItem) info).type_name);
                 setTag(parent, R.id.select_type, info);
                 mWupinType = ((PropertyTypeItem) info).type_id;
-                
-                //pinpai
+
+                // pinpai
                 parent = mRoot.findViewById(R.id.pinpai);
                 initTextHint(parent, R.id.select_type,
                         R.string.property_ershouwupin_pinpaifenlei);

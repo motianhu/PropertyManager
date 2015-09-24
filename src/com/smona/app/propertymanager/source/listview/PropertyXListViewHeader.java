@@ -91,17 +91,20 @@ public class PropertyXListViewHeader extends LinearLayout {
             if (mState == STATE_REFRESHING) {
                 mArrowImageView.clearAnimation();
             }
-            mHintTextView.setText(R.string.property_xlistview_header_hint_normal);
+            mHintTextView
+                    .setText(R.string.property_xlistview_header_hint_normal);
             break;
         case STATE_READY:
             if (mState != STATE_READY) {
                 mArrowImageView.clearAnimation();
                 mArrowImageView.startAnimation(mRotateUpAnim);
-                mHintTextView.setText(R.string.property_xlistview_header_hint_ready);
+                mHintTextView
+                        .setText(R.string.property_xlistview_header_hint_ready);
             }
             break;
         case STATE_REFRESHING:
-            mHintTextView.setText(R.string.property_xlistview_header_hint_loading);
+            mHintTextView
+                    .setText(R.string.property_xlistview_header_hint_loading);
             break;
         default:
         }

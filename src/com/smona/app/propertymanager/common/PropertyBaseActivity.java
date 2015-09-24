@@ -237,7 +237,8 @@ public abstract class PropertyBaseActivity extends PropertyDialogActivity
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(PropertyBaseActivity.this, text, Toast.LENGTH_SHORT).show();
+                Toast.makeText(PropertyBaseActivity.this, text,
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }

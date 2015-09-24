@@ -9,7 +9,7 @@ public class PropertyTousujianyiSubmitPingjiaRequestInfo extends
         PropertyRequestInfo {
     public String complaintid;
     public ArrayList<PropertyPingjiaRequestInfo> eval = new ArrayList<PropertyPingjiaRequestInfo>();
-    
+
     public void add(String evlCode, int num) {
         PropertyPingjiaRequestInfo info = new PropertyPingjiaRequestInfo();
         info.evalcode = evlCode;

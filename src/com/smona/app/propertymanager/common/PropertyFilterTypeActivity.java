@@ -57,7 +57,7 @@ public abstract class PropertyFilterTypeActivity extends
             notifyDataSetChanged();
         }
     }
-    
+
     protected abstract boolean isFileterItem(PropertyItemInfo modifyItem);
 
     private boolean modifyDatas(PropertyItemInfo modifyItem,

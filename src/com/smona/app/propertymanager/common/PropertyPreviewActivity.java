@@ -14,7 +14,7 @@ public class PropertyPreviewActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.property_common_preview_picture);
         String url = getIntent().getStringExtra("url");
-        ImageView image = (ImageView)findViewById(R.id.image);
+        ImageView image = (ImageView) findViewById(R.id.image);
         ImageLoaderManager.getInstance().loadImage(url, image);
     }
 

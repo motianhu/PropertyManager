@@ -31,7 +31,7 @@ public class PropertyTousujianyiMessageProcessProxy extends
     public void requestTousujianyidan(Context context,
             PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
-             mLocalJson.requestTousujianyidan(context, callback);
+            mLocalJson.requestTousujianyidan(context, callback);
         } else {
             mNetRequestJson.requestTousujianyidan(context, request, callback);
         }
@@ -40,7 +40,7 @@ public class PropertyTousujianyiMessageProcessProxy extends
     public void requestTousujianyidanDetail(Context context,
             PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
-             mLocalJson.requestTousujianyidanDetail(context, callback);
+            mLocalJson.requestTousujianyidanDetail(context, callback);
         } else {
             mNetRequestJson.requestTousujianyidanDetail(context, request,
                     callback);
@@ -51,7 +51,7 @@ public class PropertyTousujianyiMessageProcessProxy extends
             PropertyRequestInfo request, IQuestCallback callback) {
         mNetSubmitJson.submitTousujianyidan(context, request, callback);
     }
-    
+
     public void submitTousujianyidanPingjia(Context context,
             PropertyRequestInfo request, IQuestCallback callback) {
         mNetSubmitJson.submitTousujianyidanPingjia(context, request, callback);

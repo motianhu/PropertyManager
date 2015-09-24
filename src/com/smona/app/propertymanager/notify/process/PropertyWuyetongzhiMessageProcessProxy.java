@@ -23,7 +23,7 @@ public class PropertyWuyetongzhiMessageProcessProxy extends
     public void requestWuyetongzhi(Context context,
             PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
-             mLocalJson.requestWuyetongzhi(context, callback);
+            mLocalJson.requestWuyetongzhi(context, callback);
         } else {
             mNetRequestJson.requestWuyetongzhi(context, request, callback);
         }
@@ -33,7 +33,7 @@ public class PropertyWuyetongzhiMessageProcessProxy extends
     public void requestWuyetongzhiDetail(Context context,
             PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
-             mLocalJson.requestWuyetongzhiDetail(context, callback);
+            mLocalJson.requestWuyetongzhiDetail(context, callback);
         } else {
             mNetRequestJson
                     .requestWuyetongzhiDetail(context, request, callback);

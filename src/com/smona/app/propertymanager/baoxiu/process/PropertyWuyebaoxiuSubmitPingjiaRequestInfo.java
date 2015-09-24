@@ -8,7 +8,7 @@ public class PropertyWuyebaoxiuSubmitPingjiaRequestInfo extends
         PropertyRequestInfo {
     public String repairid;
     public ArrayList<PropertyPingjiaRequestInfo> eval = new ArrayList<PropertyPingjiaRequestInfo>();
-    
+
     public void add(String evlCode, int num) {
         PropertyPingjiaRequestInfo info = new PropertyPingjiaRequestInfo();
         info.evalcode = evlCode;

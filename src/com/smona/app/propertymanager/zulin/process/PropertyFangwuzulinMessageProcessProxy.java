@@ -23,7 +23,7 @@ public class PropertyFangwuzulinMessageProcessProxy extends
     public void requestFangwuzulin(Context context,
             PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
-             mLocalJson.requestFangwuzulin(context, request, callback);
+            mLocalJson.requestFangwuzulin(context, request, callback);
         } else {
             mNetRequestJson.requestFangwuzulin(context, request, callback);
         }
@@ -40,7 +40,7 @@ public class PropertyFangwuzulinMessageProcessProxy extends
     public void requestFangwuzulinMine(Context context,
             PropertyRequestInfo request, IQuestCallback callback) {
         if (DEBUG) {
-             mLocalJson.requestFangwuzulinMine(context, callback);
+            mLocalJson.requestFangwuzulinMine(context, callback);
         } else {
             mNetRequestJson.requestFangwuzulinMine(context, request, callback);
         }

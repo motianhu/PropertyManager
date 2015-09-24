@@ -69,10 +69,11 @@ public class PropertyWupinDetailAdapter extends PropertyBaseDataAdapter {
 
         ImageView image = (ImageView) convertView.findViewById(R.id.image);
         if (item.picurl != null && item.picurl.size() > 0) {
-            ImageLoaderManager.getInstance().loadFangwuzulin(item.picurl.get(0), image);
+            ImageLoaderManager.getInstance().loadFangwuzulin(
+                    item.picurl.get(0), image);
         }
     }
-    
+
     protected void gotoDetail(PropertyItemInfo info) {
         Intent intent = createIntent();
         intent.putExtra(PropertyConstants.DATA_ITEM_INFO, info);

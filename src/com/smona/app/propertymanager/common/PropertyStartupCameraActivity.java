@@ -17,6 +17,7 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -83,7 +84,7 @@ public abstract class PropertyStartupCameraActivity extends
                     @Override
                     public void onStart() {
                         runUI(container,
-                                R.string.property_common_uploading_hint);
+                                R.string.property_common_uploading_hint, true);
                     }
 
                     @Override
@@ -95,36 +96,62 @@ public abstract class PropertyStartupCameraActivity extends
                     public void onSuccess(ResponseInfo<String> responseInfo) {
                         LogUtil.d(TAG, "responseInfo: " + responseInfo.result);
                         String content = responseInfo.result;
+                        if (TextUtils.isEmpty(content)) {
+                            processFailed(container);
+                            return;
+                        }
                         Type type = new TypeToken<UploadInfo>() {
                         }.getType();
                         UploadInfo bean = JsonUtils.parseJson(content, type);
                         if ("SUCCESS".equalsIgnoreCase(bean.status)) {
                             container.setTag(bean.bigfilename);
                             showMessage(R.string.property_common_upload_success);
+                            runUI(container,
+                                    R.string.property_common_uploading_defaul,
+                                    true);
+                            return;
+                        } else if ("ERROR".equalsIgnoreCase(bean.status)) {
+                            showMessage(PropertyStartupCameraActivity.this
+                                    .getResources()
+                                    .getString(
+                                            R.string.property_common_upload_failed)
+                                    + ";" + bean.bigfilename);
                         } else {
                             showMessage(R.string.property_common_upload_failed);
                         }
                         runUI(container,
-                                R.string.property_common_uploading_defaul);
+                                R.string.property_common_uploading_defaul,
+                                false);
                     }
 
                     @Override
                     public void onFailure(HttpException error, String msg) {
                         LogUtil.d(TAG, "onFailure: " + msg + ", error: "
                                 + error);
+                        processFailed(container);
+                    }
+
+                    private void processFailed(final View container) {
                         showMessage(R.string.property_common_upload_failed);
                         runUI(container,
-                                R.string.property_common_uploading_defaul);
+                                R.string.property_common_uploading_defaul,
+                                false);
                     }
                 });
     }
 
-    private void runUI(final View container, final int resId) {
+    private void runUI(final View container, final int resId,
+            final boolean success) {
         this.runOnUiThread(new Runnable() {
             public void run() {
-                TextView text = (TextView) container
-                        .findViewById(R.id.upload_hint);
-                text.setText(resId);
+                if (success) {
+                    TextView text = (TextView) container
+                            .findViewById(R.id.upload_hint);
+                    text.setText(resId);
+                } else {
+                    ViewGroup parent = (ViewGroup) container.getParent();
+                    parent.removeView(container);
+                }
             }
         });
     }
